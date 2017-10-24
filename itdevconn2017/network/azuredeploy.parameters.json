@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "value": ""
+    },
+    "_artifactsLocationSasToken": {
+      "value": ""
+    },
+    "vNetPrefix": {
+      "value": "10.2.0.0/16"
+    },
+    "subnetProperties": {
+      "value": [
+        {
+          "name": "subnet-dmz-a",
+          "ipRange": "10.2.0.0/24"
+        },
+        {
+          "name": "subnet-dmz-b",
+          "ipRange": "10.2.1.0/24"
+        },
+        {
+          "name": "subnet-app-a",
+          "ipRange": "10.2.2.0/24"
+        },
+        {
+          "name": "subnet-app-b",
+          "ipRange": "10.2.3.0/24"
+        },
+        {
+          "name": "subnet-data-a",
+          "ipRange": "10.2.4.0/24"
+        },
+        {
+          "name": "subnet-data-b",
+          "ipRange": "10.2.5.0/24"
+        }
+      ]
+    }
+  }
+}

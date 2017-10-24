@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "udrName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Network Security Group resource."
+      }
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/routeTables",
+      "name": "[parameters('udrName')]",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "[parameters('udrName')]"
+      },
+      "properties": {
+        "routes": []
+      }
+    }
+  ],
+  "outputs": {
+    "udrID": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Network/routeTables',parameters('udrName'))]"
+    }
+  }
+}

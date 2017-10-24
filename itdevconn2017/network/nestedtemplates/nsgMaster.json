@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "subnetProperties": {
+      "type": "array",
+      "metadata": {
+        "description": "The array of values which defines the properties of each subnet within the virtual network."
+      }
+    },
+    "templateFolder": {
+      "type": "string"
+    },
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "nsgTemplateFolder": "[concat(parameters('templateFolder'),'/','nsg')]"
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('subnetProperties')[copyIndex()].Name,'-nsg')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "copy": {
+        "name": "nsgCopy",
+        "count": "[length(parameters('subnetProperties'))]"
+      },
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nsgTemplateFolder'), '/', parameters('subnetProperties')[copyIndex()].Name,'-nsg','.json', parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "nsgName": {
+            "value": "[concat(parameters('subnetProperties')[copyIndex()].Name,'-nsg')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "nsgIDs": {
+      "type": "array",
+      "value": [
+        "[reference(concat(parameters('subnetProperties')[0].Name,'-nsg')).outputs.nsgID.value]",
+        "[reference(concat(parameters('subnetProperties')[1].Name,'-nsg')).outputs.nsgID.value]",
+        "[reference(concat(parameters('subnetProperties')[2].Name,'-nsg')).outputs.nsgID.value]",
+        "[reference(concat(parameters('subnetProperties')[3].Name,'-nsg')).outputs.nsgID.value]",
+        "[reference(concat(parameters('subnetProperties')[4].Name,'-nsg')).outputs.nsgID.value]",
+        "[reference(concat(parameters('subnetProperties')[5].Name,'-nsg')).outputs.nsgID.value]"
+      ]
+    }
+  }
+}

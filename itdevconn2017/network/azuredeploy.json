@@ -1,0 +1,187 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vNetPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "IP range of the virtual network."
+      }
+    },
+    "subnetProperties": {
+      "type": "array",
+      "metadata": {
+        "description": "The array of values which defines the properties of each subnet within the virtual network."
+      }
+    },
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "gatewaySubnetPrefix": "10.2.250.0/24",
+    "templateFolder": "CloudOperatingModel/OrchNetwork/nestedtemplates",
+    "nsgTemplateFileName": "nsgMaster.json",
+    "udrTemplateFileName": "udrMaster.json"
+  },
+  "resources": [
+    {
+      "name": "[concat('com-orch','-',resourceGroup().location)]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/nsgMaster",
+        "Microsoft.Resources/deployments/udrMaster"
+      ],
+      "tags": {
+        "displayName": "[concat('com-orch','-',resourceGroup().location)]"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vnetPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('subnetProperties')[0].Name]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetProperties')[0].ipRange]",
+              "networkSecurityGroup": {
+                "id": "[reference('nsgMaster').outputs.nsgIds.value[0]]"
+              },
+              "routeTable": {
+                "id": "[reference('udrMaster').outputs.udrIds.value[0]]"
+              }
+            }
+          },
+          {
+            "name": "[parameters('subnetProperties')[1].Name]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetProperties')[1].ipRange]",
+              "networkSecurityGroup": {
+                "id": "[reference('nsgMaster').outputs.nsgIds.value[1]]"
+              },
+              "routeTable": {
+                "id": "[reference('udrMaster').outputs.udrIds.value[1]]"
+              }
+            }
+          },
+          {
+            "name": "[parameters('subnetProperties')[2].Name]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetProperties')[2].ipRange]",
+              "networkSecurityGroup": {
+                "id": "[reference('nsgMaster').outputs.nsgIds.value[2]]"
+              },
+              "routeTable": {
+                "id": "[reference('udrMaster').outputs.udrIds.value[2]]"
+              }
+            }
+          },
+          {
+            "name": "[parameters('subnetProperties')[3].Name]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetProperties')[3].ipRange]",
+              "networkSecurityGroup": {
+                "id": "[reference('nsgMaster').outputs.nsgIds.value[3]]"
+              },
+              "routeTable": {
+                "id": "[reference('udrMaster').outputs.udrIds.value[3]]"
+              }
+            }
+          },
+          {
+            "name": "[parameters('subnetProperties')[4].Name]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetProperties')[4].ipRange]",
+              "networkSecurityGroup": {
+                "id": "[reference('nsgMaster').outputs.nsgIds.value[4]]"
+              },
+              "routeTable": {
+                "id": "[reference('udrMaster').outputs.udrIds.value[4]]"
+              }
+            }
+          },
+          {
+            "name": "[parameters('subnetProperties')[5].Name]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetProperties')[5].ipRange]",
+              "networkSecurityGroup": {
+                "id": "[reference('nsgMaster').outputs.nsgIds.value[5]]"
+              },
+              "routeTable": {
+                "id": "[reference('udrMaster').outputs.udrIds.value[5]]"
+              }
+            }
+          },
+          {
+            "name": "GatewaySubnet",
+            "properties": {
+              "addressPrefix": "[variables('gatewaySubnetPrefix')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nsgMaster",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('templateFolder'), '/', variables('nsgTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "subnetProperties": {
+            "value": "[parameters('subnetProperties')]"
+          },
+          "templateFolder": {
+            "value": "[variables('templateFolder')]"
+          },
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "udrMaster",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('templateFolder'), '/', variables('udrTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "subnetProperties": {
+            "value": "[parameters('subnetProperties')]"
+          },
+          "templateFolder": {
+            "value": "[variables('templateFolder')]"
+          },
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}
