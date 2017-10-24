@@ -1,0 +1,139 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmProperties": {
+      "type": "array",
+      "metadata": {
+        "description": "Array of properties used to configure each virtual machine." 
+      }
+    },
+    "vmAdminPassword": {
+      "type": "securestring"
+    },
+    "storageAccountName": {
+      "type": "string"
+    },
+    "storageAccountResourceGroup": {
+      "type": "string",
+      "defaultValue": "com-orch-storage"
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "com-orch-australiasoutheast"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string",
+      "defaultValue": "com-orch-networking"
+    }
+  },
+  "variables": {
+    "vmVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "vmStorageAccountContainerName": "vhds"
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('vmProperties')[copyIndex()].vmName,'-nic')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "australiasoutheast",
+      "apiVersion": "2016-03-30",
+      "copy": {
+        "name": "vmNicCopy",
+        "count": "[length(parameters('vmProperties'))]"
+      },
+      "dependsOn": [
+        "ipCopy"
+      ],
+      "tags": {
+        "displayName": "[concat(parameters('vmProperties')[copyIndex()].vmName,'-nic')]"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('vmProperties')[copyIndex()].ipAddress]",
+              "subnet": {
+                "id": "[concat(variables('vmVnetID'), '/subnets/', parameters('vmProperties')[copyIndex()].subnetName)]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('vmProperties')[copyIndex()].vmName,'-pip'))]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('vmProperties')[copyIndex()].vmName]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "australiasoutheast",
+      "apiVersion": "2015-06-15",
+      "copy": {
+        "name": "vmCopy",
+        "count": "[length(parameters('vmProperties'))]"
+      },
+      "dependsOn": [
+        "vmNicCopy"
+      ],
+      "tags": {
+        "displayName": "[parameters('vmProperties')[copyIndex()].vmName]"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmProperties')[copyIndex()].vmSize]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmProperties')[copyIndex()].vmName]",
+          "adminUsername": "[parameters('vmProperties')[copyIndex()].vmAdminUsername]",
+          "adminPassword": "[parameters('vmAdminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('vmProperties')[copyIndex()].vmImagePublisher]",
+            "offer": "[parameters('vmProperties')[copyIndex()].vmImageOffer]",
+            "sku": "[parameters('vmProperties')[copyIndex()].vmOSVersion]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "vmOSDisk",
+            "vhd": {
+              "uri": "[concat(reference(resourceId(parameters('storageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('vmStorageAccountContainerName'), '/', parameters('vmProperties')[copyIndex()].vmName, '-osdisk', '.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmProperties')[copyIndex()].vmName,'-nic'))]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "[concat(parameters('vmProperties')[copyIndex()].vmName,'-pip')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "location": "australiasoutheast",
+      "apiVersion": "2016-03-30",
+      "copy": {
+        "name": "ipCopy",
+        "count": "[length(parameters('vmProperties'))]"
+      },
+      "dependsOn": [],
+      "tags": {
+        "displayName": "[concat(parameters('vmProperties')[copyIndex()].vmName,'-pip')]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('vmProperties')[copyIndex()].publicName]"
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmProperties": {
+      "value": [
+        {
+          "vmName": "CLIQR-CCO",
+          "vmSize": "Standard_F1",
+          "vmAdminUsername": "vmAdmin",
+          "subnetName": "subnet-app-a",
+          "ipAddress": "10.2.2.194",
+          "vmImagePublisher": "OpenLogic",
+          "vmImageOffer": "CentOS",
+          "vmOSVersion": "7.3",
+          "publicName": "cliqrcco"
+        },
+        {
+          "vmName": "CLIQR-AMQP",
+          "vmSize": "Standard_F1",
+          "vmAdminUsername": "vmAdmin",
+          "subnetName": "subnet-data-a",
+          "ipAddress": "10.2.4.193",
+          "vmImagePublisher": "OpenLogic",
+          "vmImageOffer": "CentOS",
+          "vmOSVersion": "7.3",
+          "publicName": "cliqramqp"
+        }
+      ]
+    },
+    "vmAdminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/8c15b385-5593-495b-bfe6-b1d62f0eb0e4/resourceGroups/steam-keyvault/providers/Microsoft.KeyVault/vaults/steam-vault"
+        },
+        "secretName": "vmAdminPassword"
+      }
+    } 
+  }
+}
