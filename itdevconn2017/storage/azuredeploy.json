@@ -15,7 +15,7 @@
     }
   },
   "variables": {
-    "storageAccountName": "[concat('orch', uniqueString(resourceGroup().id))]"
+    "storageAccountName": "[concat('demo', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
