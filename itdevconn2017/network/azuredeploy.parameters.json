@@ -2,14 +2,16 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "_artifactsLocation": {
-      "value": ""
-    },
-    "_artifactsLocationSasToken": {
-      "value": ""
-    },
-    "vNetPrefix": {
-      "value": "10.2.0.0/16"
+    "vNetProperties": {
+      "value": [
+        {
+          "vNetPrefix": "10.2.0.0/16",
+          "gatewaySubnetPrefix": "10.2.250.0/24",
+          "templateFolder": "itdevconn2017/OrchNetwork/nestedtemplates",
+          "nsgTemplateFileName": "nsgMaster.json",
+          "udrTemplateFileName": "udrMaster.json"
+        }
+      ]
     },
     "subnetProperties": {
       "value": [
