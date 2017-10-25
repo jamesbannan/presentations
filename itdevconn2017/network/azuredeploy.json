@@ -164,7 +164,7 @@
           "subnetProperties": {
             "value": "[parameters('subnetProperties')]"
           },
-          "templateFolder": {
+          "nestedFolder": {
             "value": "[parameters('vNetProperties')[0].nestedFolder]"
           },
           "_artifactsLocation": {
