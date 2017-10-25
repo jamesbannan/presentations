@@ -29,7 +29,8 @@
   },
   "variables": {
     "vmVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "vmStorageAccountContainerName": "vhds"
+    "vmStorageAccountContainerName": "vhds",
+    "fqdnPrefix": "itdevconn"
   },
   "resources": [
     {
@@ -130,7 +131,7 @@
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('vmProperties')[copyIndex()].publicName]"
+          "domainNameLabel": "[concat(variables('fqdnPrefix'),'-',parameters('vmProperties')[copyIndex()].vmName)]"
         }
       }
     }

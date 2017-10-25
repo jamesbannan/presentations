@@ -5,26 +5,24 @@
     "vmProperties": {
       "value": [
         {
-          "vmName": "CLIQR-CCO",
+          "vmName": "vm1",
           "vmSize": "Standard_F1",
           "vmAdminUsername": "vmAdmin",
           "subnetName": "subnet-app-a",
           "ipAddress": "10.2.2.194",
           "vmImagePublisher": "OpenLogic",
           "vmImageOffer": "CentOS",
-          "vmOSVersion": "7.3",
-          "publicName": "cliqrcco"
+          "vmOSVersion": "7.3"
         },
         {
-          "vmName": "CLIQR-AMQP",
+          "vmName": "vm2",
           "vmSize": "Standard_F1",
           "vmAdminUsername": "vmAdmin",
           "subnetName": "subnet-data-a",
           "ipAddress": "10.2.4.193",
           "vmImagePublisher": "OpenLogic",
           "vmImageOffer": "CentOS",
-          "vmOSVersion": "7.3",
-          "publicName": "cliqramqp"
+          "vmOSVersion": "7.3"
         }
       ]
     },
