@@ -30,7 +30,7 @@
     {
       "name": "[concat(parameters('vmProperties')[copyIndex()].vmName,'-nic')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "australiasoutheast",
+      "location": "[resourceGroup().location]",
       "apiVersion": "2016-03-30",
       "copy": {
         "name": "vmNicCopy",
@@ -63,7 +63,7 @@
     {
       "name": "[parameters('vmProperties')[copyIndex()].vmName]",
       "type": "Microsoft.Compute/virtualMachines",
-      "location": "australiasoutheast",
+      "location": "[resourceGroup().location]",
       "apiVersion": "2015-06-15",
       "copy": {
         "name": "vmCopy",
@@ -112,7 +112,7 @@
     {
       "name": "[concat(parameters('vmProperties')[copyIndex()].vmName,'-pip')]",
       "type": "Microsoft.Network/publicIPAddresses",
-      "location": "australiasoutheast",
+      "location": "[resourceGroup().location]",
       "apiVersion": "2016-03-30",
       "copy": {
         "name": "ipCopy",
