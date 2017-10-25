@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "templateUri": {
-      "type": "string",
-      "metadata": {
-        "description": "Full Uri of the Azure Storage Container SAS Token"
-      }
-    },
     "vNetProperties": {
       "type": "array",
       "metadata": {
@@ -19,6 +13,12 @@
       "metadata": {
         "description": "The array of values which defines the properties of each subnet within the virtual network."
       }
+    },
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
     }
   },
   "resources": [
@@ -130,7 +130,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('templateUri'),'/',parameters('vNetProperties')[0].nestedFolder,'/',parameters('vNetProperties')[0].nsgTemplateFileName)]",
+          "uri": "[concat(parameters('_artifactsLocation'),'/',parameters('vNetProperties')[0].nestedFolder,'/',parameters('vNetProperties')[0].nsgTemplateFileName,parameters('_artifactsLocationSasToken'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -140,8 +140,11 @@
           "nestedFolder": {
             "value": "[parameters('vNetProperties')[0].nestedFolder]"
           },
-          "templateUri": {
-            "value": "[parameters('templateUri')]"
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
           }
         }
       }
@@ -154,7 +157,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('templateUri'),'/',parameters('vNetProperties')[0].nestedFolder,'/',parameters('vNetProperties')[0].udrTemplateFileName)]",
+          "uri": "[concat(parameters('_artifactsLocation'),'/',parameters('vNetProperties')[0].nestedFolder,'/',parameters('vNetProperties')[0].udrTemplateFileName,parameters('_artifactsLocationSasToken'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -164,8 +167,11 @@
           "templateFolder": {
             "value": "[parameters('vNetProperties')[0].nestedFolder]"
           },
-          "templateUri": {
-            "value": "[parameters('templateUri')]"
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
           }
         }
       }

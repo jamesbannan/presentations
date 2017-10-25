@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "templateUri": {
-      "type": "string",
-      "metadata": {
-        "description": "Full Uri of the Azure Storage Container SAS Token"
-      }
-    },
     "subnetProperties": {
       "type": "array",
       "metadata": {
@@ -16,6 +10,12 @@
     },
     "nestedFolder": {
       "type": "string"
+    },
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
     }
   },
   "variables": {
@@ -34,7 +34,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('templateUri'), '/', variables('udrTemplateFolder'), '/', parameters('subnetProperties')[copyIndex()].Name,'-udr','.json')]",
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('udrTemplateFolder'), '/', parameters('subnetProperties')[copyIndex()].Name,'-udr','.json',parameters('_artifactsLocationSasToken'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
