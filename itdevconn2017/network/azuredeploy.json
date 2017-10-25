@@ -2,6 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "templateUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Full Uri of the Azure Storage Container SAS Token"
+      }
+    },
     "vNetProperties": {
       "type": "array",
       "metadata": {
@@ -124,15 +130,18 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('vNetProperties')[0].templateFolder,'/',parameters('vNetProperties')[0].nsgTemplateFileName)]",
+          "uri": "[concat(parameters('templateUri'),'/',parameters('vNetProperties')[0].nestedFolder,'/',parameters('vNetProperties')[0].nsgTemplateFileName)]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
           "subnetProperties": {
             "value": "[parameters('subnetProperties')]"
           },
-          "templateFolder": {
-            "value": "[parameters('vNetProperties')[0].templateFolder]"
+          "nestedFolder": {
+            "value": "[parameters('vNetProperties')[0].nestedFolder]"
+          },
+          "templateUri": {
+            "value": "[parameters('templateUri')]"
           }
         }
       }
@@ -145,7 +154,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('vNetProperties')[0].templateFolder,'/',parameters('vNetProperties')[0].udrTemplateFileName)]",
+          "uri": "[concat(parameters('templateUri'),'/',parameters('vNetProperties')[0].nestedFolder,'/',parameters('vNetProperties')[0].udrTemplateFileName)]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -153,7 +162,10 @@
             "value": "[parameters('subnetProperties')]"
           },
           "templateFolder": {
-            "value": "[parameters('vNetProperties')[0].templateFolder]"
+            "value": "[parameters('vNetProperties')[0].nestedFolder]"
+          },
+          "templateUri": {
+            "value": "[parameters('templateUri')]"
           }
         }
       }

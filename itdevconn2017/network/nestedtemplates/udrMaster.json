@@ -2,24 +2,24 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "templateUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Full Uri of the Azure Storage Container SAS Token"
+      }
+    },
     "subnetProperties": {
       "type": "array",
       "metadata": {
         "description": "The array of values which defines the properties of each subnet within the virtual network."
       }
     },
-    "templateFolder": {
+    "nestedFolder": {
       "type": "string"
-    },
-    "_artifactsLocation": {
-      "type": "string"
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring"
     }
   },
   "variables": {
-    "udrTemplateFolder": "[concat(parameters('templateFolder'),'/','udr')]"
+    "udrTemplateFolder": "[concat(parameters('nestedFolder'),'/','udr')]"
   },
   "resources": [
     {
@@ -34,7 +34,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('udrTemplateFolder'), '/', parameters('subnetProperties')[copyIndex()].Name,'-udr','.json', parameters('_artifactsLocationSasToken'))]",
+          "uri": "[concat(parameters('templateUri'), '/', variables('udrTemplateFolder'), '/', parameters('subnetProperties')[copyIndex()].Name,'-udr','.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
