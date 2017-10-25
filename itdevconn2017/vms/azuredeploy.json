@@ -14,21 +14,15 @@
     "storageAccountName": {
       "type": "string"
     },
-    "storageAccountResourceGroup": {
-      "type": "string",
-      "defaultValue": "com-orch-storage"
+    "resourceGroup": {
+      "type": "string"
     },
     "virtualNetworkName": {
-      "type": "string",
-      "defaultValue": "com-orch-australiasoutheast"
-    },
-    "virtualNetworkResourceGroup": {
-      "type": "string",
-      "defaultValue": "com-orch-networking"
+      "type": "string"
     }
   },
   "variables": {
-    "vmVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "vmVnetID": "[resourceId(parameters('resourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "vmStorageAccountContainerName": "vhds",
     "fqdnPrefix": "itdevconn"
   },
@@ -100,7 +94,7 @@
           "osDisk": {
             "name": "vmOSDisk",
             "vhd": {
-              "uri": "[concat(reference(resourceId(parameters('storageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('vmStorageAccountContainerName'), '/', parameters('vmProperties')[copyIndex()].vmName, '-osdisk', '.vhd')]"
+              "uri": "[concat(reference(resourceId(parameters('resourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('vmStorageAccountContainerName'), '/', parameters('vmProperties')[copyIndex()].vmName, '-osdisk', '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
