@@ -30,6 +30,12 @@ const run = (command, args) => {
 
 const slidev = (...args) => run('npx', ['--no-install', 'slidev', ...args])
 
+// Decks are served at <site root>/<deck>/. On GitHub Pages the site root is the
+// repository name, not /, so CI passes SITE_BASE and the asset URLs have to
+// carry that prefix or every request 404s.
+const basePath = deck => `/${[process.env.SITE_BASE, deck].join('/')}/`
+  .replace(/\/+/g, '/')
+
 const [task, ...rest] = process.argv.slice(2)
 const all = rest.includes('--all')
 const positional = rest.filter(arg => !arg.startsWith('--'))
@@ -63,7 +69,7 @@ for (const deck of targets) {
       slidev(entry, '--open')
       break
     case 'build':
-      slidev('build', entry, '--base', `/${deck}/`, '--out', resolve(root, 'dist', deck))
+      slidev('build', entry, '--base', basePath(deck), '--out', resolve(root, 'dist', deck))
       break
     case 'export':
       slidev('export', entry, '--format', 'pdf', '--per-slide', '--wait', '1500',

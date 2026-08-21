@@ -30,10 +30,16 @@ jobs:
 
       - run: npm ci
 
+      # Pages serves a project site under /<repo>/, so the decks need that
+      # prefix baked into their asset URLs. This step reports it.
+      - id: pages
+        uses: actions/configure-pages@v5
+
       - name: Build all decks
         run: npm run build:all
         env:
           GH_TOKEN: ${{ secrets.CONTENT_TOKEN || github.token }}
+          SITE_BASE: ${{ steps.pages.outputs.base_path }}
 
       - name: Add a landing page listing the decks
         run: node scripts/make-index.mjs

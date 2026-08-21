@@ -110,3 +110,13 @@ data reachable from every slide and from theme components.
 `.github/workflows/build.yml` builds every deck to GitHub Pages on push to
 `main`. `.github/workflows/export.yml` attaches PDF and PPTX exports to a
 release when a `<slug>-vN` tag is pushed.
+
+Each deck is published under `<site root>/<slug>/`, with a generated index at the
+root. GitHub Pages serves a project site from `/<repo>/` rather than `/`, so the
+build has to bake that prefix into its asset URLs or every request 404s. CI reads
+the prefix from `actions/configure-pages` and passes it as `SITE_BASE`; locally it
+is unset and the decks build at `/<slug>/`. To reproduce the deployed layout:
+
+```bash
+SITE_BASE=/presentations npm run build:all && node scripts/make-index.mjs
+```
