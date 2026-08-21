@@ -9,7 +9,7 @@
 // Keeps every deck on identical commands so a new talk needs no bespoke scripts.
 
 import { spawnSync } from 'node:child_process'
-import { existsSync, readdirSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -29,6 +29,14 @@ const run = (command, args) => {
 }
 
 const slidev = (...args) => run('npx', ['--no-install', 'slidev', ...args])
+
+// slidev export writes straight to --output and will not create the directory
+// on the way, so a clean checkout fails before rendering anything.
+const outFile = name => {
+  const path = resolve(root, 'dist', name)
+  mkdirSync(dirname(path), { recursive: true })
+  return path
+}
 
 // Decks are served at <site root>/<deck>/. On GitHub Pages the site root is the
 // repository name, not /, so CI passes SITE_BASE and the asset URLs have to
@@ -72,12 +80,16 @@ for (const deck of targets) {
       slidev('build', entry, '--base', basePath(deck), '--out', resolve(root, 'dist', deck))
       break
     case 'export':
+      // --per-slide is not an optimisation: the default /print route stacks
+      // every slide onto one page, collapsing flex children to zero height,
+      // which renders the arch and demo canvases blank. --wait lets the CRT
+      // and reveal animations settle before each capture.
       slidev('export', entry, '--format', 'pdf', '--per-slide', '--wait', '1500',
-        '--output', resolve(root, 'dist', `${deck}.pdf`))
+        '--output', outFile(`${deck}.pdf`))
       break
     case 'export-pptx':
       slidev('export', entry, '--format', 'pptx', '--per-slide', '--wait', '1500',
-        '--output', resolve(root, 'dist', `${deck}.pptx`))
+        '--output', outFile(`${deck}.pptx`))
       break
     default:
       console.error(`Unknown task "${task}". Expected one of: dev, build, export, export-pptx, list`)
