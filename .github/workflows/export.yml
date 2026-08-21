@@ -1,0 +1,63 @@
+name: export
+
+# Tag a deck to publish its handouts, e.g. `zero-friction-devsecops-v3`.
+on:
+  push:
+    tags: ['*-v*']
+  workflow_dispatch:
+    inputs:
+      deck:
+        description: Deck slug to export
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Resolve deck slug
+        id: deck
+        run: |
+          if [ -n "${{ inputs.deck }}" ]; then
+            slug="${{ inputs.deck }}"
+          else
+            # Strip the trailing -vN from the tag to get the deck slug.
+            slug="${GITHUB_REF_NAME%-v*}"
+          fi
+          if [ ! -d "decks/$slug" ]; then
+            echo "::error::no deck at decks/$slug (from ref '$GITHUB_REF_NAME')"
+            exit 1
+          fi
+          echo "slug=$slug" >> "$GITHUB_OUTPUT"
+
+      - name: Export PDF and PPTX
+        run: |
+          npm run export -- "${{ steps.deck.outputs.slug }}"
+          npm run export-pptx -- "${{ steps.deck.outputs.slug }}"
+        env:
+          GH_TOKEN: ${{ secrets.CONTENT_TOKEN || github.token }}
+
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/${{ steps.deck.outputs.slug }}.pdf
+            dist/${{ steps.deck.outputs.slug }}.pptx
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.deck.outputs.slug }}-handouts
+          path: |
+            dist/${{ steps.deck.outputs.slug }}.pdf
+            dist/${{ steps.deck.outputs.slug }}.pptx

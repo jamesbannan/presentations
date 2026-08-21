@@ -1,0 +1,200 @@
+/* ============================================================
+   REUSABLE COMPONENTS
+   ============================================================ */
+
+/* Stage badges (agenda) */
+.stage-badge {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.stage-num {
+  width: 64px;
+  height: 64px;
+  border: 3px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.stage-label {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+
+.stage-label strong {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  display: block;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+
+/* Stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card {
+  background: var(--arcade-panel);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: var(--glow-cyan), inset 0 0 20px #00f5ff0d;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: bold;
+  line-height: 1;
+  display: block;
+  margin-bottom: 10px;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--arcade-yellow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: var(--glow-yellow);
+}
+
+.stat-desc {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #ffffff;
+  margin-top: 12px;
+  line-height: 1.4;
+}
+
+/* Terminal block — matches pptx demo slide with macOS traffic-light dots */
+.terminal {
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.terminal-titlebar {
+  background: #1a1a1a;
+  color: var(--text-dim);
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  position: relative;
+}
+
+.terminal-titlebar::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  width: 50px;
+  height: 12px;
+  background:
+    radial-gradient(circle at 6px 6px, var(--term-red) 0 5px, transparent 6px),
+    radial-gradient(circle at 24px 6px, var(--term-yellow) 0 5px, transparent 6px),
+    radial-gradient(circle at 42px 6px, var(--term-green) 0 5px, transparent 6px);
+}
+
+.terminal-body {
+  padding: 12px 16px;
+  line-height: 1.5;
+}
+
+.t-prompt { color: var(--neon-green); }
+.t-cmd    { color: #ffffff; }
+.t-out    { color: var(--text-dim); }
+.t-ok     { color: var(--neon-green);  }
+.t-warn   { color: var(--arcade-yellow); }
+.t-err    { color: var(--neon-red); }
+.t-cyan   { color: var(--neon-cyan); }
+.t-blank  { display: block; height: 0.5em; }
+
+/* Bullet list retro style */
+ul.retro-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.retro-list li {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  padding: 4px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+ul.retro-list li::before {
+  content: '▸';
+  color: var(--neon-cyan);
+  flex-shrink: 0;
+  text-shadow: var(--glow-cyan);
+}
+
+/* Inline code */
+code {
+  font-family: var(--font-mono);
+  background: #0a1a0a;
+  color: var(--neon-green);
+  padding: 1px 5px;
+  border: 1px solid #1a3a1a;
+  font-size: 0.85em;
+}
+
+/* Horizontal rule */
+hr.retro {
+  border: none;
+  border-top: 1px solid var(--arcade-border);
+  margin: 10px 0;
+}
+
+/* Note/callout box */
+.retro-callout {
+  background: var(--arcade-panel);
+  border-left: 3px solid var(--arcade-yellow);
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.retro-callout .callout-icon {
+  color: var(--arcade-yellow);
+  text-shadow: var(--glow-yellow);
+}
+

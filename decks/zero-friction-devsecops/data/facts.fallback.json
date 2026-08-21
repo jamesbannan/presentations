@@ -1,0 +1,292 @@
+{
+  "architecture": [
+    {
+      "role": "pki",
+      "tag": "// NS · pki",
+      "title": "step-ca",
+      "sub": "private PKI · JWK + K8sSA",
+      "meta": "5-min certs"
+    },
+    {
+      "role": "sigstore",
+      "tag": "// NS · fulcio · rekor · ctlog · tuf · trillian",
+      "title": "Sigstore stack",
+      "sub": "Fulcio · Rekor · TUF · ctlog · Trillian",
+      "meta": "keyless · transparent · public log"
+    },
+    {
+      "arrow": "▼ sign A",
+      "side": "left"
+    },
+    {
+      "arrow": "▼ sign B",
+      "side": "right"
+    },
+    {
+      "role": "workload",
+      "tag": "// NS · workload",
+      "title": "signing & verification jobs",
+      "sub": [
+        "signing-job-smallstep · signing-job-sigstore",
+        "verification-job · demo-app"
+      ]
+    },
+    {
+      "arrow": "▼ push signature",
+      "side": "down-left"
+    },
+    {
+      "arrow": "▲ admission check",
+      "side": "down-right"
+    },
+    {
+      "role": "registry",
+      "tag": "// NS · registry | ext · ACR",
+      "title": "image & signature store",
+      "sub": [
+        "Docker Registry v2 · Azure Container Registry",
+        "web UIs · registry browser & Rekor search"
+      ],
+      "meta": "OCI 1.1 referrers"
+    },
+    {
+      "role": "policy",
+      "tag": "// NS · policy",
+      "title": "Kyverno",
+      "sub": [
+        "require-image-signature",
+        "audit-signed-image-admission"
+      ]
+    }
+  ],
+  "demos": {
+    "gpg": {
+      "tag": "/// DEMO 1 — THE PAINFUL BASELINE",
+      "title": "MANUAL GPG SIGNING",
+      "theme": "red",
+      "intro": "The \"before\" picture, pre-Sigstore container signing",
+      "steps": [
+        {
+          "title": "GENERATE KEY",
+          "body": "RSA-2048 GPG key in a throw-away GNUPGHOME",
+          "meta": "long-lived · on disk"
+        },
+        {
+          "title": "FETCH DIGEST",
+          "body": "Manually pull the image manifest sha256 from the registry",
+          "meta": "copy-paste prone"
+        },
+        {
+          "title": "DETACH-SIGN",
+          "body": "`gpg --detach-sign digest.txt` writes `digest.sig`",
+          "meta": "ad-hoc artefact"
+        },
+        {
+          "title": "VERIFY & PRAY",
+          "body": "Recipient must already have your pubkey · no Rekor · no identity",
+          "meta": "trust-on-first-use"
+        }
+      ],
+      "watch": [
+        "key persists in ~/.gnupg",
+        "no audit trail · no expiry",
+        "no identity binding"
+      ]
+    },
+    "smallstep": {
+      "tag": "/// DEMO 2 — PRIVATE PKI PATH",
+      "title": "SMALLSTEP CA · SHORT-LIVED CERTS",
+      "theme": "yellow",
+      "intro": "Cert expires before verify; Rekor's timestamp saves the day",
+      "steps": [
+        {
+          "title": "ISSUE CERT",
+          "body": "step-ca `workload-signer` provisioner mints a **2-min** X.509 cert",
+          "meta": "JWK · 5-min in prod"
+        },
+        {
+          "title": "COSIGN SIGN",
+          "body": "`cosign sign --certificate` binds image digest to the cert",
+          "meta": "OCI 1.1 referrer"
+        },
+        {
+          "title": "REKOR LOG",
+          "body": "Append-only entry with the cert + signing timestamp",
+          "meta": "treeSize +1"
+        },
+        {
+          "title": "WAIT 130s",
+          "body": "Certificate **expires** on purpose before we verify",
+          "meta": "⏱ tick · tick · tick"
+        },
+        {
+          "title": "VERIFY ✓",
+          "body": "Signature still valid; Rekor proves cert was good *at sign-time*",
+          "meta": "✓ OK",
+          "good": true
+        }
+      ],
+      "watch": [
+        "cert expiry ≠ signature expiry",
+        "no long-lived secret leaves the CA",
+        "Rekor inclusion proof"
+      ]
+    },
+    "sigstore": {
+      "tag": "/// DEMO 3 — KEYLESS PATH",
+      "title": "SIGSTORE · NO KEYS ON DISK",
+      "theme": "cyan",
+      "intro": "The ephemeral key never touches disk, only RAM, then gone",
+      "steps": [
+        {
+          "title": "SA TOKEN",
+          "body": "`kubectl create token` mints a 10-min OIDC JWT for `signing-sa`",
+          "meta": "audience = sigstore"
+        },
+        {
+          "title": "FULCIO CERT",
+          "body": "Fulcio issues a 10-min cert with **SAN URI** bound to the SA identity",
+          "meta": "OIDC → X.509"
+        },
+        {
+          "title": "SIGN (RAM)",
+          "body": "Ephemeral keypair generated, used, **discarded**; never written",
+          "meta": "🔥 no disk"
+        },
+        {
+          "title": "REKOR",
+          "body": "Public transparency log entry recorded",
+          "meta": "SCT + inclusion proof"
+        },
+        {
+          "title": "REGISTRY",
+          "body": "Sig + cert pushed as an OCI 1.1 referrer of the image",
+          "meta": "no .sig tag in v3"
+        }
+      ],
+      "watch": [
+        "SAN URI = kubernetes SA",
+        "key lifetime = milliseconds",
+        "verify uses identity, not pubkey"
+      ]
+    },
+    "cicd": {
+      "tag": "/// DEMO 4 — CI/CD PIPELINE",
+      "title": "BUILD → SIGN ×2 → DEPLOY",
+      "theme": "green",
+      "intro": "A simulated GitHub Actions run, both signing paths in one pipeline",
+      "steps": [
+        {
+          "title": "BUILD",
+          "body": "Rebuild image with current GIT_SHA + BUILD_TIME baked in",
+          "meta": "new digest"
+        },
+        {
+          "title": "PUSH",
+          "body": "Push to in-cluster registry (minikube) *or* ACR (AKS)",
+          "meta": "demo/app:latest"
+        },
+        {
+          "title": "SIGN ×2",
+          "body": "Smallstep CA cert **AND** Sigstore keyless, both attached as referrers",
+          "meta": "Rekor +2"
+        },
+        {
+          "title": "VERIFY",
+          "body": "`cosign verify` on both signatures · fail-closed gate",
+          "meta": "cert ID + issuer"
+        },
+        {
+          "title": "DEPLOY ✓",
+          "body": "Kyverno admits the Deployment; pod goes live",
+          "meta": "demo-app-signed · running",
+          "good": true
+        }
+      ],
+      "watch": [
+        "dual signature on one digest",
+        "PolicyReport: PASS",
+        "zero secrets in the pipeline"
+      ]
+    },
+    "policy": {
+      "tag": "/// DEMO 5 — POLICY GATE",
+      "title": "KYVERNO BLOCKS UNSIGNED IMAGES",
+      "theme": "magenta",
+      "intro": "The moment of truth; webhook says NO to unsigned, YES to signed",
+      "steps": [
+        {
+          "title": "PATCH POLICY",
+          "body": "Inject live Fulcio root, Rekor pubkey + OIDC issuer into `require-image-signature`",
+          "meta": "Audit → Enforce"
+        },
+        {
+          "title": "PUSH UNSIGNED",
+          "body": "Push a busybox-based image, **no signature attached**",
+          "meta": "demo/unsigned:latest"
+        },
+        {
+          "title": "BLOCKED ✗",
+          "body": "`kubectl run` → rejected by admission webhook before the pod exists",
+          "meta": "PolicyReport: FAIL",
+          "bad": true
+        },
+        {
+          "title": "RE-SIGN",
+          "body": "`cosign sign` the demo app with the same keyless flow",
+          "meta": "Rekor +1"
+        },
+        {
+          "title": "ADMITTED ✓",
+          "body": "Signed Deployment passes the webhook; pod schedules",
+          "meta": "signed-test · running",
+          "good": true
+        }
+      ],
+      "watch": [
+        "webhook rejection in real time",
+        "two PolicyReports (one FAIL, one PASS)",
+        "ClusterPolicy reverts on exit"
+      ]
+    },
+    "attestation": {
+      "tag": "/// DEMO 6 — CISO VIEW",
+      "title": "ATTESTATIONS + AUDIT TRAIL",
+      "theme": "white",
+      "intro": "The compliance close-out, full chain of custody, on demand",
+      "steps": [
+        {
+          "title": "BUILD PROVENANCE",
+          "body": "Assemble an in-toto SLSA-provenance predicate (source SHA, build time, builder ID)",
+          "meta": "predicateType: slsaprovenance"
+        },
+        {
+          "title": "COSIGN ATTEST",
+          "body": "Keyless `cosign attest` attaches the attestation as an OCI 1.1 referrer",
+          "meta": "fresh 10-min cert"
+        },
+        {
+          "title": "REKOR LOG",
+          "body": "Entry kind `intoto` appended, same identity, same issuer",
+          "meta": "treeSize +1"
+        },
+        {
+          "title": "VERIFY ATTEST",
+          "body": "`cosign verify-attestation` with cert-identity + issuer flags",
+          "meta": "predicate returned"
+        },
+        {
+          "title": "CISO REPORT",
+          "body": "Aggregate: source SHA · digest · sigs · attest · treeSize · PolicyReports",
+          "meta": "one-page audit",
+          "good": true
+        }
+      ],
+      "watch": [
+        "attestation ≠ signature",
+        "same Rekor, two predicate types",
+        "full chain in < 30 seconds"
+      ]
+    }
+  }
+}

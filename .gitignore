@@ -1,0 +1,20 @@
+# Node
+node_modules/
+
+# Slidev build output
+dist/
+decks/*/dist/
+
+# Content fetched from other repositories by scripts/sync-content.mjs
+.content/
+decks/*/.content/
+
+# Exported artefacts — published as release assets, never committed
+*.pdf
+*.pptx
+
+# macOS
+.DS_Store
+
+# Local overrides
+*.local
