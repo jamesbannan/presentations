@@ -1,0 +1,18 @@
+# Content pulled from other repositories at build time by scripts/sync-content.mjs.
+# Everything lands in .content/ (gitignored) so this deck stays the single place
+# the talk is authored, while the code and facts stay owned by their own repo.
+#
+# Pin `ref` to a tag or SHA before presenting so a rebuild months later is identical.
+
+sources:
+  - repo: jamesbannan/devsecops-code-signing
+    ref: main
+    dest: devsecops
+    # Structured facts the content repo publishes for decks to consume.
+    facts: .presentation/facts.yaml
+    # Sparse-checkout paths: keep this tight, it is a shallow filtered fetch.
+    paths:
+      - .presentation
+      - demos
+      - scripts
+      - docs/architecture.md

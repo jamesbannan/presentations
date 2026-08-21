@@ -1,0 +1,372 @@
+/* ============================================================
+   LAYOUT: cover (title slide)
+   ============================================================ */
+.slidev-layout.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--arcade-purple);
+  background-image:
+    radial-gradient(ellipse at 50% 40%, #2a0a4e88 0%, transparent 70%),
+    var(--bg-confetti),
+    var(--bg-banding);
+  background-size: auto, 100% 100%, auto;
+  background-repeat: no-repeat, no-repeat, repeat;
+  padding: 0;
+}
+
+.slidev-layout.cover .title-banner {
+  background: linear-gradient(180deg, #1e0e40 0%, #14082a 100%);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: var(--glow-cyan), inset 0 0 30px #00f5ff0a;
+  padding: 32px 56px;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.slidev-layout.cover h1 {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+  margin: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.slidev-layout.cover .subtitle {
+  font-family: var(--font-mono);
+  color: var(--neon-magenta);
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 14px;
+  text-shadow: var(--glow-magenta);
+}
+
+.slidev-layout.cover .insert-coin {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--arcade-yellow);
+  text-shadow: var(--glow-yellow);
+  letter-spacing: 0.2em;
+  animation: blink 1.2s step-end infinite;
+  margin-top: 32px;
+  z-index: 1;
+  position: relative;
+}
+
+.slidev-layout.cover .event-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--neon-magenta);
+  color: var(--arcade-black);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 6px 0;
+  letter-spacing: 0.15em;
+  z-index: 2;
+}
+
+.slidev-layout.cover .speaker-name {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+  z-index: 1;
+  position: relative;
+}
+
+/* ============================================================
+   LAYOUT: default (content slides) — pptx navy background
+   ============================================================ */
+.slidev-layout.default {
+  background-color: var(--arcade-navy);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slidev wraps user-authored `<div class="slidev-layout default">` inside its own
+   `<div class="slidev-layout default">`. The inner (user-authored) wrapper needs
+   `flex: 1` so it fills the outer; otherwise children with `flex: 1`
+   (e.g. `.demo-flow`) have no slack to grow into and the bottom half of the
+   slide goes empty when the content is short. */
+.slidev-layout.default > .slidev-layout.default {
+  flex: 1;
+  min-height: 0;
+}
+
+.slide-header {
+  background: linear-gradient(90deg, #0e1830, #16213e);
+  border-bottom: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 12px #00f5ff33;
+  padding: 14px 40px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Slide titles: arcade yellow, matching pptx headings */
+.slide-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: bold;
+  color: var(--arcade-yellow);
+  text-shadow: var(--glow-yellow);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* `///` section tag — cyan, monospaced, matches pptx (e.g. `/// AGENDA`) */
+.slide-header .header-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+  text-shadow: var(--glow-cyan);
+}
+
+.slide-body {
+  flex: 1;
+  padding: 24px 40px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Bullet markers — use ▸ to match pptx body slides */
+.slide-body ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.slide-body ul li {
+  position: relative;
+  padding-left: 1.6em;
+  margin: 0.4em 0;
+  line-height: 1.5;
+}
+.slide-body ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--neon-cyan);
+  font-weight: bold;
+  text-shadow: var(--glow-cyan);
+}
+
+/* ============================================================
+   LAYOUT: two-col
+   ============================================================ */
+.slidev-layout.two-col {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  padding: 16px 24px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.col-panel {
+  background: var(--arcade-panel);
+  border: 1px solid var(--arcade-border);
+  padding: 16px;
+  position: relative;
+}
+
+.col-panel.cyan-border  { border-color: var(--neon-cyan);    }
+.col-panel.yellow-border{ border-color: var(--arcade-yellow); }
+
+.col-panel-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--arcade-border);
+}
+.col-panel.cyan-border   .col-panel-title { color: var(--neon-cyan);    text-shadow: var(--glow-cyan); }
+.col-panel.yellow-border .col-panel-title { color: var(--arcade-yellow);text-shadow: var(--glow-yellow); }
+
+/* ============================================================
+   LAYOUT: section (chapter break)
+   ============================================================ */
+.slidev-layout.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--arcade-purple);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(0, 245, 255, 0.015) 60px,
+      rgba(0, 245, 255, 0.015) 61px
+    ),
+    var(--bg-confetti),
+    var(--bg-banding);
+  background-size: auto, 100% 100%, auto;
+  background-repeat: repeat, no-repeat, repeat;
+}
+
+.slidev-layout.section .level-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-magenta);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: var(--glow-magenta);
+}
+
+.slidev-layout.section h2 {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: bold;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+  margin: 0 0 16px 0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.slidev-layout.section .scanline-divider {
+  width: 300px;
+  border: none;
+  border-top: 1px solid var(--neon-cyan);
+  margin: 0 auto 16px;
+  box-shadow: var(--glow-cyan);
+}
+
+.slidev-layout.section .press-start {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--arcade-yellow);
+  letter-spacing: 0.2em;
+  text-shadow: var(--glow-yellow);
+  animation: blink 1.4s step-end infinite;
+}
+
+/* ============================================================
+   LAYOUT: end (game over / closing)
+   ============================================================ */
+.slidev-layout.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: var(--arcade-purple);
+  padding: 50px 60px 160px;
+}
+
+.slidev-layout.end .end-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slidev-layout.end .game-over {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: bold;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 12px #ff00ff, 0 0 30px #ff00ff66;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.slidev-layout.end .thank-you {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+  letter-spacing: 0.08em;
+  margin-bottom: 0;
+}
+
+.slidev-layout.end .contact-box {
+  background: var(--arcade-panel);
+  border: 1px solid var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  padding: 28px 48px;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  line-height: 2;
+  margin-bottom: 0;
+}
+
+.slidev-layout.end .contact-box > div {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.slidev-layout.end .contact-box .brand-icon {
+  width: 1.4em;
+  height: 1.4em;
+  flex-shrink: 0;
+  fill: var(--neon-cyan);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--neon-cyan) 60%, transparent));
+}
+
+.slidev-layout.end .contact-box .brand-icon-linkedin {
+  fill: #0A66C2;
+  filter: drop-shadow(0 0 4px #0a66c2aa);
+}
+
+.slidev-layout.end .contact-box .brand-icon-mastodon {
+  fill: #6364FF;
+  filter: drop-shadow(0 0 4px #6364ffaa);
+}
+
+.slidev-layout.end .contact-box .brand-icon-unimelb {
+  /* Raster-free SVG asset — colour is baked into the file (UniMelb blue). */
+  fill: none;
+  filter: drop-shadow(0 0 4px #094183aa);
+}
+
+.slidev-layout.end .contact-box .contact-note {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  padding-left: calc(1.4em + 18px);
+  margin-top: 10px;
+}
+
+.slidev-layout.end .hi-score {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+}
+

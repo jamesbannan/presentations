@@ -1,0 +1,30 @@
+{
+  "name": "slidev-theme-arcade",
+  "version": "1.0.0",
+  "description": "Retro arcade Slidev theme — neon-on-deep-purple, CRT chrome, monospace throughout",
+  "author": "James Bannan",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "arcade",
+    "retro"
+  ],
+  "engines": {
+    "slidev": ">=52.0.0"
+  },
+  "slidev": {
+    "defaults": {
+      "colorSchema": "dark",
+      "highlighter": "shiki",
+      "lineNumbers": false,
+      "transition": "fade-out",
+      "fonts": {
+        "mono": "Share Tech Mono"
+      },
+      "drawings": {
+        "persist": false
+      }
+    }
+  }
+}

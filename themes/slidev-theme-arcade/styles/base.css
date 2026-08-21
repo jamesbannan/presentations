@@ -1,0 +1,64 @@
+/* ============================================================
+   BASE — all slides
+   ============================================================ */
+.slidev-layout {
+  background-color: var(--arcade-purple);
+  background-image: var(--bg-confetti), var(--bg-banding);
+  background-size: 100% 100%, auto;
+  background-repeat: no-repeat, repeat;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+/* Border chrome (frame + corners only — confetti is in the slide
+   background so it sits behind text). Anchored to .slidev-page so the
+   frame is pinned to the slide canvas edges and is identical on every
+   slide regardless of which layout is used. */
+.slidev-page {
+  position: relative;
+}
+
+.slidev-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="none"><rect x="0" y="0" width="1280" height="8" fill="%2300F5FF"/><rect x="0" y="712" width="1280" height="8" fill="%2300F5FF"/><rect x="0" y="0" width="8" height="720" fill="%2300F5FF"/><rect x="1272" y="0" width="8" height="720" fill="%2300F5FF"/><rect x="10" y="10" width="9" height="9" fill="%23FF00FF"/><rect x="20" y="10" width="9" height="9" fill="%23FF00FF"/><rect x="10" y="20" width="9" height="9" fill="%23FF00FF"/><rect x="1249" y="10" width="9" height="9" fill="%23FF00FF"/><rect x="1260" y="10" width="9" height="9" fill="%23FF00FF"/><rect x="1260" y="20" width="9" height="9" fill="%23FF00FF"/><rect x="10" y="689" width="9" height="9" fill="%23FF00FF"/><rect x="10" y="700" width="9" height="9" fill="%23FF00FF"/><rect x="20" y="700" width="9" height="9" fill="%23FF00FF"/><rect x="1249" y="700" width="9" height="9" fill="%23FF00FF"/><rect x="1260" y="689" width="9" height="9" fill="%23FF00FF"/><rect x="1260" y="700" width="9" height="9" fill="%23FF00FF"/></svg>');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Pixel corner decorations (shared helper class) */
+.pixel-corners {
+  position: relative;
+}
+.pixel-corners::before,
+.pixel-corners::after {
+  content: '▪';
+  position: absolute;
+  color: var(--neon-cyan);
+  font-size: 8px;
+  opacity: 0.7;
+}
+.pixel-corners::before { top: 4px; left: 4px; }
+.pixel-corners::after  { top: 4px; right: 4px; }
+
+/* ============================================================
+   TYPOGRAPHY HELPERS
+   ============================================================ */
+.neon-cyan    { color: var(--neon-cyan);    text-shadow: var(--glow-cyan); }
+.neon-magenta { color: var(--neon-magenta); text-shadow: var(--glow-magenta); }
+.neon-green   { color: var(--neon-green);   text-shadow: var(--glow-green); }
+.arcade-yellow{ color: var(--arcade-yellow);text-shadow: var(--glow-yellow); }
+.neon-orange  { color: var(--neon-orange); }
+.text-dim     { color: var(--text-dim); }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+}

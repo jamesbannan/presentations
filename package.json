@@ -1,0 +1,31 @@
+{
+  "name": "@jamesbannan/presentations",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Slidev presentation monorepo — shared arcade theme plus one workspace per talk",
+  "author": "James Bannan",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "themes/*",
+    "decks/*"
+  ],
+  "scripts": {
+    "deck": "node scripts/deck.mjs",
+    "sync": "node scripts/sync-content.mjs",
+    "dev": "node scripts/deck.mjs dev",
+    "build": "node scripts/deck.mjs build",
+    "export": "node scripts/deck.mjs export",
+    "export-pptx": "node scripts/deck.mjs export-pptx",
+    "build:all": "node scripts/deck.mjs build --all",
+    "list": "node scripts/deck.mjs list"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.15.2",
+    "playwright-chromium": "^1.60.0",
+    "yaml": "^2.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

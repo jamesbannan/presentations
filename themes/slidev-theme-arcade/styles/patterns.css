@@ -1,0 +1,359 @@
+/* ============================================================
+   LAYOUT: per-demo workflow slides
+   Numbered step boxes connected by arrows + "WATCH FOR" pills
+   Accent colour per demo via --demo-accent custom prop
+   ============================================================ */
+.demo-flow {
+  flex: 1;
+  padding: 22px 36px 18px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  --demo-accent: var(--neon-cyan);
+  --demo-glow: var(--glow-cyan);
+}
+.demo-theme-red     { --demo-accent: var(--neon-red);     --demo-glow: 0 0 6px #ff003c99; }
+.demo-theme-yellow  { --demo-accent: var(--arcade-yellow);--demo-glow: var(--glow-yellow); }
+.demo-theme-cyan    { --demo-accent: var(--neon-cyan);    --demo-glow: var(--glow-cyan); }
+.demo-theme-green   { --demo-accent: var(--neon-green);   --demo-glow: var(--glow-green); }
+.demo-theme-magenta { --demo-accent: var(--neon-magenta); --demo-glow: var(--glow-magenta); }
+.demo-theme-white   { --demo-accent: #ffffff;             --demo-glow: 0 0 6px #ffffff77; }
+
+.demo-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--demo-accent);
+  text-shadow: var(--demo-glow);
+  border-left: 3px solid var(--demo-accent);
+  padding: 4px 12px;
+  align-self: flex-start;
+  text-transform: uppercase;
+}
+
+.demo-steps {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  flex: 1;
+}
+
+.demo-step {
+  flex: 1;
+  background: var(--arcade-panel);
+  border: 2px solid var(--demo-accent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--demo-accent) 35%, transparent);
+  padding: 22px 16px 14px;
+  font-family: var(--font-mono);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-step-num {
+  position: absolute;
+  top: -11px;
+  left: -2px;
+  background: var(--demo-accent);
+  color: var(--arcade-black);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: bold;
+  padding: 3px 10px;
+  letter-spacing: 0.16em;
+  text-shadow: none;
+}
+
+.demo-step-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--demo-accent);
+  text-shadow: var(--demo-glow);
+  line-height: 1.1;
+}
+
+.demo-step-body {
+  font-size: 0.78rem;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+.demo-step-meta {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.demo-sep {
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--demo-accent);
+  text-shadow: var(--demo-glow);
+  padding: 0 2px;
+  user-select: none;
+}
+
+.demo-step-bad  { border-color: var(--neon-red);   box-shadow: 0 0 6px #ff003c55; }
+.demo-step-bad  .demo-step-num   { background: var(--neon-red); }
+.demo-step-bad  .demo-step-title { color: var(--neon-red); text-shadow: 0 0 6px #ff003c99; }
+.demo-step-good { border-color: var(--neon-green); box-shadow: 0 0 6px #39ff1455; }
+.demo-step-good .demo-step-num   { background: var(--neon-green); }
+.demo-step-good .demo-step-title { color: var(--neon-green); text-shadow: var(--glow-green); }
+
+.demo-watch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.demo-watch-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: var(--arcade-yellow);
+  text-shadow: var(--glow-yellow);
+  text-transform: uppercase;
+  padding-right: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.demo-pill {
+  background: rgba(0,0,0,0.55);
+  border: 1px solid var(--demo-accent);
+  padding: 6px 11px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   LAYOUT: A vs B comparison slide (Smallstep vs Sigstore)
+   3-col grid: yellow column | dimension labels | cyan column
+   ============================================================ */
+.vs-canvas {
+  flex: 1;
+  padding: 14px 36px 18px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vs-heads {
+  display: grid;
+  grid-template-columns: 1fr 110px 1fr;
+  gap: 14px;
+  align-items: end;
+}
+
+.vs-head {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: 2px solid;
+  background: var(--arcade-panel);
+}
+.vs-head-a { border-color: var(--arcade-yellow); box-shadow: 0 0 6px #ffe60055; text-align: left; }
+.vs-head-b { border-color: var(--neon-cyan);     box-shadow: 0 0 6px #00f5ff55; text-align: right; }
+.vs-head-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.vs-head-a .vs-head-title { color: var(--arcade-yellow); text-shadow: var(--glow-yellow); font-size: 1.4rem; }
+.vs-head-b .vs-head-title { color: var(--neon-cyan);     text-shadow: var(--glow-cyan);   font-size: 1.4rem; }
+.vs-head-a .vs-head-sub,
+.vs-head-b .vs-head-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-top: 2px;
+}
+
+.vs-versus {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--neon-magenta);
+  text-shadow: var(--glow-magenta);
+  text-align: center;
+  letter-spacing: 0.1em;
+  align-self: center;
+}
+
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 110px 1fr;
+  gap: 6px 14px;
+  align-items: stretch;
+}
+
+.vs-dim {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--neon-magenta);
+  text-shadow: var(--glow-magenta);
+  text-transform: uppercase;
+  text-align: center;
+  align-self: center;
+  border-top: 1px dashed rgba(255,0,255,0.35);
+  border-bottom: 1px dashed rgba(255,0,255,0.35);
+  padding: 4px 0;
+}
+
+.vs-cell {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #ffffff;
+  background: rgba(0,0,0,0.35);
+  padding: 12px 14px;
+  border-left: 3px solid;
+  line-height: 1.4;
+  align-self: stretch;
+}
+.vs-cell-a { border-left-color: var(--arcade-yellow); }
+.vs-cell-b { border-left-color: var(--neon-cyan); text-align: right; }
+
+.vs-footer {
+  margin-top: 6px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-green);
+  text-shadow: var(--glow-green);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px;
+  border-top: 1px solid var(--neon-green);
+  border-bottom: 1px solid var(--neon-green);
+}
+
+/* ============================================================
+   LAYOUT: problem-statement slide (stolen code-signing certs)
+   Hall-of-shame attack cards, red-themed
+   ============================================================ */
+.problem-canvas {
+  flex: 1;
+  padding: 14px 36px 70px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.problem-headline {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--neon-red);
+  text-shadow: 0 0 6px #ff003c99;
+  border-left: 3px solid var(--neon-red);
+  padding: 4px 12px;
+  letter-spacing: 0.06em;
+  align-self: flex-start;
+}
+
+.attack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+
+.attack-card {
+  background: var(--arcade-panel);
+  border: 2px solid var(--neon-red);
+  box-shadow: 0 0 8px #ff003c55, inset 0 0 16px rgba(255,0,60,0.08);
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.attack-year {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--arcade-yellow);
+  text-shadow: var(--glow-yellow);
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: var(--arcade-purple);
+  padding: 2px 8px;
+  border: 1px solid var(--arcade-yellow);
+}
+
+.attack-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--neon-red);
+  text-shadow: 0 0 8px #ff003c99;
+  margin-top: 8px;
+  line-height: 1.1;
+}
+
+.attack-line {
+  font-size: 0.72rem;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.attack-impact {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--arcade-yellow);
+  text-shadow: var(--glow-yellow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255,230,0,0.4);
+}
+
+.problem-punchline {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--neon-red);
+  text-shadow: 0 0 8px #ff003c99;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 10px;
+  border-top: 2px solid var(--neon-red);
+  border-bottom: 2px solid var(--neon-red);
+  background: rgba(255,0,60,0.05);
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  bottom: 24px;
+}
+
+

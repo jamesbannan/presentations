@@ -1,0 +1,11 @@
+{
+  "name": "deck-zero-friction-devsecops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zero-Friction DevSecOps: Automated Code Signing Done Right",
+  "author": "James Bannan",
+  "license": "MIT",
+  "dependencies": {
+    "slidev-theme-arcade": "*"
+  }
+}

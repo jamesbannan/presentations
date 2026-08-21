@@ -1,0 +1,56 @@
+/* ============================================================
+   RETRO ARCADE THEME — Zero-Friction DevSecOps
+   Design system matched to retro_game_template.pptx:
+   • Single monospace face: Courier New, all sizes
+   • Palette: neon cyan / magenta / phosphor green / arcade yellow
+     on deep purple (#1a0a2e) and dark navy (#16213e)
+   • Subtle CRT scanlines + starfield (Slidev embellishment, kept
+     low-intensity so it doesn't drift from the PPTX look)
+   ============================================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Backgrounds (lifted from pptx slide masters) */
+  --arcade-black:    #0a0a0a;   /* terminal / dark */
+  --arcade-purple:   #1a0a2e;   /* cover, section, end */
+  --arcade-navy:     #16213e;   /* default content slides */
+  --arcade-panel:    #1e0e40;   /* card / panel fill */
+  --arcade-border:   #2a2a4a;
+
+  /* Neon accents (match pptx srgbClr values exactly) */
+  --neon-cyan:       #00f5ff;
+  --neon-magenta:    #ff00ff;
+  --neon-green:      #39ff14;
+  --arcade-yellow:   #ffe600;
+  --neon-orange:     #ff6b00;
+  --neon-purple:     #7b2fbe;
+  --neon-red:        #ff003c;
+
+  /* Terminal traffic-light dots (match pptx demo slide) */
+  --term-red:        #ff5f57;
+  --term-yellow:     #ffbd2e;
+  --term-green:      #28ca41;
+
+  --text-primary:    #ffffff;
+  --text-dim:        #888888;
+
+  /* Glow effects (subtle — pptx is flat, this is the web bonus) */
+  --glow-cyan:    0 0 6px #00f5ff99;
+  --glow-magenta: 0 0 6px #ff00ff99;
+  --glow-green:   0 0 6px #39ff1499;
+  --glow-yellow:  0 0 6px #ffe60099;
+
+  /* Typography — Courier New, single face, matching pptx */
+  --font-mono:    'Courier New', 'Courier', monospace;
+  --font-display: 'Courier New', 'Courier', monospace;
+
+  /* Reusable background layers (used by every layout) */
+  --bg-confetti: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="none"><rect x="38" y="26" width="5" height="5" fill="%2300F5FF"/><rect x="141" y="102" width="6" height="6" fill="%23FFFFFF"/><rect x="307" y="38" width="8" height="8" fill="%23FF00FF"/><rect x="538" y="19" width="5" height="5" fill="%23FFE600"/><rect x="704" y="70" width="6" height="6" fill="%2339FF14"/><rect x="870" y="13" width="8" height="8" fill="%2300F5FF"/><rect x="1037" y="51" width="5" height="5" fill="%23FFFFFF"/><rect x="1203" y="32" width="6" height="6" fill="%23FF00FF"/><rect x="102" y="192" width="8" height="8" fill="%23FFE600"/><rect x="256" y="154" width="5" height="5" fill="%2339FF14"/><rect x="461" y="230" width="6" height="6" fill="%2300F5FF"/><rect x="653" y="128" width="8" height="8" fill="%23FFFFFF"/><rect x="934" y="205" width="5" height="5" fill="%23FF00FF"/><rect x="1139" y="166" width="6" height="6" fill="%23FFE600"/><rect x="64" y="358" width="8" height="8" fill="%2339FF14"/><rect x="230" y="294" width="5" height="5" fill="%2300F5FF"/><rect x="410" y="371" width="6" height="6" fill="%23FFFFFF"/><rect x="627" y="269" width="8" height="8" fill="%23FF00FF"/><rect x="832" y="346" width="5" height="5" fill="%23FFE600"/><rect x="998" y="307" width="6" height="6" fill="%2339FF14"/><rect x="1178" y="371" width="8" height="8" fill="%2300F5FF"/><rect x="26" y="512" width="5" height="5" fill="%23FFFFFF"/><rect x="192" y="486" width="6" height="6" fill="%23FF00FF"/><rect x="384" y="538" width="8" height="8" fill="%23FFE600"/><rect x="742" y="448" width="5" height="5" fill="%2339FF14"/><rect x="896" y="512" width="6" height="6" fill="%2300F5FF"/><rect x="1088" y="474" width="8" height="8" fill="%23FFFFFF"/><rect x="1216" y="525" width="5" height="5" fill="%23FF00FF"/><rect x="320" y="640" width="6" height="6" fill="%23FFE600"/><rect x="768" y="666" width="8" height="8" fill="%2339FF14"/></svg>');
+  --bg-banding: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 22px,
+    rgba(30, 14, 64, 0.55) 22px,
+    rgba(30, 14, 64, 0.55) 26px
+  );
+}
