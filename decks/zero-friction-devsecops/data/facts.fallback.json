@@ -61,7 +61,7 @@
   ],
   "demos": {
     "gpg": {
-      "tag": "/// DEMO 1 — THE PAINFUL BASELINE",
+      "dir": "demos/demo1-before",
       "title": "MANUAL GPG SIGNING",
       "theme": "red",
       "intro": "The \"before\" picture, pre-Sigstore container signing",
@@ -94,7 +94,7 @@
       ]
     },
     "smallstep": {
-      "tag": "/// DEMO 2 — PRIVATE PKI PATH",
+      "dir": "demos/demo2-smallstep",
       "title": "SMALLSTEP CA · SHORT-LIVED CERTS",
       "theme": "yellow",
       "intro": "Cert expires before verify; Rekor's timestamp saves the day",
@@ -133,7 +133,7 @@
       ]
     },
     "sigstore": {
-      "tag": "/// DEMO 3 — KEYLESS PATH",
+      "dir": "demos/demo3-sigstore",
       "title": "SIGSTORE · NO KEYS ON DISK",
       "theme": "cyan",
       "intro": "The ephemeral key never touches disk, only RAM, then gone",
@@ -171,7 +171,7 @@
       ]
     },
     "cicd": {
-      "tag": "/// DEMO 4 — CI/CD PIPELINE",
+      "dir": "demos/demo4-cicd",
       "title": "BUILD → SIGN ×2 → DEPLOY",
       "theme": "green",
       "intro": "A simulated GitHub Actions run, both signing paths in one pipeline",
@@ -210,7 +210,7 @@
       ]
     },
     "policy": {
-      "tag": "/// DEMO 5 — POLICY GATE",
+      "dir": "demos/demo5-verification",
       "title": "KYVERNO BLOCKS UNSIGNED IMAGES",
       "theme": "magenta",
       "intro": "The moment of truth; webhook says NO to unsigned, YES to signed",
@@ -250,7 +250,7 @@
       ]
     },
     "attestation": {
-      "tag": "/// DEMO 6 — CISO VIEW",
+      "dir": "demos/demo6-audit",
       "title": "ATTESTATIONS + AUDIT TRAIL",
       "theme": "white",
       "intro": "The compliance close-out, full chain of custody, on demand",
