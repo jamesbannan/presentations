@@ -1,0 +1,33 @@
+{
+  "name": "slidev-theme-ai-cybersecurity",
+  "version": "1.0.0",
+  "description": "AI & cybersecurity Slidev theme — Mirror's Edge inspired, bright reflective white with navy/cyan accents",
+  "author": "James Bannan",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "ai",
+    "cybersecurity"
+  ],
+  "engines": {
+    "slidev": ">=52.0.0"
+  },
+  "slidev": {
+    "defaults": {
+      "colorSchema": "light",
+      "canvasWidth": 1280,
+      "highlighter": "shiki",
+      "lineNumbers": false,
+      "transition": "fade-out",
+      "fonts": {
+        "sans": ["Inter", "Space Grotesk"],
+        "mono": "JetBrains Mono",
+        "weights": ["400", "500", "700"]
+      },
+      "drawings": {
+        "persist": false
+      }
+    }
+  }
+}

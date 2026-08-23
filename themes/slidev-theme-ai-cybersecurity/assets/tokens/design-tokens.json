@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "name": "AI & Cybersecurity — Mirror's Edge Theme",
+    "inspiration": "Mirror's Edge: bright reflective surfaces, sense of distance/scale/grandeur, blue + white",
+    "canvas": { "widthIn": 13.333, "heightIn": 7.5, "aspectRatio": "16:9", "baseViewBox": [0, 0, 1920, 1080] }
+  },
+  "color": {
+    "navyDeep":  { "hex": "#060E21", "role": "darkest background / title gradient top" },
+    "navy":      { "hex": "#0B1E3D", "role": "dark card fill / quote & closing background" },
+    "blueMid":   { "hex": "#1852B0", "role": "secondary accent, kicker on light bg" },
+    "blue":      { "hex": "#2E6FF2", "role": "primary accent, motif fill" },
+    "sky":       { "hex": "#C4E2FF", "role": "light gradient base / subtitle text on dark" },
+    "ice":       { "hex": "#EAF4FF", "role": "light card fill / divider gradient mid" },
+    "white":     { "hex": "#FFFFFF", "role": "dominant background, headline text on dark" },
+    "cyan":      { "hex": "#00D4FF", "role": "sharp accent — kickers on dark, stat numbers" },
+    "ink":       { "hex": "#27354C", "role": "body text on white/light backgrounds" },
+    "muted":     { "hex": "#5B6B85", "role": "secondary/caption text on light backgrounds" },
+    "cardBorder":{ "hex": "#DCE6F5", "role": "hairline border for light cards" }
+  },
+  "colorUsage": {
+    "dominance": "White / near-white carries 60-70% of visual weight across the deck as a whole; navy gradients are reserved for title, section-opening quote, and closing slides.",
+    "cardRule": "On a white-background slide, cards stay LIGHT (ice/white fill, hairline border, colored kicker/icon for differentiation). Dark navy fill is reserved for slides that are themselves full-bleed dark (stat callouts, quote slides, closing) — never as a card sitting on a white slide."
+  },
+  "typography": {
+    "headingFont": { "family": "Arial", "weight": 700, "charSpacing": "wide (1-3pt tracking)", "webFallback": "Arial, Helvetica, sans-serif", "slidevSuggestion": "Space Grotesk or Archivo Expanded for a closer futuristic web-font match, fallback Arial" },
+    "bodyFont": { "family": "Calibri", "weight": 400, "webFallback": "Calibri, 'Segoe UI', sans-serif", "slidevSuggestion": "Inter or Source Sans 3" },
+    "scale": {
+      "titleHero": "60pt / 80px",
+      "sectionDividerTitle": "46pt / 61px",
+      "slideTitle": "28-40pt / 37-53px",
+      "sectionHeader": "12-13pt / 16-17px, bold, uppercase, tracked",
+      "body": "14.5-16.5pt / 19-22px",
+      "caption": "10-12pt / 13-16px, muted, often italic",
+      "statNumber": "92pt / 123px"
+    }
+  },
+  "spacing": {
+    "slideMarginIn": 0.7,
+    "cardGapIn": 0.35,
+    "rowGapIn": 0.78,
+    "unit": "multiples of 0.35in / ~34px preferred for gaps"
+  },
+  "motif": {
+    "shape": "45deg-rotated square (diamond)",
+    "sizeIn": [0.35, 0.62],
+    "usage": "Single repeating accent anchor before a kicker/title on divider, title, quote, and closing slides. Fill = blue @ 10-25% transparency, stroke = cyan 1pt. Replaces underlines/accent bars (avoided by design system rule).",
+    "explicitlyAvoid": ["accent stripe under title", "sidebar color bar", "single-side border on cards"]
+  },
+  "cardStyles": {
+    "lightCard": {
+      "usedWhen": "card sits on a white/light-background slide",
+      "fill": "#F5F8FF (or #EAF2FF for a second differentiated card in the same row)",
+      "border": "1px solid #DCE6F5",
+      "cornerRadiusIn": 0.06,
+      "kickerColor": "#1852B0 (blueMid)",
+      "bodyTextColor": "#27354C (ink)"
+    },
+    "darkFullBleed": {
+      "usedWhen": "the entire slide is the card — stat callouts, quote slides, closing",
+      "background": "navy (#0B1E3D) solid or bg-dark.svg gradient",
+      "kickerColor": "#00D4FF (cyan)",
+      "bodyTextColor": "#FFFFFF / #C4E2FF (sky)",
+      "accentNumberColor": "#00D4FF (cyan)"
+    }
+  },
+  "backgroundAssets": {
+    "bg-title": { "svg": "assets/svg/bg-title.svg", "usedOn": ["title slide", "closing slide"] },
+    "bg-divider": { "svg": "assets/svg/bg-divider.svg", "usedOn": ["section divider slides"] },
+    "bg-dark": { "svg": "assets/svg/bg-dark.svg", "usedOn": ["full-bleed quote / principle slides"] },
+    "panel-facets": { "svg": "assets/svg/panel-facets.svg", "usedOn": ["decorative accent on agenda / stat slides, right or left edge, 30-100% opacity"] }
+  },
+  "geometrySource": "assets/tokens/background-geometry.json — raw gradient stops, glare radial-gradient params, perspective line coordinates, and facet polygon point lists used to generate every SVG above. Re-derive CSS gradients/clip-paths directly from this file rather than eyeballing the SVGs."
+}

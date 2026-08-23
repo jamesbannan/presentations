@@ -1,0 +1,135 @@
+/*
+  AI & Cybersecurity — Mirror's Edge theme
+  Design tokens as CSS custom properties + ready-made gradient/utility classes
+  for the Slidev conversion. Geometry backing the SVGs lives in
+  assets/tokens/background-geometry.json; this file is the styling layer.
+*/
+
+:root {
+  /* --- Palette --- */
+  --color-navy-deep: #060E21;
+  --color-navy: #0B1E3D;
+  --color-blue-mid: #1852B0;
+  --color-blue: #2E6FF2;
+  --color-sky: #C4E2FF;
+  --color-ice: #EAF4FF;
+  --color-white: #FFFFFF;
+  --color-cyan: #00D4FF;
+  --color-ink: #27354C;
+  --color-muted: #5B6B85;
+  --color-card-border: #DCE6F5;
+  --color-card-alt: #EAF2FF;
+
+  /* --- Type --- */
+  --font-heading: Arial, Helvetica, sans-serif; /* swap for 'Space Grotesk', Arial in Slidev if web fonts are available */
+  --font-body: Calibri, 'Segoe UI', sans-serif; /* swap for 'Inter', Calibri */
+  --tracking-wide: 0.08em;
+
+  /* --- Spacing (1in = 96px reference) --- */
+  --space-margin: 67px;   /* 0.7in */
+  --space-card-gap: 34px; /* 0.35in */
+  --space-row-gap: 75px;  /* 0.78in */
+
+  /* --- Motif --- */
+  --motif-size: 48px;
+  --motif-fill: rgba(46, 111, 242, 0.15);
+  --motif-stroke: var(--color-cyan);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Backgrounds — gradients mirror assets/svg/*.svg exactly                */
+/* ---------------------------------------------------------------------- */
+
+.bg-title {
+  background: linear-gradient(
+    180deg,
+    var(--color-navy-deep) 0%,
+    var(--color-navy) 55%,
+    var(--color-blue-mid) 85%,
+    var(--color-blue) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+.bg-title::before { /* sun glare, top-right */
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -6%;
+  width: 55%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(0,212,255,0.35) 40%, transparent 72%);
+  pointer-events: none;
+}
+
+.bg-divider {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-ice) 60%, var(--color-sky) 100%);
+}
+
+.bg-dark {
+  background: linear-gradient(180deg, #04091A 0%, var(--color-navy-deep) 50%, var(--color-navy) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.bg-dark::before {
+  content: "";
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,111,242,0.30) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Facet skyline / shard SVGs: import directly as <img> or inline <svg>            */
+/* e.g. <img src="/assets/svg/bg-title.svg" class="absolute inset-0 w-full h-full"> */
+/* or inline the SVG markup to allow currentColor / recoloring per slide.          */
+
+/* ---------------------------------------------------------------------- */
+/* Motif — repeating rotated-diamond accent                               */
+/* ---------------------------------------------------------------------- */
+.motif-diamond {
+  width: var(--motif-size);
+  height: var(--motif-size);
+  background: var(--motif-fill);
+  border: 1px solid var(--motif-stroke);
+  transform: rotate(45deg);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Typography scale                                                       */
+/* ---------------------------------------------------------------------- */
+.text-hero      { font-family: var(--font-heading); font-weight: 700; font-size: 80px; }
+.text-section-title { font-family: var(--font-heading); font-weight: 700; font-size: 61px; line-height: 1.09; }
+.text-slide-title   { font-family: var(--font-heading); font-weight: 700; font-size: 40px; }
+.text-kicker    { font-family: var(--font-heading); font-weight: 700; font-size: 17px; letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+.text-body      { font-family: var(--font-body); font-size: 22px; }
+.text-caption   { font-family: var(--font-body); font-size: 15px; font-style: italic; color: var(--color-muted); }
+.text-stat      { font-family: var(--font-heading); font-weight: 700; font-size: 123px; color: var(--color-cyan); }
+
+/* ---------------------------------------------------------------------- */
+/* Card styles                                                            */
+/* CARD RULE: on a white/light slide, cards ALWAYS use .card-light        */
+/* (never .card-dark) — dark fill is reserved for full-bleed slides.      */
+/* ---------------------------------------------------------------------- */
+.card-light {
+  background: #F5F8FF;
+  border: 1px solid var(--color-card-border);
+  border-radius: 6px;
+  color: var(--color-ink);
+}
+.card-light .card-kicker { color: var(--color-blue-mid); }
+
+.card-light--alt { /* second card in a row: same light treatment, differentiated tint */
+  background: var(--color-card-alt);
+}
+
+.card-dark-fullbleed { /* only for slides that ARE the card: stat callouts, quote, closing */
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+.card-dark-fullbleed .card-kicker { color: var(--color-cyan); }

@@ -1,0 +1,141 @@
+/* ============================================================
+   BASE — canvas, type defaults, shared slide furniture
+
+   The deck is authored on the source template's 13.333 x 7.5in canvas at
+   96px per inch, so `canvasWidth: 1280` in package.json makes every px in
+   theme.css and every inch in assets/tokens/layout-tokens.json land exactly
+   where the template puts it. Layout coordinates below are written as
+   `calc(N * var(--in))` so they can be read straight off the token file.
+   ============================================================ */
+
+:root {
+  --in: 96px;
+  --slide-margin: calc(0.7 * var(--in));
+
+  /* theme.css ships the print-template faces (Arial / Calibri) and flags the
+     web-font swap in its comments; design-tokens.json names the equivalents.
+     Slidev loads them, so promote them to the front of each stack here rather
+     than editing the shipped token file. */
+  --font-heading: 'Space Grotesk', Arial, Helvetica, sans-serif;
+  --font-body: 'Inter', Calibri, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+.slidev-layout {
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Full-bleed background art sits behind everything, edge to edge. */
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Every positioned content block sits above the background art and the
+   decorative facet panel (z-index 1). Listed explicitly rather than via a
+   blanket child selector, which would outrank the layout rules that place
+   these blocks and drop them back into normal flow. */
+.slide-header,
+.slide-body,
+.cover-body,
+.cover-footer,
+.section-body,
+.two-col-grid,
+.stat-grid,
+.stat-source,
+.quote-body,
+.end-body {
+  z-index: 2;
+}
+
+/* ============================================================
+   TYPOGRAPHY DEFAULTS
+
+   Every selector here is wrapped in :where() so it contributes zero
+   specificity. Element defaults must never outrank a theme class such as
+   .end-subtitle or .cover-title — plain `.slidev-layout p` (0,1,1) silently
+   beats those (0,1,0) rules and drops their margins and colours.
+   ============================================================ */
+:where(.slidev-layout) :where(h1, h2, h3) {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0;
+  line-height: 1.15;
+}
+
+:where(.slidev-layout) p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+:where(.slidev-layout) strong { font-weight: 700; color: var(--color-navy); }
+:where(.slidev-layout) em { font-style: italic; }
+
+:where(.slidev-layout) a {
+  color: var(--color-blue-mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-card-border);
+}
+
+:where(.slidev-layout) code {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.9em;
+  background: var(--color-ice);
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+}
+
+/* ============================================================
+   SLIDE HEADER — kicker + title, common to every content layout
+   ============================================================ */
+.slide-header {
+  position: absolute;
+  left: var(--slide-margin);
+  top: calc(0.55 * var(--in));
+  right: var(--slide-margin);
+}
+
+.slide-kicker {
+  color: var(--color-blue-mid);
+  font-size: 16px;
+  margin-bottom: calc(0.08 * var(--in));
+}
+
+.slide-title {
+  font-size: 40px;
+  color: var(--color-navy);
+  max-width: calc(10.5 * var(--in));
+}
+
+.slide-title--tight { font-size: 37px; }
+.slide-title--lg { font-size: 53px; }
+
+/* Body region beneath the header. */
+.slide-body {
+  position: absolute;
+  left: var(--slide-margin);
+  right: var(--slide-margin);
+  top: calc(2.05 * var(--in));
+  bottom: calc(0.6 * var(--in));
+}
+
+/* On dark slides the title flips to white. Written against the layout class
+   so it outranks the `.slidev-layout h2` base colour. */
+.slidev-layout.stat .slide-title,
+.slidev-layout.quote .slide-title,
+.slidev-layout.cover .slide-title {
+  color: var(--color-white);
+}

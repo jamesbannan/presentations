@@ -1,0 +1,225 @@
+/* ============================================================
+   LAYOUTS — one block per template in layout-tokens.json.
+   Positions are the token coordinates in inches; `--in` maps them onto the
+   1280 x 720 canvas exactly as the source template lays them out.
+   ============================================================ */
+
+/* ------------------------------------------------------------------------
+   COVER — bg-title gradient, cyan eyebrow, hero title
+   ------------------------------------------------------------------------ */
+.slidev-layout.cover { color: var(--color-white); }
+
+.cover-body {
+  position: absolute;
+  left: calc(0.85 * var(--in));
+  top: calc(1.55 * var(--in));
+  right: calc(0.7 * var(--in));
+}
+
+.cover-kicker {
+  color: var(--color-cyan);
+  font-size: 17px;
+  margin-left: calc(0.05 * var(--in));
+}
+
+.slidev-layout.cover .cover-title {
+  color: var(--color-white);
+  margin-top: calc(0.45 * var(--in));
+  max-width: calc(10.8 * var(--in));
+  line-height: 1.05;
+}
+
+.cover-subtitle {
+  color: var(--color-sky);
+  font-size: 27px;
+  font-style: italic;
+  margin-top: calc(0.45 * var(--in));
+  margin-left: calc(0.05 * var(--in));
+  max-width: calc(9.5 * var(--in));
+}
+
+.cover-motif { margin: calc(0.5 * var(--in)) 0 0 calc(0.05 * var(--in)); }
+
+.cover-footer {
+  position: absolute;
+  left: calc(0.9 * var(--in));
+  top: calc(6.65 * var(--in));
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: #AEC9F0;
+}
+
+/* ------------------------------------------------------------------------
+   AGENDA — white, numbered rows, facets off the right edge
+   ------------------------------------------------------------------------ */
+.slidev-layout.agenda .slide-title {
+  font-size: 53px;
+  max-width: calc(8 * var(--in));
+}
+
+.slidev-layout.agenda .slide-body {
+  top: calc(2.05 * var(--in));
+  right: auto;
+  width: calc(7.85 * var(--in));
+}
+
+/* ------------------------------------------------------------------------
+   SECTION DIVIDER — white-to-sky gradient with blue facets
+   ------------------------------------------------------------------------ */
+.section-body {
+  position: absolute;
+  left: calc(0.85 * var(--in));
+  top: calc(2.15 * var(--in));
+  right: calc(0.7 * var(--in));
+}
+
+.section-motif { margin-left: calc(0.05 * var(--in)); }
+
+.section-kicker {
+  color: var(--color-blue-mid);
+  font-size: 17px;
+  margin: calc(0.05 * var(--in)) 0 0 calc(0.05 * var(--in));
+}
+
+.slidev-layout.section .section-title {
+  color: var(--color-navy);
+  margin-top: calc(0.12 * var(--in));
+  max-width: calc(9.5 * var(--in));
+  /* Holds the subtitle at the template's 4.85in while letting long titles push it down. */
+  min-height: calc(1.93 * var(--in));
+}
+
+.section-subtitle {
+  font-size: 21px;
+  font-style: italic;
+  color: var(--color-muted);
+  margin: 0 0 0 calc(0.05 * var(--in));
+  max-width: calc(7.5 * var(--in));
+}
+
+/* ------------------------------------------------------------------------
+   TWO-COLUMN COMPARISON — two light cards, never light-vs-dark
+   ------------------------------------------------------------------------ */
+.two-col-grid {
+  position: absolute;
+  left: var(--slide-margin);
+  right: var(--slide-margin);
+  top: calc(2.15 * var(--in));
+  height: calc(4.5 * var(--in));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(0.6 * var(--in));
+}
+
+/* ------------------------------------------------------------------------
+   STAT CALLOUT — full-bleed navy, one oversized cyan number
+   ------------------------------------------------------------------------ */
+.slidev-layout.stat {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+.slidev-layout.stat .slide-kicker { color: var(--color-cyan); }
+.slidev-layout.stat .slide-title {
+  font-size: 35px;
+  max-width: calc(9 * var(--in));
+}
+
+.stat-grid {
+  position: absolute;
+  left: var(--slide-margin);
+  right: var(--slide-margin);
+  top: calc(2.1 * var(--in));
+  display: grid;
+  grid-template-columns: 1fr calc(5.7 * var(--in));
+  gap: calc(0.5 * var(--in));
+}
+
+.stat-notes {
+  color: var(--color-sky);
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.stat-figure { text-align: right; }
+
+.slidev-layout.stat .stat-number {
+  color: var(--color-cyan);
+  line-height: 1;
+}
+
+.stat-caption {
+  color: var(--color-sky);
+  font-size: 20px;
+  margin-top: calc(0.35 * var(--in));
+}
+
+.stat-source {
+  position: absolute;
+  left: var(--slide-margin);
+  top: calc(6.7 * var(--in));
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-style: italic;
+  color: #7FA6E8;
+  max-width: calc(8 * var(--in));
+}
+
+/* ------------------------------------------------------------------------
+   FULL-BLEED QUOTE — the dark gradient, one guiding principle
+   ------------------------------------------------------------------------ */
+.slidev-layout.quote { color: var(--color-white); }
+
+.quote-body {
+  position: absolute;
+  left: calc(0.9 * var(--in));
+  top: calc(1.5 * var(--in));
+  right: calc(1.4 * var(--in));
+}
+
+.quote-motif { margin-left: calc(0.05 * var(--in)); }
+
+.slidev-layout.quote .quote-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 43px;
+  line-height: 1.25;
+  color: var(--color-white);
+  margin: calc(0.85 * var(--in)) 0 0 calc(0.5 * var(--in));
+  max-width: calc(10.5 * var(--in));
+  border: none;
+  padding: 0;
+  quotes: none;
+}
+.quote-text p { font-size: inherit; line-height: inherit; }
+
+.quote-kicker {
+  color: var(--color-cyan);
+  font-size: 16px;
+  margin: calc(0.5 * var(--in)) 0 0 calc(0.5 * var(--in));
+}
+
+/* ------------------------------------------------------------------------
+   CLOSING — bookends the deck with the title gradient
+   ------------------------------------------------------------------------ */
+.slidev-layout.end { color: var(--color-white); }
+
+.end-body {
+  position: absolute;
+  left: calc(0.9 * var(--in));
+  top: calc(2.55 * var(--in));
+  right: calc(0.7 * var(--in));
+}
+
+.slidev-layout.end .end-title {
+  font-size: 72px;
+  color: var(--color-white);
+  letter-spacing: 0.03em;
+  margin-top: calc(-0.05 * var(--in));
+}
+
+.end-subtitle {
+  font-size: 24px;
+  font-style: italic;
+  color: var(--color-sky);
+  margin-top: calc(0.19 * var(--in));
+}
