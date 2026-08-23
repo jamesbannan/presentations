@@ -93,12 +93,13 @@
   padding-top: calc(0.1 * var(--in));
 }
 
-/* Row pitch is fixed at the template's 1.35in so rows land on 2.15/3.50/4.85. */
+/* Row pitch defaults to the template's 1.35in; IconRows tightens it via
+   --row-pitch when a slide carries more than three rows. */
 .icon-row {
   display: flex;
   align-items: flex-start;
   gap: calc(0.23 * var(--in));
-  min-height: calc(1.35 * var(--in));
+  min-height: var(--row-pitch, calc(1.35 * var(--in)));
 }
 
 .icon-row-badge {

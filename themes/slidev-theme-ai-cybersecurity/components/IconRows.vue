@@ -5,6 +5,10 @@
     <IconRows :rows="[{ title: 'Critical evaluation', body: 'Judging AI output…' }]" />
 
   `n` overrides the auto-numbering; pass `icon` to swap the number for a glyph.
+
+  Row pitch is the template's 1.35in for the usual three rows, and tightens
+  automatically beyond that so four to six rows still fit the 4.75in body
+  rather than silently overflowing off the bottom of the slide.
 -->
 <script setup lang="ts">
 import { computed } from 'vue'
@@ -19,6 +23,13 @@ interface IconRow {
 
 const props = defineProps<{ rows: IconRow[] }>()
 
+const BODY_HEIGHT_IN = 4.75
+const MAX_PITCH_IN = 1.35
+
+const pitch = computed(() =>
+  Math.min(MAX_PITCH_IN, BODY_HEIGHT_IN / Math.max(props.rows.length, 1)),
+)
+
 const items = computed(() =>
   props.rows.map((row, index) => ({
     badge: row.icon ?? String(row.n ?? index + 1),
@@ -29,7 +40,7 @@ const items = computed(() =>
 </script>
 
 <template>
-  <div class="icon-rows">
+  <div class="icon-rows" :style="{ '--row-pitch': `${pitch}in` }">
     <div v-for="(row, index) in items" :key="index" class="icon-row">
       <div class="icon-row-badge">{{ row.badge }}</div>
       <div class="icon-row-text">

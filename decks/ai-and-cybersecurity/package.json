@@ -1,0 +1,11 @@
+{
+  "name": "deck-ai-and-cybersecurity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI & Cybersecurity: Navigating Your Transition from Study to Industry",
+  "author": "James Bannan",
+  "license": "MIT",
+  "dependencies": {
+    "slidev-theme-ai-cybersecurity": "*"
+  }
+}
