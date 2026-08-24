@@ -75,6 +75,8 @@ itself or in the presenter notes, and expanded below.
 | Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi 10.1111/bjet.13544 |
 | Effort is the signal, not the problem | Fluent AI explanations leave students confident about material they have not learned; "metacognitive laziness"; "generating answers before receiving explanations" listed among the desirable difficulties | TEQSA, *Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities*, 24 June 2026 |
 | What actually governs this in Australia | No AI Act; reliance on "strong existing, largely technology-neutral legal frameworks"; an AI Safety Institute being established; text and data mining exception ruled out | *National AI Plan*, Department of Industry, Science and Resources, 2 December 2025 |
+| What actually governs this in Australia | Australian Standards for AI announced, Office of AI established in PM&C, standards "expected to be legislated early next year"; obligations are directed at large data centres | Prime Minister of Australia, *AI in Australia's interests*, media release, 15 July 2026 |
+| What you type in does not stay yours | "Files you upload to Copilot Chat are stored privately within your OneDrive and are not used for training"; all students have M365 Copilot Chat, which is not a licence to Microsoft 365 Copilot | University of Melbourne Student IT, *Microsoft 365*, studentit.unimelb.edu.au |
 | What actually governs this in Australia | Guidance for AI Adoption sets out 6 essential practices and "evolves" the 10 VAISS guardrails and the 8 AI Ethics Principles | National AI Centre, *Guidance for AI Adoption*, 21 October 2025 |
 | What this University tells you not to upload | Uploading personal information "carries similar risks to sharing it publicly to the open web"; uploading lecture slides or other subject material may violate creators' copyright; treat outputs "with the same scepticism and caution as you would any content from the internet" | University of Melbourne Academic Skills, *GenAI at Melbourne*, students.unimelb.edu.au |
 
@@ -216,6 +218,18 @@ Sourcing notes for the frameworks material in section 6:
   expertise". The plan was read from the primary PDF, not from secondary
   coverage. Mandatory guardrails for high-risk AI were consulted on in 2024
   and did not proceed in that form.
+- **The July 2026 announcement is on the slide because it is widely
+  misreported, and the correction is the point.** The Prime Minister's media
+  release of 15 July 2026 was read in full from pm.gov.au. It announces
+  Australian Standards for AI, establishes an Office of AI within Prime
+  Minister and Cabinet, and says standards are "expected to be legislated
+  early next year". Secondary coverage has framed this as an Australian AI
+  Act. It is not: the obligations described are for large data centres —
+  underwriting their own power supply, paying connection costs, reducing load
+  on demand, water efficiency. The one part directly relevant to this section
+  is the commitment that "no company should use Australian creative works to
+  train AI without the artist's control", which aligns with the text and data
+  mining decision. The deck states this accurately rather than inflating it.
 - **The 8 AI Ethics Principles and the 10 VAISS guardrails have been
   superseded** by the 6 essential practices in the October 2025 Guidance for
   AI Adoption. Both older pages now carry a notice saying so, and the ethics
@@ -232,6 +246,29 @@ Sourcing notes for the frameworks material in section 6:
   that privacy law regulates the organisations they will work for, which is
   why universities and employers have input rules and provide sanctioned
   tools.
+- **There is exactly one exception, and it is now in the notes.** The
+  statutory tort of serious invasion of privacy, in Schedule 2 of the Privacy
+  Act, commenced 10 June 2025. The OAIC's own page describes it as "broader
+  in application than the Privacy Act, extending to individuals and other
+  entities that may not necessarily be an Australian Privacy Principle
+  entity" — so it can reach a person, not just an organisation. It is framed
+  as the outer boundary rather than a daily risk, because the threshold is
+  intentional or reckless conduct, a reasonable expectation of privacy, and a
+  serious invasion, with consent available as a defence. Verified verbatim
+  from oaic.gov.au, published 19 June 2025.
+- **The University's provisioned tool is named on the slide because it is the
+  actionable answer**, and the wording was verified verbatim from Student IT:
+  "Files you upload to Copilot Chat are stored privately within your OneDrive
+  and are not used for training." Be precise about scope — every student has
+  M365 Copilot Chat, which the same page says is *not* a licence to the full
+  Microsoft 365 Copilot. The transferable principle is that an institutional
+  account carries contractual data protections a free personal account does
+  not.
+- **GAP, stated in the notes:** the University does not publish an approved
+  versus prohibited list of AI tools for personal study use. It provides one
+  protected option and expects judgement about the rest. The notes also say to
+  re-verify the provisioned tooling before presenting, because institutional
+  AI offerings change faster than a deck does.
 - The **OAIC position that a hallucination about an identifiable person is
   that person's personal information** is genuinely counter-intuitive and
   verified verbatim, but it sits in the notes rather than on a slide for the
@@ -250,9 +287,6 @@ Sourcing notes for the frameworks material in section 6:
   is that the government has ruled out a text and data mining exception in
   Australian copyright law. The Attorney-General's Department continues to
   consult through the Copyright and AI Reference Group.
-- The University's provisioned tooling is referred to generically in the notes
-  with an instruction to re-verify before presenting, because institutional
-  AI offerings change faster than a deck does.
 
 ## Australian framing
 
@@ -291,7 +325,10 @@ then voluntary national guidance aimed at organisations, then the
 institutional policy that is the only layer with real consequences for a
 student. The section then moves from national frameworks to the University's
 own published words on personal information, copyright and reliability, which
-is the closest and most actionable layer for this audience.
+is the closest and most actionable layer for this audience. It also names the
+tool the University actually provides — M365 Copilot Chat, where uploads are
+not used for training — so the section ends with something to do rather than
+only something to avoid.
 
 The rest of section 4's local grounding is Sheard's peer-reviewed study of
 Australian employers, Sapia and Criteria Corp as platforms actually operating

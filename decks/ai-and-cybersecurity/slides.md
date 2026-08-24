@@ -1003,7 +1003,8 @@ title: What actually governs this in Australia
 ---
 
 <IconRows :rows="[
-  { title: 'There is no Australian AI Act', body: 'In December 2025 the government chose to rely on existing, largely technology-neutral law rather than write a new one. Privacy, copyright, consumer and discrimination law all still apply.' },
+  { title: 'There is no Australian AI Act', body: 'Existing, largely technology-neutral law does the work instead. Privacy, copyright, consumer and discrimination law all already apply to AI.' },
+  { title: 'Legislation was announced in July 2026', body: 'Australian Standards for AI, expected to be legislated in 2027. Read the detail though — it is mostly about data centres and energy, not about how you use a chatbot.' },
   { title: 'The national guidance is voluntary — and it has moved', body: 'Guidance for AI Adoption, October 2025, sets out 6 essential practices for organisations. It replaced the 8 AI Ethics Principles and the 10 guardrails.' },
   { title: 'The rules that actually bind you are closer to home', body: 'Your University policy now, your employer policy next year. Those are the ones with consequences attached.' },
 ]" />
@@ -1011,17 +1012,28 @@ title: What actually governs this in Australia
 <!--
 2 min. This is the answer to "what are the rules in Australia", and the
 framing matters more than the detail: most people assume there is an AI law.
-There is not.
+There is not — although one is now on the way.
 
-Source, verified first-hand from the PDF: National AI Plan, Department of
-Industry, Science and Resources, 2 December 2025. Its words are that Australia
-has "strong existing, largely technology-neutral legal frameworks... that can
-apply to AI", and that the approach "uses regulators' existing expertise" and
-is "practical and risk-based". Mandatory guardrails for high-risk AI were
-proposed in 2024 and did not proceed in that form. An AI Safety Institute is
-being established to advise regulators rather than to regulate directly.
+Source for rows 1 and 3, verified first-hand from the PDF: National AI Plan,
+Department of Industry, Science and Resources, 2 December 2025. Its words are
+that Australia has "strong existing, largely technology-neutral legal
+frameworks... that can apply to AI", and that the approach "uses regulators'
+existing expertise" and is "practical and risk-based". Mandatory guardrails
+for high-risk AI were proposed in 2024 and did not proceed in that form.
 
-Row 2 is worth being precise about, because a lot of teaching material is now
+Row 2 is the one to get right, because it is recent and it is widely
+misreported. On 15 July 2026 the Prime Minister announced a set of Australian
+Standards for AI and established an Office of AI within Prime Minister and
+Cabinet, with standards "expected to be legislated early next year".
+Secondary coverage has framed this as Australia's AI Act. It is not. Read the
+release and the obligations are about large data centres — underwriting their
+own power supply, paying connection costs, reducing load on demand, water
+efficiency. The genuinely relevant part for this room is the commitment that
+"no company should use Australian creative works to train AI without the
+artist's control". If a student raises the announcement, that is the honest
+summary: infrastructure and creators, not personal use.
+
+Row 3 is worth being precise about, because a lot of teaching material is now
 out of date. The 8 AI Ethics Principles date from 2019 and the Voluntary AI
 Safety Standard from September 2024; both pages now carry a notice that the
 October 2025 Guidance for AI Adoption evolves them into 6 essential practices.
@@ -1033,10 +1045,11 @@ monitor; maintain human control.
 
 Important caveat, and do not get this wrong from the stage: all of that is
 voluntary guidance aimed at organisations, not obligations on individuals.
-Privacy law works the same way — the Australian Privacy Principles bind
-entities, not a student using a chatbot at home. That is exactly why row 3
-matters. The binding constraints on this audience are institutional policy
-and, once they are employed, their employer's policy.
+Privacy law mostly works the same way — the Australian Privacy Principles
+bind entities, not a student using a chatbot at home. There is one real
+exception, and it is on the next slide but one. That is why row 4 matters:
+the binding constraints on this audience are institutional policy and, once
+they are employed, their employer's policy.
 -->
 
 ---
@@ -1049,6 +1062,7 @@ title: What you type in does not stay yours
   { title: 'Consumer tools may train on your input', body: 'Free tiers often use conversations for training by default. Check, and turn it off.' },
   { title: 'Other people did not consent', body: 'Interview transcripts, group work and client details are not yours to paste in.' },
   { title: 'Unpublished work is a real risk', body: 'Your thesis, a manuscript, an unlodged submission — think before it leaves your machine.' },
+  { title: 'You already have a tool where it does stay yours', body: 'Melbourne provides M365 Copilot Chat to every student. Files you upload sit in your own OneDrive and, in the University’s words, are not used for training.' },
 ]" />
 
 <!--
@@ -1059,9 +1073,22 @@ fieldwork is a genuine ethics breach, and possibly a breach of the ethics
 approval the research was granted under. That example lands harder than any
 abstraction about data policy.
 
-Distinguish consumer accounts from institutional ones with contractual
-protections — the University's provisioned tooling is not the same as a free
-personal account.
+Row 4 is the practical payoff, and it is worth being specific because most
+students do not know they have it. Verified verbatim from Student IT: "Files
+you upload to Copilot Chat are stored privately within your OneDrive and are
+not used for training." Every student has M365 Copilot Chat for the duration
+of their enrolment. Note the precise scope — that is Copilot Chat, not a
+licence to the full Microsoft 365 Copilot, and the page says so explicitly.
+
+The general principle underneath: an institutional account carries contractual
+data protections that a free personal account does not. Same underlying model,
+materially different terms. That is the distinction to teach, because it
+transfers to whatever their employer provides next year.
+
+Honest gap, if pushed: the University does not publish an approved-versus-
+prohibited list of AI tools for personal study use. It provides one protected
+option and expects judgement about the rest. Re-verify the provisioned tooling
+before presenting — institutional AI offerings change faster than a deck does.
 -->
 
 ---
@@ -1090,16 +1117,29 @@ Row 2 is the one that changes behaviour, because almost everyone in the room
 has uploaded lecture slides to summarise them. Point them at the University
 Copyright Office resource on AI and copyright if they want the detail.
 
-Note the University provides Microsoft Copilot to students under its
-enterprise agreement. That is not the same thing as a personal ChatGPT
-account — different contractual protections over what happens to the input.
-Verify the current tooling before presenting; institutional offerings change.
-
 The line from that page most worth saying out loud to a Job Ready audience:
 "No one will hire you to do what GenAI does for free." The University also
 asks three questions worth repeating — what skills am I losing by outsourcing
 my thinking, what value am I adding, and what do I do that is different from
 GenAI. That is section 4's argument, in the University's own voice.
+
+One hard-edged Australian point for row 3, if the room is engaged. Since 10
+June 2025 there has been a statutory tort of serious invasion of privacy in
+Schedule 2 of the Privacy Act. The OAIC describes it as "broader in
+application than the Privacy Act, extending to individuals and other entities
+that may not necessarily be an Australian Privacy Principle entity". So this
+is the one privacy instrument in the section that can reach a person rather
+than an organisation — someone can sue you directly, and the courts can award
+damages or order an apology.
+
+Frame it as the outer boundary, not a daily risk, and be accurate about the
+threshold. The conduct has to be intentional or reckless, not merely careless;
+there has to be a reasonable expectation of privacy; the invasion has to be
+serious; and the public interest in privacy has to outweigh any competing
+interest. Consent is a defence. Casually pasting a classmate's draft in is
+very unlikely to meet that bar — but it is the reason "I did not think about
+it" is a weak position. Source verified verbatim: OAIC, Statutory tort for
+serious invasions of privacy, published 19 June 2025.
 -->
 
 ---
