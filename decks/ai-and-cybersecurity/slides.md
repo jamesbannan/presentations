@@ -1150,12 +1150,13 @@ subtitle: What you feed in, what you trust, and whose work it is
 layout: default
 kicker: 05 · ETHICS & PRIVACY
 title: What actually governs this in Australia
+source: "Guidance for AI Adoption, Department of Industry, Science and Resources, 21 October 2025. Voluntary; aimed at organisations. · ai.gov.au/staying-safe-and-responsible/essential-ai-practices"
 ---
 
 <IconRows :rows="[
   { title: 'There is no Australian AI Act', body: 'Existing, largely technology-neutral law does the work instead. Privacy, copyright, consumer and discrimination law all already apply to AI.' },
   { title: 'Legislation was announced in July 2026', body: 'Australian Standards for AI, expected to be legislated in 2027. Read the detail though — it is mostly about data centres and energy, not about how you use a chatbot.' },
-  { title: 'The national guidance is voluntary — and it has moved', body: 'Guidance for AI Adoption, October 2025, sets out 6 essential practices for organisations. It replaced the 8 AI Ethics Principles and the 10 guardrails.' },
+  { title: 'The national guidance is voluntary — and it has moved', body: 'Guidance for AI Adoption, 21 October 2025, sets out 6 essential practices for organisations. It evolves the 8 AI Ethics Principles and the 10 guardrails into one set.' },
   { title: 'The rules that actually bind you are closer to home', body: 'Your University policy now, your employer policy next year. Those are the ones with consequences attached.' },
 ]" />
 
@@ -1186,8 +1187,15 @@ summary: infrastructure and creators, not personal use.
 Row 3 is worth being precise about, because a lot of teaching material is now
 out of date. The 8 AI Ethics Principles date from 2019 and the Voluntary AI
 Safety Standard from September 2024; both pages now carry a notice that the
-October 2025 Guidance for AI Adoption evolves them into 6 essential practices.
-If someone quotes the 8 principles at you, they are quoting the old framework.
+Guidance for AI Adoption, published 21 October 2025, evolves them into 6
+essential practices. If someone quotes the 8 principles at you, they are
+quoting the old framework.
+
+Use the department's own verb. Its notice says the new guidance "evolves the
+10 guardrails in the Voluntary AI Safety Standard and these 8 AI Ethics
+Principles" — it does not say replaces, and both older pages are still up. The
+adoption guidance itself says the practices "align with" the Ethics
+Principles. So say superseded in practice, not repealed.
 
 The six, if asked: decide who is accountable; understand impacts and plan
 accordingly; measure and manage risks; share essential information; test and
@@ -1397,6 +1405,7 @@ subtitle: The same capability is available to the people targeting you
 layout: default
 kicker: 06 · THREATS
 title: What AI changed for attackers
+source: "ASD Annual Cyber Threat Report 2024–25, Australian Signals Directorate, 14 October 2025 · cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025"
 ---
 
 <IconRows :rows="[
@@ -1415,7 +1424,9 @@ Cybercriminals, it says, use generative AI "to create high-quality videos,
 fake voices, websites, know-your-customer records and spearphishing emails to
 more convincingly present themselves to victims as legitimate actors with
 relatively minimal effort". Videos, fake voices, spearphishing — that is rows
-one, two and three, from the national cyber authority.
+one, two and three, from the national cyber authority. Both quotes in this
+note were re-verified verbatim on the report's landing page, now cited on the
+slide, so you can read them out with confidence.
 
 ASD's broader assessment, in its own calibrated language, is that the
 prevalence of AI "almost certainly enables malicious cyber actors to execute
@@ -1468,7 +1479,9 @@ caption: |
   the average cost of cybercrime
   <strong>self-reported by an individual</strong>
   in Australia last financial year
-source: "ASD Annual Cyber Threat Report 2024–25, published 14 October 2025. Average self-reported cost per report, FY2024–25, up 8%."
+source: |-
+  ASD Annual Cyber Threat Report 2024–25, published 14 October 2025. Average self-reported cost per report, FY2024–25, up 8%.
+  cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025
 ---
 
 <!--
@@ -1481,9 +1494,11 @@ numbers.
 The figures, all from the ASD report and all for FY2024–25. Over 84,700
 cybercrime reports to ReportCyber — on average one every six minutes. The
 average self-reported cost for an individual was $33,000, up 8%. For
-businesses it was $80,850, up 50%. Identity fraud remained the single most
-reported cybercrime by individuals at 30%, followed by online shopping fraud
-at 13% and online banking fraud at 10%.
+businesses it was $80,850, up 50% — small business $56,600 (up 14%), medium
+$97,200 (up 55%), large $202,700 (up 219%) if anyone asks. Identity fraud
+remained the single most reported cybercrime by individuals at 30%, followed
+by online shopping fraud at 13% and online banking fraud at 10%. Every figure
+here was re-verified on the landing page now cited on the slide.
 
 Two things to say about the number itself. First, it is self-reported and per
 report, not a national average across the population — describe it accurately.
