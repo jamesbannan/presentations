@@ -40,6 +40,7 @@ treatment, or `bare: true` to drop the padded body wrapper entirely.
 | `AgendaList` | Numbered rows with hairline dividers between them |
 | `IconRows` | Circular numbered badge plus title and description |
 | `CompareCard` | Light card with a kicker and diamond-bulleted list |
+| `CornerArt` | Shard clusters in the top-right and bottom-left corners of white slides |
 | `ContactLink` | One contact row on the closing slide — brand glyph plus text |
 | `BrandIcon` | Brand glyph; `github`/`linkedin`/`mastodon` are built in, or name any SVG in `assets/` |
 
@@ -66,7 +67,7 @@ canvas at 980px, so test decks should use the package name too.
 | `styles/layouts.css` | Per-layout geometry, straight from `layout-tokens.json` |
 | `styles/components.css` | Component styling |
 | `styles/index.ts` | Style entry point auto-imported by Slidev |
-| `assets/svg/` | Background art — `bg-title`, `bg-dark`, `bg-divider`, `panel-facets` |
+| `assets/svg/` | Background art — `bg-title`, `bg-dark`, `bg-divider`, `panel-facets`, `corner-facets` |
 | `assets/tokens/` | Source-of-truth JSON: `design-tokens`, `layout-tokens`, `background-geometry` |
 | `example.md` | Reference deck exercising all eight layouts |
 

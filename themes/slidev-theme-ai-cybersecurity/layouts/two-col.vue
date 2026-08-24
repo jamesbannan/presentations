@@ -22,6 +22,8 @@ const { kicker, heading } = useSlideHeader(props)
 
 <template>
   <div class="slidev-layout two-col">
+    <CornerArt />
+
     <header v-if="kicker || heading" class="slide-header">
       <div v-if="kicker" class="text-kicker slide-kicker">{{ kicker }}</div>
       <h2 v-if="heading" class="text-slide-title slide-title slide-title--tight">{{ heading }}</h2>

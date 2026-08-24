@@ -38,6 +38,15 @@
 }
 .facet-panel--flipped { transform: rotate(180deg); }
 
+/* --- Corner art: shard clusters in the two free corners of white slides --- */
+.corner-art {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.corner-art--tr { top: 0; right: 0; }
+.corner-art--bl { bottom: 0; left: 0; transform: rotate(180deg); }
+
 /* --- Page number -------------------------------------------------------- */
 .page-number {
   position: absolute;

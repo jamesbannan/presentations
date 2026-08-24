@@ -1,5 +1,6 @@
 <!--
   Standard content slide: kicker, title, and a flexible body on white.
+  Decorated with corner shard clusters in the two corners no layout uses.
 
   Frontmatter:
     kicker — e.g. "01 · INDUSTRY SKILLS"
@@ -25,6 +26,8 @@ const bare = computed(() => props.bare ?? ($frontmatter as any)?.bare ?? false)
 
 <template>
   <div class="slidev-layout default">
+    <CornerArt />
+
     <header v-if="kicker || heading" class="slide-header">
       <div v-if="kicker" class="text-kicker slide-kicker">{{ kicker }}</div>
       <h2 v-if="heading" class="text-slide-title slide-title">{{ heading }}</h2>
