@@ -1056,6 +1056,9 @@ does the thinking and you do the accepting.
 layout: default
 kicker: 04 · COGNITIVE OFFLOADING
 title: Effort is the signal, not the problem
+source: |-
+  TEQSA, Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities, 24 June 2026.
+  teqsa.gov.au/sites/default/files/2026-06/assuring-quality-learning-in-a-gen-AI-integrated-future.pdf
 ---
 
 <IconRows :rows="[
@@ -1069,10 +1072,11 @@ title: Effort is the signal, not the problem
 and it is very recent — worth naming the date.
 
 Source: TEQSA, "Assuring quality learning in a gen AI-integrated future: The
-role of adaptive capabilities", 24 June 2026. Verified on teqsa.gov.au. It is
-the third in TEQSA's assessment reform series, and it is aimed at protecting
-learning rather than at policing integrity — which is why it belongs here and
-not back in the assessment section.
+role of adaptive capabilities", 24 June 2026. The PDF is now cited on the
+slide and every quote below was checked against it directly. It is the third
+in TEQSA's assessment reform series, and it is aimed at protecting learning
+rather than at policing integrity — which is why it belongs here and not back
+in the assessment section.
 
 The useful point for this audience: the regulator is not telling them to
 avoid AI. It is telling universities to build evaluative judgement, critical
@@ -1085,13 +1089,18 @@ the tool in second; TEQSA independently lists "generating answers before
 receiving explanations" as one of four desirable difficulties. The other
 three are spacing, mixing problem types, and self-testing.
 
-Best line to say aloud, quoting the document directly: effort can, and often
-does, signal effective learning. Students assume ease means it is working —
-TEQSA says that assumption is exactly backwards.
+Best line to say aloud, quoting the document directly and verified word for
+word in the PDF: institutions must help students understand that "effort can,
+and often does, signal effective learning". Students assume ease means it is
+working — TEQSA says that assumption is exactly backwards. Its own supporting
+line for row 1 is that gen AI gives "a sense of familiarity and comprehension…
+that does not align with how much they have actually learned".
 
-If you want the underlying research: "metacognitive laziness" is Fan et al.
-2025, the study on the previous slide; the atrophy argument is Panadero and
-Broadbent 2025; "desirable difficulties" is Bjork and Bjork 2020.
+If you want the underlying research, all of it cited inside the TEQSA
+document itself: "metacognitive laziness" is TEQSA quoting Fan et al. 2025 —
+the study on the previous slide, which is why these two slides sit together —
+and "desirable difficulties" is Bjork and Bjork 2020. The atrophy argument is
+Panadero and Broadbent 2025.
 -->
 
 ---
@@ -1253,6 +1262,9 @@ before presenting — institutional AI offerings change faster than a deck does.
 layout: default
 kicker: 05 · ETHICS & PRIVACY
 title: What this University tells you not to upload
+source: |-
+  University of Melbourne Academic Skills, GenAI at Melbourne.
+  students.unimelb.edu.au/academic-skills/study-skills/learning-with-genai/GenAI-at-Melbourne
 ---
 
 <IconRows :rows="[
@@ -1266,14 +1278,20 @@ title: What this University tells you not to upload
 institution telling them, so quote it rather than paraphrasing.
 
 Source, verified verbatim: University of Melbourne Academic Skills, "GenAI at
-Melbourne", students.unimelb.edu.au. The open-web comparison in row 1 is the
-University's own analogy, and it is the most useful sentence on the page —
-students understand "public website" in a way they do not understand
-"third-party data processing".
+Melbourne", now cited on the slide. The open-web comparison in row 1 is the
+University's own analogy — its words are that uploading personal information
+"carries similar risks to sharing it publicly to the open web" — and it is the
+most useful sentence on the page, because students understand "public website"
+in a way they do not understand "third-party data processing". It also names
+what not to upload: full name, date of birth, address.
 
 Row 2 is the one that changes behaviour, because almost everyone in the room
-has uploaded lecture slides to summarise them. Point them at the University
-Copyright Office resource on AI and copyright if they want the detail.
+has uploaded lecture slides to summarise them. The University names them
+explicitly, warning about material "that represents your own or somebody
+else's intellectual labour (like lecture slides or other subject material)",
+and its instruction is "Don't make copyright material available on the web or
+to an AI tool without permission". That page links on to the Copyright Office
+resource, which is the source cited two slides further on.
 
 The line from that page most worth saying out loud to a Job Ready audience:
 "No one will hire you to do what GenAI does for free." The University also
@@ -1354,6 +1372,9 @@ Attribute it accurately — that guidance binds organisations, not individuals.
 layout: default
 kicker: 05 · ETHICS & PRIVACY
 title: Attribution, consent and ownership
+source: |-
+  University of Melbourne Copyright Office, AI and Copyright.
+  copyright.unimelb.edu.au/shared/using-copyright-material/ai-and-copyright
 ---
 
 <IconRows :rows="[
@@ -1388,6 +1409,28 @@ requires human authorship, so purely machine-generated material may not
 attract it. Say "may not" rather than "does not" — there is no Australian
 decision squarely on generative AI output, and this is exactly the kind of
 question a model will answer confidently and wrongly.
+
+Your own University says the same thing, which is the best possible authority
+for this room, and it is now the slide's source. The Copyright Office's words,
+verified verbatim: "Copyright ownership of AI generated works is currently
+unclear in Australia. Australian law states that works hold copyright when
+they are original and if they are made by a human." It adds that the Copyright
+Act 1968 (Cth) "does not specify how works are made, which leaves the Act open
+for interpretation" — so unsettled is the University's position too, not just
+mine.
+
+Two more things from that page worth having ready. For row 2: "In most cases,
+you are not permitted to upload third-party material into AI applications",
+and most library databases prohibit uploading their content, so journal
+articles and book chapters are out. The page also notes that Indigenous
+Cultural Materials must not be uploaded without free, prior and informed
+consent — worth knowing in a Faculty of Arts room. And if asked what is safe,
+it names the two University-approved tools, Spark and Microsoft Copilot when
+signed in to the University's M365, as secure applications that do not take
+uploads as training data.
+
+One trap to avoid: the US fair use argument does not transfer. Australia has
+fair dealing, not fair use, and the Copyright Office page says so directly.
 -->
 
 ---

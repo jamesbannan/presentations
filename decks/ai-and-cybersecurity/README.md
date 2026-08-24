@@ -77,12 +77,13 @@ itself or in the presenter notes, and expanded below.
 | Use AI to prepare, not to perform | ATO expects candidates to be honest, transparent, themselves and fair; must disclose AI use when asked; ATO does not use AI to screen applications | Australian Taxation Office, *Guidelines for candidate use of AI in recruitment processes*, ato.gov.au |
 | Two very different kinds of shortcut | Delayed essay-quality gains larger among "augmentation users" who used AI to explain concepts; "automation users" who used it to generate text lost their short-run gains once AI was removed | Contractor & Reyes, *Experimental Evidence on the Learning Impact of Generative AI*, IZA Discussion Paper 18792, July 2026, iza.org/publications/dp/18792 — working paper, not peer reviewed |
 | Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi.org/10.1111/bjet.13544 — free to read, no open licence |
-| Effort is the signal, not the problem | Fluent AI explanations leave students confident about material they have not learned; "metacognitive laziness"; "generating answers before receiving explanations" listed among the desirable difficulties | TEQSA, *Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities*, 24 June 2026 |
+| Effort is the signal, not the problem | Fluent AI explanations leave students confident about material they have not learned; "metacognitive laziness"; "generating answers before receiving explanations" listed among the desirable difficulties; "effort can, and often does, signal effective learning" | TEQSA, *Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities*, 24 June 2026, teqsa.gov.au/sites/default/files/2026-06/assuring-quality-learning-in-a-gen-AI-integrated-future.pdf |
 | What actually governs this in Australia | No AI Act; reliance on "strong existing, largely technology-neutral legal frameworks"; an AI Safety Institute being established; text and data mining exception ruled out | *National AI Plan*, Department of Industry, Science and Resources, 2 December 2025 |
 | What actually governs this in Australia | Australian Standards for AI announced, Office of AI established in PM&C, standards "expected to be legislated early next year"; obligations are directed at large data centres | Prime Minister of Australia, *AI in Australia's interests*, media release, 15 July 2026 |
 | What you type in does not stay yours | "Files you upload to Copilot Chat are stored privately within your OneDrive and are not used for training"; all students have M365 Copilot Chat, which is not a licence to Microsoft 365 Copilot | University of Melbourne Student IT, *Microsoft 365*, studentit.unimelb.edu.au |
 | What actually governs this in Australia | Guidance for AI Adoption sets out 6 essential practices and "evolves" the 10 VAISS guardrails and the 8 AI Ethics Principles | National AI Centre, *Guidance for AI Adoption*, 21 October 2025, ai.gov.au/staying-safe-and-responsible/essential-ai-practices |
-| What this University tells you not to upload | Uploading personal information "carries similar risks to sharing it publicly to the open web"; uploading lecture slides or other subject material may violate creators' copyright; treat outputs "with the same scepticism and caution as you would any content from the internet" | University of Melbourne Academic Skills, *GenAI at Melbourne*, students.unimelb.edu.au |
+| What this University tells you not to upload | Uploading personal information "carries similar risks to sharing it publicly to the open web"; uploading lecture slides or other subject material may violate creators' copyright; treat outputs "with the same scepticism and caution as you would any content from the internet" | University of Melbourne Academic Skills, *GenAI at Melbourne*, students.unimelb.edu.au/academic-skills/study-skills/learning-with-genai/GenAI-at-Melbourne |
+| Attribution, consent and ownership | "Copyright ownership of AI generated works is currently unclear in Australia"; copyright requires works to be "original and if they are made by a human"; the Copyright Act 1968 (Cth) "does not specify how works are made, which leaves the Act open for interpretation"; "in most cases, you are not permitted to upload third-party material into AI applications"; Australia has fair dealing, not fair use | University of Melbourne Copyright Office, *AI and Copyright*, copyright.unimelb.edu.au/shared/using-copyright-material/ai-and-copyright |
 | The scam built for people applying for jobs | Over 3,000 job scam reports in 2024 totalling $13.7 million, average losses 5.1% above all other scam types; 29,000 scam social accounts and 1,850 fake job ads removed Sept 2024 – Mar 2025; scams "disproportionately affect... international students, non-resident visa holders"; impersonations of Home Affairs, DFAT and APSJobs disrupted; "stop and check any job ad that requires you paying money to make money" | National Anti-Scam Centre job scam fusion cell final report, via Scamwatch, 30 May 2025 |
 | What AI changed for attackers | 11,964 phishing and investment scam websites removed across 2025, a 90% increase on 6,270, averaging 32 per day; 1,100+ scam investment ads removed from social media; Australians lost $2.18 billion to scams in 2025, investment scams $837.7 million; "with these AI videos, the only thing that is real is the amount of money you risk losing" | ASIC media release 26-063MR, 8 April 2026 (scam loss totals attributed there to the NASC *Targeting Scams* report) |
 
@@ -203,7 +204,14 @@ Sourcing notes for the learning material in section 5:
   desirable-difficulties material is first-hand from the regulator. It is the
   third in TEQSA's assessment reform series and is explicitly about assuring
   *learning* rather than policing integrity, which is why it sits here rather
-  than in section 3.
+  than in section 3. The PDF URL is now cited on the slide face, and every
+  quoted phrase was checked against the extracted text rather than taken from
+  a summary.
+- **TEQSA itself attributes "metacognitive laziness" to Fan et al. (2025)** —
+  the same study on the preceding slide. That is why slides 28 and 30 sit
+  together, and it means the regulator and the evidence slide are not two
+  independent sources but one chain. Worth knowing if challenged: it is a
+  strength for the argument's coherence, not a second data point.
 - **Fan et al. is the strongest study in the deck** — randomised, four
   conditions, and outcomes measured rather than self-reported. Describe it
   accurately from the stage: the lead institution is Peking University with
@@ -244,6 +252,35 @@ Sourcing notes for the learning material in section 5:
   improvise.
 
 Sourcing notes for the frameworks material in section 6:
+
+- **Both University of Melbourne pages were verified first-hand and every
+  quoted phrase confirmed verbatim.** They are the strongest sources in this
+  section for this audience, because they are the room's own institution
+  rather than a general principle. Note the URL shapes, which cost real effort
+  to find and are easy to guess wrong: the GenAI page sits under
+  `/academic-skills/study-skills/learning-with-genai/` and is case-sensitive
+  (`GenAI-at-Melbourne`), and the copyright page sits under
+  `/shared/using-copyright-material/`, not `/guides` — it is not linked from
+  the guides index at all, only inline from the GenAI page. Neither page shows
+  a last-updated date, so both are cited without one.
+
+- **The Copyright Office page carries more than the slide uses.** Held in the
+  presenter notes for slide 37 in case of questions: "in most cases, you are
+  not permitted to upload third-party material into AI applications"; most
+  library databases prohibit uploading their content, so journal articles and
+  book chapters are out; Indigenous Cultural Materials must not be uploaded
+  without free, prior and informed consent; and Spark and Microsoft Copilot
+  (signed in to the University's M365) are named as the approved secure tools.
+  It also states plainly that Australia has fair dealing, not fair use — which
+  is the correction to make if a student runs the US fair use argument.
+
+- **"Ownership is genuinely unsettled" is the University's own position, not
+  just a hedge.** The Copyright Office says copyright ownership of AI
+  generated works "is currently unclear in Australia" and that the Copyright
+  Act 1968 (Cth) "does not specify how works are made, which leaves the Act
+  open for interpretation". Say "may not attract copyright" rather than "does
+  not" — there is still no Australian decision squarely on generative AI
+  output.
 
 - **"Evolves", not "replaced".** The slide originally said the Guidance for AI
   Adoption "replaced" the 8 AI Ethics Principles and the 10 guardrails. The
