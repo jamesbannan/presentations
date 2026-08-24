@@ -518,6 +518,59 @@ newer semantic matching.
 
 If time allows, the strongest single tip: read the ad, list its nouns, and
 make sure the true ones appear in your resume in your own words.
+
+This is also the University's own advice. Careers and Employability tells
+students to keep a "master" resume and tailor it per application rather than
+sending one document everywhere. They also provide SMART Resume, a tool that
+scores a resume for ATS-readiness and gives students ten uploads a year.
+Worth naming from the stage — it is free, most of the room does not know it
+exists, and it makes this slide immediately actionable. Note it is built on
+a commercial product (VMock), so treat its score as feedback, not truth.
+-->
+
+---
+layout: default
+kicker: 03 · APPLICATION SCREENING
+title: What the research on Australian hiring found
+---
+
+<IconRows :rows="[
+  { title: 'The first study of AI hiring in Australia', body: 'Dr Natalie Sheard, a lawyer and postdoctoral fellow at this University, interviewed 23 recruiters and specialists about the systems they actually use.' },
+  { title: 'The risk is concentrated, not evenly spread', body: 'She found these systems can enable, reinforce and amplify discrimination — against women, candidates with disability, people from non-English-speaking backgrounds, and older applicants.' },
+  { title: 'And no specific law regulates them here', body: 'Facial analysis has been scientifically discredited, but nothing prohibits it, so some systems may still use it.' },
+]" />
+
+<!--
+2 min. The credibility anchor for the section, and it is close to home —
+Sheard is at the University of Melbourne, so this is their own institution's
+research on their own job market.
+
+Source: Natalie Sheard, "Algorithm-facilitated discrimination", Journal of
+Law and Society, doi 10.1111/jols.12535; reported by ABC News, 8 May 2025.
+Both verified directly. Peer-reviewed, which matters given how much of the
+material in this area is vendor content.
+
+Be precise about the method: 23 qualitative interviews, mainly recruiters,
+plus two careers coaches, an AI expert, and two staff from a large AI
+developer. It is the first study of AI hiring system use by Australian
+employers, not a survey with a representative sample. Say "interviewed 23
+people" out loud — it is on the slide for exactly that reason.
+
+Row 2 connects straight back to the assessment section: the same groups
+flagged by AI detectors are flagged here. That is the throughline of the
+talk — these systems fail unevenly, and the people they fail are already
+disadvantaged.
+
+If a number is wanted: about 62% of Australian organisations used AI
+"extensively or moderately" in recruitment, per the Responsible AI Index
+2024. Attribute it carefully — Fifth Quadrant is a commercial research firm
+and the data is from 2024, so it is the weakest thing on this slide. It is
+deliberately not on the slide face.
+
+Corroboration if challenged: The Age ran a named investigation on 22 January
+2026, "Computer says no", including a Victorian HR professional rejected two
+hours after applying, and the Australian Services Union arguing for human
+judgement in recruitment decisions.
 -->
 
 ---
@@ -540,7 +593,7 @@ rightTitle: WHY IT IS CONTESTED
 - Facial analysis was withdrawn after sustained criticism
 - Accents, disability and neurodivergence risk mis-scoring
 - Candidates rarely learn how they were assessed
-- Regulation is uneven and mostly outside Australia
+- Australian law does not give you a right to an explanation
 
 <!--
 3 min.
@@ -552,13 +605,79 @@ contested claims — HireVue removed facial and emotion analysis in January
 2021, after a 2019 EPIC complaint to the FTC and sustained pressure. What
 remains is scoring of transcribed answers against a rubric.
 
-Regulatory context, one line each: Illinois' AI Video Interview Act took
+Australian grounding, useful because these are employers this room will
+actually apply to: Sapia, an Australian platform, runs text-based chat
+interviews — five typed questions, no time limit — and told The Age in
+January 2026 it had conducted nine million interviews for clients including
+Qantas, Woolworths and Bunnings. Treat the figure and the client list as the
+vendor's own claim reported in a newspaper, not as independently confirmed.
+Federally, the National Indigenous Australians Agency has used Criteria Corp
+for video assessment. So this is not a US-only phenomenon, and it reaches
+well beyond graduate programs into retail and hospitality hiring.
+
+Regulatory context. **Australia now has something, but read the fine print.**
+From **10 December 2026** — about three months after this talk — the Privacy
+Act's new automated decision-making transparency obligation commences. Where
+an organisation has arranged for a computer program to make, or to do
+something substantially and directly related to making, a decision that could
+reasonably be expected to significantly affect your rights or interests, and
+personal information is used to do it, that must be disclosed in the
+organisation's privacy policy. The OAIC's own issues paper names
+"limits access to employment opportunities" as an example of a significant
+effect, so hiring is squarely in scope. The next slide covers what this does
+and does not give you.
+
+For comparison, one line each: Illinois' AI Video Interview Act took
 effect 1 January 2020 (notice, explanation and consent); New York City's
 Local Law 144, passed in 2021 and enforced from 5 July 2023, requires annual
-independent bias audits and advance notice. Australia has no equivalent — the
-Privacy Act and anti-discrimination law apply, but there is no right to know
-how an AI tool scored you. Say that plainly rather than implying they are
-covered.
+independent bias audits and advance notice. Australia still has nothing
+equivalent to those — no bias audit requirement, and no right to an
+explanation. Say that plainly rather than implying they are covered.
+-->
+
+---
+layout: default
+kicker: 03 · YOUR RIGHTS
+title: What Australian law will and will not give you
+---
+
+<IconRows :rows="[
+  { title: 'From 10 December 2026, disclosure — in a privacy policy', body: 'Organisations must state what kinds of decisions are made by computer programs, and what personal information those programs use. Hiring counts.' },
+  { title: 'But no explanation, no notification, no human review', body: 'The regulator says so plainly: the obligation gives no right to contestability, no right to request information, and no obligation to notify you.' },
+  { title: 'So read the privacy policy before you apply', body: 'From December it should tell you whether a machine is in the loop. That disclosure is the lever you actually have.' },
+]" />
+
+<!--
+2 min. New for 2026 and genuinely useful, because almost nobody in the room
+will know it is coming.
+
+Source: OAIC, "Automated Decision-Making Transparency Obligation (APP 1)",
+issues paper, May 2026. Verified verbatim. The obligation sits in APP 1.7-1.9,
+inserted by the Privacy and Other Legislation Amendment Act 2024, and
+commences 10 December 2026.
+
+Row 2 is a direct paraphrase of the OAIC's own words: the obligation "gives
+no right to contestability or to request information, and no obligation to
+notify". Resist the temptation to oversell this as a new protection — it is a
+transparency obligation about categories of decisions, not about your
+decision. That honesty is the point of the slide.
+
+Useful contrast if asked: Western Australia went further. From 1 July 2026,
+WA regulated entities using ADM for significant decisions must notify people,
+provide information about the ADM on request, and allow requests for human
+intervention. That is closer to what students assume they already have — but
+it binds WA entities, not employers generally.
+
+Two caveats to hold in reserve rather than lead with. The OAIC's final
+guidance was still in development at the time of writing, following a
+consultation that closed 15 June 2026, so the detail may have moved — check
+before presenting. And the Privacy Act's small business exemption is being
+wound back in stages; some smaller employers may still sit outside the Act
+entirely. Do not assert a specific status for that from the stage.
+
+The practical takeaway is row 3, and it is a real behaviour change: privacy
+policies are about to become the one place a candidate can find out whether
+they are being screened by a machine.
 -->
 
 ---
@@ -581,6 +700,51 @@ that scores well and reads well to a human, so it is robust either way.
 
 The third row matters and is routinely missed: students do not realise they
 can ask, and many are entitled to adjustments.
+-->
+
+---
+layout: default
+kicker: 03 · USING AI TO APPLY
+title: Use AI to prepare, not to perform
+---
+
+<IconRows :rows="[
+  { title: 'One large Australian employer, in writing', body: 'The ATO publishes what it expects from candidates using AI: be honest, be transparent, be yourself, be fair.' },
+  { title: 'Declare it when you are asked', body: 'In their words: when asked, you need to tell us how you have used AI tools. The same rule you met in your assessments.' },
+  { title: 'Prepare with it, perform without it', body: 'Rehearsing with AI is fine. Using it during the interview or assessment itself is not.' },
+]" />
+
+<!--
+2 min. Closes the section on something concrete and hopeful, and bridges into
+section 4.
+
+Source: Australian Taxation Office, "Guidelines for candidate use of AI in
+recruitment processes", ato.gov.au. Verified verbatim. The slide title is the
+ATO's own phrase — "use AI to prepare, not perform".
+
+Why the ATO: it is a plausible graduate destination for this room, it is
+Australian, and it has actually published its position, which most employers
+have not. The APSC published parallel "Principles for candidate use of AI in
+recruitment" in April 2026, so this is APS-wide rather than one agency being
+idiosyncratic. I could not fetch the APSC PDF directly — mention the ATO,
+which was verified, rather than leading with the APSC.
+
+The best line to deliver here, and a genuine surprise to most audiences: the
+ATO explicitly states it does NOT use AI to review or screen applications or
+resumes, and that all shortlisting decisions are made by a human selection
+panel. It uses AI for drafting job ads. That is a useful corrective to the
+"a robot rejected me" assumption, and it shows the honest answer is
+"it depends on the employer, so check".
+
+The ATO also names the risks of over-using AI in an application, and they are
+the ones students actually hit: skills gaps that surface later in practical
+assessment, over-reliance that leaves you unable to think on your feet, and a
+generic voice that reads as nobody in particular. Frame that as self-interest
+rather than compliance.
+
+Bridge to section 4: the reason "prepare, not perform" works as a rule is the
+same reason the next section gives — if you cannot reconstruct it without the
+tool, you do not actually have it.
 -->
 
 ---
