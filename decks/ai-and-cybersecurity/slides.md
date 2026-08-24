@@ -764,12 +764,36 @@ provide information about the ADM on request, and allow requests for human
 intervention. That is closer to what students assume they already have — but
 it binds WA entities, not employers generally.
 
-Two caveats to hold in reserve rather than lead with. The OAIC's final
-guidance was still in development at the time of writing, following a
-consultation that closed 15 June 2026, so the detail may have moved — check
-before presenting. And the Privacy Act's small business exemption is being
-wound back in stages; some smaller employers may still sit outside the Act
-entirely. Do not assert a specific status for that from the stage.
+Two caveats to hold in reserve rather than lead with. The first is the status
+of the OAIC's guidance, checked 24 August 2026: the final guidance has NOT
+issued. The consultation page is unchanged since 18 May 2026 and still says
+the issues paper "will inform" the guidance, and APP Guidelines Chapter 1,
+last updated 3 October 2025, still says "The OAIC will be publishing detailed
+guidance about these new APP 1 obligations for automated decisions in 2026."
+So the slide is safe as it stands. Chapter 1 is the page to re-check closer to
+the day, because that is where the detail will land:
+oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information
+
+The second is that the Privacy Act's small business exemption is being wound
+back in stages; some smaller employers may still sit outside the Act entirely.
+Do not assert a specific status for that from the stage.
+
+Row 2's wording was re-verified against the issues paper PDF itself, which
+reads: "The POLA Act's ADM obligation gives no right to contestability or to
+request information, and no obligation to notify." That is verbatim.
+
+On "Hiring counts" — it is defensible but it is a reading, not a quote. The
+statutory test is a decision that "could reasonably be expected to
+significantly affect the rights or interests of an individual". The OAIC's
+own headline examples are benefits decisions, contracts such as life
+insurance, and access to services such as healthcare — recruitment is not
+among them. What supports the line is elsewhere in the issues paper: it cites
+GDPR Recital 71's example of "e-recruiting practices without any human
+intervention", notes that decisions which deny or seriously disadvantage
+someone of "an opportunity, such as an employment opportunity" fall into the
+category, and lists targeting that "limits access to employment
+opportunities". If pressed hard, say hiring should count and explain why,
+rather than claiming the regulator has settled it.
 
 The practical takeaway is row 3, and it is a real behaviour change: privacy
 policies are about to become the one place a candidate can find out whether

@@ -146,12 +146,22 @@ Sourcing notes for the recruitment material in section 4:
   matters because most secondary coverage of the ADM reforms overstates them
   as a new individual right. They are not: they are a privacy-policy
   disclosure obligation about *categories* of decisions.
-- **Two live caveats on that slide.** The OAIC's final guidance was still in
-  development at the time of writing, following a consultation that closed
-  15 June 2026 — re-check before presenting. And the Privacy Act's small
-  business exemption is being wound back in stages; only vendor blogs could be
-  found on its current status, which is not good enough to assert, so the
-  notes say not to.
+- **Two live caveats on that slide.** The OAIC's final guidance had not issued
+  as at 24 August 2026, when it was last checked: the consultation page is
+  unchanged since 18 May 2026 and APP Guidelines Chapter 1 still says the
+  detailed guidance is coming "in 2026". Chapter 1 is the page to re-check
+  closer to the day, and its URL is in the slide notes. And the Privacy Act's
+  small business exemption is being wound back in stages; only vendor blogs
+  could be found on its current status, which is not good enough to assert, so
+  the notes say not to.
+- **"Hiring counts" is a reading, not a quote.** The OAIC's headline examples
+  of significant effect are benefits decisions, contracts such as life
+  insurance, and access to services such as healthcare — recruitment is not
+  among them. The issues paper supports the line elsewhere, citing GDPR
+  Recital 71 on "e-recruiting practices without any human intervention",
+  decisions denying "an opportunity, such as an employment opportunity", and
+  targeting that "limits access to employment opportunities". The notes tell
+  the presenter to argue it rather than claim the regulator has settled it.
 - **Sheard's research is peer-reviewed**, which is why it carries the section.
   Disclose the method from the stage: 23 qualitative interviews, not a
   representative survey. The slide says "interviewed 23 recruiters and
