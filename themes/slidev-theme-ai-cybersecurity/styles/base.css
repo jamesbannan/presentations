@@ -139,3 +139,14 @@
 .slidev-layout.cover .slide-title {
   color: var(--color-white);
 }
+
+/* Bold text defaults to navy, which is invisible on the dark layouts. Flip it
+   to white there. `:where(strong)` keeps the selector at class-only weight so
+   a layout or component rule can still override it. */
+.slidev-layout.stat :where(strong),
+.slidev-layout.quote :where(strong),
+.slidev-layout.section :where(strong),
+.slidev-layout.cover :where(strong),
+.slidev-layout.end :where(strong) {
+  color: var(--color-white);
+}

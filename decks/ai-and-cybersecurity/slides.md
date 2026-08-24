@@ -149,6 +149,70 @@ point is not that they are safe, it is that their training is complementary.
 -->
 
 ---
+layout: stat
+kicker: 01 · INDUSTRY SKILLS
+title: Australian demand is for users, not builders
+stat: "19,300"
+caption: |
+  new Australian job ads for AI <strong>user</strong> roles in 2025 —
+  against 1,300 for AI developer roles
+source: "PwC Australia, 2026 AI Jobs Barometer, 18 June 2026. PwC's own analysis of job-ad data, not a government statistic."
+---
+
+<!--
+1 min. This is the evidence slide for the claim you just made.
+
+Australian AI job ads more than doubled over the year — 20,000 in 2024 to
+41,000 in 2025 — but almost all of that growth is in roles that *apply* AI
+rather than build it. That ratio is roughly fifteen to one.
+
+Say the source out loud: this is PwC's own analysis of job-ad data, not an
+ABS or Jobs and Skills Australia statistic. It is the most substantial
+regular Australian series available, and PwC sells AI consulting — both
+things are true, so name them and let the students weigh it.
+
+If asked about the wage premium: the same report puts it at 62% on average,
+up from 57%. Don't lead with that number — it invites "so I should learn
+AI instead of my degree", which is the opposite of this section's point.
+-->
+
+---
+layout: default
+kicker: 01 · INDUSTRY SKILLS
+title: What this already looks like in Australia
+---
+
+<IconRows :rows="[
+  { title: 'Your employer may train you — and expect it', body: 'The APS AI Plan 2025 makes foundational AI literacy training mandatory for every APS employee, rolling out through 2026.' },
+  { title: 'The tasks change more than the job does', body: 'Jobs and Skills Australia put around 79% of jobs as transformed at task level, and only about 4% at high likelihood of full automation.' },
+  { title: 'The premium sits on judgement', body: 'In AI-exposed roles, new tasks are 2.5× more likely to demand human-intensive skills than technical ones.' },
+]" />
+
+<!--
+2 min. The point of this slide is that none of this is hypothetical or
+American — it is already policy at employers in this room's pipeline.
+
+Row 1 — APS AI Plan 2025 (Department of Finance with the DTA and APSC).
+Foundational AI literacy is being made mandatory APS-wide, phased in across
+2026. The Commonwealth and Victorian public services are among the largest
+graduate employers for this faculty, so this lands. Secondary reporting puts
+the first mandatory requirement at 15 June 2026 — I could not reach
+digital.gov.au to confirm that date, so say "during 2026" rather than
+quoting the day.
+
+Row 2 — Jobs and Skills Australia, "Our Gen AI Transition", September 2025.
+A Commonwealth statutory body, so the strongest source in this section.
+Worth adding aloud: JSA flags routine clerical and communications roles as
+the most exposed, which is honest about where this cohort is heading.
+
+Row 3 — PwC Australia's 2026 barometer again: empathy, creativity,
+leadership, face-to-face work. Same sourcing caveat as the previous slide.
+
+Do NOT use PwC's "junior workers are 7× more likely to need senior skills"
+figure — that one is US data, and this slide is explicitly about Australia.
+-->
+
+---
 layout: default
 kicker: 01 · INDUSTRY SKILLS
 title: "\"Prompt engineering\" is a skill, not a career"
