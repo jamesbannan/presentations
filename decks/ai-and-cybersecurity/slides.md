@@ -1276,9 +1276,28 @@ The mental model to dismantle: "I can spot a scam". The cues people were
 taught to rely on — spelling, awkward phrasing, generic greetings — were weak
 signals that AI has now removed.
 
+ASIC put hard numbers on this in media release 26-063MR, 8 April 2026. Across
+2025 it coordinated the removal of 11,964 phishing and investment scam
+websites — a 90% increase on the 6,270 removed the year before, and an average
+of 32 sites every day — plus more than 1,100 scam investment advertisements on
+social media. Australians lost $2.18 billion to scams in 2025, with investment
+scams alone accounting for $837.7 million, on the National Anti-Scam Centre
+figures ASIC cites.
+
+Commissioner Alan Kirkland is quotable on row one: "Scammers are using
+artificial intelligence to make fake investment ads look more polished, more
+convincing and harder to spot", and "we are seeing AI being used to create
+professional videos, fake endorsements and targeted ads". His closing line is
+the one to use if you only use one: "With these AI videos, the only thing that
+is real is the amount of money you risk losing."
+
+Worth noting who those ads are aimed at. ASIC published the script of one:
+"19-year-olds are becoming millionaires while you wait for Friday's paycheck."
+That is not written for retirees. It is written for this room.
+
 Graduate-specific hook: fake job offers and recruitment scams target exactly
 this cohort, and now arrive well-written and personalised from a scraped
-LinkedIn profile.
+LinkedIn profile. Two slides on there is Australian data on precisely that.
 
 The case behind row three, if you want a concrete example. In January 2024 a
 finance employee at Arup's Hong Kong office joined a video conference with
@@ -1327,6 +1346,51 @@ at work in five years. It is a personal financial risk now.
 
 If someone asks where the reports go: ReportCyber at cyber.gov.au, or the
 Australian Cyber Security Hotline on 1300 CYBER1.
+-->
+
+---
+layout: default
+kicker: 06 · THREATS
+title: The scam built for people applying for jobs
+---
+
+<IconRows :rows="[
+  { title: '$13.7 million lost in a single year', body: 'Over 3,000 job scam reports to Scamwatch in 2024, with average losses higher than the typical scam.' },
+  { title: 'It targets people with the fewest options', body: 'The National Anti-Scam Centre says job scams disproportionately affect international students, visa holders and people on low incomes.' },
+  { title: 'They impersonate the places you would trust', body: 'The response disrupted fake Home Affairs, DFAT and APSJobs listings, and removed 1,850 fraudulent job advertisements.' },
+  { title: 'The test that still works', body: 'Stop and check any job ad that asks you to pay money in order to make money.' },
+]" />
+
+<!--
+2 min. This is the most directly relevant threat in the deck for this room,
+and it belongs in a Job Ready session specifically. Everyone here is about to
+start applying for work, which is exactly the moment this scam is designed for.
+
+All figures verified from Scamwatch, 30 May 2025, reporting the National
+Anti-Scam Centre job scam fusion cell final report. In 2024 Scamwatch received
+more than 3,000 job scam reports totalling $13.7 million, with average losses
+5.1% higher than the average across all other scam types. Between September
+2024 and March 2025 the fusion cell had 29,000 scam social media accounts
+removed with Meta, referred 1,850 scam job advertisements and websites for
+removal, and referred 836 scammer cryptocurrency wallets to exchanges.
+
+Row 2 is quoted almost verbatim and it matters in this faculty. The full list
+is people on low incomes, culturally and linguistically diverse communities,
+international students, non-resident visa holders, people with caring
+responsibilities, and others with limited employment options. If there are
+international students in the room, this is the slide that is about them.
+
+Row 3 is the detail that lands: the scammers impersonated the Department of
+Home Affairs, the Department of Foreign Affairs and Trade, and APSJobs. That
+last one is a graduate recruitment site. The brand being faked is one they are
+about to use.
+
+Worth saying: the NASC ran awareness forums across the tertiary education
+sector precisely because this cohort is a target. That is why this is in the
+deck.
+
+Row 4 is Scamwatch's own test, and it is the single most useful sentence to
+leave them with. Legitimate employers do not charge you to be hired.
 -->
 
 ---

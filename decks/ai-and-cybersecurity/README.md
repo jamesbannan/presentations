@@ -29,13 +29,13 @@ eventDate: "2 September 2026"
 | 4 | AI resume screening and video interviews | 14 min |
 | 5 | Using AI without losing the ability to learn | 8 min |
 | 6 | The ethical use of personal AI | 10 min |
-| 7 | Using AI and staying safe | 7 min |
+| 7 | Using AI and staying safe | 9 min |
 | 8 | Wrap-up and Q&A | 5 min |
 
 Timings live in the presenter notes on each slide. The content now runs to
-roughly **66 minutes** against a 45–50 minute slot, so **a substantial trim is
-required before delivery**. Sections 2, 3, 4 and 6 all grew when the Australian
-evidence was added. In order of least damage, the cuts are:
+roughly **68 minutes** against a 45–50 minute slot, so **a substantial trim is
+required before delivery**. Sections 2, 3, 4, 6 and 7 all grew when the
+Australian evidence was added. In order of least damage, the cuts are:
 
 1. "Prompt engineering is a skill, not a career" (2 min) — the point survives
    as a sentence over the top of the preceding slide.
@@ -81,6 +81,8 @@ itself or in the presenter notes, and expanded below.
 | What you type in does not stay yours | "Files you upload to Copilot Chat are stored privately within your OneDrive and are not used for training"; all students have M365 Copilot Chat, which is not a licence to Microsoft 365 Copilot | University of Melbourne Student IT, *Microsoft 365*, studentit.unimelb.edu.au |
 | What actually governs this in Australia | Guidance for AI Adoption sets out 6 essential practices and "evolves" the 10 VAISS guardrails and the 8 AI Ethics Principles | National AI Centre, *Guidance for AI Adoption*, 21 October 2025 |
 | What this University tells you not to upload | Uploading personal information "carries similar risks to sharing it publicly to the open web"; uploading lecture slides or other subject material may violate creators' copyright; treat outputs "with the same scepticism and caution as you would any content from the internet" | University of Melbourne Academic Skills, *GenAI at Melbourne*, students.unimelb.edu.au |
+| The scam built for people applying for jobs | Over 3,000 job scam reports in 2024 totalling $13.7 million, average losses 5.1% above all other scam types; 29,000 scam social accounts and 1,850 fake job ads removed Sept 2024 – Mar 2025; scams "disproportionately affect... international students, non-resident visa holders"; impersonations of Home Affairs, DFAT and APSJobs disrupted; "stop and check any job ad that requires you paying money to make money" | National Anti-Scam Centre job scam fusion cell final report, via Scamwatch, 30 May 2025 |
+| What AI changed for attackers | 11,964 phishing and investment scam websites removed across 2025, a 90% increase on 6,270, averaging 32 per day; 1,100+ scam investment ads removed from social media; Australians lost $2.18 billion to scams in 2025, investment scams $837.7 million; "with these AI videos, the only thing that is real is the amount of money you risk losing" | ASIC media release 26-063MR, 8 April 2026 (scam loss totals attributed there to the NASC *Targeting Scams* report) |
 
 Sourcing notes for the Australian figures:
 
@@ -324,7 +326,41 @@ Sourcing notes for the threat material in section 7:
 - **Prompt injection is the one claim in the section still carrying no
   Australian citation.** It is described from first principles rather than
   attributed, which is defensible because the mechanism is not contested, but
-  it is the outstanding gap in this section.
+  it is the outstanding gap in this section. A joint ASD/CISA/NSA publication
+  on agentic AI services was identified as a candidate source but could not be
+  retrieved from cyber.gov.au, so it has not been cited. It is also joint
+  guidance with US agencies, which sits awkwardly with the brief for this
+  section.
+- **A job scam slide was added because it is the most audience-proximate
+  threat in the deck.** Every person in the room is about to start applying
+  for work, which is the exact moment this scam is built for. All figures come
+  from the National Anti-Scam Centre job scam fusion cell final report,
+  reported by Scamwatch on 30 May 2025. The demographic sentence is quoted
+  close to verbatim and names international students and non-resident visa
+  holders explicitly. The detail worth keeping is that the impersonated brands
+  included APSJobs — a graduate recruitment site this cohort is about to use.
+  The NASC also ran awareness forums across the tertiary education sector,
+  which is the clearest possible signal that this audience is the target.
+- **A claimed 2025 escalation in job scam losses was not used.** A figure of
+  more than $19 million, up 102.5%, with 25–34 as the most-reported age group,
+  surfaced in research but could not be confirmed against a primary NASC or
+  Scamwatch publication. The slide therefore uses the 2024 figures that are
+  directly attributable.
+- **ASIC 26-063MR supplies the Australian scale numbers** for the opening
+  slide, replacing what would otherwise have been vendor data. Kirkland's
+  "the only thing that is real is the amount of money you risk losing" is the
+  strongest single line available on this topic from an Australian regulator.
+  The script ASIC published from one of the ads — "19-year-olds are becoming
+  millionaires while you wait for Friday's paycheck" — is in the notes because
+  it demonstrates the targeting better than any statistic.
+- **Two widely repeated claims about that ASIC release are wrong and were
+  excluded.** Secondary coverage attributes to it a $7.4 million deepfake
+  figure involving impersonations of the Prime Minister and other public
+  figures, a quote from Chair Sarah Court, and a publication date of 17 August
+  2026. The release was retrieved and checked directly: it is dated 8 April
+  2026 and contains no reference to Albanese, no $7.4 million figure, no quote
+  from Sarah Court, and does not use the word "deepfake" at all. Only the
+  verified content is used.
 
 ## Australian framing
 
@@ -398,3 +434,12 @@ from ASD rather than asserted. This matters more in this section than
 elsewhere, because cybersecurity is the topic where vendor marketing most
 often substitutes for evidence, and because the section is otherwise asking
 the audience to distrust confident, fluent sources.
+
+The section then gained the slide it was missing. Everything in it was true of
+anyone, and none of it was about being a final-year student walking into a job
+market. The job scam slide fixes that. It is sourced to the National Anti-Scam
+Centre, it names the demographic in the room, and the brands being impersonated
+include a graduate recruitment site. It is the one threat in the deck that is
+aimed at the audience rather than merely relevant to them, which makes it the
+right note to end the section's evidence on before moving to what to do about
+it.
