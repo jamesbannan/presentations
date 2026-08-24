@@ -71,7 +71,8 @@ itself or in the presenter notes, and expanded below.
 | What AI changed for attackers | Cybercriminals use GenAI "to create high-quality videos, fake voices, websites, know-your-customer records and spearphishing emails... with relatively minimal effort"; AI "almost certainly" enables attacks at larger scale and faster rate | ASD, *Annual Cyber Threat Report 2024–25*, 14 October 2025 |
 | What it costs when it works | $33,000 average self-reported cost of cybercrime per report for individuals, up 8%; over 84,700 reports to ReportCyber, one every 6 minutes; identity fraud the top individual cybercrime at 30% | ASD, *Annual Cyber Threat Report 2024–25*, 14 October 2025 |
 | Basic hygiene that still works | "Use phishing-resistant multi-factor authentication wherever possible, preferably passkeys"; basic mitigations "can prevent the majority of the cyber incidents reported to ASD's ACSC" | ASD, *Annual Cyber Threat Report 2024–25* and its individuals fact sheet, 14 October 2025 |
-| What the research on Australian hiring found | AI hiring systems may "enable, reinforce and amplify discrimination"; first study of AI hiring system use by Australian employers; n=23 interviews | Natalie Sheard, "Algorithm-facilitated discrimination", *Journal of Law and Society*, doi 10.1111/jols.12535; reported ABC News, 8 May 2025 |
+| What the research on Australian hiring found | AI hiring systems may "enable, reinforce and amplify discrimination"; first study of AI hiring system use by Australian employers; n=23 interviews | Natalie Sheard, "Algorithm-facilitated discrimination", *Journal of Law and Society* 52(2):269–291, 8 May 2025, doi 10.1111/jols.12535, open access (CC BY 4.0); reported ABC News, 8 May 2025 |
+| How applicant tracking systems actually work | Parser "scans an imported resume and auto-fills appropriate fields with information it detects"; a columned layout, contact details in the header, footer or a text box, graphics, photos, word art, image-only files and tables all break the parse; recruiters "search for keywords in applications, then filter the results", using "suggested keywords generated from your public job post" | Greenhouse Recruiting product documentation, *Unsuccessful resume parse* and *Talent Filtering*, both updated 3 March 2026 |
 | What Australian law will and will not give you | ADM transparency obligation commences 10 December 2026; disclosure in privacy policies only; "no right to contestability or to request information, and no obligation to notify" | OAIC, *Automated Decision-Making Transparency Obligation (APP 1)* issues paper, May 2026; APP 1.7–1.9 as inserted by the Privacy and Other Legislation Amendment Act 2024 |
 | Use AI to prepare, not to perform | ATO expects candidates to be honest, transparent, themselves and fair; must disclose AI use when asked; ATO does not use AI to screen applications | Australian Taxation Office, *Guidelines for candidate use of AI in recruitment processes*, ato.gov.au |
 | Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi 10.1111/bjet.13544 |
@@ -417,6 +418,27 @@ here, and the ATO's published expectations of candidates. The University's own
 careers guidance — its tailoring advice and the SMART Resume tool — is named
 in the notes so the practical advice is anchored to something students can
 use the same day.
+
+The applicant tracking slide is sourced differently from everything else in
+the deck, and deliberately so. There is no Australian source for it: the
+University's own careers pages, including the resumes guidance and the SMART
+Resume tool, contain no reference to applicant tracking, parsing or keywords
+at all, and the APSC's *Cracking the code* does not describe screening
+mechanics either. Both were checked directly and neither supports the claims.
+
+Rather than reach for the widely repeated "X% of resumes are never seen by a
+human" figure, which is vendor marketing with no research behind it, the slide
+cites an ATS vendor's own product documentation. The distinction being applied
+is that a vendor publishing a statistic about the industry is marketing, but a
+vendor documenting how its own parser behaves and what breaks it is a primary
+source for mechanism. Greenhouse's *Unsuccessful resume parse* article supplies
+rows 1 and 3 nearly verbatim, and *Talent Filtering* supplies row 2, including
+the detail that the suggested search keywords are generated from the job post
+itself. Both were rendered and read in full, and both were updated in 2026.
+
+That choice also happens to reinforce the slide's argument. The documentation
+describes a recruiter running a search, not a system issuing rejections, which
+is the deflationary picture the slide is trying to leave students with.
 
 Section 5 previously rested entirely on two non-Australian sources, one of
 them an unreviewed preprint. It now leads with TEQSA's June 2026 resource on

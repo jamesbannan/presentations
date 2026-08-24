@@ -478,6 +478,9 @@ subtitle: What the systems between you and a recruiter are actually doing
 layout: default
 kicker: 03 · APPLICATION SCREENING
 title: How applicant tracking systems actually work
+source: |
+  Greenhouse Recruiting product documentation, “Unsuccessful resume parse” and “Talent Filtering”, updated 2026.
+  support.greenhouse.io/hc/en-us/articles/200989175-Unsuccessful-resume-parse
 ---
 
 <IconRows :rows="[
@@ -500,6 +503,27 @@ defensible version is that Jobscan's annual audit of Fortune 500 career
 portals finds ~97–98% run an ATS, attributed as a vendor census rather than
 independent research. Safer still: skip the statistic, the mechanics are the
 useful part.
+
+Sourcing for the three rows is Greenhouse's own product documentation, which
+is a primary source for mechanism rather than vendor marketing. "Unsuccessful
+resume parse" (updated 3 March 2026) covers rows 1 and 3. On row 1 it says the
+product "scans an imported resume and auto-fills appropriate fields with
+information it detects", and its section on fake data shows the parser simply
+skips anything it does not recognise as real — extraction, not comprehension.
+On row 3 it lists the exact things that break a parse: a columned layout, the
+name and contact details placed in the header, footer or a text box, graphics,
+photos or word art, a resume uploaded as an image rather than a document, and
+tables.
+
+Row 2 comes from the same vendor's "Talent Filtering" article, also updated
+3 March 2026:
+support.greenhouse.io/hc/en-us/articles/27104809835291-Talent-Filtering
+It describes letting a recruiter "easily search for keywords in applications,
+then filter the results to find the most qualified candidates", and tells them
+to "include Greenhouse's suggested keywords generated from your public job
+post". That is the deflationary argument made concrete: a human is running the
+search, and the search terms are lifted from the ad. Which is exactly why
+mirroring the ad's language works.
 -->
 
 ---
@@ -549,6 +573,9 @@ a commercial product (VMock), so treat its score as feedback, not truth.
 layout: default
 kicker: 03 · APPLICATION SCREENING
 title: What the research on Australian hiring found
+source: |
+  Sheard, “Algorithm-facilitated discrimination”, Journal of Law and Society 52(2), 8 May 2025. Open access.
+  doi.org/10.1111/jols.12535
 ---
 
 <IconRows :rows="[
@@ -562,10 +589,17 @@ title: What the research on Australian hiring found
 Sheard is at the University of Melbourne, so this is their own institution's
 research on their own job market.
 
-Source: Natalie Sheard, "Algorithm-facilitated discrimination", Journal of
-Law and Society, doi 10.1111/jols.12535; reported by ABC News, 8 May 2025.
-Both verified directly. Peer-reviewed, which matters given how much of the
-material in this area is vendor content.
+Source: Natalie Sheard, "Algorithm-facilitated discrimination: a socio-legal
+study of the use by employers of artificial intelligence hiring systems",
+Journal of Law and Society 52(2), 269-291, published 8 May 2025. Confirmed
+against Crossref: sole author, correct journal, volume, issue and pages, and
+licensed CC BY 4.0, so it is genuinely open access. Reported by ABC News the
+same day. Peer-reviewed, which matters given how much of the material in this
+area is vendor content.
+
+If anyone tries the link on the day and gets an error, the Wiley site
+bot-blocks automated requests. In an ordinary browser it opens fine, and the
+full text is free.
 
 Be precise about the method: 23 qualitative interviews, mainly recruiters,
 plus two careers coaches, an AI expert, and two staff from a large AI
