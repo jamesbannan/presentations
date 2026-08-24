@@ -28,13 +28,13 @@ eventDate: "2 September 2026"
 | 3 | Assessments and AI detection | 9 min |
 | 4 | AI resume screening and video interviews | 14 min |
 | 5 | Using AI without losing the ability to learn | 8 min |
-| 6 | The ethical use of personal AI | 6 min |
+| 6 | The ethical use of personal AI | 10 min |
 | 7 | Using AI and staying safe | 7 min |
 | 8 | Wrap-up and Q&A | 5 min |
 
 Timings live in the presenter notes on each slide. The content now runs to
-roughly **62 minutes** against a 45–50 minute slot, so **a substantial trim is
-required before delivery**. Sections 2, 3 and 4 all grew when the Australian
+roughly **66 minutes** against a 45–50 minute slot, so **a substantial trim is
+required before delivery**. Sections 2, 3, 4 and 6 all grew when the Australian
 evidence was added. In order of least damage, the cuts are:
 
 1. "Prompt engineering is a skill, not a career" (2 min) — the point survives
@@ -74,6 +74,9 @@ itself or in the presenter notes, and expanded below.
 | Use AI to prepare, not to perform | ATO expects candidates to be honest, transparent, themselves and fair; must disclose AI use when asked; ATO does not use AI to screen applications | Australian Taxation Office, *Guidelines for candidate use of AI in recruitment processes*, ato.gov.au |
 | Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi 10.1111/bjet.13544 |
 | Effort is the signal, not the problem | Fluent AI explanations leave students confident about material they have not learned; "metacognitive laziness"; "generating answers before receiving explanations" listed among the desirable difficulties | TEQSA, *Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities*, 24 June 2026 |
+| What actually governs this in Australia | No AI Act; reliance on "strong existing, largely technology-neutral legal frameworks"; an AI Safety Institute being established; text and data mining exception ruled out | *National AI Plan*, Department of Industry, Science and Resources, 2 December 2025 |
+| What actually governs this in Australia | Guidance for AI Adoption sets out 6 essential practices and "evolves" the 10 VAISS guardrails and the 8 AI Ethics Principles | National AI Centre, *Guidance for AI Adoption*, 21 October 2025 |
+| What this University tells you not to upload | Uploading personal information "carries similar risks to sharing it publicly to the open web"; uploading lecture slides or other subject material may violate creators' copyright; treat outputs "with the same scepticism and caution as you would any content from the internet" | University of Melbourne Academic Skills, *GenAI at Melbourne*, students.unimelb.edu.au |
 
 Sourcing notes for the Australian figures:
 
@@ -203,6 +206,54 @@ Sourcing notes for the learning material in section 5:
   lost them. It is a working paper, not peer reviewed, and American — the
   notes say so.
 
+Sourcing notes for the frameworks material in section 6:
+
+- **The framework slide is deliberately about hierarchy, not detail.** The
+  common misconception is that an Australian AI law exists. It does not, and
+  the National AI Plan of 2 December 2025 says so in terms — Australia relies
+  on "strong existing, largely technology-neutral legal frameworks" and a
+  "practical and risk-based" approach that "uses regulators' existing
+  expertise". The plan was read from the primary PDF, not from secondary
+  coverage. Mandatory guardrails for high-risk AI were consulted on in 2024
+  and did not proceed in that form.
+- **The 8 AI Ethics Principles and the 10 VAISS guardrails have been
+  superseded** by the 6 essential practices in the October 2025 Guidance for
+  AI Adoption. Both older pages now carry a notice saying so, and the ethics
+  principles page has been rewritten in the past tense. Much secondary
+  material still quotes the 8 principles as current; it is out of date. The
+  principles date from 2019 and the standard from September 2024, so neither
+  meets the 2025 date bar on its own — they appear only as the thing that was
+  replaced.
+- **The individual-versus-organisation distinction is the thing most likely
+  to be got wrong from the stage, and the notes flag it explicitly.** The
+  Australian Privacy Principles and the OAIC's AI guidance bind APP entities,
+  not a student using a chatbot at home. The deck therefore does not tell
+  students they are personally bound by privacy law. The useful framing is
+  that privacy law regulates the organisations they will work for, which is
+  why universities and employers have input rules and provide sanctioned
+  tools.
+- The **OAIC position that a hallucination about an identifiable person is
+  that person's personal information** is genuinely counter-intuitive and
+  verified verbatim, but it sits in the notes rather than on a slide for the
+  same reason — it is an obligation on organisations. Source: OAIC, *Guidance
+  on privacy and the use of commercially available AI products*, 21 October
+  2024, updated 17 January 2025. It is in-date on its update, not its
+  publication.
+- **The University of Melbourne page was verified verbatim** and carries the
+  section. It is the layer that actually binds this audience, and the
+  open-web analogy is the University's own. The line "no one will hire you to
+  do what GenAI does for free" is from the same page and is held in the notes
+  for a Job Ready audience.
+- **Whether AI-generated output attracts copyright in Australia remains
+  unsettled** and the deck says "may not" rather than "does not". There is no
+  Australian decision squarely on the point. What *is* settled, and is stated,
+  is that the government has ruled out a text and data mining exception in
+  Australian copyright law. The Attorney-General's Department continues to
+  consult through the Copyright and AI Reference Group.
+- The University's provisioned tooling is referred to generically in the notes
+  with an instruction to re-verify before presenting, because institutional
+  AI offerings change faster than a deck does.
+
 ## Australian framing
 
 The audience is Australian, so the deck says explicitly what does and does not
@@ -232,6 +283,15 @@ That is no longer accurate, and the section now leads with the Australian
 position: the ADM transparency obligation commencing 10 December 2026, and
 what it pointedly does not provide. Illinois and NYC are retained in the
 presenter notes as contrast rather than as the substance.
+
+Section 6 previously named no Australian instrument at all. It now opens by
+answering the question directly — what actually governs AI use here — and the
+answer is a hierarchy rather than a statute: existing technology-neutral law,
+then voluntary national guidance aimed at organisations, then the
+institutional policy that is the only layer with real consequences for a
+student. The section then moves from national frameworks to the University's
+own published words on personal information, copyright and reliability, which
+is the closest and most actionable layer for this audience.
 
 The rest of section 4's local grounding is Sheard's peer-reviewed study of
 Australian employers, Sapia and Criteria Corp as platforms actually operating

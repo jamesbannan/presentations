@@ -999,6 +999,49 @@ subtitle: What you feed in, what you trust, and whose work it is
 ---
 layout: default
 kicker: 05 · ETHICS & PRIVACY
+title: What actually governs this in Australia
+---
+
+<IconRows :rows="[
+  { title: 'There is no Australian AI Act', body: 'In December 2025 the government chose to rely on existing, largely technology-neutral law rather than write a new one. Privacy, copyright, consumer and discrimination law all still apply.' },
+  { title: 'The national guidance is voluntary — and it has moved', body: 'Guidance for AI Adoption, October 2025, sets out 6 essential practices for organisations. It replaced the 8 AI Ethics Principles and the 10 guardrails.' },
+  { title: 'The rules that actually bind you are closer to home', body: 'Your University policy now, your employer policy next year. Those are the ones with consequences attached.' },
+]" />
+
+<!--
+2 min. This is the answer to "what are the rules in Australia", and the
+framing matters more than the detail: most people assume there is an AI law.
+There is not.
+
+Source, verified first-hand from the PDF: National AI Plan, Department of
+Industry, Science and Resources, 2 December 2025. Its words are that Australia
+has "strong existing, largely technology-neutral legal frameworks... that can
+apply to AI", and that the approach "uses regulators' existing expertise" and
+is "practical and risk-based". Mandatory guardrails for high-risk AI were
+proposed in 2024 and did not proceed in that form. An AI Safety Institute is
+being established to advise regulators rather than to regulate directly.
+
+Row 2 is worth being precise about, because a lot of teaching material is now
+out of date. The 8 AI Ethics Principles date from 2019 and the Voluntary AI
+Safety Standard from September 2024; both pages now carry a notice that the
+October 2025 Guidance for AI Adoption evolves them into 6 essential practices.
+If someone quotes the 8 principles at you, they are quoting the old framework.
+
+The six, if asked: decide who is accountable; understand impacts and plan
+accordingly; measure and manage risks; share essential information; test and
+monitor; maintain human control.
+
+Important caveat, and do not get this wrong from the stage: all of that is
+voluntary guidance aimed at organisations, not obligations on individuals.
+Privacy law works the same way — the Australian Privacy Principles bind
+entities, not a student using a chatbot at home. That is exactly why row 3
+matters. The binding constraints on this audience are institutional policy
+and, once they are employed, their employer's policy.
+-->
+
+---
+layout: default
+kicker: 05 · ETHICS & PRIVACY
 title: What you type in does not stay yours
 ---
 
@@ -1019,6 +1062,44 @@ abstraction about data policy.
 Distinguish consumer accounts from institutional ones with contractual
 protections — the University's provisioned tooling is not the same as a free
 personal account.
+-->
+
+---
+layout: default
+kicker: 05 · ETHICS & PRIVACY
+title: What this University tells you not to upload
+---
+
+<IconRows :rows="[
+  { title: 'Personal information — yours or anyone else’s', body: 'Melbourne’s own advice is blunt: uploading it carries similar risks to sharing it publicly on the open web. Not your full name, date of birth or address.' },
+  { title: 'Lecture slides and subject material', body: 'Uploading someone else’s intellectual labour may breach their copyright. The University says do not make copyright material available to an AI tool without permission.' },
+  { title: 'Anything you could not defend uploading', body: 'Interview transcripts, a classmate’s draft, unpublished work. If consent was never given for this, you do not have it.' },
+]" />
+
+<!--
+2 min. Same move as the detection slide back in section 3 — this is their own
+institution telling them, so quote it rather than paraphrasing.
+
+Source, verified verbatim: University of Melbourne Academic Skills, "GenAI at
+Melbourne", students.unimelb.edu.au. The open-web comparison in row 1 is the
+University's own analogy, and it is the most useful sentence on the page —
+students understand "public website" in a way they do not understand
+"third-party data processing".
+
+Row 2 is the one that changes behaviour, because almost everyone in the room
+has uploaded lecture slides to summarise them. Point them at the University
+Copyright Office resource on AI and copyright if they want the detail.
+
+Note the University provides Microsoft Copilot to students under its
+enterprise agreement. That is not the same thing as a personal ChatGPT
+account — different contractual protections over what happens to the input.
+Verify the current tooling before presenting; institutional offerings change.
+
+The line from that page most worth saying out loud to a Job Ready audience:
+"No one will hire you to do what GenAI does for free." The University also
+asks three questions worth repeating — what skills am I losing by outsourcing
+my thinking, what value am I adding, and what do I do that is different from
+GenAI. That is section 4's argument, in the University's own voice.
 -->
 
 ---
@@ -1054,6 +1135,21 @@ institutions and history are exactly where confident errors appear.
 
 Good challenge if the room is engaged: ask them to name something in their
 discipline the tool would probably get wrong about Australia.
+
+The University puts this more plainly than I can: these tools "may represent
+biased opinions as facts or entirely fabricate information", and you should
+approach them "with the same scepticism and caution as you would any content
+from the internet". That is the standard to hold them to — not a special new
+kind of trust.
+
+One genuinely surprising Australian point if you want it. The OAIC has said
+that inferred, incorrect or artificially generated information about an
+identified or reasonably identifiable person — hallucinations and deepfakes
+included — is that person's personal information, and has to be handled under
+the Privacy Principles. So a fabricated claim about a real person is not just
+wrong, it is regulated. Source: OAIC, Guidance on privacy and the use of
+commercially available AI products, 21 October 2024, updated 17 January 2025.
+Attribute it accurately — that guidance binds organisations, not individuals.
 -->
 
 ---
@@ -1079,6 +1175,21 @@ treat commercial reliance on it as a risk to check, not a given.
 Employment angle worth thirty seconds: work produced during employment
 usually belongs to the employer, and feeding it into a personal AI account
 may breach their policy.
+
+Australian specifics for row 3, all from the National AI Plan of 2 December
+2025. Copyright and AI is live but unsettled: the Attorney-General's
+Department is consulting through the Copyright and AI Reference Group on
+whether Australia's copyright laws need updating for AI. One thing is
+settled, though, and it is worth stating because it cuts against what people
+assume — the government has explicitly **ruled out a text and data mining
+exception** in Australian copyright law, which it framed as giving certainty
+to Australian creators and media workers.
+
+On owning the output: the defensible line remains that copyright generally
+requires human authorship, so purely machine-generated material may not
+attract it. Say "may not" rather than "does not" — there is no Australian
+decision squarely on generative AI output, and this is exactly the kind of
+question a model will answer confidently and wrongly.
 -->
 
 ---
