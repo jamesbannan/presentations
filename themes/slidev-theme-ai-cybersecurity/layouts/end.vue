@@ -1,6 +1,9 @@
 <!--
   Closing slide — the title gradient again, bookending the deck.
 
+  No motif here, unlike cover/section/quote: at this size the diamond landed
+  directly on top of the title's first letter.
+
   Frontmatter:
     title    — defaults to "THANK YOU"
     subtitle — e.g. "Questions · Discussion · Job Ready Program"
@@ -26,7 +29,6 @@ const title = computed(() => heading.value ?? 'THANK YOU')
     <SlideBg name="bg-title" />
 
     <div class="end-body">
-      <Motif size="md" on-dark class="end-motif" />
       <h2 class="end-title">{{ title }}</h2>
       <p v-if="subtitle" class="end-subtitle">{{ subtitle }}</p>
 

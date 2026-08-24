@@ -1715,7 +1715,7 @@ varies by subject, and disclosure norms in hiring are still forming.
 ---
 layout: end
 title: THANK YOU
-subtitle: Questions · Discussion · Job Ready Program
+subtitle: Questions · Discussion
 ---
 
 <ContactLink icon="linkedin" text="linkedin.com/in/jamesbannan" />
