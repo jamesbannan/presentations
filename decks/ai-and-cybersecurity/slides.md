@@ -15,9 +15,10 @@ faculty: "Faculty of Arts"
 eventDate: "2 September 2026"
 # ───────────────────────────────────────────────────────────────────────────
 layout: cover
-kicker: JOB READY  //  FACULTY OF ARTS
+kicker: UoM  //  FACULTY OF ARTS  //  JOB READY PROGRAM
+heading: AI & Cybersecurity
 subtitle: Navigating your transition from study to industry
-footer: University of Melbourne  ·  Job Ready Program  ·  2 September 2026
+footer: James Bannan  ||  Principal Consultant
 ---
 
 <!--
