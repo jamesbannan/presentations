@@ -1258,6 +1258,20 @@ title: What AI changed for attackers
 <!--
 2 min.
 
+This whole slide is sourced to one sentence in the ASD Annual Cyber Threat
+Report 2024–25, and it is worth reading aloud because it comes from the
+Australian Signals Directorate rather than from a security vendor.
+Cybercriminals, it says, use generative AI "to create high-quality videos,
+fake voices, websites, know-your-customer records and spearphishing emails to
+more convincingly present themselves to victims as legitimate actors with
+relatively minimal effort". Videos, fake voices, spearphishing — that is rows
+one, two and three, from the national cyber authority.
+
+ASD's broader assessment, in its own calibrated language, is that the
+prevalence of AI "almost certainly enables malicious cyber actors to execute
+attacks on a larger scale and at a faster rate". Note "almost certainly" —
+that is a deliberate confidence term, not a hedge.
+
 The mental model to dismantle: "I can spot a scam". The cues people were
 taught to rely on — spelling, awkward phrasing, generic greetings — were weak
 signals that AI has now removed.
@@ -1265,35 +1279,54 @@ signals that AI has now removed.
 Graduate-specific hook: fake job offers and recruitment scams target exactly
 this cohort, and now arrive well-written and personalised from a scraped
 LinkedIn profile.
+
+The case behind row three, if you want a concrete example. In January 2024 a
+finance employee at Arup's Hong Kong office joined a video conference with
+what appeared to be the UK-based CFO and several colleagues. Every other
+participant was synthetic, and roughly HK$200 million left the business across
+fifteen transfers. Hong Kong Police described the case in February 2024
+without naming the firm; Arup confirmed it was the victim in May 2024. Use it
+as illustration only — it is not an Australian case, and the deck now leads
+with Australian data on the next slide.
 -->
 
 ---
 layout: stat
 kicker: 06 · THREATS
-title: Video calls are not identity verification
-stat: "US$25M"
+title: What it costs when it works
+stat: "$33,000"
 caption: |
-  transferred after a video call in which
-  every other participant was a deepfake
-source: "Incident January 2024, disclosed by Hong Kong Police in February; Arup publicly confirmed it was the company targeted in May 2024."
+  the average cost of cybercrime
+  <strong>self-reported by an individual</strong>
+  in Australia last financial year
+source: "ASD Annual Cyber Threat Report 2024–25, published 14 October 2025. Average self-reported cost per report, FY2024–25, up 8%."
 ---
 
 <!--
 1 min.
 
-A finance employee at Arup's Hong Kong office joined what appeared to be a
-video conference with the UK-based CFO and several colleagues. Every other
-participant was synthetic. Roughly HK$200 million went out across fifteen
-transfers to five accounts, and it surfaced about a week later.
+This replaced an overseas deepfake case, because there is no reason to reach
+for Hong Kong when the Australian national cyber authority publishes better
+numbers.
 
-Dates, if pressed: the fraud was January 2024, Hong Kong Police described the
-case publicly in February without naming the firm, and Arup confirmed it was
-the victim to CNN on 16 May 2024. Don't call it a "February 2024 incident" —
-that is when it was disclosed, not when it happened.
+The figures, all from the ASD report and all for FY2024–25. Over 84,700
+cybercrime reports to ReportCyber — on average one every six minutes. The
+average self-reported cost for an individual was $33,000, up 8%. For
+businesses it was $80,850, up 50%. Identity fraud remained the single most
+reported cybercrime by individuals at 30%, followed by online shopping fraud
+at 13% and online banking fraud at 10%.
 
-The lesson is not "distrust video" — it is that verification has to move to a
-channel the attacker does not control. Call the person back on a number you
-already had.
+Two things to say about the number itself. First, it is self-reported and per
+report, not a national average across the population — describe it accurately.
+Second, ASD assesses that "the vast majority of cybercrime continues to go
+unreported", so treat 84,700 as a floor rather than a count.
+
+Why this lands with this audience: $33,000 is more than most of them will
+have in the world. This is not framed as a corporate risk they will inherit
+at work in five years. It is a personal financial risk now.
+
+If someone asks where the reports go: ReportCyber at cyber.gov.au, or the
+Australian Cyber Security Hotline on 1300 CYBER1.
 -->
 
 ---
@@ -1340,20 +1373,34 @@ title: Basic hygiene that still works
 ---
 
 <IconRows :rows="[
-  { title: 'Verify out of band', body: 'Unexpected request for money or credentials? Confirm on a channel you initiated.' },
+  { title: 'Verify out of band', body: 'Unexpected request for money or credentials? Confirm on a channel you started, using a number you already had.' },
   { title: 'Never outsource a security judgement', body: 'Do not ask a chatbot whether an email is safe. It does not know, and it will answer anyway.' },
-  { title: 'Passkeys and a password manager', body: 'Phishing-resistant sign-in beats being clever about spotting fakes.' },
+  { title: 'Passkeys, on ASD’s own advice', body: 'The Australian Signals Directorate tells individuals to use phishing-resistant multi-factor authentication wherever possible, preferably passkeys.' },
+  { title: 'The boring basics do most of the work', body: 'ASD says these steps prevent the majority of the incidents reported to it. Update your software, use unique passphrases, back up your data.' },
 ]" />
 
 <!--
 2 min.
 
-The middle row is the one to hammer — students genuinely do paste suspicious
+The second row is the one to hammer — students genuinely do paste suspicious
 emails into chatbots and ask "is this a scam?". The answer is confident,
 unreliable, and easily manipulated by the email itself, which is prompt
 injection in its most everyday form.
 
-Close on the third: the durable defence is structural, not perceptual.
+Rows three and four are quoted from ASD rather than offered as opinion, which
+matters when the rest of the section has been about not trusting fluent
+sources. The individuals factsheet accompanying the Annual Cyber Threat Report
+2024–25 says to "use phishing-resistant multi-factor authentication wherever
+possible, preferably passkeys", and to consider a reputable password manager.
+The report itself says of the basic actions that "implementing these
+mitigations can prevent the majority of the cyber incidents reported to ASD's
+ACSC". That is a strong claim from a credible source, and it is the reassuring
+note to end on.
+
+Close on the fourth: the durable defence is structural, not perceptual. After
+a section about attacks that are specifically designed to defeat human
+judgement, the answer is not to become a better judge — it is to rely less on
+judgement.
 -->
 
 ---

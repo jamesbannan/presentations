@@ -68,7 +68,9 @@ itself or in the presenter notes, and expanded below.
 | Be honest about what detection can and cannot do | Detectors have already caused wrong accusations at Australian universities | ABC News, "Over a dozen unis are using AI to catch AI — and getting it wrong", 20 October 2025 |
 | What this University actually says | "An AI writing detection report alone is not sufficient evidence for an allegation"; detector visible to staff only; being asked to explain is not an allegation; free checkers and "humaniser" tools are a breach | University of Melbourne, *Advice for students regarding Turnitin and AI writing detection*, academicintegrity.unimelb.edu.au |
 | Show your process, not your innocence | Three-part declaration: tools used, how outputs were used, whether prompt records are available on request | University of Melbourne Academic Skills, *Acknowledging use of AI tools and technologies* |
-| Video calls are not identity verification | ~US$25M lost to a deepfake video conference | Incident January 2024; Hong Kong Police disclosed February 2024; Arup confirmed 16 May 2024 |
+| What AI changed for attackers | Cybercriminals use GenAI "to create high-quality videos, fake voices, websites, know-your-customer records and spearphishing emails... with relatively minimal effort"; AI "almost certainly" enables attacks at larger scale and faster rate | ASD, *Annual Cyber Threat Report 2024–25*, 14 October 2025 |
+| What it costs when it works | $33,000 average self-reported cost of cybercrime per report for individuals, up 8%; over 84,700 reports to ReportCyber, one every 6 minutes; identity fraud the top individual cybercrime at 30% | ASD, *Annual Cyber Threat Report 2024–25*, 14 October 2025 |
+| Basic hygiene that still works | "Use phishing-resistant multi-factor authentication wherever possible, preferably passkeys"; basic mitigations "can prevent the majority of the cyber incidents reported to ASD's ACSC" | ASD, *Annual Cyber Threat Report 2024–25* and its individuals fact sheet, 14 October 2025 |
 | What the research on Australian hiring found | AI hiring systems may "enable, reinforce and amplify discrimination"; first study of AI hiring system use by Australian employers; n=23 interviews | Natalie Sheard, "Algorithm-facilitated discrimination", *Journal of Law and Society*, doi 10.1111/jols.12535; reported ABC News, 8 May 2025 |
 | What Australian law will and will not give you | ADM transparency obligation commences 10 December 2026; disclosure in privacy policies only; "no right to contestability or to request information, and no obligation to notify" | OAIC, *Automated Decision-Making Transparency Obligation (APP 1)* issues paper, May 2026; APP 1.7–1.9 as inserted by the Privacy and Other Legislation Amendment Act 2024 |
 | Use AI to prepare, not to perform | ATO expects candidates to be honest, transparent, themselves and fair; must disclose AI use when asked; ATO does not use AI to screen applications | Australian Taxation Office, *Guidelines for candidate use of AI in recruitment processes*, ato.gov.au |
@@ -288,6 +290,42 @@ Sourcing notes for the frameworks material in section 6:
   Australian copyright law. The Attorney-General's Department continues to
   consult through the Copyright and AI Reference Group.
 
+Sourcing notes for the threat material in section 7:
+
+- **The section is now anchored on ASD rather than on vendor research**, which
+  matters more here than anywhere else in the deck: commercial threat reports
+  are the default source for this topic and the weakest one available. The
+  *Annual Cyber Threat Report 2024–25* was published 14 October 2025 and is
+  the current edition; no 2025–26 edition existed as at August 2026. Both the
+  main report and the individuals fact sheet were downloaded and their text
+  extracted directly.
+- **One ASD sentence sources the whole opening slide**, and it is quoted in
+  the notes so it can be read aloud: cybercriminals use GenAI "to create
+  high-quality videos, fake voices, websites, know-your-customer records and
+  spearphishing emails to more convincingly present themselves to victims as
+  legitimate actors with relatively minimal effort".
+- **ASD's "almost certainly" is a calibrated confidence term, not a hedge**,
+  and the notes say so. Reading it as vague weakens the claim.
+- **The $33,000 figure must be described precisely.** It is an average
+  *self-reported* cost *per report* for individuals in FY2024–25, not a
+  population average. ASD also assesses that "the vast majority of cybercrime
+  continues to go unreported", so the 84,700 report count is a floor. Both
+  caveats are in the notes.
+- **The Arup deepfake case was removed from the slide face** and demoted to
+  the notes as illustration. It is genuine and well documented, but it is a
+  Hong Kong incident denominated in US dollars, and there is no reason to
+  reach overseas when the Australian national cyber authority publishes
+  better-attributed numbers. The dates are retained in the notes because the
+  case is routinely misdated — the fraud was January 2024, disclosure February
+  2024, Arup's confirmation May 2024.
+- **The hygiene advice is now quoted from ASD rather than offered as
+  opinion**, which matters in a section about not trusting fluent sources.
+  Passkeys are ASD's own recommendation, not the presenter's preference.
+- **Prompt injection is the one claim in the section still carrying no
+  Australian citation.** It is described from first principles rather than
+  attributed, which is defensible because the mechanism is not contested, but
+  it is the outstanding gap in this section.
+
 ## Australian framing
 
 The audience is Australian, so the deck says explicitly what does and does not
@@ -349,3 +387,14 @@ paradox, the illusion of competence — are Monash and UQ work. The section is
 also deliberately two-sided: the notes carry RCT counter-evidence that AI
 helps when used to understand rather than to generate, which is the same
 distinction the section draws.
+
+Section 7 was the most obviously imported section in the deck: its centrepiece
+was a Hong Kong deepfake fraud quoted in US dollars, and its security advice
+was generic. It now runs on the Australian Signals Directorate. The opening
+slide is sourced to ASD's own description of how cybercriminals use generative
+AI, the evidence slide uses ASD's Australian cost and volume figures for
+individuals, and the closing hygiene advice — including passkeys — is quoted
+from ASD rather than asserted. This matters more in this section than
+elsewhere, because cybersecurity is the topic where vendor marketing most
+often substitutes for evidence, and because the section is otherwise asking
+the audience to distrust confident, fluent sources.
