@@ -719,6 +719,9 @@ explanation. Say that plainly rather than implying they are covered.
 layout: default
 kicker: 03 · YOUR RIGHTS
 title: What Australian law will and will not give you
+source: |
+  OAIC issues paper, 18 May 2026 · oaic.gov.au/engage-with-us/consultations/consultation-on-guidance-for-transparency-in-automated-decision-making
+  Privacy and Other Legislation Amendment Act 2024 (Cth), APP 1.7–1.9 · legislation.gov.au/C2024A00128
 ---
 
 <IconRows :rows="[
@@ -732,9 +735,22 @@ title: What Australian law will and will not give you
 will know it is coming.
 
 Source: OAIC, "Automated Decision-Making Transparency Obligation (APP 1)",
-issues paper, May 2026. Verified verbatim. The obligation sits in APP 1.7-1.9,
-inserted by the Privacy and Other Legislation Amendment Act 2024, and
-commences 10 December 2026.
+issues paper, published 18 May 2026. Verified verbatim. The obligation sits in
+APP 1.7-1.9, inserted by the Privacy and Other Legislation Amendment Act 2024,
+and commences 10 December 2026.
+
+Both links on the slide were checked directly. The OAIC consultation page
+states it plainly: "The Privacy and Other Legislation Amendment Act 2024
+introduced an automated decision making (ADM) Obligation. From 10 December
+2026, APP entities that use personal information in ADM with the potential to
+affect rights or interests will be required to provide information in their
+privacy policies about the kinds of personal information used and the kinds of
+decisions made using ADM." That single sentence carries rows 1 and 3.
+
+The Act itself is Act No. 128 of 2024, at legislation.gov.au/C2024A00128. The
+issues paper PDF sits at oaic.gov.au/__data/assets/pdf_file/0027/263925/ADM-Issues-Paper.pdf
+if the full text is wanted, but the consultation page is the friendlier link
+to read out.
 
 Row 2 is a direct paraphrase of the OAIC's own words: the obligation "gives
 no right to contestability or to request information, and no obligation to
