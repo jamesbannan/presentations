@@ -75,7 +75,8 @@ itself or in the presenter notes, and expanded below.
 | How applicant tracking systems actually work | Parser "scans an imported resume and auto-fills appropriate fields with information it detects"; a columned layout, contact details in the header, footer or a text box, graphics, photos, word art, image-only files and tables all break the parse; recruiters "search for keywords in applications, then filter the results", using "suggested keywords generated from your public job post" | Greenhouse Recruiting product documentation, *Unsuccessful resume parse* and *Talent Filtering*, both updated 3 March 2026 |
 | What Australian law will and will not give you | ADM transparency obligation commences 10 December 2026; disclosure in privacy policies only; "no right to contestability or to request information, and no obligation to notify" | OAIC, *Automated Decision-Making Transparency Obligation (APP 1)* issues paper, 18 May 2026, oaic.gov.au/engage-with-us/consultations/consultation-on-guidance-for-transparency-in-automated-decision-making; APP 1.7–1.9 as inserted by the Privacy and Other Legislation Amendment Act 2024 (Cth), Act No. 128 of 2024, legislation.gov.au/C2024A00128 |
 | Use AI to prepare, not to perform | ATO expects candidates to be honest, transparent, themselves and fair; must disclose AI use when asked; ATO does not use AI to screen applications | Australian Taxation Office, *Guidelines for candidate use of AI in recruitment processes*, ato.gov.au |
-| Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi 10.1111/bjet.13544 |
+| Two very different kinds of shortcut | Delayed essay-quality gains larger among "augmentation users" who used AI to explain concepts; "automation users" who used it to generate text lost their short-run gains once AI was removed | Contractor & Reyes, *Experimental Evidence on the Learning Impact of Generative AI*, IZA Discussion Paper 18792, July 2026, iza.org/publications/dp/18792 — working paper, not peer reviewed |
+| Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi.org/10.1111/bjet.13544 — free to read, no open licence |
 | Effort is the signal, not the problem | Fluent AI explanations leave students confident about material they have not learned; "metacognitive laziness"; "generating answers before receiving explanations" listed among the desirable difficulties | TEQSA, *Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities*, 24 June 2026 |
 | What actually governs this in Australia | No AI Act; reliance on "strong existing, largely technology-neutral legal frameworks"; an AI Safety Institute being established; text and data mining exception ruled out | *National AI Plan*, Department of Industry, Science and Resources, 2 December 2025 |
 | What actually governs this in Australia | Australian Standards for AI announced, Office of AI established in PM&C, standards "expected to be legislated early next year"; obligations are directed at large data centres | Prime Minister of Australia, *AI in Australia's interests*, media release, 15 July 2026 |
@@ -224,11 +225,23 @@ Sourcing notes for the learning material in section 5:
 - The **MIT Media Lab "cognitive debt" EEG preprint has been dropped.** It was
   still unreviewed as at August 2026 (arXiv 2506.08872, n=54), and Fan et al.
   now does the same job with much better evidence.
-- **Counter-evidence is carried in the notes** so the argument is two-sided.
-  Contractor and Reyes (IZA Discussion Paper 18792, July 2026) found
-  "augmentation users" kept their gains a week later while "automation users"
-  lost them. It is a working paper, not peer reviewed, and American — the
-  notes say so.
+- **Contractor and Reyes is now cited on the slide face, and its notes were
+  corrected.** The abstract was read in full on 24 August 2026 and does not say
+  what the deck previously claimed. AI access raised immediate test scores by
+  0.27 standard deviations and **those gains persisted a week later** — so the
+  paper's headline is friendlier to AI than this section is. What it does
+  support, and all the slide now claims, is the split beneath: delayed essay
+  quality gains were larger among "augmentation users" who used AI to explain
+  concepts, while "automation users" who used it to generate text saw their
+  short-run gains vanish once AI was removed. Working paper, not peer reviewed,
+  American — the notes say so, and now also say not to overstate it.
+  IZA Discussion Paper 18792, July 2026, iza.org/publications/dp/18792.
+- **The two studies in this section point different ways on the headline.**
+  Contractor and Reyes found learning gains that persisted; Fan et al. found no
+  significant knowledge or transfer gain. The designs differ — Fan et al.
+  measured transfer to a new task — and the notes on the Fan slide now carry an
+  answer for a student who spots it, rather than leaving the presenter to
+  improvise.
 
 Sourcing notes for the frameworks material in section 6:
 

@@ -5,9 +5,12 @@
   Frontmatter:
     kicker, title
     leftTitle, rightTitle — card kickers
+    source — optional citation line pinned to the foot of the slide
   Content goes in the ::left:: and ::right:: slots.
 -->
 <script setup lang="ts">
+import { useSlideContext } from '@slidev/client'
+import { computed } from 'vue'
 import { useSlideHeader } from '../composables/useSlideHeader'
 
 const props = defineProps<{
@@ -15,13 +18,16 @@ const props = defineProps<{
   heading?: string
   leftTitle?: string
   rightTitle?: string
+  source?: string
 }>()
 
 const { kicker, heading } = useSlideHeader(props)
+const { $frontmatter } = useSlideContext()
+const source = computed(() => props.source ?? ($frontmatter as any)?.source)
 </script>
 
 <template>
-  <div class="slidev-layout two-col">
+  <div class="slidev-layout two-col" :class="{ 'has-source': source }">
     <CornerArt />
 
     <header v-if="kicker || heading" class="slide-header">
@@ -37,6 +43,8 @@ const { kicker, heading } = useSlideHeader(props)
         <slot name="right" />
       </CompareCard>
     </div>
+
+    <div v-if="source" class="slide-source">{{ source }}</div>
 
     <PageNumber />
   </div>

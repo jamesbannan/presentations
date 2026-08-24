@@ -111,6 +111,12 @@
   gap: calc(0.6 * var(--in));
 }
 
+/* Pull the cards up when a citation is pinned to the foot, so the two can
+   never meet. Mirrors the `has-source` contract on the default layout. */
+.slidev-layout.two-col.has-source .two-col-grid {
+  height: calc(4.25 * var(--in));
+}
+
 /* ------------------------------------------------------------------------
    STAT CALLOUT — full-bleed navy, one oversized cyan number
    ------------------------------------------------------------------------ */

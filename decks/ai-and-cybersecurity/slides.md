@@ -895,6 +895,7 @@ kicker: 04 · COGNITIVE OFFLOADING
 title: Two very different kinds of shortcut
 leftTitle: OUTSOURCING THE TYPING
 rightTitle: OUTSOURCING THE THINKING
+source: "Contractor & Reyes, IZA Discussion Paper 18792, July 2026. Randomised; working paper, not yet peer reviewed. · iza.org/publications/dp/18792"
 ---
 
 ::left::
@@ -923,13 +924,26 @@ Note that the left column is genuinely fine — this is not an abstinence
 message, and framing it that way loses credibility with students who already
 use these tools daily.
 
-There is now randomised evidence for exactly this split. Contractor and Reyes
-(IZA Discussion Paper 18792, July 2026) gave undergraduates AI access and
-found "augmentation users" — who used it to understand concepts — kept their
-gains a week later, while "automation users" — who used it to generate text —
-lost them as soon as the AI was taken away. Same tool, opposite outcome,
-decided by which column they were in. Caveat it honestly: it is a working
-paper, not yet peer reviewed, and American.
+There is now randomised evidence for exactly this split — but quote it
+carefully, because its headline is friendlier to AI than this section is.
+Contractor and Reyes (IZA Discussion Paper 18792, July 2026) ran proctored,
+in-person sessions where undergraduates learned an unfamiliar topic and wrote
+an essay with or without AI, then sat unaided assessments immediately and a
+week later. AI access raised immediate test scores by **0.27 standard
+deviations, and those gains persisted** a week on. So this is not a paper that
+says AI harms learning.
+
+The part that belongs on this slide is the split underneath. Essay quality
+barely moved while students had AI, then improved a week later when they wrote
+unaided — and **those delayed gains were larger among "augmentation users",
+who used AI to explain concepts, while "automation users", who used it to
+generate text, saw their short-run quality gains vanish once AI was removed.**
+Same tool, different outcome, decided by which column they were in. The
+mechanism they identify is the left column in one line: students shifted time
+away from drafting and toward reading and searching.
+
+Caveat it honestly if pushed: working paper, not yet peer reviewed, and
+American. And do not overstate it — say the split, not "AI made them worse".
 -->
 
 ---
@@ -943,7 +957,9 @@ caption: |
   The ChatGPT group improved their
   <strong>essay scores the most</strong> — with
   <strong>no significant gain in knowledge or transfer</strong>
-source: "Fan et al., British Journal of Educational Technology 56(2), 2025. A randomised experiment with measured outcomes, not self-report. Co-authored at Monash; cited by TEQSA, June 2026."
+source: |-
+  Fan et al., British Journal of Educational Technology 56(2), 2025. Randomised; co-authored at Monash, cited by TEQSA June 2026.
+  doi.org/10.1111/bjet.13544 · free to read
 ---
 
 <!--
@@ -962,6 +978,20 @@ it measures applying it to a new task.
 
 The authors named the mechanism "metacognitive laziness". It is the next
 slide, so land the number here and move on.
+
+The DOI is now on the slide. It is free to read on the publisher site, though
+it carries no open licence, so do not redistribute the PDF; the preprint is
+also on arXiv at 2412.09315.
+
+Be ready for one apparent contradiction. The previous slide's study
+(Contractor and Reyes) found AI access *raised* test scores and that the gain
+persisted, while this one finds no significant knowledge or transfer gain.
+They are not really in conflict — the designs differ, and this one measured
+transfer to a new task while the other measured retention of the same
+material — but if a student spots it, the honest answer is that the evidence
+is genuinely mixed on whether AI helps you learn, and much less mixed on the
+augmentation-versus-automation split. That split is the claim the section
+actually rests on.
 
 Honest framing if pushed: the lead institution is Peking University, with
 co-authors at Monash's Centre for Learning Analytics — so describe it as
