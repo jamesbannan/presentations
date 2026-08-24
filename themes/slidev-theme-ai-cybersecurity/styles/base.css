@@ -132,6 +132,27 @@
   bottom: calc(0.6 * var(--in));
 }
 
+/* Optional citation line at the foot of a content slide. The body region is
+   pulled up when one is present so rows can never run into it. */
+.slide-source {
+  position: absolute;
+  left: var(--slide-margin);
+  right: var(--slide-margin);
+  bottom: calc(0.28 * var(--in));
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--color-muted);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  z-index: 2;
+}
+
+.slidev-layout.has-source .slide-body {
+  bottom: calc(1.0 * var(--in));
+}
+
 /* On dark slides the title flips to white. Written against the layout class
    so it outranks the `.slidev-layout h2` base colour. */
 .slidev-layout.stat .slide-title,

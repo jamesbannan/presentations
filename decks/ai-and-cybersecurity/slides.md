@@ -361,6 +361,9 @@ evidence protects you in a way that "I didn't use AI" does not.
 layout: default
 kicker: 02 · ASSESSMENT INTEGRITY
 title: What this University actually says
+source: |
+  University of Melbourne, “Advice for students regarding Turnitin and AI writing detection”.
+  academicintegrity.unimelb.edu.au/plagiarism-and-collusion/advice-for-students-regarding-turnitin-and-ai-writing-detection
 ---
 
 <IconRows :rows="[
@@ -374,12 +377,17 @@ title: What this University actually says
 it is their own institution's published position, not general commentary.
 
 Source for all three rows: "Advice for students regarding Turnitin and AI
-writing detection", academicintegrity.unimelb.edu.au. Verified verbatim.
+writing detection", academicintegrity.unimelb.edu.au. Verified verbatim, and
+the URL is now on the slide face so students can go and read it themselves —
+which is the point. The page is public and needs no student login.
 
 Row 1 — Turnitin's AI detector IS enabled here, unlike Curtin (disabled from
 1 January 2026) and UQ (disabled from semester 2, 2025). Staff can see the
 score; students cannot, unless an instructor shares the report. The quoted
-line is exact, so you can read it out.
+line is exact, so you can read it out. If you want the mechanism: the page
+says the percentage represents text the tool calculates as "98% or more
+likely" to have been generated or paraphrased by AI — a high bar per
+sentence, which is not the same as a high bar for the whole document.
 
 Row 2 — the page says being asked to discuss your work is "informal and
 exploratory" and explicitly not an allegation. It also says you are not
@@ -400,6 +408,9 @@ being described here are not just about passing this semester.
 
 If asked about the two named policies: Student Academic Integrity Policy
 MPF1310, and Assessment and Results Policy MPF1326. Point, don't paraphrase.
+Both are public at policy.unimelb.edu.au/MPF1310 and
+policy.unimelb.edu.au/MPF1326 — no login required, so you can send students
+straight there.
 -->
 
 ---

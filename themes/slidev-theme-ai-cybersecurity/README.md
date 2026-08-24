@@ -19,7 +19,7 @@ theme: slidev-theme-ai-cybersecurity
 | `cover` | Opening slide, dark gradient | `kicker`, `title`, `subtitle`, `footer` |
 | `agenda` | Numbered agenda, facet panel right | `kicker`, `title`, `items` |
 | `section` | Section divider, white-to-sky gradient | `kicker`, `title`, `subtitle` |
-| `default` | Content slide on white; body is slide markdown | `kicker`, `title`, `bare` |
+| `default` | Content slide on white; body is slide markdown | `kicker`, `title`, `source`, `bare` |
 | `two-col` | Two light comparison cards | `kicker`, `title`, `leftTitle`, `rightTitle` + `::left::`/`::right::` slots |
 | `stat` | Dark full-bleed stat callout | `kicker`, `title`, `stat`, `caption`, `source` |
 | `quote` | Dark full-bleed pull quote | `kicker`, `quote` |
@@ -28,6 +28,19 @@ theme: slidev-theme-ai-cybersecurity
 `agenda` takes `items` as a list of strings. `default` renders whatever the
 slide body contains — use the `IconRows` component for the numbered-row
 treatment, or `bare: true` to drop the padded body wrapper entirely.
+
+`default` and `stat` both accept an optional `source`, rendered as an italic
+citation line at the foot of the slide. Newlines are preserved, so a citation
+and its URL can sit on separate lines using a YAML block scalar:
+
+```yaml
+source: |
+  Author, “Title”, Publication, 2026.
+  example.org/path/to/page
+```
+
+On `default` the body region shrinks automatically when a `source` is present,
+so rows can never collide with it. Long URLs wrap rather than overflow.
 
 ## Components
 

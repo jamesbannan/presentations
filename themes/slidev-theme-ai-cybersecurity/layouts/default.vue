@@ -5,6 +5,8 @@
   Frontmatter:
     kicker — e.g. "01 · INDUSTRY SKILLS"
     title  — slide heading
+    source — optional citation line pinned to the foot of the slide; the body
+             region shrinks to make room, so content never collides with it
     bare   — skip the padded body wrapper when the slide supplies its own
              full-bleed canvas
 -->
@@ -16,16 +18,18 @@ import { useSlideHeader } from '../composables/useSlideHeader'
 const props = defineProps<{
   kicker?: string
   heading?: string
+  source?: string
   bare?: boolean
 }>()
 
 const { kicker, heading } = useSlideHeader(props)
 const { $frontmatter } = useSlideContext()
 const bare = computed(() => props.bare ?? ($frontmatter as any)?.bare ?? false)
+const source = computed(() => props.source ?? ($frontmatter as any)?.source)
 </script>
 
 <template>
-  <div class="slidev-layout default">
+  <div class="slidev-layout default" :class="{ 'has-source': source }">
     <CornerArt />
 
     <header v-if="kicker || heading" class="slide-header">
@@ -37,6 +41,8 @@ const bare = computed(() => props.bare ?? ($frontmatter as any)?.bare ?? false)
     <div v-else class="slide-body">
       <slot />
     </div>
+
+    <div v-if="source" class="slide-source">{{ source }}</div>
 
     <PageNumber />
   </div>
