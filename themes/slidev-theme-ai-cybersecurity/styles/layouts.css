@@ -162,6 +162,8 @@
   font-style: italic;
   color: #7FA6E8;
   max-width: calc(8 * var(--in));
+  white-space: pre-line;
+  overflow-wrap: anywhere;
 }
 
 /* ------------------------------------------------------------------------

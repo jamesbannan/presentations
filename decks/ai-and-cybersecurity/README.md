@@ -88,9 +88,16 @@ Sourcing notes for the Australian figures:
 
 - **PwC** is a professional services firm that sells AI consulting, and the
   barometer is its own analysis of job-ad data rather than a government
-  statistic. The slide says so on its face. It is used because it is the most
-  substantial regular Australian AI jobs series available, not because it is
-  independent. The PwC media release was verified directly.
+  statistic. That qualification is now made verbally rather than on the slide:
+  the slide carries the citation and the source URL, and the presenter notes
+  flag that the caveat has to be spoken because it no longer appears anywhere
+  on screen. It is used because it is the most substantial regular Australian
+  AI jobs series available, not because it is independent. The PwC media
+  release was verified directly, and the landing page at
+  `pwc.com.au/services/artificial-intelligence/ai-jobs-barometer.html` was
+  confirmed live and confirmed to be the 2026 edition — it carries the 62%
+  wage premium up from 57%, and defines the AI user and AI developer
+  categories the slide's claim depends on.
 - **Jobs and Skills Australia** is a Commonwealth statutory body, so it is the
   strongest source in section 2. The 79% and 4% figures were corroborated
   across several independent secondary reports; `jobsandskills.gov.au` was

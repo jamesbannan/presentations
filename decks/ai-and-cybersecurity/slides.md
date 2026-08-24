@@ -156,7 +156,9 @@ stat: "19,300"
 caption: |
   new Australian job ads for AI <strong>user</strong> roles in 2025 —
   against 1,300 for AI developer roles
-source: "PwC Australia, 2026 AI Jobs Barometer, 18 June 2026. PwC's own analysis of job-ad data, not a government statistic."
+source: |
+  PwC Australia, 2026 AI Jobs Barometer, 18 June 2026.
+  pwc.com.au/services/artificial-intelligence/ai-jobs-barometer.html
 ---
 
 <!--
@@ -166,10 +168,12 @@ Australian AI job ads more than doubled over the year — 20,000 in 2024 to
 41,000 in 2025 — but almost all of that growth is in roles that *apply* AI
 rather than build it. That ratio is roughly fifteen to one.
 
-Say the source out loud: this is PwC's own analysis of job-ad data, not an
-ABS or Jobs and Skills Australia statistic. It is the most substantial
-regular Australian series available, and PwC sells AI consulting — both
-things are true, so name them and let the students weigh it.
+Say the source out loud — this is the only place the caveat now appears, since
+the slide carries the citation and URL rather than the qualification. This is
+PwC's own analysis of job-ad data, not an ABS or Jobs and Skills Australia
+statistic. It is the most substantial regular Australian series available, and
+PwC sells AI consulting — both things are true, so name them and let the
+students weigh it.
 
 If asked about the wage premium: the same report puts it at 62% on average,
 up from 57%. Don't lead with that number — it invites "so I should learn
