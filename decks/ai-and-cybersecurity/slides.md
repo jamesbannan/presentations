@@ -811,6 +811,10 @@ title: THANK YOU
 subtitle: Questions · Discussion · Job Ready Program
 ---
 
+<ContactLink icon="linkedin" text="linkedin.com/in/jamesbannan" />
+<ContactLink icon="mastodon" text="jamesbannan@aus.social" />
+<ContactLink icon="unimelb"  text="unimelb.edu.au/alumni/engage/ask-alumni" />
+
 <!--
 Leave this up for Q&A.
 

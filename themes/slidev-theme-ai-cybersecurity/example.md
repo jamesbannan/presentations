@@ -88,3 +88,8 @@ layout: end
 title: THANK YOU
 subtitle: Questions · Discussion · Job Ready Program
 ---
+
+<ContactLink icon="github"   text="github.com/jamesbannan" />
+<ContactLink icon="linkedin" text="linkedin.com/in/jamesbannan" />
+<ContactLink icon="mastodon" text="jamesbannan@aus.social" />
+<ContactLink icon="unimelb"  text="unimelb.edu.au/alumni/engage/ask-alumni" />

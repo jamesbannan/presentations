@@ -40,6 +40,8 @@ treatment, or `bare: true` to drop the padded body wrapper entirely.
 | `AgendaList` | Numbered rows with hairline dividers between them |
 | `IconRows` | Circular numbered badge plus title and description |
 | `CompareCard` | Light card with a kicker and diamond-bulleted list |
+| `ContactLink` | One contact row on the closing slide — brand glyph plus text |
+| `BrandIcon` | Brand glyph; `github`/`linkedin`/`mastodon` are built in, or name any SVG in `assets/` |
 
 ## Canvas size
 

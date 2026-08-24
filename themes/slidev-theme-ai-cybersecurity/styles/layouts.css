@@ -223,3 +223,36 @@
   color: var(--color-sky);
   margin-top: calc(0.19 * var(--in));
 }
+
+.end-contact {
+  margin-top: calc(0.55 * var(--in));
+  font-size: 20px;
+  color: var(--color-white);
+}
+
+.end-contact .contact-link {
+  display: flex;
+  align-items: center;
+  gap: calc(0.18 * var(--in));
+  min-height: calc(0.36 * var(--in));
+}
+
+.end-contact .brand-icon {
+  width: 1.35em;
+  height: 1.35em;
+  flex-shrink: 0;
+  /* Monochrome white keeps the glyphs legible across the whole gradient. */
+  fill: var(--color-white);
+}
+
+.end-contact img.brand-icon {
+  /* Bundled SVG assets carry their own colours, so height-match them only. */
+  object-fit: contain;
+}
+
+.end-note {
+  font-size: 16px;
+  color: var(--color-sky);
+  margin-top: calc(0.18 * var(--in));
+  padding-left: calc(1.35em + 0.18 * var(--in));
+}
