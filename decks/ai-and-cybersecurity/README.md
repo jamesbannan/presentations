@@ -420,11 +420,22 @@ in the notes so the practical advice is anchored to something students can
 use the same day.
 
 The applicant tracking slide is sourced differently from everything else in
-the deck, and deliberately so. There is no Australian source for it: the
-University's own careers pages, including the resumes guidance and the SMART
-Resume tool, contain no reference to applicant tracking, parsing or keywords
-at all, and the APSC's *Cracking the code* does not describe screening
-mechanics either. Both were checked directly and neither supports the claims.
+the deck, and deliberately so. No *authoritative* Australian source covers it.
+The University's own careers pages, including the resumes guidance and the
+SMART Resume tool, contain no reference to applicant tracking, parsing or
+keywords at all, and the APSC's *Cracking the code* does not describe
+screening mechanics either. Both were checked directly.
+
+SEEK does publish an Australian article on the topic, *Tips for creating an
+ATS-friendly resumé* (updated 5 August 2025), and it supports all three rows —
+it describes keyword matching, says the software "ranks the resumés based on
+how well they match the job description's criteria", and warns that complex
+designs may not be read correctly. It is cited in the notes as the Australian
+voice. It is not the slide-face source for two reasons. It is careers-blog
+content rather than documentation or research, and it leans on the "digital
+gatekeeper" framing that this slide is specifically arguing against. It also
+claims resumés "saved as PDF files" may not be filtered correctly, which the
+vendor documentation contradicts.
 
 Rather than reach for the widely repeated "X% of resumes are never seen by a
 human" figure, which is vendor marketing with no research behind it, the slide

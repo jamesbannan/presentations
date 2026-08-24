@@ -524,6 +524,15 @@ to "include Greenhouse's suggested keywords generated from your public job
 post". That is the deflationary argument made concrete: a human is running the
 search, and the search terms are lifted from the ad. Which is exactly why
 mirroring the ad's language works.
+
+If an Australian source is wanted out loud, SEEK's "Tips for creating an
+ATS-friendly resumé", updated 5 August 2025, covers all three rows:
+au.seek.com/career-advice/article/tips-for-creating-an-ats-friendly-resume
+It says the software "ranks the resumés based on how well they match the job
+description's criteria". Two caveats before leaning on it. It uses the
+"digital gatekeeper" framing this slide is arguing against, and it claims
+resumés saved as PDFs may not be filtered correctly, which Greenhouse's own
+documentation contradicts. Useful as the local voice, not as the authority.
 -->
 
 ---
@@ -600,6 +609,26 @@ area is vendor content.
 If anyone tries the link on the day and gets an error, the Wiley site
 bot-blocks automated requests. In an ordinary browser it opens fine, and the
 full text is free.
+
+Sheard also wrote this up herself in The Conversation on 24 July 2026, which
+is open, loads without any bot-blocking, and is the easier link to give
+students:
+theconversation.com/why-clearer-rules-on-using-ai-in-hiring-would-be-a-win-for-bosses-too-288086
+Her byline there reads "McKenzie Postdoctoral Fellow, The University of
+Melbourne", which is what backs the "at this University" line on the slide.
+
+Row 3 is the time-sensitive one, so know this before the day. In that article
+Sheard notes the Victorian government announced it will legislate to ensure AI
+hiring decisions are "free from bias or discrimination", and to require a
+human to have "final say" in significant automated decisions made using
+surveillance data. That is an announcement, not law, so "no specific law
+regulates them here" is still correct on 2 September. But if someone raises
+it, the honest answer is that Victoria has said it intends to change exactly
+this, partly because the federal government dropped its proposed mandatory
+guardrails for high-risk AI. Sheard also argues emotion inference should be
+prohibited outright, and notes the EU AI Act already bans it in workplaces
+except for medical or safety reasons — useful if row 3's facial analysis point
+draws a question.
 
 Be precise about the method: 23 qualitative interviews, mainly recruiters,
 plus two careers coaches, an AI expert, and two staff from a large AI
