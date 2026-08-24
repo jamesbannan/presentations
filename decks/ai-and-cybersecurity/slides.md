@@ -334,7 +334,9 @@ stat: "61%"
 caption: |
   of TOEFL essays written by non-native English
   speakers were misclassified as AI-generated
-source: "Liang et al., “GPT detectors are biased against non-native English writers”, Patterns (Cell Press), 2023."
+source: |
+  Liang et al., “GPT detectors are biased against non-native English writers”, Patterns (Cell Press), 2023.
+  doi.org/10.1016/j.patter.2023.100779
 ---
 
 <!--
