@@ -72,6 +72,8 @@ itself or in the presenter notes, and expanded below.
 | What the research on Australian hiring found | AI hiring systems may "enable, reinforce and amplify discrimination"; first study of AI hiring system use by Australian employers; n=23 interviews | Natalie Sheard, "Algorithm-facilitated discrimination", *Journal of Law and Society*, doi 10.1111/jols.12535; reported ABC News, 8 May 2025 |
 | What Australian law will and will not give you | ADM transparency obligation commences 10 December 2026; disclosure in privacy policies only; "no right to contestability or to request information, and no obligation to notify" | OAIC, *Automated Decision-Making Transparency Obligation (APP 1)* issues paper, May 2026; APP 1.7–1.9 as inserted by the Privacy and Other Legislation Amendment Act 2024 |
 | Use AI to prepare, not to perform | ATO expects candidates to be honest, transparent, themselves and fair; must disclose AI use when asked; ATO does not use AI to screen applications | Australian Taxation Office, *Guidelines for candidate use of AI in recruitment processes*, ato.gov.au |
+| Better essays. No better learning. | 117 university students randomly assigned ChatGPT, a human expert, writing analytics or no tool; the ChatGPT group improved essay scores the most, with no significant difference in knowledge gain or transfer | Fan, Tang, Le, Shen, Tan, Zhao, Shen, Li & Gašević, *British Journal of Educational Technology* 56(2):489–530, 2025, doi 10.1111/bjet.13544 |
+| Effort is the signal, not the problem | Fluent AI explanations leave students confident about material they have not learned; "metacognitive laziness"; "generating answers before receiving explanations" listed among the desirable difficulties | TEQSA, *Assuring quality learning in a gen AI-integrated future: The role of adaptive capabilities*, 24 June 2026 |
 
 Sourcing notes for the Australian figures:
 
@@ -162,10 +164,44 @@ research. The ATS section teaches the mechanics instead. If a number is
 wanted, the presenter notes give the defensible alternative and how to
 attribute it.
 
-Claims about HireVue, the Illinois AI Video Interview Act, NYC Local Law 144
-and the cognitive-offloading research are stated only in the presenter notes,
-with dates and peer-review status recorded so they are not overstated from the
-stage. The MIT "cognitive debt" EEG study is flagged as an unreviewed preprint.
+Claims about HireVue, the Illinois AI Video Interview Act and NYC Local Law
+144 are stated only in the presenter notes, with dates and peer-review status
+recorded so they are not overstated from the stage.
+
+Sourcing notes for the learning material in section 5:
+
+- **TEQSA's June 2026 resource was downloaded and its text extracted
+  directly**, so the "metacognitive laziness", regulatory-erosion and
+  desirable-difficulties material is first-hand from the regulator. It is the
+  third in TEQSA's assessment reform series and is explicitly about assuring
+  *learning* rather than policing integrity, which is why it sits here rather
+  than in section 3.
+- **Fan et al. is the strongest study in the deck** — randomised, four
+  conditions, and outcomes measured rather than self-reported. Describe it
+  accurately from the stage: the lead institution is Peking University with
+  co-authors at Monash's Centre for Learning Analytics, so it is Monash
+  co-authored, not an Australian study. It is in the deck because TEQSA leans
+  on it. It also carries a 2025 issue date but appeared online in December
+  2024, so it sits just on the edge of the date bar.
+- The **"performance paradox"** is Australian-authored and peer-reviewed: Yan
+  and Gašević (Monash) with Lodge (UQ) and Greiff, *Nature Reviews Psychology*
+  4:435–436, 18 June 2025. Metadata verified via Crossref.
+- **"Illusion of competence"** is Jason Lodge's phrase, from The Conversation,
+  16 March 2026, written alongside a report with Leslie Loble at UTS. The
+  article was verified verbatim; the underlying report itself could not be
+  rendered.
+- The **"almost 80% of Australian uni students use AI"** headline figure is
+  deliberately **not** on any slide. It is attributable to Lodge, but the
+  underlying survey, its sample and its method could not be traced. The notes
+  say to say "most students" instead.
+- The **MIT Media Lab "cognitive debt" EEG preprint has been dropped.** It was
+  still unreviewed as at August 2026 (arXiv 2506.08872, n=54), and Fan et al.
+  now does the same job with much better evidence.
+- **Counter-evidence is carried in the notes** so the argument is two-sided.
+  Contractor and Reyes (IZA Discussion Paper 18792, July 2026) found
+  "augmentation users" kept their gains a week later while "automation users"
+  lost them. It is a working paper, not peer reviewed, and American — the
+  notes say so.
 
 ## Australian framing
 
@@ -203,3 +239,16 @@ here, and the ATO's published expectations of candidates. The University's own
 careers guidance — its tailoring advice and the SMART Resume tool — is named
 in the notes so the practical advice is anchored to something students can
 use the same day.
+
+Section 5 previously rested entirely on two non-Australian sources, one of
+them an unreviewed preprint. It now leads with TEQSA's June 2026 resource on
+adaptive capabilities, which is useful for two reasons: it is the Australian
+regulator speaking about protecting *learning* rather than catching cheating,
+and it independently endorses the sequence the section already recommended —
+"generating answers before receiving explanations" is one of the four
+desirable difficulties it lists. The evidence slide behind it is a randomised
+experiment with measured outcomes, and the framing concepts — the performance
+paradox, the illusion of competence — are Monash and UQ work. The section is
+also deliberately two-sided: the notes carry RCT counter-evidence that AI
+helps when used to understand rather than to generate, which is the same
+distinction the section draws.

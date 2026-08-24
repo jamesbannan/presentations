@@ -802,6 +802,74 @@ open? If not, you have offloaded the wrong half.
 Note that the left column is genuinely fine — this is not an abstinence
 message, and framing it that way loses credibility with students who already
 use these tools daily.
+
+There is now randomised evidence for exactly this split. Contractor and Reyes
+(IZA Discussion Paper 18792, July 2026) gave undergraduates AI access and
+found "augmentation users" — who used it to understand concepts — kept their
+gains a week later, while "automation users" — who used it to generate text —
+lost them as soon as the AI was taken away. Same tool, opposite outcome,
+decided by which column they were in. Caveat it honestly: it is a working
+paper, not yet peer reviewed, and American.
+-->
+
+---
+layout: stat
+kicker: 04 · COGNITIVE OFFLOADING
+title: Better essays. No better learning.
+stat: "117"
+caption: |
+  university students, randomly assigned ChatGPT,
+  a human expert, writing analytics, or no tool.
+  The ChatGPT group improved their
+  <strong>essay scores the most</strong> — with
+  <strong>no significant gain in knowledge or transfer</strong>
+source: "Fan et al., British Journal of Educational Technology 56(2), 2025. A randomised experiment with measured outcomes, not self-report. Co-authored at Monash; cited by TEQSA, June 2026."
+---
+
+<!--
+1–2 min. This is the evidence slide for the distinction you just drew, and
+it is the strongest study in the whole section — say the method out loud.
+
+Randomised, four groups, and the outcomes were measured rather than
+self-reported. That matters because almost everything else in this space is
+a survey of how people feel about their own thinking.
+
+The finding is the section in one sentence: the artefact got better, the
+person did not. The essay improved most in the ChatGPT group, and knowledge
+gain and transfer showed no significant difference. Transfer is the one to
+stress — that is the test of whether anything was actually learned, because
+it measures applying it to a new task.
+
+The authors named the mechanism "metacognitive laziness". It is the next
+slide, so land the number here and move on.
+
+Honest framing if pushed: the lead institution is Peking University, with
+co-authors at Monash's Centre for Learning Analytics — so describe it as
+Monash co-authored, not as an Australian study. It is in the deck because
+TEQSA leans on it, which is the Australian connection that matters.
+
+This effect has an Australian-authored name: the "performance paradox".
+Lixiang Yan and Dragan Gašević (Monash), with Jason Lodge (UQ) and Samuel
+Greiff, set it out in Nature Reviews Psychology 4:435–436, 18 June 2025 —
+peer-reviewed, and a good citation to have in your pocket. Their line is that
+AI use of this kind does not promote the deep cognitive and metacognitive
+processing that high-quality learning requires.
+
+Lodge's own phrase for what it feels like from the inside is the one to say
+out loud: AI gives students the **illusion of competence**. He
+wrote that in The Conversation on 16 March 2026, alongside a report with
+Leslie Loble at UTS.
+
+Vivid example from that piece if you want one: a 2025 randomised experiment
+with high school students in Turkey using an AI maths tutor. They solved
+problems better with it — and their learning "fell off a cliff" the moment
+the AI was removed for the assessment.
+
+One figure to handle carefully: that article is headlined "almost 80% of
+Australian uni students now use AI". It is attributable to Lodge, but the
+underlying survey, its sample and its method could not be traced, so it is
+deliberately not on any slide. Say "most students" instead unless you have
+verified it yourself.
 -->
 
 ---
@@ -825,6 +893,55 @@ happening.
 
 The third row is where fabricated citations get caught. Worth stating that
 confident-sounding references are frequently invented.
+
+A fourth move worth offering, from Jason Lodge (UQ): use AI as a **cognitive
+mirror** rather than an answer oracle. Instead of asking it for the answer,
+ask it to interrogate yours — to ask you clarifying questions, or to make you
+define the assumptions behind a vague argument. Explaining yourself to it is
+what builds the learning, and it inverts the usual dynamic where the tool
+does the thinking and you do the accepting.
+-->
+
+---
+layout: default
+kicker: 04 · COGNITIVE OFFLOADING
+title: Effort is the signal, not the problem
+---
+
+<IconRows :rows="[
+  { title: 'Ease is not evidence of learning', body: 'TEQSA, the higher education regulator, warns that fluent AI explanations leave students confident about material they have not actually learned.' },
+  { title: 'It has a name: metacognitive laziness', body: 'When the work feels easy you skip the retrieval and the struggle that make learning stick — and capacities you stop exercising, you lose.' },
+  { title: 'Generate before you are given the answer', body: 'TEQSA lists this among the “desirable difficulties”, with testing yourself instead of re-reading, and spacing study out over time.' },
+]" />
+
+<!--
+2 min. This is the Australian authority for everything you have just argued,
+and it is very recent — worth naming the date.
+
+Source: TEQSA, "Assuring quality learning in a gen AI-integrated future: The
+role of adaptive capabilities", 24 June 2026. Verified on teqsa.gov.au. It is
+the third in TEQSA's assessment reform series, and it is aimed at protecting
+learning rather than at policing integrity — which is why it belongs here and
+not back in the assessment section.
+
+The useful point for this audience: the regulator is not telling them to
+avoid AI. It is telling universities to build evaluative judgement, critical
+thinking and ethical reasoning — and it explicitly says those capabilities
+benefit them in the workplace. That is the Job Ready argument, made by the
+regulator rather than by me.
+
+Row 3 is the payoff. The previous slide told them to draft first and bring
+the tool in second; TEQSA independently lists "generating answers before
+receiving explanations" as one of four desirable difficulties. The other
+three are spacing, mixing problem types, and self-testing.
+
+Best line to say aloud, quoting the document directly: effort can, and often
+does, signal effective learning. Students assume ease means it is working —
+TEQSA says that assumption is exactly backwards.
+
+If you want the underlying research: "metacognitive laziness" is Fan et al.
+2025, the study on the previous slide; the atrophy argument is Panadero and
+Broadbent 2025; "desirable difficulties" is Bjork and Bjork 2020.
 -->
 
 ---
@@ -847,14 +964,25 @@ The concession is real — calculators genuinely did replace a skill. The
 disanalogy is reliability: an unreliable tool requires a supervisor, and
 supervision requires expertise you only get by doing the work early on.
 
-Emerging research points the same way, but be careful how you cite it. Lee et
-al. (CHI 2025), a peer-reviewed Microsoft Research/CMU survey of 319
-knowledge workers, found higher confidence in AI correlated with lower
-self-reported critical-thinking effort, and that the work shifts from
-generating toward verifying. It is self-report, not measured performance.
-The MIT Media Lab EEG study (Kosmyna et al., 2025, "cognitive debt") is
-suggestive but n=54 and still a preprint — mention it as a signal, and say
-it has not been peer reviewed if you raise it at all.
+Emerging research points the same way, and you now have better citations than
+this area usually offers. Lead with Fan et al. (2025) from two slides back —
+randomised, measured outcomes, and endorsed by TEQSA. Lee et al. (CHI 2025),
+a peer-reviewed Microsoft Research/CMU survey of 319 knowledge workers, adds
+that higher confidence in AI correlated with lower self-reported
+critical-thinking effort, and that the work shifts from generating toward
+verifying — but flag that it is self-report, not measured performance.
+
+You no longer need the MIT Media Lab EEG study (Kosmyna et al., 2025,
+"cognitive debt") — it is n=54 and still a preprint. Drop it. If someone in
+the room raises it, say plainly that it has not been peer reviewed.
+
+The best support for row 3 is Lodge again, and it lands especially well with
+an Arts cohort: critical thinking is not a generic skill, it is deeply
+intertwined with knowledge. His example — it is very hard to judge whether a
+claim about the Second World War is biased or has the dates wrong if you do
+not already know much about the participants and their perspectives. That is
+the whole argument for building the foundation, in one sentence, and it is
+about history rather than maths.
 -->
 
 ---
