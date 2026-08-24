@@ -295,6 +295,7 @@ rightTitle: WHERE THEY FALL DOWN
 - Penalise non-native English writers disproportionately
 - Are degraded by light paraphrasing or editing
 - Cannot distinguish "AI-assisted" from "AI-generated"
+- Have already caused wrong accusations at Australian universities
 
 <!--
 2 min. Being straight about the limits buys credibility for the advice that
@@ -303,6 +304,22 @@ otherwise loses the room.
 
 The bias finding on the right is the one to put weight on; the next slide
 gives the actual study.
+
+The last bullet is Australian and recent: an ABC News investigation
+(20 October 2025) found at least a dozen Australian universities using AI
+detection software and getting it wrong. Charles Sturt's Mark Bassett, who
+runs academic integrity there, called heavy reliance on detectors a "lazy"
+alternative to redesigning assessment. TEQSA and Universities Australia both
+told the ABC they hold no data on which universities use these tools.
+
+A second ABC story (9 October 2025) covers the Australian Catholic
+University, which abandoned Turnitin's AI detector in March 2025. ACU's
+Deputy Vice-Chancellor confirmed on the record that any case resting on the
+detector as sole evidence was dismissed immediately. Use the DVC's own
+words, not the disputed "6,000 cases" figure from leaked documents.
+
+Do not turn this into an anti-university rant. The point is that the sector
+itself has worked out that detectors are not evidence.
 -->
 
 ---
@@ -337,13 +354,58 @@ evidence protects you in a way that "I didn't use AI" does not.
 ---
 layout: default
 kicker: 02 · ASSESSMENT INTEGRITY
+title: What this University actually says
+---
+
+<IconRows :rows="[
+  { title: 'The detector is a prompt, not a verdict', body: 'In the University’s own words: an AI writing detection report alone is not sufficient evidence for an allegation.' },
+  { title: 'Being asked to explain is not an accusation', body: 'You may be asked how you built the argument, or for drafts and notes. The University states plainly that this is not an allegation of misconduct.' },
+  { title: 'Never run your work through a free AI checker', body: 'They are often inaccurate, they take your work, and “humaniser” tools are themselves flagged — and that is misconduct.' },
+]" />
+
+<!--
+2 min. This is the slide that makes the section concrete for this room —
+it is their own institution's published position, not general commentary.
+
+Source for all three rows: "Advice for students regarding Turnitin and AI
+writing detection", academicintegrity.unimelb.edu.au. Verified verbatim.
+
+Row 1 — Turnitin's AI detector IS enabled here, unlike Curtin (disabled from
+1 January 2026) and UQ (disabled from semester 2, 2025). Staff can see the
+score; students cannot, unless an instructor shares the report. The quoted
+line is exact, so you can read it out.
+
+Row 2 — the page says being asked to discuss your work is "informal and
+exploratory" and explicitly not an allegation. It also says you are not
+required to attend such a discussion, and points students to UMSU Advocacy.
+Mention UMSU by name — most of the room will not know it exists.
+
+Row 3 — the strongest practical warning on the page, and the one students
+most often get wrong. Free checkers monetise student anxiety, claim to find
+AI in wholly human work in order to sell "humaniser" tools, and those
+humanisers usually use AI and are picked up by the University's own
+detector. You also hand over your intellectual property.
+
+Closing beat, worth saying slowly because it lands with a Job Ready
+audience: the same page states work can be checked "at any stage",
+including in the years following graduation, and that the University may
+amend marks or rescind degrees if misconduct is found later. The habits
+being described here are not just about passing this semester.
+
+If asked about the two named policies: Student Academic Integrity Policy
+MPF1310, and Assessment and Results Policy MPF1326. Point, don't paraphrase.
+-->
+
+---
+layout: default
+kicker: 02 · ASSESSMENT INTEGRITY
 title: Show your process, not your innocence
 ---
 
 <IconRows :rows="[
   { title: 'Work somewhere with history', body: 'Drafting in a tool that keeps version history gives you a record you never have to construct.' },
   { title: 'Keep your prompts and notes', body: 'If you used AI, save what you asked and what you did with the answer.' },
-  { title: 'Declare use where required', body: 'Read the policy for each subject — they differ, and the default is not “anything goes”.' },
+  { title: 'Declare it properly', body: 'Name the tool, say how you used the output, and state that your prompt records are available on request.' },
 ]" />
 
 <!--
@@ -352,6 +414,25 @@ title: Show your process, not your innocence
 The practical core of the section. The advice is not defensive paranoia — it
 is that a visible process is simply better scholarship, and it happens to be
 the thing that resolves an integrity query in your favour.
+
+Row 3 is the University's own three-part declaration format, from Academic
+Skills, "Acknowledging use of AI tools and technologies": the specific tools
+used, how those outputs were used, and whether detailed records of prompts
+and outputs are available on request. It goes at the end of the assessment,
+after the reference list, under a "Declaration" heading. There is a Word
+template on the Academic Skills site — tell them to search for it rather
+than trying to write the URL down.
+
+Two things worth saying out loud. First, a declaration is required for far
+more than "I got AI to write it" — brainstorming, planning, generating
+tables or images, proofreading and editing all need declaring. Second, if
+you quote or paraphrase AI output you must also cite it as a source, which
+is a separate obligation from the declaration.
+
+Also worth flagging: coordinators here choose from five published levels of
+permitted AI use, from unrestricted collaboration down to none at all. So
+"what's the rule" has five possible answers and the only reliable move is to
+read the assessment guidelines for each subject.
 
 Point them at the University's academic integrity guidance rather than
 paraphrasing policy from the stage; policies change and vary by subject.
