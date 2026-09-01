@@ -1,0 +1,89 @@
+{
+  "canvas": { "widthIn": 13.333, "heightIn": 7.5 },
+  "note": "All x/y/w/h are inches from top-left, matching the .pptx build script. pct = value / canvas dimension, for responsive Slidev/CSS layouts.",
+  "templates": {
+    "title": {
+      "background": "bg-title",
+      "elements": [
+        { "role": "eyebrow", "text": "e.g. JOB READY // FACULTY OF ARTS", "x": 0.9, "y": 1.55, "w": 9, "h": 0.4, "font": "heading", "size": 13, "color": "cyan", "charSpacing": 3 },
+        { "role": "motif", "x": 0.9, "y": 4.55, "w": 0.5, "h": 0.5, "rotateDeg": 45, "fill": "blue@15%", "stroke": "cyan" },
+        { "role": "title", "x": 0.85, "y": 2.0, "w": 10.8, "h": 1.9, "font": "heading", "size": 60, "color": "white" },
+        { "role": "subtitle", "x": 0.9, "y": 3.75, "w": 9.5, "h": 0.55, "font": "body", "size": 20, "italic": true, "color": "sky" },
+        { "role": "footer", "x": 0.9, "y": 6.65, "w": 9, "h": 0.4, "font": "body", "size": 12, "color": "#AEC9F0" }
+      ]
+    },
+    "agenda": {
+      "background": "white",
+      "decoration": { "asset": "panel-facets", "x": 8.73, "y": -0.3, "w": 5.2, "h": 7.8, "opacityPct": 90 },
+      "elements": [
+        { "role": "kicker", "x": 0.7, "y": 0.55, "w": 8, "h": 0.4, "color": "blueMid" },
+        { "role": "title", "x": 0.7, "y": 0.95, "w": 8, "h": 0.9, "font": "heading", "size": 40, "color": "navy" },
+        { "role": "agendaRow", "repeat": 6, "startY": 2.05, "rowH": 0.78,
+          "numberCol": { "x": 0.7, "w": 0.9, "font": "heading", "size": 22, "color": "blue" },
+          "labelCol": { "x": 1.65, "w": 6.9, "font": "body", "size": 16.5, "color": "ink" },
+          "divider": { "color": "#DCE6F5", "widthPt": 1 } }
+      ]
+    },
+    "sectionDivider": {
+      "background": "bg-divider",
+      "elements": [
+        { "role": "motif", "x": 0.9, "y": 2.15, "w": 0.35, "h": 0.35, "rotateDeg": 45, "fill": "blue@10%" },
+        { "role": "eyebrow", "text": "SECTION 0N", "x": 0.9, "y": 2.55, "w": 6, "h": 0.4, "color": "blueMid" },
+        { "role": "title", "x": 0.85, "y": 2.95, "w": 9.5, "h": 2.1, "font": "heading", "size": 46, "color": "navy", "lineSpacingPt": 50 },
+        { "role": "subtitle", "x": 0.9, "y": 4.85, "w": 7.5, "h": 0.6, "font": "body", "size": 16, "italic": true, "color": "muted" }
+      ]
+    },
+    "contentIconRows": {
+      "background": "white",
+      "elements": [
+        { "role": "kicker", "x": 0.7, "y": 0.55, "w": 8, "h": 0.4, "color": "blueMid" },
+        { "role": "title", "x": 0.7, "y": 0.95, "w": 10.5, "h": 0.75, "font": "heading", "size": 30, "color": "navy" },
+        { "role": "iconRow", "repeat": 3, "startY": 2.15, "rowH": 1.35,
+          "badge": { "x": 0.7, "w": 0.62, "h": 0.62, "shape": "circle", "fill": "ice", "stroke": "blue 1.25pt", "numberColor": "blueMid" },
+          "rowTitle": { "x": 1.55, "w": 10.2, "h": 0.45, "font": "heading", "size": 18, "color": "navy" },
+          "rowDesc": { "x": 1.55, "yOffset": 0.45, "w": 10.2, "h": 0.55, "font": "body", "size": 14.5, "color": "muted" } }
+      ]
+    },
+    "twoColumnComparison": {
+      "background": "white",
+      "elements": [
+        { "role": "kicker", "x": 0.7, "y": 0.55, "w": 8, "h": 0.4, "color": "blueMid" },
+        { "role": "title", "x": 0.7, "y": 0.95, "w": 11, "h": 0.75, "font": "heading", "size": 28, "color": "navy" },
+        { "role": "cardLeft", "style": "lightCard", "x": 0.7, "y": 2.15, "w": 5.55, "h": 4.5,
+          "header": { "x": 1.0, "y": 2.5, "w": 4.95, "h": 0.35, "color": "blueMid" },
+          "list": { "x": 1.0, "y": 3.0, "w": 4.95, "h": 3.3, "color": "ink" } },
+        { "role": "cardRight", "style": "lightCard", "note": "changed from darkFullBleed per design review — cards on a white slide stay light; use a differentiated tint (#EAF2FF) and a distinct kicker color (cyan-on-light e.g. #0BA5C9 or keep blueMid with icon variation) rather than a dark fill", "x": 6.85, "y": 2.15, "w": 5.55, "h": 4.5,
+          "header": { "x": 7.15, "y": 2.5, "w": 4.95, "h": 0.35 },
+          "list": { "x": 7.15, "y": 3.0, "w": 4.95, "h": 3.3, "color": "ink" } }
+      ]
+    },
+    "statCallout": {
+      "background": "navy",
+      "note": "darkFullBleed card style — correct as-is, unchanged by the light-card revision.",
+      "decoration": { "asset": "panel-facets", "x": -1.2, "y": 1.5, "w": 5.2, "h": 6.5, "opacityPct": 65, "rotateDeg": 180 },
+      "elements": [
+        { "role": "kicker", "x": 0.7, "y": 0.55, "w": 8, "h": 0.4, "color": "cyan" },
+        { "role": "title", "x": 0.7, "y": 0.95, "w": 9, "h": 0.75, "font": "heading", "size": 26, "color": "white" },
+        { "role": "bigStat", "x": 6.9, "y": 2.1, "w": 5.7, "h": 1.9, "font": "heading", "size": 92, "color": "cyan", "align": "right" },
+        { "role": "statCaption", "x": 6.9, "y": 3.85, "w": 5.7, "h": 0.9, "font": "body", "size": 15, "color": "sky", "align": "right" },
+        { "role": "sourceNote", "x": 0.7, "y": 6.7, "w": 8, "h": 0.4, "font": "body", "size": 11, "italic": true, "color": "#7FA6E8" }
+      ]
+    },
+    "fullBleedQuote": {
+      "background": "bg-dark",
+      "elements": [
+        { "role": "motif", "x": 0.9, "y": 1.5, "w": 0.35, "h": 0.35, "rotateDeg": 45, "fill": "cyan@25%", "stroke": "cyan" },
+        { "role": "quote", "x": 1.4, "y": 2.7, "w": 10.5, "h": 2.2, "font": "heading", "size": 32, "color": "white", "lineSpacingPt": 40 },
+        { "role": "eyebrow", "x": 1.4, "y": 5.1, "w": 9, "h": 0.4, "color": "cyan" }
+      ]
+    },
+    "closing": {
+      "background": "bg-title",
+      "elements": [
+        { "role": "motif", "x": 0.9, "y": 2.55, "w": 0.4, "h": 0.4, "rotateDeg": 45, "fill": "blue@15%", "stroke": "cyan" },
+        { "role": "title", "text": "THANK YOU", "x": 0.9, "y": 2.9, "w": 10, "h": 1.2, "font": "heading", "size": 54, "color": "white", "charSpacing": 2 },
+        { "role": "subtitle", "x": 0.9, "y": 3.95, "w": 9, "h": 0.5, "font": "body", "size": 18, "italic": true, "color": "sky" }
+      ]
+    }
+  }
+}

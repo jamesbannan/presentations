@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<defs><linearGradient id="bg-divider-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0.0%" stop-color="#FFFFFF"/><stop offset="60.0%" stop-color="#EAF4FF"/><stop offset="100.0%" stop-color="#C4E2FF"/></linearGradient></defs>
+<rect width="1920" height="1080" fill="url(#bg-divider-grad)"/>
+<polygon points="1089.4,1023.2 1301.4,698.3 1540.5,828.9 1351.3,1188.4" fill="#2E6FF2" fill-opacity="0.114"/>
+<polygon points="1928.3,1035.2 1767.9,1024.7 1855.4,880.7" fill="#2E6FF2" fill-opacity="0.129"/>
+<polygon points="1251.3,475.4 1410.5,488.1 1330.3,617.4" fill="#2E6FF2" fill-opacity="0.11"/>
+<polygon points="1064.3,1072.5 1178.5,842.3 1385.6,941.8 1309.9,1160.8" fill="#2E6FF2" fill-opacity="0.122"/>
+<polygon points="1523.6,501.3 1704.9,577.6 1644.9,711.4 1480.3,663.1" fill="#2E6FF2" fill-opacity="0.09"/>
+<polygon points="1964.1,943.5 1578.3,969.7 1742.3,692.3" fill="#2E6FF2" fill-opacity="0.102"/>
+<polygon points="2190.5,1084.9 1909.9,1214.2 1767.5,970.3 2071.2,804.8" fill="#2E6FF2" fill-opacity="0.067"/>
+<polygon points="1674.3,1091.4 1564.1,1001.6 1649.9,912.1 1743.7,984.0" fill="#2E6FF2" fill-opacity="0.071"/>
+<polygon points="1419.8,623.2 1703.3,723.2 1452.0,834.2" fill="#2E6FF2" fill-opacity="0.125"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" width="520" height="520">
+<!--
+  Corner shard cluster for white slides. Anchored to the TOP-RIGHT of the
+  viewBox and bleeding off the top and right edges; rotate 180° for the
+  bottom-left. Palette and opacity range match assets/svg/panel-facets.svg,
+  and the small 45° diamond near the inner tip echoes the theme motif.
+-->
+<polygon points="248,-40 560,-40 560,196 384,118" fill="#1852B0" fill-opacity="0.14"/>
+<polygon points="384,118 560,196 560,368 436,302" fill="#2E6FF2" fill-opacity="0.10"/>
+<polygon points="248,-40 384,118 302,232 168,88" fill="#00D4FF" fill-opacity="0.10"/>
+<polygon points="436,302 560,368 560,486 512,470" fill="#1852B0" fill-opacity="0.075"/>
+<polygon points="168,88 302,232 214,334 118,212" fill="#2E6FF2" fill-opacity="0.065"/>
+<polygon points="302,232 352,282 302,332 252,282" fill="#00D4FF" fill-opacity="0.13"/>
+<polygon points="118,212 214,334 150,404" fill="#1852B0" fill-opacity="0.05"/>
+</svg>

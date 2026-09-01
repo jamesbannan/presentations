@@ -1,0 +1,216 @@
+/* ============================================================
+   COMPONENTS — motif, facets, agenda rows, icon rows, cards
+   Coordinates and sizes come from assets/tokens/layout-tokens.json.
+   ============================================================ */
+
+/* --- Motif: the 45° diamond, the theme's only accent shape --------------- */
+.motif {
+  background: rgba(46, 111, 242, 0.10);
+  border: 1px solid rgba(46, 111, 242, 0.45);
+  transform: rotate(45deg);
+}
+.motif--sm { width: calc(0.35 * var(--in)); height: calc(0.35 * var(--in)); }
+.motif--md { width: calc(0.40 * var(--in)); height: calc(0.40 * var(--in)); }
+.motif--lg { width: calc(0.50 * var(--in)); height: calc(0.50 * var(--in)); }
+
+.motif--on-dark {
+  background: rgba(46, 111, 242, 0.15);
+  border-color: var(--color-cyan);
+}
+
+/* --- Facet panel: decorative shards bleeding off one edge ---------------- */
+.facet-panel {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.facet-panel--right {
+  left: calc(8.73 * var(--in));
+  top: calc(-0.3 * var(--in));
+  width: calc(5.2 * var(--in));
+  height: calc(7.8 * var(--in));
+}
+.facet-panel--left {
+  left: calc(-1.2 * var(--in));
+  top: calc(1.5 * var(--in));
+  width: calc(5.2 * var(--in));
+  height: calc(6.5 * var(--in));
+}
+.facet-panel--flipped { transform: rotate(180deg); }
+
+/* --- Corner art: shard clusters in the two free corners of white slides --- */
+.corner-art {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.corner-art--tr { top: 0; right: 0; }
+.corner-art--bl { bottom: 0; left: 0; transform: rotate(180deg); }
+
+/* --- Page number -------------------------------------------------------- */
+.page-number {
+  position: absolute;
+  right: calc(0.7 * var(--in));
+  bottom: calc(0.35 * var(--in));
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #9FB3CC;
+  z-index: 3;
+}
+.page-number--on-dark { color: #7FA6E8; }
+
+/* --- Agenda list -------------------------------------------------------- */
+.agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: calc(7.85 * var(--in));
+}
+
+.agenda-row {
+  display: flex;
+  align-items: center;
+  gap: calc(0.25 * var(--in));
+  height: calc(0.78 * var(--in));
+}
+
+/* Hairlines separate rows; the list has no rule above the first or below
+   the last, matching the source template. */
+.agenda-row + .agenda-row {
+  border-top: 1px solid var(--color-card-border);
+}
+
+.agenda-num {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 29px;
+  color: var(--color-blue);
+  width: calc(0.7 * var(--in));
+  flex: none;
+}
+
+.agenda-label {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--color-ink);
+}
+
+/* --- Icon rows ---------------------------------------------------------- */
+.icon-rows {
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(0.1 * var(--in));
+}
+
+/* Row pitch defaults to the template's 1.35in; IconRows tightens it via
+   --row-pitch when a slide carries more than three rows. */
+.icon-row {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(0.23 * var(--in));
+  min-height: var(--row-pitch, calc(1.35 * var(--in)));
+}
+
+.icon-row-badge {
+  width: calc(0.62 * var(--in));
+  height: calc(0.62 * var(--in));
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-ice);
+  border: 1.25px solid var(--color-blue);
+  color: var(--color-blue-mid);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-row-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-navy);
+  line-height: calc(0.45 * var(--in));
+}
+
+.icon-row-body {
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--color-muted);
+  line-height: 1.35;
+}
+
+/* --- Comparison cards --------------------------------------------------- */
+.compare-card {
+  padding: calc(0.35 * var(--in)) calc(0.3 * var(--in));
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.2 * var(--in));
+}
+
+.compare-card .card-kicker {
+  font-size: 16px;
+}
+.card-light--alt .card-kicker { color: var(--color-blue); }
+
+.compare-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.22 * var(--in));
+}
+
+.compare-list li {
+  position: relative;
+  padding-left: calc(0.28 * var(--in));
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+/* Diamond bullets — the motif at list scale, in place of a disc. */
+.compare-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  background: var(--color-blue);
+  transform: translateY(-50%) rotate(45deg);
+}
+.card-light--alt .compare-list li::before { background: var(--color-blue-mid); }
+
+/* Markdown content passed through the ::left:: / ::right:: slots picks up
+   the same list treatment as the `items` prop. */
+.compare-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.22 * var(--in));
+}
+.compare-card ul li {
+  position: relative;
+  padding-left: calc(0.28 * var(--in));
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+.compare-card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  background: var(--color-blue);
+  transform: translateY(-50%) rotate(45deg);
+}
+.card-light--alt ul li::before { background: var(--color-blue-mid); }
