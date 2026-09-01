@@ -71,6 +71,39 @@ String fields in facts accept inline markdown — `` `code` ``, `**bold**` and
 
 Start in `tokens.css` for a palette change; everything else derives from it.
 
+## Utility classes
+
+Beyond the components, `styles/` provides classes for hand-written slide content.
+
+Colour, for spans and headings: `.neon-cyan`, `.neon-magenta`, `.neon-green`,
+`.arcade-yellow`, `.neon-orange`, `.text-dim`.
+
+A terminal block, for scripted command output — safer on stage than a live shell:
+
+```html
+<div class="terminal">
+  <div class="terminal-titlebar">● ● ●&nbsp;&nbsp; bash — signing</div>
+  <div class="terminal-body">
+    <span class="t-prompt">$</span> <span class="t-cmd">cosign verify …</span><br>
+    <span class="t-out">normal output</span><br>
+    <span class="t-ok">verified</span><br>
+  </div>
+</div>
+```
+
+Line classes are `.t-prompt` `.t-cmd` `.t-out` `.t-ok` `.t-warn` `.t-err`
+`.t-cyan`, plus `.t-blank` as a spacer.
+
+Also `.retro-list` (arrow-marked `<ul>`), `.retro-callout` (note box, pair with
+`.callout-icon`), `.stat-grid` / `.stat-card` (`.stat-value` `.stat-label`
+`.stat-desc`) and `.stage-badge` when `<StageList>` is too rigid.
+
+## Exporting
+
+Exports pass `--per-slide`. The default `/print` route stacks every slide onto
+one long page, which collapses flex children to zero height — the architecture
+and demo canvases come out blank. Do not remove the flag to speed up an export.
+
 ## Assets
 
 SVGs in `assets/` are bundled by Vite and addressable by filename:
