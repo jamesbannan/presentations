@@ -1,0 +1,118 @@
+/* ============================================================
+   BASE — slide surface and typography
+
+   Every slide is a "room": the void background, a faint star field, a
+   vignette, and a scanline overlay. Backgrounds attach to `.slidev-layout`
+   (the root element every layout renders, including Slidev's built-ins)
+   rather than to a wrapper class, so built-in layouts get the treatment too.
+   ============================================================ */
+
+html,
+body,
+#slide-content {
+  background: var(--void);
+}
+
+.slidev-layout {
+  background: var(--void);
+  color: var(--ghost);
+  font-family: var(--font-body);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Night-sky texture: faint stars + vignette, no external images required. */
+.slidev-layout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 22%, rgba(234, 230, 245, 0.5) 0, transparent 60%),
+    radial-gradient(1px 1px at 22% 68%, rgba(234, 230, 245, 0.35) 0, transparent 60%),
+    radial-gradient(1px 1px at 40% 15%, rgba(234, 230, 245, 0.4) 0, transparent 60%),
+    radial-gradient(1px 1px at 63% 78%, rgba(234, 230, 245, 0.3) 0, transparent 60%),
+    radial-gradient(1px 1px at 78% 30%, rgba(234, 230, 245, 0.45) 0, transparent 60%),
+    radial-gradient(1px 1px at 91% 60%, rgba(234, 230, 245, 0.3) 0, transparent 60%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* Scanlines, above the stars and below the content. */
+.slidev-layout::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.16) 0px,
+    rgba(0, 0, 0, 0.16) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.slidev-layout > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Typography ---------- */
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-family: var(--font-display);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--ghost);
+}
+
+.slidev-layout h1 { font-size: 1.6rem; }
+.slidev-layout h2 { font-size: 1.15rem; color: var(--cyan); }
+.slidev-layout h3 { font-size: 0.9rem; color: var(--yellow); }
+
+.slidev-layout p,
+.slidev-layout li,
+.slidev-layout td,
+.slidev-layout th {
+  font-family: var(--font-body);
+  line-height: 1.65;
+}
+
+.slidev-layout a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+
+.slidev-layout strong {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+/* Monospace italics are weak at distance — emphasise with colour instead. */
+.slidev-layout em {
+  color: var(--cyan);
+  font-style: normal;
+}
+
+.slidev-layout code {
+  font-family: var(--font-body);
+  background: rgba(87, 232, 214, 0.08);
+  color: var(--cyan);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+/* Fenced blocks bring their own surface — don't double up the inline chip. */
+.slidev-layout pre code {
+  background: transparent;
+  padding: 0;
+}

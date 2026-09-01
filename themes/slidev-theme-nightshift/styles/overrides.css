@@ -1,0 +1,32 @@
+/* ============================================================
+   OVERRIDES — Slidev built-ins pulled into the theme's palette
+   ============================================================ */
+
+/* Shiki ships its own background; inside a panel the panel is the surface. */
+.slidev-layout .terminal-box .slidev-code,
+.slidev-layout .terminal-box pre,
+.slidev-layout .dialog-box .slidev-code,
+.slidev-layout .dialog-box pre {
+  background: transparent !important;
+}
+
+.slidev-layout .slidev-code {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.slidev-layout .slidev-progress {
+  background: var(--cyan) !important;
+  height: 2px !important;
+}
+
+.slidev-nav-arrow,
+.slidev-icon-btn {
+  color: var(--ghost) !important;
+}
+
+::selection {
+  background: var(--magenta);
+  color: var(--void);
+}

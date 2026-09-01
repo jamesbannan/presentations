@@ -1,0 +1,95 @@
+/* ============================================================
+   COMPONENTS — the signature furniture
+
+   The pixel-bordered dialogue box and the scanline overlay are the one
+   signature move of this theme. Everything else stays quiet: no extra
+   chrome, no second accent per slide.
+   ============================================================ */
+
+/* ---------- The pixel-bordered dialogue box ---------- */
+.dialog-box {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  box-shadow:
+    0 0 0 2px var(--void),
+    0 0 0 4px var(--line),
+    6px 6px 0 0 rgba(0, 0, 0, 0.35);
+  padding: 1.6em 2em;
+}
+
+.dialog-box--cyan {
+  box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--cyan), 6px 6px 0 0 rgba(0, 0, 0, 0.35);
+}
+
+.dialog-box--magenta {
+  box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--magenta), 6px 6px 0 0 rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Terminal / computer-screen panel for code + demos ---------- */
+.terminal-box {
+  background: #060013;
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 0 2px var(--void), 0 0 24px rgba(87, 232, 214, 0.25);
+  padding: 1.4em 1.6em;
+  font-family: var(--font-body);
+  color: var(--cyan);
+  min-height: 0;
+  overflow: auto;
+}
+
+/* ---------- Scene / chapter number badge ---------- */
+.scene-number {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  color: var(--void);
+  background: var(--yellow);
+  padding: 0.4em 0.6em;
+  box-shadow: 3px 3px 0 0 var(--line);
+}
+
+/* ---------- Verb-style bullet list (nods to the verb-coin UI) ---------- */
+.verb-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.verb-list li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.5em;
+}
+
+.verb-list li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  color: var(--magenta);
+  font-size: 0.75em;
+}
+
+/* Markdown lists get the same treatment so slides don't have to hand-write
+   <ul class="verb-list"> to look right. */
+.slidev-layout .dialog-box ul:not(.verb-list),
+.slidev-layout .terminal-box ul:not(.verb-list) {
+  list-style: none;
+  padding-left: 0;
+}
+
+.slidev-layout .dialog-box ul:not(.verb-list) > li,
+.slidev-layout .terminal-box ul:not(.verb-list) > li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.5em;
+}
+
+.slidev-layout .dialog-box ul:not(.verb-list) > li::before,
+.slidev-layout .terminal-box ul:not(.verb-list) > li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  color: var(--magenta);
+  font-size: 0.75em;
+}
