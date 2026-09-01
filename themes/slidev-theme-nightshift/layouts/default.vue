@@ -5,6 +5,7 @@
 -->
 <template>
   <div class="slidev-layout dialog w-full h-full flex flex-col justify-center px-16 py-10">
+    <SceneBackdrop variant="interior" />
     <div class="dialog-box">
       <slot />
     </div>

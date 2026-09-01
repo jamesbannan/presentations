@@ -13,23 +13,35 @@
   box-shadow:
     0 0 0 2px var(--void),
     0 0 0 4px var(--line),
-    6px 6px 0 0 rgba(0, 0, 0, 0.35);
+    6px 6px 0 0 rgba(0, 0, 0, 0.35),
+    0 18px 60px rgba(0, 0, 0, 0.6);
   padding: 1.6em 2em;
 }
 
 .dialog-box--cyan {
-  box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--cyan), 6px 6px 0 0 rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 0 2px var(--void),
+    0 0 0 4px var(--cyan),
+    6px 6px 0 0 rgba(0, 0, 0, 0.35),
+    0 18px 60px rgba(0, 0, 0, 0.6);
 }
 
 .dialog-box--magenta {
-  box-shadow: 0 0 0 2px var(--void), 0 0 0 4px var(--magenta), 6px 6px 0 0 rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 0 2px var(--void),
+    0 0 0 4px var(--magenta),
+    6px 6px 0 0 rgba(0, 0, 0, 0.35),
+    0 18px 60px rgba(0, 0, 0, 0.6);
 }
 
 /* ---------- Terminal / computer-screen panel for code + demos ---------- */
 .terminal-box {
   background: #060013;
   border: 2px solid var(--cyan);
-  box-shadow: 0 0 0 2px var(--void), 0 0 24px rgba(87, 232, 214, 0.25);
+  box-shadow:
+    0 0 0 2px var(--void),
+    0 0 24px rgba(87, 232, 214, 0.25),
+    0 18px 60px rgba(0, 0, 0, 0.6);
   padding: 1.4em 1.6em;
   font-family: var(--font-body);
   color: var(--cyan);

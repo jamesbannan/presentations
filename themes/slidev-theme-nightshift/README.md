@@ -39,13 +39,38 @@ slide, not per element.
 
 | Layout | Use | Frontmatter |
 | --- | --- | --- |
-| `cover` | title / closing card | — |
-| `section` | chapter card, "SCENE n" | `scene` |
-| `dialog` | default content, in the dialogue box | `scene`, `accent: cyan\|magenta` |
-| `terminal` | code and demos, CRT panel | `scene` |
-| `default` | fallback — `dialog` without a badge | — |
+| `cover` | title / closing card | `backdrop` |
+| `section` | chapter card, "SCENE n" | `scene`, `backdrop` |
+| `dialog` | default content, in the dialogue box | `scene`, `accent: cyan\|magenta`, `backdrop` |
+| `terminal` | code and demos, CRT panel | `scene`, `backdrop` |
+| `default` | fallback — `dialog` without a badge | `backdrop` |
+
+Every layout paints a `SceneBackdrop` behind its content. Set `backdrop: none`
+in a slide's frontmatter to drop back to the plain graded wash — useful when a
+slide carries a full-bleed image of its own.
 
 ## Components
+
+`<SceneBackdrop>` draws the room or the landscape the slide is standing in. It
+is pure SVG on a `320x180` grid with `crispEdges` and `image-rendering:
+pixelated`, so it scales to any projector as chunky pixels rather than soft
+vectors. Layouts mount it for you; mount it directly only if you are writing a
+new layout.
+
+| Prop | Values | Notes |
+| --- | --- | --- |
+| `variant` | `exterior`, `interior` | trestle-bridge night landscape, or a lit room |
+| `palette` | `warm`, `cool` | amber lamps, or the cyan of the `terminal` layout |
+| `seed` | number | reshuffles stars, trees, grass and fireflies |
+
+Two things are load-bearing:
+
+- Geometry comes from a seeded PRNG, never `Math.random`. The live deck and the
+  exported PDF have to draw the identical scene.
+- Interior detail is **banded**. The dialogue box covers roughly `y 59–134` and
+  the scene badge sits top-left above it, so props only read above `y≈58` (on
+  the right-hand side, clear of the badge) or below `y≈135`. An earlier counter
+  drawn straight through the middle was completely invisible.
 
 `<SceneVideo>` frames a recorded clip as an in-game CRT screen.
 

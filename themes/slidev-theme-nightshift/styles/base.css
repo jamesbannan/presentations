@@ -23,21 +23,17 @@ body,
   overflow: hidden;
 }
 
-/* Night-sky texture: faint stars + vignette, no external images required. */
+/* Fallback wash for layouts that don't render a <SceneBackdrop> (Slidev's
+   built-ins), so nothing is ever a flat black rectangle. */
 .slidev-layout::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image:
-    radial-gradient(1px 1px at 8% 22%, rgba(234, 230, 245, 0.5) 0, transparent 60%),
-    radial-gradient(1px 1px at 22% 68%, rgba(234, 230, 245, 0.35) 0, transparent 60%),
-    radial-gradient(1px 1px at 40% 15%, rgba(234, 230, 245, 0.4) 0, transparent 60%),
-    radial-gradient(1px 1px at 63% 78%, rgba(234, 230, 245, 0.3) 0, transparent 60%),
-    radial-gradient(1px 1px at 78% 30%, rgba(234, 230, 245, 0.45) 0, transparent 60%),
-    radial-gradient(1px 1px at 91% 60%, rgba(234, 230, 245, 0.3) 0, transparent 60%),
-    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(87, 232, 214, 0.1) 0, transparent 60%),
+    linear-gradient(to bottom, #080118 0%, #150a35 60%, #0d0221 100%);
 }
 
 /* Scanlines, above the stars and below the content. */
@@ -58,7 +54,9 @@ body,
   opacity: 0.5;
 }
 
-.slidev-layout > * {
+/* Content sits above the backdrop and the scanlines; the backdrop opts out
+   and keeps its own stacking position. */
+.slidev-layout > *:not(.scene-backdrop) {
   position: relative;
   z-index: 2;
 }
