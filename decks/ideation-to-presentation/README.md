@@ -1,6 +1,6 @@
 # From Ideation to Presentation with Markdown, Slidev & Agents
 
-Lightning talk (~6 min) for **Agentic AI Melbourne — September 2026**.
+Lightning talk (~6.5 min) for **Agentic AI Melbourne — September 2026**.
 Theme: [`slidev-theme-nightshift`](../../themes/slidev-theme-nightshift).
 
 ```bash
@@ -25,22 +25,28 @@ Keep it to 10–15s and silent or near-silent: venue sound is unreliable and the
 talk narrates over it live. Playback is click-to-play, so the timing stays with
 the presenter.
 
-## Running order (~6 min)
+## Running order (~6.5 min)
 
 | Time | Slide | Beat |
 | --- | --- | --- |
 | 0:00–0:20 | Cover | Hook — this deck is the demo |
-| 0:20–1:30 | Scene 1 | The old way: slides are disconnected from how you think |
-| 1:30–2:30 | Scene 2 | The workflow: Notes → Agent → Markdown → Slidev |
-| 2:30–2:50 | Source | Show the actual `.md` behind the previous slide |
-| 2:50–3:20 | Scene 3 + clip | Recorded clip: agent turns notes into Markdown |
-| 3:20–4:30 | Live | Live edit in the running `npm run dev` preview |
-| 4:30–5:15 | Why it works | Decoupled content/design, real git diffs, agent-agnostic |
-| 5:15–6:00 | Close | Repo link, CTA |
+| 0:20–1:05 | Scene 1 | The old way: slides are disconnected from how you think |
+| 1:05–2:35 | Scene 2 | The workflow: Notes → Agent → Markdown → Slidev, then its source |
+| 2:35–3:00 | Demo clip | Recorded clip: agent turns notes into Markdown |
+| 3:00–3:45 | Scene 3 | The theme came out of a prompt too — a mood, not a design |
+| 3:45–4:05 | Tokens | The whole visual identity, eight lines, in git |
+| 4:05–4:55 | Scene 4 | The agent writes code it cannot see — four real bugs |
+| 4:55–5:45 | Probe + loop | Playwright screenshots every slide; the agent reads them back |
+| 5:45–6:15 | Why it works | Decoupled content/design, real git diffs, agent-agnostic |
+| 6:15–6:40 | Close | Repo link, CTA |
 
 Timing and speaker notes are in HTML comments under each slide — visible in
 presenter mode (`d`, or `/presenter`).
 
-The 3:20–4:30 segment is live: keep `slides.md` open next to the running dev
-server and make a one-line edit on stage. Everything before it must be
-pre-checked, because that minute is the whole argument.
+The talk has two halves. The first is the one people expect: an agent writes
+Markdown. The second is the one that earns the slot — the agent also generated
+the theme, and then verified its own visual output in a browser. Scenes 3 and 4
+are the argument; don't let the pipeline material eat their time.
+
+There is no live-coding segment. It was cut deliberately: the recorded clip
+makes the same point in a quarter of the time and cannot fail on stage.
