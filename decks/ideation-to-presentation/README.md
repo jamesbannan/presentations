@@ -37,7 +37,7 @@ the presenter.
 | 3:45–4:05 | Tokens | The whole visual identity, eight lines, in git |
 | 4:05–4:55 | Scene 4 | The agent writes code it cannot see — four real bugs |
 | 4:55–5:45 | Probe + loop | Playwright screenshots every slide; the agent reads them back |
-| 5:45–6:15 | Why it works | Decoupled content/design, real git diffs, agent-agnostic |
+| 5:45–6:15 | Ship | The Actions workflow: build every deck, bake the base path, deploy to Pages |
 | 6:15–6:40 | Close | Repo link, CTA |
 
 Timing and speaker notes are in HTML comments under each slide — visible in

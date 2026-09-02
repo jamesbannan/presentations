@@ -304,22 +304,43 @@ accent: cyan
 -->
 
 ---
-layout: dialog
-scene: '10 — WHY'
-accent: magenta
+layout: terminal
+scene: '10 — SHIP'
 ---
 
-# Why this holds up
+# Every push builds every deck
 
-<ul class="verb-list">
-  <li>Content and design are decoupled — restyle the whole deck without touching a word.</li>
-  <li><code>git diff</code> on a talk actually means something now.</li>
-  <li>Regenerating a section doesn't risk the rest of the deck.</li>
-  <li>Works with any agent that can write a file and run a browser.</li>
-</ul>
+```yaml
+on: { push: { branches: [main] }, pull_request: }
+
+jobs:
+  build:
+    steps:
+      - id: pages
+        uses: actions/configure-pages@v6    # resolves the /<repo>/ prefix
+      - run: npm run build:all              # every deck, not just the one I touched
+        env: { SITE_BASE: '${{ steps.pages.outputs.base_path }}' }
+      - run: node scripts/make-index.mjs    # landing page indexing the decks
+      - uses: actions/upload-pages-artifact@v5
+
+  deploy:
+    if: github.ref == 'refs/heads/main'     # PRs build, only main deploys
+    needs: [build]
+    steps:
+      - uses: actions/deploy-pages@v5       # → GitHub Pages
+
+# and on a tag: <deck>-v3 → a Release carrying the PDF and the PPTX
+```
 
 <!--
 5:45–6:15
+- The base path is the interesting bit: Pages serves under /<repo>/, so that
+  prefix has to be baked into asset URLs at build time. Get it wrong and you
+  ship a deck of 404s — which is exactly the class of bug the browser check
+  catches, and exactly what nothing else would.
+- build:all matters: a theme change can break a deck I wasn't editing.
+- Point out there's no PowerPoint in this pipeline anywhere. The .pptx is an
+  export artefact on a tag, not the source of truth.
 -->
 
 ---
