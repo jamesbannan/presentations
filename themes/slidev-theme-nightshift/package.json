@@ -1,0 +1,39 @@
+{
+  "name": "slidev-theme-nightshift",
+  "version": "1.0.0",
+  "description": "Night Shift Slidev theme — original dark pixel-adventure visual language: dialogue-box panels, scanlines, CRT terminals",
+  "author": "James Bannan",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "pixel",
+    "dark"
+  ],
+  "engines": {
+    "slidev": ">=52.0.0"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/press-start-2p": "^5.3.0"
+  },
+  "slidev": {
+    "defaults": {
+      "colorSchema": "dark",
+      "canvasWidth": 980,
+      "highlighter": "shiki",
+      "lineNumbers": false,
+      "transition": "fade",
+      "aspectRatio": "16/9",
+      "fonts": {
+        "provider": "none",
+        "sans": "JetBrains Mono",
+        "mono": "JetBrains Mono",
+        "serif": "JetBrains Mono"
+      },
+      "drawings": {
+        "persist": false
+      }
+    }
+  }
+}

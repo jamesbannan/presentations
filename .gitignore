@@ -5,6 +5,9 @@ node_modules/
 dist/
 decks/*/dist/
 
+# Screenshots and report from scripts/check-decks.mjs
+.checks/
+
 # Content fetched from other repositories by scripts/sync-content.mjs
 .content/
 decks/*/.content/

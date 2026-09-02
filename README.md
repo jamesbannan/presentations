@@ -24,12 +24,32 @@ npm run dev -- zero-friction-devsecops
 | `npm run dev -- <deck>` | Dev server with hot reload |
 | `npm run build -- <deck>` | Static site → `dist/<deck>/` (base `/<deck>/`) |
 | `npm run build:all` | Build every deck into `dist/` |
+| `npm run check -- <deck>` | Render-check a built deck in a real browser |
+| `npm run check:all` | Render-check every built deck |
 | `npm run export -- <deck>` | PDF → `dist/<deck>.pdf` |
 | `npm run export-pptx -- <deck>` | PPTX → `dist/<deck>.pptx` |
 | `npm run sync -- <deck>` | Refresh synced content only |
 
 Every task runs the content sync first, so a deck is never built against stale
 facts.
+
+## Checking that a deck actually renders
+
+A deck that compiles is not a deck that looks right. `scripts/check-decks.mjs`
+serves `dist/<deck>/` at the same base path Pages will use, drives every slide
+in headless Chromium, and fails on the things a build cannot see:
+
+- an element overflowing its slide, or content clipped inside a panel
+- a webfont that never loaded
+- a console error, a 404, or any failed request under the build base
+
+Screenshots land in `.checks/<deck>/` alongside a `report.json`. It runs on
+every push and pull request, and the screenshots upload as a workflow artefact
+either way — so a failing check comes with pictures of what went wrong.
+
+```bash
+npm run build:all && npm run check:all
+```
 
 ## Why a monorepo
 

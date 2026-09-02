@@ -1,0 +1,38 @@
+/* ============================================================
+   TOKENS — "Night Shift"
+
+   A dark point-and-click-adventure aesthetic (in the spirit of late-80s /
+   early-90s SCUMM-era graphic adventures), built as an ORIGINAL visual
+   language — no copyrighted game assets, logos, or character art are
+   reproduced here.
+
+   Colour:
+     --void     deep night-sky navy-purple, the base "screen"
+     --panel    dialogue-box / card fill, one step up from void
+     --line     pixel-border / divider purple-grey
+     --cyan     CRT phosphor glow — primary accent, links, active state
+     --magenta  neon-sign accent — used sparingly, for emphasis only
+     --yellow   diner-sign yellow — dialogue highlight / code strings
+     --ghost    main body text, warm-white with a lavender cast
+
+   Type:
+     Display — "Press Start 2P": bitmap-style pixel font, used ONLY for scene
+       badges and cover/section headlines. Period-accurate to the genre, and
+       unreadable in quantity — never set body copy in it.
+     Body — "JetBrains Mono": monospace for everything else. Reads as
+       "adventure-game text box" while staying legible from the back of a room.
+   ============================================================ */
+
+:root {
+  --void: #0d0221;
+  --panel: #1c1433;
+  --line: #3a2e57;
+  --cyan: #57e8d6;
+  --magenta: #ff4f93;
+  --yellow: #ffce54;
+  --ghost: #eae6f5;
+  --ghost-dim: #b7aed4;
+
+  --font-display: 'Press Start 2P', ui-monospace, monospace;
+  --font-body: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "deck-ideation-to-presentation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "From Ideation to Presentation with Markdown, Slidev & Agents",
+  "author": "James Bannan",
+  "license": "MIT",
+  "dependencies": {
+    "slidev-theme-nightshift": "*"
+  }
+}
