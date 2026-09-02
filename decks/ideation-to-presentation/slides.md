@@ -125,7 +125,7 @@ accent: cyan
 -->
 
 ---
-layout: terminal
+layout: media
 scene: '04 — DEMO'
 ---
 
@@ -259,25 +259,27 @@ accent: cyan
 # So give it eyes
 
 ```js
-// build → serve dist/ → drive the real deck in a real browser
-const page = await browser.newPage()
-
-for (const slide of slides) {
-  await page.goto(`${base}/${slide}`)
+// build → serve dist/ at its real base → drive it in a real browser
+for (let n = 1; n <= slides.length; n++) {
+  await page.goto(`${base}${n}`)
   await page.evaluate(() => document.fonts.ready)
-  await page.screenshot({ path: `shots/${slide}.png` })
-}
+  await page.screenshot({ path: `.checks/${n}.png` })
 
-// then assert the things a human would only notice on stage
-expect(consoleErrors).toEqual([])   // nothing threw
-expect(failedRequests).toEqual([])  // no 404s under the build base
-expect(overflowing).toEqual([])     // nothing outside its own slide
-expect(computedFont).toContain('JetBrains Mono')
+  // then assert the things a human would only notice on stage
+  expect(consoleErrors).toEqual([])   // nothing threw
+  expect(failedRequests).toEqual([])  // no 404s under the build base
+  expect(overflowing).toEqual([])     // nothing outside its own slide
+  expect(clipped).toEqual([])         // nothing cut off inside a panel
+  expect(missingFonts).toEqual([])    // the webfont actually loaded
+}
 ```
 
 <!--
 4:55–5:20
-- Playwright, ~60 lines. Runs against the built artefact, not the dev server.
+- Playwright, ~200 lines, in scripts/check-decks.mjs. Runs against the built
+  artefact, not the dev server — same base path CI and Pages use.
+- The clipped check earned its keep: it caught a caption cut off inside the
+  terminal panel on the pipeline slide, which I had looked straight at.
 - The screenshots are the point: the agent reads its own output back.
 -->
 
@@ -292,7 +294,7 @@ accent: cyan
 <ul class="verb-list">
   <li>The agent builds the deck, screenshots every slide, and <em>looks at the result</em>.</li>
   <li>It found the invisible scene and the 404 on its own — and fixed both.</li>
-  <li>Writing is cheap. Verifying is what makes it trustworthy.</li>
+  <li>Now it runs on every push, so the loop closes without me in it.</li>
 </ul>
 
 <p style="margin-top:1.2em; color:#b7aed4;">Otherwise you find out in front of the room.</p>
@@ -317,30 +319,31 @@ jobs:
   build:
     steps:
       - id: pages
-        uses: actions/configure-pages@v6    # resolves the /<repo>/ prefix
-      - run: npm run build:all              # every deck, not just the one I touched
+        uses: actions/configure-pages@v6   # resolves the /<repo>/ prefix
+      - run: npm run build:all             # every deck, not just the one I touched
         env: { SITE_BASE: '${{ steps.pages.outputs.base_path }}' }
-      - run: node scripts/make-index.mjs    # landing page indexing the decks
+      - run: npm run check:all             # ← Playwright, every slide, every deck
+      - uses: actions/upload-artifact@v7   # screenshots, even on failure
       - uses: actions/upload-pages-artifact@v5
 
   deploy:
-    if: github.ref == 'refs/heads/main'     # PRs build, only main deploys
+    if: github.ref == 'refs/heads/main'   # PRs build and get checked; main deploys
     needs: [build]
     steps:
-      - uses: actions/deploy-pages@v5       # → GitHub Pages
-
-# and on a tag: <deck>-v3 → a Release carrying the PDF and the PPTX
+      - uses: actions/deploy-pages@v5      # → GitHub Pages
 ```
 
 <!--
 5:45–6:15
+- The check is a required step, not a nice-to-have: a PR that renders badly
+  doesn't merge. The screenshots upload either way, so review is visual.
 - The base path is the interesting bit: Pages serves under /<repo>/, so that
   prefix has to be baked into asset URLs at build time. Get it wrong and you
-  ship a deck of 404s — which is exactly the class of bug the browser check
-  catches, and exactly what nothing else would.
+  ship a deck of 404s — which is exactly what the check catches.
 - build:all matters: a theme change can break a deck I wasn't editing.
-- Point out there's no PowerPoint in this pipeline anywhere. The .pptx is an
-  export artefact on a tag, not the source of truth.
+- On a tag, a second workflow exports the PDF and PPTX onto a Release. Point
+  out there's no PowerPoint in this pipeline as a source of truth — the .pptx
+  is an export artefact.
 -->
 
 ---

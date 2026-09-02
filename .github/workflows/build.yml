@@ -42,6 +42,23 @@ jobs:
           GH_TOKEN: ${{ secrets.CONTENT_TOKEN || github.token }}
           SITE_BASE: ${{ steps.pages.outputs.base_path }}
 
+      # Rendering bugs don't fail a build — a deck with a clipped panel, a
+      # 404 asset or an unloaded webfont compiles perfectly happily. This
+      # drives every slide of every built deck in headless Chromium and
+      # fails the job if any of that is true.
+      - name: Check every slide renders
+        run: npm run check:all
+
+      # The screenshots are the useful part when the check fails, so keep
+      # them even then.
+      - name: Upload slide screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: slide-checks
+          path: .checks
+          retention-days: 7
+
       - name: Add a landing page listing the decks
         run: node scripts/make-index.mjs
 

@@ -42,8 +42,14 @@ slide, not per element.
 | `cover` | title / closing card | `backdrop` |
 | `section` | chapter card, "SCENE n" | `scene`, `backdrop` |
 | `dialog` | default content, in the dialogue box | `scene`, `accent: cyan\|magenta`, `backdrop` |
-| `terminal` | code and demos, CRT panel | `scene`, `backdrop` |
+| `terminal` | code, in a CRT panel | `scene`, `backdrop` |
+| `media` | a clip or image that brings its own frame | `scene`, `backdrop` |
 | `default` | fallback — `dialog` without a badge | `backdrop` |
+
+Use `media`, not `terminal`, for `SceneVideo`: `terminal` wraps the slot in its
+own panel, and nesting a bezel inside a bezel both reads badly and costs the
+clip the vertical space it needs. `media` height-constrains its slot instead, so
+a 16:9 frame scales down to fit rather than running off the bottom of the slide.
 
 Every layout paints a `SceneBackdrop` behind its content. Set `backdrop: none`
 in a slide's frontmatter to drop back to the plain graded wash — useful when a

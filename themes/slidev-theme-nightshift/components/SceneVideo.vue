@@ -73,6 +73,10 @@ const failed = ref(false)
 <style scoped>
 .scene-video {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .scene-video__bezel {
@@ -84,6 +88,10 @@ const failed = ref(false)
     0 0 28px rgba(87, 232, 214, 0.3);
   padding: 0.6em;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .scene-video__label {
@@ -91,7 +99,8 @@ const failed = ref(false)
   font-size: 0.5rem;
   color: var(--void);
   background: var(--yellow);
-  display: inline-block;
+  align-self: flex-start;
+  flex: none;
   padding: 0.3em 0.5em;
   margin-bottom: 0.5em;
   box-shadow: 2px 2px 0 0 var(--line);
@@ -100,7 +109,9 @@ const failed = ref(false)
 .scene-video__el {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  min-height: 0;
+  flex: 1 1 auto;
+  object-fit: contain;
   background: #000;
 }
 
@@ -111,7 +122,8 @@ const failed = ref(false)
   justify-content: center;
   gap: 0.9em;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  min-height: 0;
+  flex: 1 1 auto;
   background: #000;
   text-align: center;
 }
@@ -147,6 +159,7 @@ const failed = ref(false)
 
 .scene-video__caption {
   margin-top: 0.7em;
+  flex: none;
   font-size: 0.8rem;
   color: var(--ghost-dim);
 }
