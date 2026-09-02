@@ -26,6 +26,31 @@ defineProps({
   color: var(--ghost);
   text-shadow: 4px 4px 0 var(--line), 0 0 24px rgba(8, 1, 24, 0.9);
 }
+
+/* A struck-through word in a headline reads as a correction, so it wants to
+   look deliberate. The font's own line-through metric sits low against this
+   pixel face, and a background stripe disappears under the headline's drop
+   shadow, so the rule is its own element: centred on the glyphs, drawn over
+   them, with a shadow of its own so it survives a lit backdrop. */
+.cover :deep(h1 s),
+.cover :deep(h1 del) {
+  position: relative;
+  color: var(--ghost-dim);
+  text-decoration: none;
+}
+
+.cover :deep(h1 s)::after,
+.cover :deep(h1 del)::after {
+  content: '';
+  position: absolute;
+  left: -0.06em;
+  right: -0.06em;
+  top: 50%;
+  height: 0.08em;
+  transform: translateY(-50%);
+  background: var(--magenta);
+  box-shadow: 0 0.04em 0 rgba(8, 1, 24, 0.85);
+}
 .cover :deep(h2) {
   font-family: var(--font-body);
   font-size: 1rem;

@@ -105,3 +105,41 @@
   color: var(--magenta);
   font-size: 0.75em;
 }
+
+/* ---------- Closing-slide contact links ---------- */
+
+/* The cover layout runs a lit scene edge to edge, so contact lines get their
+   own dark plate rather than relying on whatever is behind them. */
+.slidev-layout .contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  margin-top: 1.6em;
+}
+
+.slidev-layout .contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ghost);
+  background: rgba(13, 2, 33, 0.82);
+  border: 2px solid var(--line);
+  padding: 0.4em 0.9em;
+  box-shadow: 3px 3px 0 0 rgba(8, 1, 24, 0.8);
+}
+
+.slidev-layout .contact-link .brand-icon {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+  fill: var(--cyan);
+}
+
+/* Brand marks keep their own colours — a recognisable glyph is doing more work
+   here than a consistent palette. The UniMelb asset bakes its own in. */
+.slidev-layout .contact-link .brand-icon-linkedin { fill: #4a9fe0; }
+.slidev-layout .contact-link .brand-icon-mastodon { fill: #8b8cff; }
+.slidev-layout .contact-link .brand-icon-unimelb { fill: none; }

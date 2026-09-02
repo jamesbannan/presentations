@@ -350,12 +350,18 @@ jobs:
 layout: cover
 ---
 
-# Steal This Workflow
+# ~~Steal~~ Use This Workflow
 
 <p style="margin-top: 0.4em;">github.com/jamesbannan/presentations</p>
 
-<p>Theme, deck and the Playwright check are all in there. Come find me after.</p>
+<div class="contact-list">
+  <ContactLink icon="linkedin" text="linkedin.com/in/jamesbannan" />
+  <ContactLink icon="mastodon" text="jamesbannan@aus.social" />
+  <ContactLink icon="unimelb" text="unimelb.edu.au/alumni/engage/ask-alumni" />
+</div>
 
 <!--
-6:15–6:40 — Close. Point at the repo link, thank the room, hand back to MC.
+6:15–6:40 — Close. Theme, deck and the Playwright check are all in the repo —
+it's MIT, so "use" is the honest verb. Point at the link, thank the room, hand
+back to MC.
 -->

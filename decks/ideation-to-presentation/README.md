@@ -38,7 +38,7 @@ the presenter.
 | 4:05–4:55 | Scene 4 | The agent writes code it cannot see — four real bugs |
 | 4:55–5:45 | Probe + loop | Playwright screenshots every slide; the agent reads them back |
 | 5:45–6:15 | Ship | The Actions workflow: build, run the check, bake the base path, deploy to Pages |
-| 6:15–6:40 | Close | Repo link, CTA |
+| 6:15–6:40 | Close | Repo link, contact links, CTA |
 
 Timing and speaker notes are in HTML comments under each slide — visible in
 presenter mode (`d`, or `/presenter`).

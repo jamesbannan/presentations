@@ -84,7 +84,7 @@ Two things are load-bearing:
 <SceneVideo
   src="/demo-clip.mp4"
   poster="/demo-clip-poster.png"
-  label="AGENT RUN — 00:14"
+  label="AGENT RUN — 00:11"
   caption="Rough notes → agent → this file's outline. Unedited, real time."
 />
 ```
@@ -95,9 +95,35 @@ file is missing the bezel shows a "NO SIGNAL" holding frame instead of a broken
 video element — clips are recorded shortly before a talk and are not committed,
 and a clean clone still has to build and export.
 
+The frame is sized from the available height and the bezel shrink-wraps it, so
+the picture fills its own frame instead of sitting in a black surround. Use it
+on the `media` layout, not `terminal`.
+
+`<ContactLink>` is one line of the closing slide, and `<BrandIcon>` is the glyph
+in front of it. Wrap them in a `.contact-list` on a `cover` slide:
+
+```md
+<div class="contact-list">
+  <ContactLink icon="linkedin" text="linkedin.com/in/jamesbannan" />
+  <ContactLink icon="mastodon" text="jamesbannan@aus.social" />
+  <ContactLink icon="unimelb" text="unimelb.edu.au/alumni/engage/ask-alumni" />
+</div>
+```
+
+`github`, `linkedin` and `mastodon` are built-in vectors. Any SVG dropped into
+the theme's `assets/` is addressable by filename (`unimelb.svg` → `unimelb`),
+and anything else is treated as a URL. Each line carries its own dark plate,
+because the cover layout runs a lit scene edge to edge behind it.
+
 ## Utility classes
 
 - `.verb-list` — verb-coin style bullets. Plain Markdown lists inside a
   `dialog` or `terminal` box get the same treatment automatically.
+- `.contact-list` — stacked, centred `<ContactLink>` rows for a closing slide.
 - `.dialog-box`, `.terminal-box`, `.scene-number` — the furniture, if a slide
   needs to place it by hand.
+
+Strikethrough in a `cover` heading (`# ~~Steal~~ Use This Workflow`) is styled
+as a deliberate correction: the word steps back and a magenta rule is drawn
+across the middle of the glyphs, rather than relying on the font's own
+line-through metric, which sits too low on this pixel face to read.
