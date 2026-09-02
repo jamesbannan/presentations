@@ -153,10 +153,12 @@ scene: 3
 
 # The Look
 
-## You can't prompt PowerPoint for a design system
+## Prompting for a theme is the easy part. Reading it back isn't.
 
 <!--
 3:00–3:10
+- Careful here: Copilot will absolutely generate you a PowerPoint theme. Don't
+  claim otherwise — the room will know. The distinction is what you get handed.
 -->
 
 ---
@@ -173,13 +175,16 @@ accent: magenta
   <li>The agent doesn't lay out slides. It builds the machine that lays out slides — <em>once</em>.</li>
 </ul>
 
-<p style="margin-top:1.2em; color:#b7aed4;">Restyling this talk is now a conversation, not a rebuild.</p>
+<p style="margin-top:1.2em; color:#b7aed4;">Other tools will generate you a theme. This one hands you the source.</p>
 
 <!--
 3:10–3:45
 - This is where the talk stops being "agent writes Markdown" — which everyone
   has seen — and becomes something they haven't.
 - Everything on this screen, the backdrop included, came out of that prompt.
+- The point is not that an agent made a theme. It's that the theme is a file:
+  reviewable, diffable, reusable across every deck in the repo. Next slide
+  proves it.
 -->
 
 ---

@@ -33,7 +33,7 @@ the presenter.
 | 0:20–1:05 | Scene 1 | Slide tools sit outside the developer toolchain — generation isn't the gap |
 | 1:05–2:35 | Scene 2 | The workflow: Notes → Agent → Markdown → Slidev, then its source |
 | 2:35–3:00 | Demo clip | Recorded clip: agent turns notes into Markdown |
-| 3:00–3:45 | Scene 3 | The theme came out of a prompt too — a mood, not a design |
+| 3:00–3:45 | Scene 3 | The theme came out of a prompt too — and it hands back source |
 | 3:45–4:05 | Tokens | The whole visual identity, eight lines, in git |
 | 4:05–4:55 | Scene 4 | The agent writes code it cannot see — four real bugs |
 | 4:55–5:45 | Probe + loop | Playwright screenshots every slide; the agent reads them back |
