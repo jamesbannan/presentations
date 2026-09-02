@@ -134,7 +134,7 @@ scene: '04 — DEMO'
 <SceneVideo
   src="/demo-clip.mp4"
   poster="/demo-clip-poster.png"
-  label="AGENT RUN — 00:14"
+  label="AGENT RUN — 00:11"
   caption="Rough notes → agent → this file's outline. Unedited, real time."
 />
 

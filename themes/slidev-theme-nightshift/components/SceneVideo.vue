@@ -71,10 +71,18 @@ const failed = ref(false)
 </template>
 
 <style scoped>
+/*
+  The bezel shrink-wraps the frame rather than stretching to the slide width.
+  A 16:9 clip is nearly always taller than the space left under the heading, so
+  a full-width bezel would letterbox the video and surround it with dead black
+  bars. Sizing the frame from the available *height* and letting the bezel
+  follow means the picture fills its own frame at whatever size fits.
+*/
 .scene-video {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 0;
   flex: 1 1 auto;
 }
@@ -90,6 +98,8 @@ const failed = ref(false)
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: fit-content;
+  max-width: 100%;
   min-height: 0;
   flex: 1 1 auto;
 }
@@ -108,7 +118,10 @@ const failed = ref(false)
 
 .scene-video__el {
   display: block;
-  width: 100%;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
   min-height: 0;
   flex: 1 1 auto;
   object-fit: contain;
@@ -121,7 +134,10 @@ const failed = ref(false)
   align-items: center;
   justify-content: center;
   gap: 0.9em;
-  width: 100%;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
   min-height: 0;
   flex: 1 1 auto;
   background: #000;

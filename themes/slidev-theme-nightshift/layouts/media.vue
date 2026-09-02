@@ -19,9 +19,9 @@ defineProps({
 </script>
 
 <template>
-  <div class="slidev-layout media w-full h-full flex flex-col justify-center px-16 py-10">
+  <div class="slidev-layout media w-full h-full flex flex-col justify-center px-16 py-8">
     <SceneBackdrop v-if="backdrop !== 'none'" :variant="backdrop" palette="cool" :seed="20260903" />
-    <span v-if="scene !== '' && scene !== null" class="scene-number mb-4 w-fit">{{ scene }}</span>
+    <span v-if="scene !== '' && scene !== null" class="scene-number mb-3 w-fit">{{ scene }}</span>
     <div class="media-body">
       <slot />
     </div>
@@ -41,7 +41,7 @@ defineProps({
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.1rem;
-  margin-bottom: 0.6em;
+  margin-bottom: 0.4em;
   flex: none;
 }
 </style>
