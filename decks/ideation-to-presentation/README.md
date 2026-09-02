@@ -30,7 +30,7 @@ the presenter.
 | Time | Slide | Beat |
 | --- | --- | --- |
 | 0:00–0:20 | Cover | Hook — this deck is the demo |
-| 0:20–1:05 | Scene 1 | The old way: slides are disconnected from how you think |
+| 0:20–1:05 | Scene 1 | Slide tools sit outside the developer toolchain — generation isn't the gap |
 | 1:05–2:35 | Scene 2 | The workflow: Notes → Agent → Markdown → Slidev, then its source |
 | 2:35–3:00 | Demo clip | Recorded clip: agent turns notes into Markdown |
 | 3:00–3:45 | Scene 3 | The theme came out of a prompt too — a mood, not a design |

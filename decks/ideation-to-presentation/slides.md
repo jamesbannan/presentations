@@ -30,13 +30,12 @@ scene: 1
 
 # The Old Way
 
-## Slides are slow, and disconnected from how you actually think
+## Every other artefact you ship lives in git. Not this one.
 
 <!--
 0:20–0:35
-- Idea happens in your head / in notes, but has to go straight into a
-  drag-and-drop tool.
-- Every new idea = fighting a layout instead of writing.
+- Frame it as a tooling mismatch, not a complaint about PowerPoint.
+- Everything else in your workflow is text in a repo. Slides are the exception.
 -->
 
 ---
@@ -47,14 +46,19 @@ scene: '01 — PAIN'
 # Where the friction actually is
 
 <ul class="verb-list">
-  <li>Ideas live in your head. Slides live in a proprietary binary file.</li>
-  <li>Reordering a talk means dragging boxes, not editing an outline.</li>
-  <li>An agent can <em>write</em> prose all day — it really struggles to lay out a slide.</li>
+  <li>Slide tools predate your toolchain — no repo, no diff, no pipeline.</li>
+  <li>Agents already build decks. Copilot, Gemini — generation isn't the gap.</li>
+  <li>But the history lives inside the app. <em>"v3-final-FINAL"</em> is not source control.</li>
+  <li>And the format fights automation: code is text an agent drives headlessly, a <code>.pptx</code> is a binary it clicks through.</li>
 </ul>
+
+<p style="margin-top:1.2em; color:#b7aed4;">The gap isn't generation. It's everything a developer expects around it.</p>
 
 <!--
 0:35–1:05
-- Land hard on the agent point — that's the pivot into the workflow.
+- Bullet 2 matters: don't set this up as "agents can't make slides". They can.
+- The argument is that the artefact lands somewhere you can't review, diff or
+  automate — which is the setup for both halves of the rest of the talk.
 -->
 
 ---
