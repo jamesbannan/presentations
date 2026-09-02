@@ -50,13 +50,15 @@ jobs:
         run: npm run check:all
 
       # The screenshots are the useful part when the check fails, so keep
-      # them even then.
+      # them even then. `.checks` is a dotfile, which upload-artifact skips
+      # unless told otherwise.
       - name: Upload slide screenshots
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: slide-checks
           path: .checks
+          include-hidden-files: true
           retention-days: 7
 
       - name: Add a landing page listing the decks

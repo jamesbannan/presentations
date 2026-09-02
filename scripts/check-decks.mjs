@@ -37,9 +37,16 @@ const MIME = {
   '.otf': 'font/otf', '.ico': 'image/x-icon',
 }
 
-// Must match scripts/deck.mjs, or the served paths won't be the built paths and
-// the 404 check — the whole point of it — would be testing the wrong URLs.
-const basePath = deck => `/${[process.env.SITE_BASE, deck].join('/')}/`.replace(/\/+/g, '/')
+// The base path is baked into the built HTML, so read it back out rather than
+// recomputing it. Deriving it independently is how the check ends up testing
+// URLs the artefact will never be served from — which is exactly the bug it
+// exists to catch, and it happened: CI builds with SITE_BASE=/presentations,
+// so a checker that assumed /<deck>/ 404'd on every asset.
+const builtBase = async (dist, deck) => {
+  const html = await readFile(join(dist, 'index.html'), 'utf8')
+  const match = html.match(/(?:href|src)="(\/(?:[^"]*?\/)?)assets\//)
+  return match?.[1] ?? `/${[process.env.SITE_BASE, deck].join('/')}/`.replace(/\/+/g, '/')
+}
 
 const listDecks = () => {
   const dir = resolve(root, 'decks')
@@ -156,7 +163,7 @@ async function checkDeck(deck) {
     throw new Error(`No build at dist/${deck} — run \`npm run build -- ${deck}\` first.`)
 
   const { slides } = await load({ userRoot: root }, resolve(root, 'decks', deck, 'slides.md'))
-  const base = basePath(deck)
+  const base = await builtBase(dist, deck)
   const shots = resolve(root, '.checks', deck)
   await rm(shots, { recursive: true, force: true })
   await mkdir(shots, { recursive: true })
