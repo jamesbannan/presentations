@@ -1,7 +1,7 @@
 <!--
   Title card. Text on the left and the temple-as-system filling the right,
-  standing on the same ground line as the meander, whose circuit traces run
-  into its steps.
+  standing on the same ground line as the meander, which stops short of its
+  steps.
 
   Frontmatter:
     kicker — small mono line above the title, e.g. 'TEDxUniMelb · MMXXVI'
@@ -27,7 +27,7 @@ defineProps({
     <div v-if="motif !== 'none'" class="motif cover-motif">
       <Temple />
     </div>
-    <Meander class="cover-meander" :periods="motif === 'none' ? 34 : 22" height="32px" />
+    <Meander class="cover-meander" :periods="motif === 'none' ? 34 : 19" height="32px" />
   </div>
 </template>
 
