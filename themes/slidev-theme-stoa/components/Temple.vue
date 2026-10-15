@@ -12,8 +12,8 @@
     colonnade that has turned (0 = all marble, 1 = all pixels).
 
   The capitals and the entablature are drawn on every column regardless: the
-  form persists, only the material changes. Sized by width; the aspect ratio
-  is fixed at 4:3.
+  form persists, only the material changes. Sized by width; the viewBox is
+  cropped tight to the drawing, so the aspect ratio is 29:20.
 -->
 <script setup lang="ts">
 import { computed } from 'vue'
@@ -103,7 +103,7 @@ const cols = computed(() => {
 </script>
 
 <template>
-  <svg class="motif temple" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <svg class="motif temple" viewBox="26 26 348 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
     <!-- pediment -->
     <g fill="none" stroke-linejoin="miter">
       <path

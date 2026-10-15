@@ -1,6 +1,7 @@
 <!--
-  Title card. Text on the left, the temple-as-system on the right, and a
-  meander running out into circuit traces along the foot.
+  Title card. Text on the left and the temple-as-system filling the right,
+  standing on the same ground line as the meander, whose circuit traces run
+  into its steps.
 
   Frontmatter:
     kicker — small mono line above the title, e.g. 'TEDxUniMelb · MMXXVI'
@@ -22,30 +23,37 @@ defineProps({
         <span v-if="kicker" class="kicker">{{ kicker }}</span>
         <slot />
       </div>
-      <div v-if="motif !== 'none'" class="cover-motif">
-        <Temple />
-      </div>
     </div>
-    <Meander class="cover-meander" :periods="34" height="32px" />
+    <div v-if="motif !== 'none'" class="motif cover-motif">
+      <Temple />
+    </div>
+    <Meander class="cover-meander" :periods="motif === 'none' ? 34 : 22" height="32px" />
   </div>
 </template>
 
 <style scoped>
 .cover-body {
   height: 100%;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 0 56px 40px 64px;
+  padding: 0 0 56px 64px;
 }
 
-.cover-body--solo {
-  grid-template-columns: 1fr;
+.cover-text {
+  max-width: 400px;
 }
 
+.cover-body--solo .cover-text {
+  max-width: none;
+  padding-right: 64px;
+}
+
+/* Sized so the stylobate lines up with the middle of the meander. */
 .cover-motif {
-  align-self: center;
+  position: absolute;
+  right: 28px;
+  bottom: 42px;
+  width: 500px;
 }
 
 .cover-meander {
