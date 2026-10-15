@@ -1,0 +1,40 @@
+{
+  "name": "slidev-theme-stoa",
+  "version": "1.0.0",
+  "description": "Stoa Slidev theme — light, abstract classical architecture drawn as computing diagrams: neural pediments, pixel-dissolving columns, meanders that become circuit traces",
+  "author": "James Bannan",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "classical",
+    "light"
+  ],
+  "engines": {
+    "slidev": ">=52.0.0"
+  },
+  "dependencies": {
+    "@fontsource/cinzel": "^5.3.0",
+    "@fontsource/eb-garamond": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0"
+  },
+  "slidev": {
+    "defaults": {
+      "colorSchema": "light",
+      "canvasWidth": 980,
+      "highlighter": "shiki",
+      "lineNumbers": false,
+      "transition": "fade",
+      "aspectRatio": "16/9",
+      "fonts": {
+        "provider": "none",
+        "sans": "EB Garamond",
+        "serif": "Cinzel",
+        "mono": "IBM Plex Mono"
+      },
+      "drawings": {
+        "persist": false
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+/* ============================================================
+   TOKENS — "Stoa"
+
+   A light, abstract theme where classical architecture is drawn the way
+   an engineer draws a system: wireframes, nodes, traces and grids. The
+   point is continuity — the stoa, the inscription and the arch were the
+   communication technology of their day.
+
+   Colour:
+     --marble       slide surface, warm off-white
+     --marble-deep  panels and plates, one step down
+     --vein         hairlines, grid dots, quiet structure
+     --ink          body text, a warm graphite rather than black
+     --ink-soft     secondary text and captions
+     --terracotta   red-figure pottery — the "ancient" accent
+     --ochre        gilded inscription — keystones, highlights
+     --aegean       signal blue — the "computing" accent
+
+   Terracotta and aegean are the two ends of the argument. Most motifs run
+   a gradient from one to the other; text uses one at a time.
+
+   Type:
+     Display — "Cinzel": Roman inscriptional capitals. Headlines only.
+     Body    — "EB Garamond": a humanist serif with a long print lineage.
+     Mono    — "IBM Plex Mono": the machine voice — labels, folios, tokens.
+   ============================================================ */
+
+:root {
+  --marble: #f6f2ea;
+  --marble-deep: #ebe4d6;
+  --vein: #d3c9b6;
+  --ink: #2a2830;
+  --ink-soft: #6a655d;
+  --terracotta: #b4532a;
+  --ochre: #b8892f;
+  --aegean: #2e6a80;
+
+  --font-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-body: 'EB Garamond', Garamond, Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+}

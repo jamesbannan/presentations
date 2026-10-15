@@ -1,0 +1,100 @@
+/* ============================================================
+   COMPONENTS — furniture shared across layouts
+   ============================================================ */
+
+/* ---------- Kicker — the small mono line above a headline ---------- */
+.slidev-layout .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aegean);
+}
+
+.slidev-layout .kicker::before {
+  content: '';
+  width: 1.8em;
+  height: 1px;
+  background: currentColor;
+}
+
+/* ---------- Interpunct list ----------
+   Roman inscriptions separated words with a raised dot. It is also, more or
+   less, what a tokeniser does — so bullets are interpuncts. */
+.slidev-layout ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.slidev-layout ul > li {
+  position: relative;
+  padding-left: 1.3em;
+  margin-bottom: 0.35em;
+}
+
+.slidev-layout ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0.3em;
+  top: 0.7em;
+  width: 0.26em;
+  height: 0.26em;
+  background: var(--terracotta);
+  transform: rotate(45deg);
+}
+
+/* ---------- Placeholder — content still to be written ----------
+   Layouts restyle their paragraphs; a placeholder should look the same
+   wherever it lands, so it wins over them. */
+.slidev-layout .placeholder {
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft) !important;
+  border: 1px dashed var(--vein);
+  background: rgba(235, 228, 214, 0.55);
+  padding: 0.5em 0.8em;
+  display: inline-block;
+}
+
+.slidev-layout .placeholder::before {
+  content: '[ TODO ] ';
+  color: var(--terracotta);
+}
+
+/* ---------- Closing-slide contact links ---------- */
+.slidev-layout .contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+  align-items: center;
+  margin-top: 1.4em;
+}
+
+.slidev-layout .contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: rgba(246, 242, 234, 0.9);
+  border: 1px solid var(--vein);
+  padding: 0.35em 0.9em;
+}
+
+.slidev-layout .contact-link .brand-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+  fill: var(--ink);
+}
+
+.slidev-layout .contact-link .brand-icon-linkedin { fill: #0a66c2; }
+.slidev-layout .contact-link .brand-icon-mastodon { fill: #6364ff; }
+.slidev-layout .contact-link .brand-icon-unimelb { fill: none; }

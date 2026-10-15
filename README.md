@@ -6,6 +6,7 @@ repositories a talk is actually about.
 
 ```
 themes/slidev-theme-arcade   shared design system — layouts, components, CSS, assets
+themes/slidev-theme-stoa     light classical/computing theme (TEDxUniMelb 2026)
 decks/<slug>/                one talk: slides.md, content.yaml, data/, setup/
 scripts/                     deck dispatcher + cross-repo content sync
 archive/                     pre-Slidev decks (ARM template demos, 2015–2017)
