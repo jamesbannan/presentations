@@ -25,7 +25,7 @@ fonts are bundled through `@fontsource`, so the deck works offline.
 | `statement` | `kicker` | Large centred line with a meander ornament |
 | `quote` | `cite` | Quote set on a tabula ansata |
 | `figure` | `src`, `caption`, `kicker`, `fit` | Image plate, or a hatched placeholder when `src` is unset |
-| `diptych` | `kicker`, `class` | Header in the default slot; `::left::` / `::right::` either side of a column. `class: spread` spreads the lists down the full height; add `large` for short lists |
+| `diptych` | `kicker`, `class` | Header in the default slot; `::left::` / `::right::` either side of a column. `class: spread` spreads the lists down the full height; add `large` for short lists. Wrap a panel in `<div v-click>` to reveal it on click |
 | `end` | `kicker` | Faint arch behind centred contact details |
 
 ## Components

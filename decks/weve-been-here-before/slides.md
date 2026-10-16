@@ -77,6 +77,8 @@ kicker: In hindsight
 
 ::left::
 
+<div v-click>
+
 ### Misplaced
 
 - Writing didn't end thinking: Plato wrote the warning down
@@ -84,7 +86,11 @@ kicker: In hindsight
 - Photography didn't end painting
 - Recording didn't end music-making
 
+</div>
+
 ::right::
+
+<div v-click>
 
 ### Partly right
 
@@ -92,6 +98,8 @@ kicker: In hindsight
 - Printing did, in time, retire the scribe
 - Photography did take over much of the portrait's everyday work
 - Making music at home did give ground to listening
+
+</div>
 
 ---
 layout: statement

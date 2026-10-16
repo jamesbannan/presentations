@@ -6,6 +6,9 @@
     kicker — optional mono line above the heading
     class: spread — spread the panel lists down the full height
 
+  Wrap a panel's content in `<div v-click>` to reveal it on click; the
+  spread layout still applies inside the wrapper.
+
   Slots: the default slot is the heading across the top, then `::left::`
   and `::right::` for the two panels.
 
@@ -106,6 +109,13 @@ defineProps({
 
 .diptych.spread .diptych-panel :deep(li) {
   margin: 0;
+}
+
+/* A wrapper inside a panel (e.g. `<div v-click>`) keeps the spread layout. */
+.diptych.spread .diptych-panel > :deep(div) {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* `class: spread large` — for short lists, also set the items larger. */
