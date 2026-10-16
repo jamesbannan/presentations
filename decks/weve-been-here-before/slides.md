@@ -174,7 +174,9 @@ layout: statement
 kicker: I'd argue
 ---
 
-# Humans remix too. The difference is that someone lived through it.
+# All creativity remixes the past. Ours passes through a life first.
+
+<p class="source">Counter-view: Roland Barthes, “The Death of the Author”, 1967 — meaning is made by the reader</p>
 
 ---
 layout: statement
