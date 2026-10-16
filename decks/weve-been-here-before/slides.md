@@ -125,34 +125,21 @@ kicker: The mirror
 # Generative AI reflects our culture back at us. But it's distorted; weighted and smoothed.
 
 ---
-layout: diptych
-class: spread large
-kicker: Then · Now
+kicker: Every time
 ---
 
-# A change of scale and speed, not of kind
+# The recurring reaction
 
-::left::
+<ol class="cycle">
+<li v-click><b>“It isn’t real.”</b><span>Not real art, real music, real thinking.</span></li>
+<li v-click><b>“It will rot our abilities.”</b><span>Memory, skill and attention will decline.</span></li>
+<li v-click><b>“Think of the young people.”</b><span>Moral panic follows.</span></li>
+<li v-click><b>Adoption anyway.</b></li>
+<li v-click><b>The old form retreats to its human core.</b><span>It redefines itself around what the new technology can’t do.</span></li>
+<li v-click><b>The new technology grows its own human journeys.</b><span>And becomes an art form in its own right.</span></li>
+</ol>
 
-<div v-click>
-
-### Earlier technologies
-
-- Copied, captured and distributed human work
-- Fed back into culture over generations
-
-</div>
-
-::right::
-
-<div v-click>
-
-### Generative AI
-
-- Recombines human work into new artefacts
-- Can feed back into culture, and its own training data, far faster
-
-</div>
+<p v-click class="cycle-note"><b>This time?</b> The cycle is running in years, not generations. And the last step is the open question: when there’s no one behind the work, where does the human journey come from?</p>
 
 ---
 layout: statement

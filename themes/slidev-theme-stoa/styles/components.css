@@ -120,3 +120,65 @@
 .slidev-layout .source em {
   font-style: italic;
 }
+
+/* ---------- Cycle — a numbered sequence set as a frieze ----------
+   An ordered list with `class="cycle"` becomes a three-column grid of steps,
+   each headed by a Roman numeral. `<b>` is the step, an optional `<span>`
+   the gloss. A `.cycle-note` paragraph sits underneath as the turn. */
+.slidev-layout ol.cycle {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 0.2em 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1em 2em;
+}
+
+.slidev-layout ol.cycle > li {
+  counter-increment: step;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  margin: 0;
+  padding-top: 0.5em;
+  border-top: 1px solid var(--vein);
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.slidev-layout ol.cycle > li::before {
+  content: counter(step, upper-roman);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--terracotta);
+}
+
+.slidev-layout ol.cycle > li b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.slidev-layout ol.cycle > li span {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.slidev-layout .cycle-note {
+  margin-top: 1.3em;
+  padding: 0.5em 0 0.5em 1em;
+  border-left: 2px solid var(--ochre);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.slidev-layout .cycle-note b {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-right: 0.5em;
+}

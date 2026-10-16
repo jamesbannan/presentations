@@ -24,7 +24,7 @@ notes.
 | --- | --- | --- |
 | Cold open | 2–3 | An unattributed quote that sounds like it's about AI, then the reveal: Plato's *Phaedrus*, about writing |
 | I — We've been here before | 4–9 | Trithemius on printing, Baudelaire on photography, Sousa on recorded music; some fears misplaced, some partly right |
-| II — (Sort of.) | 10–13 | The hinge. AI reflects our culture back at us, but distorted; a change of scale and speed; the mirror reflecting itself |
+| II — (Sort of.) | 10–13 | The hinge. AI reflects our culture back at us, but distorted; the recurring reaction to new media, and what may break the cycle; the mirror reflecting itself |
 | III — What are we missing? | 14–17 | Why AI-generated work leaves us cold (no human journey to recognise), the argument (all creativity remixes; ours passes through a life first, with Barthes as the counter-view), the takeaway (stay focused on the story) |
 | Close | 18 | Thank you, contact links |
 

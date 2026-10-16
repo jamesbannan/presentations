@@ -40,3 +40,7 @@ written. It renders as a dashed `[ TODO ]` box.
 
 Add `class="source"` to a paragraph for a small citation line. It renders in mono
 with a `↳` prefix.
+
+Add `class="cycle"` to an `<ol>` to set a numbered sequence as a three-column
+frieze with Roman numerals: `<b>` for each step, an optional `<span>` for its
+gloss. Follow it with a `<p class="cycle-note">` for the turn.
