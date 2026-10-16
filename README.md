@@ -34,6 +34,10 @@ npm run dev -- zero-friction-devsecops
 Every task runs the content sync first, so a deck is never built against stale
 facts.
 
+Any other flags after the deck name go straight to Slidev. For example,
+`npm run dev -- <deck> --remote` serves the deck on the network with remote
+presenter mode, and `--remote <password>` protects the presenter view.
+
 ## Checking that a deck actually renders
 
 A deck that compiles is not a deck that looks right. `scripts/check-decks.mjs`
