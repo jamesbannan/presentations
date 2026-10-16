@@ -23,10 +23,10 @@ notes.
 | Part | Slides | Beat |
 | --- | --- | --- |
 | Cold open | 2–3 | An unattributed quote that sounds like it's about AI, then the reveal: Plato's *Phaedrus*, about writing |
-| I — We've been here before | 4–8 | Baudelaire on photography, Sousa on recorded music; some fears misplaced, some partly right |
-| II — (Sort of.) | 9–12 | The hinge. AI reflects our culture back at us; a change of scale and speed; the mirror reflecting itself |
-| III — What are we missing? | 13–16 | The case against (Barthes, remix), the argument (someone lived through it), the takeaway |
-| Close | 17 | Thank you, contact links |
+| I — We've been here before | 4–9 | Trithemius on printing, Baudelaire on photography, Sousa on recorded music; some fears misplaced, some partly right |
+| II — (Sort of.) | 10–13 | The hinge. AI reflects our culture back at us; a change of scale and speed; the mirror reflecting itself |
+| III — What are we missing? | 14–17 | The case against (Barthes, remix), the argument (someone lived through it), the takeaway |
+| Close | 18 | Thank you, contact links |
 
 ## Sources
 
@@ -34,6 +34,12 @@ All quotations were checked against the primary texts.
 
 - Plato, *Phaedrus* 275a, trans. Benjamin Jowett (public domain; Project Gutenberg #1636).
   Socrates relays the Egyptian king Thamus's response to Theuth's invention of letters.
+- Johannes Trithemius, *De laude scriptorum* (*In Praise of Scribes*), written
+  1492, printed Mainz 1494; trans. Roland Behrendt, ed. Klaus Arnold (Coronado
+  Press, 1974), ch. 7. Short quotation from the Behrendt translation, wording
+  checked against Noel L. Brann, "A Monastic Dilemma Posed by the Invention of
+  Printing", *Visible Language* 13.2 (1979). Brann also notes Trithemius went on
+  to build a library of printed books and to praise the press.
 - Charles Baudelaire, *Salon de 1859*, "Le public moderne et la photographie":
   « l'industrie photographique était le refuge de tous les peintres manqués,
   trop mal doués ou trop paresseux pour achever leurs études ». The English on

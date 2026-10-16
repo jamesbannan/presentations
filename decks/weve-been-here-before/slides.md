@@ -48,6 +48,13 @@ kicker: Pars prima
 
 ---
 layout: quote
+cite: "Johannes Trithemius, In Praise of Scribes, 1492, trans. Roland Behrendt"
+---
+
+The word written on parchment will last a thousand years. … The most you can expect a book of paper to survive is two hundred years.
+
+---
+layout: quote
 cite: "Charles Baudelaire, Salon de 1859 (author's translation)"
 ---
 
@@ -72,6 +79,7 @@ kicker: In hindsight
 ### Misplaced
 
 - Writing didn't end thinking — Plato wrote the warning down
+- Paper didn't crumble — Trithemius had his book printed
 - Photography didn't end painting
 - Recording didn't end music-making
 
@@ -80,6 +88,7 @@ kicker: In hindsight
 ### Partly right
 
 - Writing did change what we bother to remember
+- Printing did, in time, retire the scribe
 - Photography did take over much of the portrait's everyday work
 - Making music at home did give ground to listening
 
