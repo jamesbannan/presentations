@@ -118,13 +118,6 @@ kicker: Pars secunda
 ## What's different this time
 
 ---
-layout: statement
-kicker: The mirror
----
-
-# Generative AI reflects our culture back at us. But it's distorted; weighted and smoothed.
-
----
 kicker: Every time
 ---
 
@@ -140,6 +133,13 @@ kicker: Every time
 </ol>
 
 <p v-click class="cycle-note"><b>This time?</b> The cycle is running in years, not generations. And the last step is the open question: when there’s no one behind the work, where does the human journey come from?</p>
+
+---
+layout: statement
+kicker: The mirror
+---
+
+# Generative AI reflects our culture back at us. But it's distorted; weighted and smoothed.
 
 ---
 layout: statement
