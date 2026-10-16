@@ -21,8 +21,8 @@ defineProps({
       <span v-if="kicker" class="kicker">{{ kicker }}</span>
       <slot />
     </div>
-    <Meander class="end-meander end-meander--l" :periods="14" flip />
-    <Meander class="end-meander end-meander--r" :periods="14" />
+    <Meander class="end-meander end-meander--l" :periods="30" flip />
+    <Meander class="end-meander end-meander--r" :periods="30" />
   </div>
 </template>
 
@@ -43,6 +43,7 @@ defineProps({
   opacity: 0.32;
 }
 
+/* 30 periods a side, plus the 16px gap, spans ~75% of the slide width. */
 .end-meander {
   position: absolute;
   bottom: 26px;

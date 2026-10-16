@@ -68,11 +68,12 @@
 }
 
 /* ---------- Closing-slide contact links ---------- */
+/* One shared column, as wide as the longest link, so every plate matches. */
 .slidev-layout .contact-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: max-content;
+  justify-content: center;
   gap: 0.45em;
-  align-items: center;
   margin-top: 1.4em;
 }
 
