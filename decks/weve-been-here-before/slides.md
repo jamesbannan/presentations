@@ -5,7 +5,7 @@ titleTemplate: "%s"
 author: "James Bannan"
 keywords: tedx, ai, synthetic culture, storytelling, history of technology
 info: |
-  TEDxUniMelb 2026 — "The Unseen Horizon: What Are We Missing?"
+  TEDxUniMelb 2026: "The Unseen Horizon: What Are We Missing?"
   Friday 16 October 2026, Arts West Forum Theatre, The University of Melbourne.
   James Bannan, Principal Consultant @ Microsoft.
 mdc: true
@@ -69,6 +69,7 @@ Will she croon her baby to slumber with sweet lullabys, or will the infant be pu
 
 ---
 layout: diptych
+class: spread
 kicker: In hindsight
 ---
 
@@ -78,8 +79,8 @@ kicker: In hindsight
 
 ### Misplaced
 
-- Writing didn't end thinking — Plato wrote the warning down
-- Paper didn't crumble — Trithemius had his book printed
+- Writing didn't end thinking: Plato wrote the warning down
+- Paper didn't crumble: Trithemius had his book printed
 - Photography didn't end painting
 - Recording didn't end music-making
 
@@ -119,6 +120,7 @@ Built from human writing, images and music.
 
 ---
 layout: diptych
+class: spread large
 kicker: Then · Now
 ---
 
@@ -136,7 +138,7 @@ kicker: Then · Now
 ### Generative AI
 
 - Recombines human work into new artefacts
-- Can feed back into culture — and into its own training data — far faster
+- Can feed back into culture, and its own training data, far faster
 
 ---
 layout: statement
@@ -145,8 +147,8 @@ kicker: A risk, not a certainty
 
 # What happens when the mirror reflects itself?
 
-<p class="source">Shumailov et al., <em>Nature</em>, 2024 — trained on their own output, models lose the rare cases first</p>
-<p class="source">Gerstgrasser et al., 2024 — keeping human data in the mix largely avoids it</p>
+<p class="source">Shumailov et al., <em>Nature</em>, 2024: trained on their own output, models lose the rare cases first</p>
+<p class="source">Gerstgrasser et al., 2024: keeping human data in the mix largely avoids it</p>
 
 ---
 layout: section
@@ -167,7 +169,7 @@ kicker: Why it leaves us cold
 
 With generated content, there's no journey to recognise.
 
-<p class="source">Bellaiche et al., <em>Cognitive Research</em>, 2023 — the same AI images, rated higher when labelled “human-made”</p>
+<p class="source">Bellaiche et al., <em>Cognitive Research</em>, 2023: the same AI images, rated higher when labelled “human-made”</p>
 
 ---
 layout: statement
@@ -176,7 +178,7 @@ kicker: I'd argue
 
 # All creativity remixes the past. Ours passes through a life first.
 
-<p class="source">Counter-view: Roland Barthes, “The Death of the Author”, 1967 — meaning is made by the reader</p>
+<p class="source">Counter-view: in “The Death of the Author” (1967), Roland Barthes argues meaning is made by the reader</p>
 
 ---
 layout: statement

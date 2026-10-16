@@ -4,6 +4,7 @@
 
   Frontmatter:
     kicker — optional mono line above the heading
+    class: spread — spread the panel lists down the full height
 
   Slots: the default slot is the heading across the top, then `::left::`
   and `::right::` for the two panels.
@@ -86,5 +87,33 @@ defineProps({
 
 .diptych-panel :deep(h3) {
   margin-bottom: 0.8em;
+}
+
+/* `class: spread` — distribute the panel lists down the full column height
+   rather than stacking them at the top. */
+.diptych.spread .diptych-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.diptych.spread .diptych-panel :deep(ul) {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0;
+}
+
+.diptych.spread .diptych-panel :deep(li) {
+  margin: 0;
+}
+
+/* `class: spread large` — for short lists, also set the items larger. */
+.diptych.spread.large .diptych-panel :deep(ul) {
+  justify-content: space-around;
+}
+
+.diptych.spread.large .diptych-panel :deep(li) {
+  font-size: 1.65rem;
 }
 </style>
