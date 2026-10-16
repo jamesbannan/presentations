@@ -185,9 +185,9 @@ layout: statement
 kicker: The takeaway
 ---
 
-# Keep making your own stories.
+# Stay focused on the story.
 
-The story behind the work is part of the work.
+Without the story, it's just content.
 
 ---
 layout: end
