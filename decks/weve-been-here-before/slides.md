@@ -122,9 +122,7 @@ layout: statement
 kicker: The mirror
 ---
 
-# Generative AI doesn't invent our culture. It reflects it back at us.
-
-Built from human writing, images and music.
+# Generative AI reflects our culture back at us. But it's distorted; weighted and smoothed.
 
 ---
 layout: diptych
