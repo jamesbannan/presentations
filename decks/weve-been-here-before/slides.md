@@ -159,13 +159,15 @@ kicker: Pars tertia
 ## The human story behind the work
 
 ---
-kicker: The case against me
+layout: statement
+kicker: Why it leaves us cold
 ---
 
-# Does it matter who made it?
+# We're moved by the life behind the work.
 
-- Roland Barthes, “The Death of the Author” (1967): meaning is made by the reader
-- Every artist learns from, and remixes, what came before
+With generated content, there's no journey to recognise.
+
+<p class="source">Bellaiche et al., <em>Cognitive Research</em>, 2023 — the same AI images, rated higher when labelled “human-made”</p>
 
 ---
 layout: statement

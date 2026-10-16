@@ -25,7 +25,7 @@ notes.
 | Cold open | 2–3 | An unattributed quote that sounds like it's about AI, then the reveal: Plato's *Phaedrus*, about writing |
 | I — We've been here before | 4–9 | Trithemius on printing, Baudelaire on photography, Sousa on recorded music; some fears misplaced, some partly right |
 | II — (Sort of.) | 10–13 | The hinge. AI reflects our culture back at us; a change of scale and speed; the mirror reflecting itself |
-| III — What are we missing? | 14–17 | The case against (Barthes, remix), the argument (someone lived through it), the takeaway |
+| III — What are we missing? | 14–17 | Why AI-generated work leaves us cold (no human journey to recognise), the argument (someone lived through it), the takeaway |
 | Close | 18 | Thank you, contact links |
 
 ## Sources
@@ -50,7 +50,11 @@ All quotations were checked against the primary texts.
   generated data", *Nature* 631 (2024).
 - M. Gerstgrasser et al., "Is Model Collapse Inevitable? Breaking the Curse of
   Recursion by Accumulating Real and Synthetic Data" (2024).
-- Roland Barthes, "The Death of the Author" (1967).
+- L. Bellaiche et al., "Humans versus AI: whether and why we prefer
+  human-created compared to AI-created artwork", *Cognitive Research:
+  Principles and Implications* 8, 42 (2023), doi:10.1186/s41235-023-00499-6.
+  All the paintings were AI-generated; only the label changed. Human-labelled
+  works were rated higher, with perceived story and effort moderating the effect.
 
 ## Images
 
