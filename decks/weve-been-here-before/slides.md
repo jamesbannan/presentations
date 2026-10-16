@@ -136,17 +136,25 @@ kicker: Then · Now
 
 ::left::
 
+<div v-click>
+
 ### Earlier technologies
 
 - Copied, captured and distributed human work
 - Fed back into culture over generations
 
+</div>
+
 ::right::
+
+<div v-click>
 
 ### Generative AI
 
 - Recombines human work into new artefacts
 - Can feed back into culture, and its own training data, far faster
+
+</div>
 
 ---
 layout: statement
