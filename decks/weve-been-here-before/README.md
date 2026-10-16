@@ -14,20 +14,37 @@ npm run export -- weve-been-here-before
 
 ## Status
 
-Structure only. Every slide is a placeholder — square-bracketed text and
-`.placeholder` boxes mark what still has to be written. Timings in the speaker
-notes are a first guess at a ~12 minute running order.
+First content pass. Slides are deliberately sparse: the talk carries the
+argument, the slides carry the quotations and the turns. There are no speaker
+notes.
 
-## Running order (draft)
+## Running order
 
-| Time | Slide | Beat |
+| Part | Slides | Beat |
 | --- | --- | --- |
-| 0:00–0:30 | Cover | Title |
-| 0:30–1:30 | Statement | Hook |
-| 1:30–5:00 | Part I — Then | Ancient communication technologies, an artefact, a quotation |
-| 5:00–9:00 | Part II — Now | Then/now diptych, synthetic culture today |
-| 9:00–11:30 | Part III — What are we missing? | The takeaway |
-| 11:30–12:00 | End | Thank you, contact links |
+| Cold open | 2–3 | An unattributed quote that sounds like it's about AI, then the reveal: Plato's *Phaedrus*, about writing |
+| I — We've been here before | 4–8 | Baudelaire on photography, Sousa on recorded music; some fears misplaced, some partly right |
+| II — (Sort of.) | 9–12 | The hinge. AI reflects our culture back at us; a change of scale and speed; the mirror reflecting itself |
+| III — What are we missing? | 13–16 | The case against (Barthes, remix), the argument (someone lived through it), the takeaway |
+| Close | 17 | Thank you, contact links |
+
+## Sources
+
+All quotations were checked against the primary texts.
+
+- Plato, *Phaedrus* 275a, trans. Benjamin Jowett (public domain; Project Gutenberg #1636).
+  Socrates relays the Egyptian king Thamus's response to Theuth's invention of letters.
+- Charles Baudelaire, *Salon de 1859*, "Le public moderne et la photographie":
+  « l'industrie photographique était le refuge de tous les peintres manqués,
+  trop mal doués ou trop paresseux pour achever leurs études ». The English on
+  the slide is the author's own translation.
+- John Philip Sousa, "The Menace of Mechanical Music", *Appleton's Magazine*
+  8 (1906), pp. 278–284. "lullabys" is Sousa's spelling.
+- I. Shumailov et al., "AI models collapse when trained on recursively
+  generated data", *Nature* 631 (2024).
+- M. Gerstgrasser et al., "Is Model Collapse Inevitable? Breaking the Curse of
+  Recursion by Accumulating Real and Synthetic Data" (2024).
+- Roland Barthes, "The Death of the Author" (1967).
 
 ## Images
 

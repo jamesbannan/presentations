@@ -37,3 +37,6 @@ pediment, binary frieze, columns dissolving into pixels), `<Arch>`, `<Column>`,
 
 Add `class="placeholder"` to a paragraph to mark content that's still to be
 written. It renders as a dashed `[ TODO ]` box.
+
+Add `class="source"` to a paragraph for a small citation line. It renders in mono
+with a `↳` prefix.

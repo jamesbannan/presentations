@@ -98,3 +98,24 @@
 .slidev-layout .contact-link .brand-icon-linkedin { fill: #0a66c2; }
 .slidev-layout .contact-link .brand-icon-mastodon { fill: #6364ff; }
 .slidev-layout .contact-link .brand-icon-unimelb { fill: none; }
+
+/* ---------- Source — a citation line under a claim ----------
+   Small enough not to compete with the slide, there for anyone who wants
+   to check. Wins over layout paragraph styles, like .placeholder. */
+.slidev-layout .source {
+  font-family: var(--font-mono) !important;
+  font-size: 0.62rem !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft) !important;
+  margin-top: 0.9em !important;
+}
+
+.slidev-layout .source::before {
+  content: '↳ ';
+  color: var(--aegean);
+}
+
+.slidev-layout .source em {
+  font-style: italic;
+}
