@@ -1,0 +1,144 @@
+/* ============================================================
+   BASE — slide surface and typography
+
+   The surface is marble laid over engineering paper: a warm off-white,
+   a faint dot grid, and a soft vignette that keeps the eye in the middle.
+   Backgrounds attach to `.slidev-layout` (the root every layout renders,
+   including Slidev's built-ins) so built-in layouts get them too.
+   ============================================================ */
+
+html,
+body,
+#slide-content {
+  background: var(--marble);
+}
+
+.slidev-layout {
+  background: var(--marble);
+  color: var(--ink);
+  font-family: var(--font-body);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Dot grid — the computing half of the surface. */
+.slidev-layout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(106, 101, 93, 0.22) 0.9px, transparent 1.2px);
+  background-size: 22px 22px;
+  background-position: 11px 11px;
+}
+
+/* Warm vignette — the marble half. Darkens the edges a touch so the light
+   surface doesn't read as a blank page on a projector. */
+.slidev-layout::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 18% 12%, rgba(255, 255, 255, 0.7) 0, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(184, 137, 47, 0.1) 100%);
+}
+
+/* Content above the surface; decorative motifs opt out and keep their own
+   absolute positions. */
+.slidev-layout > *:not(.motif) {
+  position: relative;
+  z-index: 2;
+}
+
+.slidev-layout .motif {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- Typography ---------- */
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.slidev-layout h1 {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+}
+
+.slidev-layout h2 {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.slidev-layout h3 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aegean);
+}
+
+.slidev-layout p,
+.slidev-layout li,
+.slidev-layout td,
+.slidev-layout th {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.slidev-layout a {
+  color: var(--aegean);
+  text-decoration: underline;
+  text-decoration-color: var(--vein);
+  text-underline-offset: 3px;
+}
+
+.slidev-layout strong {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+.slidev-layout em {
+  font-style: italic;
+}
+
+.slidev-layout code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(46, 106, 128, 0.08);
+  color: var(--aegean);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+.slidev-layout pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.slidev-layout blockquote {
+  border-left: 2px solid var(--ochre);
+  padding-left: 1em;
+  color: var(--ink-soft);
+}
+
+.slidev-layout hr {
+  border: 0;
+  border-top: 1px solid var(--vein);
+  margin: 1em 0;
+}

@@ -1,0 +1,26 @@
+/* ============================================================
+   OVERRIDES — Slidev built-ins pulled into the theme's palette
+   ============================================================ */
+
+.slidev-layout .slidev-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  background: var(--marble-deep) !important;
+  border: 1px solid var(--vein);
+}
+
+.slidev-layout .slidev-progress {
+  background: var(--terracotta) !important;
+  height: 2px !important;
+}
+
+.slidev-nav-arrow,
+.slidev-icon-btn {
+  color: var(--ink) !important;
+}
+
+::selection {
+  background: var(--ochre);
+  color: var(--marble);
+}

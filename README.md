@@ -6,6 +6,7 @@ repositories a talk is actually about.
 
 ```
 themes/slidev-theme-arcade   shared design system — layouts, components, CSS, assets
+themes/slidev-theme-stoa     light classical/computing theme (TEDxUniMelb 2026)
 decks/<slug>/                one talk: slides.md, content.yaml, data/, setup/
 scripts/                     deck dispatcher + cross-repo content sync
 archive/                     pre-Slidev decks (ARM template demos, 2015–2017)
@@ -32,6 +33,10 @@ npm run dev -- zero-friction-devsecops
 
 Every task runs the content sync first, so a deck is never built against stale
 facts.
+
+Any other flags after the deck name go straight to Slidev. For example,
+`npm run dev -- <deck> --remote` serves the deck on the network with remote
+presenter mode, and `--remote <password>` protects the presenter view.
 
 ## Checking that a deck actually renders
 

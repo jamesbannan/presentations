@@ -5,6 +5,9 @@
 //   npm run build  -- zero-friction-devsecops
 //   npm run build  -- --all
 //   npm run export -- zero-friction-devsecops
+//   npm run dev    -- zero-friction-devsecops --remote --port 3031
+//
+// Any other flags are passed straight through to slidev.
 //
 // Keeps every deck on identical commands so a new talk needs no bespoke scripts.
 
@@ -44,12 +47,17 @@ const outFile = name => {
 const basePath = deck => `/${[process.env.SITE_BASE, deck].join('/')}/`
   .replace(/\/+/g, '/')
 
+const available = listDecks()
+
 const [task, ...rest] = process.argv.slice(2)
 const all = rest.includes('--all')
 const positional = rest.filter(arg => !arg.startsWith('--'))
-const explicit = rest.find(arg => arg.startsWith('--deck='))?.split('=')[1] ?? positional[0]
-
-const available = listDecks()
+// Prefer a positional that names a real deck, so flag values such as the 3031
+// in `--port 3031` are never mistaken for the slug.
+const deckArg = positional.find(arg => available.includes(arg)) ?? positional[0]
+const explicit = rest.find(arg => arg.startsWith('--deck='))?.split('=')[1] ?? deckArg
+const passthrough = rest.filter((arg, i) =>
+  arg !== '--all' && !arg.startsWith('--deck=') && i !== rest.indexOf(deckArg))
 
 if (!task || task === 'list') {
   console.log(available.length ? available.join('\n') : 'No decks found under decks/')
@@ -74,10 +82,10 @@ for (const deck of targets) {
 
   switch (task) {
     case 'dev':
-      slidev(entry, '--open')
+      slidev(entry, '--open', ...passthrough)
       break
     case 'build':
-      slidev('build', entry, '--base', basePath(deck), '--out', resolve(root, 'dist', deck))
+      slidev('build', entry, '--base', basePath(deck), '--out', resolve(root, 'dist', deck), ...passthrough)
       break
     case 'export':
       // --per-slide is not an optimisation: the default /print route stacks
@@ -85,11 +93,11 @@ for (const deck of targets) {
       // which renders the arch and demo canvases blank. --wait lets the CRT
       // and reveal animations settle before each capture.
       slidev('export', entry, '--format', 'pdf', '--per-slide', '--wait', '1500',
-        '--output', outFile(`${deck}.pdf`))
+        '--output', outFile(`${deck}.pdf`), ...passthrough)
       break
     case 'export-pptx':
       slidev('export', entry, '--format', 'pptx', '--per-slide', '--wait', '1500',
-        '--output', outFile(`${deck}.pptx`))
+        '--output', outFile(`${deck}.pptx`), ...passthrough)
       break
     default:
       console.error(`Unknown task "${task}". Expected one of: dev, build, export, export-pptx, list`)

@@ -1,0 +1,11 @@
+{
+  "name": "deck-weve-been-here-before",
+  "version": "1.0.0",
+  "private": true,
+  "description": "We've Been Here Before (Sort Of): Stories in an age of synthetic culture",
+  "author": "James Bannan",
+  "license": "MIT",
+  "dependencies": {
+    "slidev-theme-stoa": "*"
+  }
+}
