@@ -320,6 +320,10 @@
   margin: 0 0 0.3em;
 }
 
+.slidev-layout .zoom-figure {
+  margin: 0.4em 0 1.1em;
+}
+
 /* ---------- Split — a figure beside a few lines of text ---------- */
 .slidev-layout .split {
   display: grid;

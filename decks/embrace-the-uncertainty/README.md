@@ -26,10 +26,12 @@ built and render-checked until the rest of the talk is written.
 | 5 | How far north sets the odds | Three latitudes and their odds |
 | 6 | Reading it moves the arrow | Two clicks: the read, then the snapped arrow |
 | 7 | So you run it hundreds of times | 500 simulated reads of the cover's arrow |
-| 8 | Bit vs qubit | Summary table |
-| 9 | The one-liner | Statement |
+| 8 | Why? Qubits are built from tiny things | Zoom from a coin to an electron; where the rules change |
+| 9 | Uncertainty is built in | Heisenberg as two questions on one globe; one click |
+| 10 | Bit vs qubit | Summary table |
+| 11 | The one-liner | Statement |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
-`Odds`, `Shots`, `Readout`), so there are no image files to maintain. The
+`Odds`, `Shots`, `Readout`, `ScaleZoom`), so there are no image files to maintain. The
 odds come from the arrow's angle, so a figure stays correct if you change its
 `theta`.

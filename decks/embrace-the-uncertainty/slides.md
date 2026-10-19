@@ -142,6 +142,58 @@ One read tells you almost nothing. So quantum programs are run hundreds or thous
 -->
 
 ---
+kicker: Bits and qubits · why
+---
+
+# Why? Qubits are built from tiny things
+
+<div class="zoom-figure">
+  <ScaleZoom />
+</div>
+
+Real qubits are an electron, a particle of light, a single atom, or a circuit chilled until it acts like one.
+
+<!--
+So why does a qubit behave like this? Because of what it's made of. Zoom in from a coin, to a grain of sand, to a cell, to an atom, to an electron. Somewhere around the atom the rules change. Down there, nature doesn't keep a definite value for everything. It keeps odds.
+
+A qubit is one of those tiny things that we've learned to control: an electron's spin, a particle of light, a single trapped atom. Or the IBM and Google approach: a superconducting circuit big enough to see under a microscope, cooled colder than outer space until the whole thing behaves like one quantum object. The arrow on our globe is that object's state.
+-->
+
+---
+kicker: Bits and qubits · uncertainty
+---
+
+# Uncertainty is built in
+
+Every direction is a sure answer to one question, and a coin toss for another.
+
+<div class="plates" style="--plate: 180px">
+  <div class="plate">
+    <Globe :theta="0" />
+    <Odds :theta="0" />
+    <p><b>North or south?</b>Sure: north, so 0.</p>
+  </div>
+  <div class="plate">
+    <Globe :theta="0" ask="ew" />
+    <Odds :chance="0.5" :labels="['W', 'E']" />
+    <p><b>West or east?</b>Same arrow. Coin toss.</p>
+  </div>
+  <div class="plate" v-click>
+    <Globe :theta="90" :phi="28.65" />
+    <Odds :theta="90" />
+    <p><b>Point it east?</b>North or south: coin toss.</p>
+  </div>
+</div>
+
+<!--
+This is Heisenberg's uncertainty principle, in arrow form. Point the arrow straight north and "north or south?" has a sure answer: 0. Ask the same arrow "west or east?" and it's a coin toss.
+
+[click] Fine, point it east instead. Now west-or-east is sure, and north-or-south is the coin toss. No direction makes every question certain.
+
+And it's not that our instruments are clumsy, or that the answer is hidden somewhere. The experiments behind the 2022 Nobel Prize in Physics showed the answer can't be secretly written down in advance. It's made when you ask. That's the uncertainty in the title. Quantum computers don't fight it. They're built on it.
+-->
+
+---
 kicker: Bits and qubits · side by side
 ---
 

@@ -3,6 +3,7 @@
 
     <Odds :theta="90" />            worked out from the arrow: 50 / 50
     <Odds :counts="[316, 84]" />    or from a tally of actual reads
+    <Odds :chance="0.5" :labels="['W', 'E']" />   or a chance, for another question
 
   For an arrow `theta` degrees from the north pole, a read gives 0 with
   probability cos²(θ/2). That's the only maths in the theme, and it lives
@@ -14,6 +15,8 @@ import { computed } from 'vue'
 const props = defineProps({
   theta: { type: Number, default: null },
   counts: { type: Array as () => number[], default: null },
+  chance: { type: Number, default: null },
+  labels: { type: Array as () => string[], default: () => ['0', '1'] },
 })
 
 const split = computed(() => {
@@ -22,6 +25,7 @@ const split = computed(() => {
     const total = zeros + ones || 1
     return { p0: zeros / total, zeros, ones }
   }
+  if (props.chance !== null) return { p0: props.chance, zeros: null, ones: null }
   const t = ((props.theta ?? 90) * Math.PI) / 180
   return { p0: Math.cos(t / 2) ** 2, zeros: null, ones: null }
 })
@@ -37,10 +41,10 @@ const pct = (p: number) => `${Math.round(p * 100)}%`
     </div>
     <div class="odds-legend">
       <span class="odds-key odds-key--zero">
-        <b>0</b> {{ pct(split.p0) }}<template v-if="split.zeros !== null"> · {{ split.zeros }}</template>
+        <b>{{ labels[0] }}</b> {{ pct(split.p0) }}<template v-if="split.zeros !== null"> · {{ split.zeros }}</template>
       </span>
       <span class="odds-key odds-key--one">
-        <template v-if="split.ones !== null">{{ split.ones }} · </template>{{ pct(1 - split.p0) }} <b>1</b>
+        <template v-if="split.ones !== null">{{ split.ones }} · </template>{{ pct(1 - split.p0) }} <b>{{ labels[1] }}</b>
       </span>
     </div>
   </div>

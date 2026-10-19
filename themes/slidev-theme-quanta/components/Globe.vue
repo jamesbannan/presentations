@@ -7,6 +7,7 @@
     <Globe :theta="60" />                a qubit, a little north of the equator
     <Globe :theta="60" :ghosts="14" />   …with faint arrows showing it could point anywhere
     <Globe :theta="0" :was="60" />       …after it's read: snapped to 0, old arrow ghosted
+    <Globe :theta="0" ask="ew" />        the same globe asked a different question: west or east?
 
   Props:
     theta    — degrees from the north pole (0 = 0, 180 = 1)
@@ -16,6 +17,9 @@
     latitude — draw the arrow's line of latitude
     was      — a previous theta: ghosts the old arrow and draws the snap
     seed     — for the ghosts
+    ask      — which question a read asks: 'ns' (north or south, the
+               default) or 'ew' (west or east, an axis drawn across the
+               globe). An arrow points due east at theta 90, phi 28.65
 
   Scales to the width of its container. Font sizes and opacity live in the
   stylesheet, not in attributes: UnoCSS attributify reads those as utilities.
@@ -32,6 +36,7 @@ const props = defineProps({
   latitude: { type: Boolean, default: false },
   was: { type: Number, default: null },
   seed: { type: Number, default: 13 },
+  ask: { type: String, default: 'ns' },
 })
 
 const uid = useId() ?? 'x'
@@ -65,6 +70,18 @@ const axis = (() => {
   const b = P([0, 0, -1.12])
   return `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`
 })()
+
+// Due east is the azimuth that the projection draws flat across the page.
+const EAST = 0.5
+const ew = (() => {
+  const a = P([-1.12 * Math.cos(EAST), -1.12 * Math.sin(EAST), 0])
+  const b = P([1.12 * Math.cos(EAST), 1.12 * Math.sin(EAST), 0])
+  return { axis: `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`, west: P([-Math.cos(EAST), -Math.sin(EAST), 0]), east: P([Math.cos(EAST), Math.sin(EAST), 0]) }
+})()
+const atSide = computed(() => {
+  const d = Math.sin(rad(props.theta)) * Math.cos(rad(props.phi) - EAST)
+  return d >= 0.999 ? 'e' : d <= -0.999 ? 'w' : null
+})
 
 const tip = computed(() => P(unit(rad(props.theta), rad(props.phi))))
 const atPole = computed(() => (props.theta <= 0.5 ? 0 : props.theta >= 179.5 ? 1 : null))
@@ -108,7 +125,7 @@ const snap = computed(() => {
 </script>
 
 <template>
-  <svg class="motif globe" :class="{ 'globe--bit': bit }" viewBox="-130 -142 260 284" aria-hidden="true">
+  <svg class="motif globe" :class="{ 'globe--bit': bit, 'globe--ew': ask === 'ew' }" viewBox="-130 -142 260 284" aria-hidden="true">
     <defs>
       <linearGradient :id="ids.vec" gradientUnits="userSpaceOnUse" x1="0" y1="0" :x2="tip.x" :y2="tip.y">
         <stop offset="0" style="stop-color: var(--cyan)" />
@@ -152,6 +169,7 @@ const snap = computed(() => {
     </g>
     <circle :r="R" fill="none" class="globe-rim" />
     <path :d="axis" class="globe-axis" fill="none" />
+    <path v-if="ask === 'ew'" :d="ew.axis" class="globe-axis globe-axis--ew" fill="none" />
 
     <g class="globe-ghosts">
       <template v-for="(g, i) in ghostArrows" :key="`gf${i}`">
@@ -181,14 +199,25 @@ const snap = computed(() => {
     <circle r="2.6" class="globe-origin" />
 
     <!-- Poles -->
-    <g class="globe-pole globe-pole--zero" :class="{ 'globe-pole--on': atPole === 0 }">
+    <g class="globe-pole globe-pole--ns globe-pole--zero" :class="{ 'globe-pole--on': atPole === 0 }">
       <circle :cx="north.x" :cy="north.y - 24" r="12" />
       <text :x="north.x" :y="north.y - 24" text-anchor="middle" dominant-baseline="central">0</text>
     </g>
-    <g class="globe-pole globe-pole--one" :class="{ 'globe-pole--on': atPole === 1 }">
+    <g class="globe-pole globe-pole--ns globe-pole--one" :class="{ 'globe-pole--on': atPole === 1 }">
       <circle :cx="south.x" :cy="south.y + 24" r="12" />
       <text :x="south.x" :y="south.y + 24" text-anchor="middle" dominant-baseline="central">1</text>
     </g>
+
+    <template v-if="ask === 'ew'">
+      <g class="globe-pole globe-pole--zero" :class="{ 'globe-pole--on': atSide === 'w' }">
+        <circle :cx="ew.west.x - 22" :cy="ew.west.y" r="12" />
+        <text :x="ew.west.x - 22" :y="ew.west.y" text-anchor="middle" dominant-baseline="central">W</text>
+      </g>
+      <g class="globe-pole globe-pole--one" :class="{ 'globe-pole--on': atSide === 'e' }">
+        <circle :cx="ew.east.x + 22" :cy="ew.east.y" r="12" />
+        <text :x="ew.east.x + 22" :y="ew.east.y" text-anchor="middle" dominant-baseline="central">E</text>
+      </g>
+    </template>
   </svg>
 </template>
 
@@ -323,6 +352,23 @@ const snap = computed(() => {
 .globe-pole--on.globe-pole--zero circle { fill: var(--cyan); }
 .globe-pole--on.globe-pole--one circle { fill: var(--magenta); }
 .globe-pole--on text { fill: #fff; }
+
+/* Asked west-or-east: that axis is the one that counts, so north and south
+   step back. */
+.globe-axis--ew {
+  stroke: var(--violet);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+  opacity: 0.9;
+}
+
+.globe--ew .globe-axis:not(.globe-axis--ew) {
+  opacity: 0.2;
+}
+
+.globe--ew .globe-pole--ns {
+  opacity: 0.3;
+}
 
 /* A classical bit: the globe is there to be ignored. Only the line between
    the poles counts, and the arrow is plain ink. */

@@ -40,8 +40,9 @@ the deck works offline.
 | `<Orbital>` | `cloud`, `seed` |
 | `<Entanglement>` | `twists` |
 | `<Ket>` | `bra`. `<Ket>ψ</Ket>` renders `|ψ⟩` |
-| `<Globe>` | `theta` (0 = north = 0, 180 = south = 1), `phi`, `bit` (classical style), `ghosts` (faint arrows elsewhere), `latitude`, `was` (old angle, drawn with a snap arc), `seed` |
-| `<Odds>` | `theta` or `counts` (`[zeros, ones]`). A split bar of the chance of reading 0 or 1 |
+| `<Globe>` | `theta` (0 = north = 0, 180 = south = 1), `phi`, `bit` (classical style), `ghosts` (faint arrows elsewhere), `latitude`, `was` (old angle, drawn with a snap arc), `ask` (`ns`\|`ew`: which question a read asks; due east is `theta` 90, `phi` 28.65), `seed` |
+| `<Odds>` | `theta`, `counts` (`[zeros, ones]`) or `chance`, plus `labels` (default `['0', '1']`). A split bar of the chance of each answer |
+| `<ScaleZoom>` | `stops` (`kind`: `coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`. A dot per simulated read, tallied with `<Odds>` underneath |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
@@ -72,6 +73,7 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
 - `.split` is a two-column grid with a figure on one side and text on the
   other. Set `--split` to change the ratio.
 - `.mini-globe` sizes a `<Globe>` to sit in a table header.
+- `.zoom-figure` spaces a `<ScaleZoom>` from the text around it.
 
 ## Writing SVG components for Slidev
 
