@@ -22,6 +22,158 @@ James Bannan · Principal Consultant, Microsoft
 ---
 layout: section
 numeral: 1
+kicker: Part one
+---
+
+# Bits and qubits
+
+## Same two answers. Very different rules.
+
+<!--
+Before any algorithms or cryptography: what is a qubit, and how is it different from the bits you already work with every day? One picture carries the whole section: an arrow on a globe.
+-->
+
+---
+kicker: Bits and qubits · classical
+---
+
+# A bit points one of two ways
+
+<div class="plates" style="--plate: 230px">
+  <div class="plate">
+    <Globe bit :theta="0" />
+    <p><b>Zero</b>North. Read it as often as you like.</p>
+  </div>
+  <div class="plate">
+    <Globe bit :theta="180" />
+    <p><b>One</b>South. It stays where you left it.</p>
+  </div>
+</div>
+
+<!--
+Picture a bit as an arrow that can only point at the North Pole or the South Pole. North is 0, south is 1. There's no "a bit north". Every bit in every laptop in this room is one of these two pictures.
+-->
+
+---
+kicker: Bits and qubits · quantum
+---
+
+# A qubit can point anywhere
+
+<div class="split">
+<Globe :theta="62" :ghosts="18" />
+<div>
+
+- Same globe, same two poles
+- The arrow can point in **any** direction
+- That direction *is* the qubit
+
+</div>
+</div>
+
+<!--
+A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. The faint arrows are all valid qubits. The direction the arrow points is the state. That's all "superposition" means here: pointing somewhere other than straight at a pole.
+-->
+
+---
+kicker: Bits and qubits · reading a qubit
+---
+
+# How far north sets the odds
+
+<div class="plates" style="--plate: 200px">
+  <div class="plate">
+    <Globe :theta="30" latitude />
+    <Odds :theta="30" />
+    <p><b>Mostly 0</b>Near the north pole</p>
+  </div>
+  <div class="plate">
+    <Globe :theta="90" latitude />
+    <Odds :theta="90" />
+    <p><b>Coin toss</b>On the equator</p>
+  </div>
+  <div class="plate">
+    <Globe :theta="150" latitude />
+    <Odds :theta="150" />
+    <p><b>Mostly 1</b>Near the south pole</p>
+  </div>
+</div>
+
+<!--
+Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both". What the direction controls is the odds. The closer to north, the more likely a 0. On the equator it's a coin toss.
+-->
+
+---
+kicker: Bits and qubits · measurement
+---
+
+# Reading it moves the arrow
+
+<div class="plates" style="--plate: 220px">
+  <div class="plate">
+    <Globe :theta="60" />
+    <p><b>Before</b>Somewhere north of the equator</p>
+  </div>
+  <div class="plate-step" v-click>
+    <Readout value="0" />
+  </div>
+  <div class="plate" v-click>
+    <Globe :theta="0" :was="60" />
+    <p><b>After</b>Snapped to 0. Read again: 0, every time.</p>
+  </div>
+</div>
+
+<!--
+And reading it isn't free. [click] We read it and get a 0. [click] The arrow is now pointing straight at the North Pole. Wherever it was before is gone. Read it again and you'll get 0 forever. You can't peek without changing it.
+-->
+
+---
+kicker: Bits and qubits · shots
+---
+
+# So you run it hundreds of times
+
+Set up the same qubit 500 times. Read it each time. Count.
+
+<Shots :theta="55" :reads="500" :per-row="50" :seed="18" />
+
+<!--
+One read tells you almost nothing. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
+-->
+
+---
+kicker: Bits and qubits · side by side
+---
+
+# Bit vs qubit
+
+| | <div class="mini-globe"><Globe bit :theta="0" /></div> Bit | <div class="mini-globe"><Globe :theta="62" /></div> Qubit |
+| --- | --- | --- |
+| Holds | 0 or 1 | A direction |
+| A read gives you | What's stored | 0 or 1, at the odds |
+| After a read | Unchanged | Snapped to the answer |
+| To learn what it holds | Read it once | Set it up and read it many times |
+
+<!--
+The whole section on one slide.
+-->
+
+---
+layout: statement
+kicker: The one-liner
+---
+
+# A qubit isn't 0 and 1 at once.
+
+## It's an arrow that turns into a 0 or a 1 the moment you read it.
+
+<!--
+If you take one sentence out of this section, take this one.
+-->
+
+---
+layout: section
+numeral: 1
 kicker: Layout · section
 ---
 

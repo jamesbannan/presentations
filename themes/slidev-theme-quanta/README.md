@@ -40,6 +40,10 @@ the deck works offline.
 | `<Orbital>` | `cloud`, `seed` |
 | `<Entanglement>` | `twists` |
 | `<Ket>` | `bra`. `<Ket>ψ</Ket>` renders `|ψ⟩` |
+| `<Globe>` | `theta` (0 = north = 0, 180 = south = 1), `phi`, `bit` (classical style), `ghosts` (faint arrows elsewhere), `latitude`, `was` (old angle, drawn with a snap arc), `seed` |
+| `<Odds>` | `theta` or `counts` (`[zeros, ones]`). A split bar of the chance of reading 0 or 1 |
+| `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`. A dot per simulated read, tallied with `<Odds>` underneath |
+| `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
 Also `<Folio>` (slide number as a ket, qubit dots and binary), `<ContactLink>`
 and `<BrandIcon>`.
@@ -61,6 +65,13 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
 - `.placeholder` on a paragraph marks content that's still to be written. It
   renders as a dashed `[ TODO ]` box.
 - `.source` on a paragraph is a small citation line, in mono with a `↳` prefix.
+- `.plates` is a row of captioned figures. Each `.plate` holds a graphic with
+  a `<p>` under it; `<b>` in the caption is the heading. Set `--plate` to
+  change the width. `.plate-step` is a narrow column between plates, for an
+  arrow or a `<Readout>`.
+- `.split` is a two-column grid with a figure on one side and text on the
+  other. Set `--split` to change the ratio.
+- `.mini-globe` sizes a `<Globe>` to sit in a table header.
 
 ## Writing SVG components for Slidev
 

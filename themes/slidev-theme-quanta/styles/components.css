@@ -260,6 +260,78 @@
   color: var(--violet);
 }
 
+/* ---------- Plates — a row of figures with captions ----------
+   <div class="plates">
+     <div class="plate"><Globe bit :theta="0" /><p><b>Zero</b> A short line</p></div>
+     <div class="plate">…</div>
+   </div>
+   Plates share the row equally; set --plate on the row to cap their width.
+   A <div class="plate-step"> between two plates holds a connector, like a
+   <Readout>, and takes only the room it needs. */
+.slidev-layout .plates {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.2em;
+  margin-top: 0.6em;
+}
+
+.slidev-layout .plate {
+  flex: 0 1 var(--plate, 210px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.slidev-layout .plate > p {
+  margin: 0.7em 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.slidev-layout .plate > p b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.1em;
+}
+
+.slidev-layout .plate .odds {
+  margin-top: 0.8em;
+}
+
+.slidev-layout .plate-step {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+/* ---------- Mini globe — a small figure inline, e.g. in a table head ---------- */
+.slidev-layout .mini-globe {
+  width: 112px;
+  margin: 0 auto 0.3em;
+}
+
+.slidev-layout th .mini-globe {
+  margin: 0 0 0.3em;
+}
+
+/* ---------- Split — a figure beside a few lines of text ---------- */
+.slidev-layout .split {
+  display: grid;
+  grid-template-columns: var(--split, 0.85fr 1.15fr);
+  gap: 2.6em;
+  align-items: center;
+}
+
+.slidev-layout .split > * {
+  min-width: 0;
+}
+
 /* ---------- Closing-slide contact links ---------- */
 /* One shared column, as wide as the longest link, so every plate matches. */
 .slidev-layout .contact-list {
