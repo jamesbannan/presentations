@@ -1,0 +1,295 @@
+/* ============================================================
+   COMPONENTS — furniture shared across layouts
+   ============================================================ */
+
+/* ---------- Kicker — the small mono line above a headline ----------
+   Led by a tiny wire with a qubit on it. */
+.slidev-layout .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+.slidev-layout .kicker::before {
+  content: '';
+  width: 2.2em;
+  height: 0.7em;
+  background:
+    radial-gradient(circle, var(--paper) 0 0.17em, currentColor 0.18em 0.28em, transparent 0.29em) 70% 50% / 0.7em 0.7em no-repeat,
+    linear-gradient(currentColor, currentColor) 0 50% / 100% 1px no-repeat;
+}
+
+/* ---------- Ket — |label⟩ without relying on the glyph ----------
+   `<span class="ket">0</span>` or `<Ket>ψ</Ket>`. The bar and the angle
+   are drawn, so they match any font and never fall back. */
+.slidev-layout .ket,
+.slidev-layout .bra {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  /* Plex Mono has no Greek, so |ψ⟩ falls through to Plex Sans. */
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans', monospace;
+  font-size: 0.95em;
+  line-height: 1;
+  vertical-align: -0.08em;
+}
+
+.slidev-layout .ket::before,
+.slidev-layout .bra::after {
+  content: '';
+  width: 0.08em;
+  min-width: 1px;
+  height: 1.15em;
+  background: currentColor;
+  margin: 0 0.14em;
+}
+
+.slidev-layout .ket::after,
+.slidev-layout .bra::before {
+  content: '';
+  width: 0.36em;
+  height: 1.2em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 20' preserveAspectRatio='none'%3E%3Cpath d='M0.6 0.5 L5.4 10 L0.6 19.5' fill='none' stroke='black' stroke-width='1.1'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 20' preserveAspectRatio='none'%3E%3Cpath d='M0.6 0.5 L5.4 10 L0.6 19.5' fill='none' stroke='black' stroke-width='1.1'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  margin-left: 0.06em;
+}
+
+.slidev-layout .bra::before {
+  transform: scaleX(-1);
+  margin: 0 0.06em 0 0;
+}
+
+/* ---------- Qubit list ----------
+   Each bullet is a tiny Bloch circle with its state on the rim. */
+.slidev-layout ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.slidev-layout ul > li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.slidev-layout ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.48em;
+  width: 0.62em;
+  height: 0.62em;
+  border-radius: 50%;
+  border: 1.5px solid var(--violet);
+  background: radial-gradient(circle at 72% 26%, var(--magenta) 0 0.1em, transparent 0.11em);
+  box-sizing: border-box;
+}
+
+.slidev-layout ul ul > li::before {
+  border-color: var(--cyan);
+  background: none;
+  width: 0.5em;
+  height: 0.5em;
+  top: 0.55em;
+}
+
+/* ---------- Numbered list — register indices in mono ---------- */
+.slidev-layout ol:not(.timeline) {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: q;
+}
+
+.slidev-layout ol:not(.timeline) > li {
+  counter-increment: q;
+  position: relative;
+  padding-left: 2.2em;
+  margin-bottom: 0.4em;
+}
+
+.slidev-layout ol:not(.timeline) > li::before {
+  content: counter(q, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 500;
+  color: var(--violet);
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 0 0.3em;
+  line-height: 1.5;
+}
+
+/* ---------- Timeline — a sequence drawn as a circuit ----------
+   `<ol class="timeline">`: each step is a gate on one wire. `<b>` is the
+   step, an optional `<span>` its gloss. */
+.slidev-layout ol.timeline {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 1em 0 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 1.6em;
+  position: relative;
+}
+
+.slidev-layout ol.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.95em;
+  height: 1px;
+  background: var(--superposition);
+}
+
+.slidev-layout ol.timeline > li {
+  counter-increment: step;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.slidev-layout ol.timeline > li::before {
+  content: counter(step);
+  align-self: flex-start;
+  min-width: 1.9em;
+  height: 1.9em;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--violet);
+  background: var(--paper);
+  border: 1.5px solid var(--violet);
+  border-radius: 3px;
+  margin-bottom: 0.5em;
+}
+
+.slidev-layout ol.timeline > li b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.slidev-layout ol.timeline > li span {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Panel — a lab-instrument card ---------- */
+.slidev-layout .panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--grid);
+  border-top: 2px solid var(--violet);
+  border-radius: 4px;
+  padding: 0.9em 1.1em;
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- Tag — a small status chip ---------- */
+.slidev-layout .tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--violet);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.15em 0.75em;
+  vertical-align: middle;
+}
+
+.slidev-layout .tag.cyan { color: var(--cyan); }
+.slidev-layout .tag.magenta { color: var(--magenta); }
+.slidev-layout .tag.amber { color: var(--amber); }
+
+/* ---------- Placeholder — content still to be written ----------
+   Layouts restyle their paragraphs; a placeholder should look the same
+   wherever it lands, so it wins over them. */
+.slidev-layout .placeholder {
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft) !important;
+  border: 1px dashed var(--grid);
+  background: rgba(233, 237, 247, 0.6);
+  padding: 0.5em 0.8em;
+  display: inline-block;
+}
+
+.slidev-layout .placeholder::before {
+  content: '[ TODO ] ';
+  color: var(--magenta);
+}
+
+/* ---------- Source — a citation line under a claim ----------
+   Small enough not to compete with the slide, there for anyone who wants
+   to check. Wins over layout paragraph styles, like .placeholder. */
+.slidev-layout .source {
+  font-family: var(--font-mono) !important;
+  font-size: 0.62rem !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft) !important;
+  margin-top: 0.9em !important;
+}
+
+.slidev-layout .source::before {
+  content: '↳ ';
+  color: var(--violet);
+}
+
+/* ---------- Closing-slide contact links ---------- */
+/* One shared column, as wide as the longest link, so every plate matches. */
+.slidev-layout .contact-list {
+  display: grid;
+  grid-template-columns: max-content;
+  justify-content: center;
+  gap: 0.45em;
+  margin-top: 1.4em;
+}
+
+.slidev-layout .contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--grid);
+  border-radius: 4px;
+  padding: 0.35em 0.9em;
+}
+
+.slidev-layout .contact-link .brand-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+  fill: var(--ink);
+}
+
+.slidev-layout .contact-link .brand-icon-linkedin { fill: #0a66c2; }
+.slidev-layout .contact-link .brand-icon-mastodon { fill: #6364ff; }
+.slidev-layout .contact-link .brand-icon-github { fill: var(--ink); }

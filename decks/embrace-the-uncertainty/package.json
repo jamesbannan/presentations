@@ -1,0 +1,11 @@
+{
+  "name": "deck-embrace-the-uncertainty",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Embrace the Uncertainty: A Beginner's Guide to Quantum Computing",
+  "author": "James Bannan",
+  "license": "MIT",
+  "dependencies": {
+    "slidev-theme-quanta": "*"
+  }
+}

@@ -1,0 +1,49 @@
+/* ============================================================
+   TOKENS — "Quanta"
+
+   A light theme drawn like a quantum lab notebook: graph paper under
+   clean-room light, with the instruments sketched on top — Bloch
+   spheres, circuit diagrams, qubit lattices and wave packets.
+
+   Colour:
+     --paper        slide surface, a cool lab white
+     --paper-deep   panels and plates, one step down
+     --grid         hairlines, graph-paper rules, quiet structure
+     --ink          body text, a deep blue-black
+     --ink-soft     secondary text and captions
+     --cyan         |0⟩ — ground state, the "classical" end
+     --violet       superposition — the theme's main accent
+     --magenta      measurement — collapse, emphasis, warnings
+     --amber        a spark of energy — sparingly, for highlights
+
+   Cyan → violet → magenta is the "superposition" gradient. Motifs run
+   along it; text uses one colour at a time.
+
+   Type:
+     Display — "Space Grotesk": geometric, a little sci-fi. Headlines.
+     Body    — "IBM Plex Sans": engineered, readable, and a nod to the
+               people who put a quantum computer on the cloud.
+     Mono    — "IBM Plex Mono": labels, folios, kets and code.
+   ============================================================ */
+
+:root {
+  --paper: #f6f8fc;
+  --paper-deep: #e9edf7;
+  --grid: #d3d9e8;
+  --ink: #141a2e;
+  --ink-soft: #586079;
+  --cyan: #0590c0;
+  --violet: #6246ea;
+  --magenta: #d4307c;
+  --amber: #e09a12;
+
+  --glow-cyan: rgba(5, 144, 192, 0.12);
+  --glow-violet: rgba(98, 70, 234, 0.11);
+  --glow-magenta: rgba(212, 48, 124, 0.08);
+
+  --superposition: linear-gradient(90deg, var(--cyan), var(--violet) 55%, var(--magenta));
+
+  --font-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+}
