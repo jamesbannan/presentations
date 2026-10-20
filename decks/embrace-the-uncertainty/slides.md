@@ -322,6 +322,43 @@ Useful flags: --shots 5000, --dump-state to show the state before measurement.
 -->
 
 ---
+kicker: Demo · real hardware
+---
+
+# Demo: the same pair on a real machine
+
+<div class="split" style="--split: 0.78fr 1.22fr">
+<div>
+
+Same Bell pair, sent to **Azure Quantum** ahead of time and replayed here, offline.
+
+On the simulator, 01 and 10 never happen. On hardware, a few do. **That gap is noise.**
+
+<p class="run-cmd">uv run demos/bell_hardware.py</p>
+
+</div>
+<div class="chart-pair">
+  <Outcomes title="Simulator" :counts="[487, 0, 0, 513]" />
+  <Outcomes title="Hardware" pending="Record a run, then fill in" />
+</div>
+</div>
+
+<p class="source">Simulator: a typical run, 1,000 shots on the local QDK. Hardware: placeholder until a run is recorded</p>
+
+<!--
+TODO before the talk: record a hardware run, then replace the Hardware chart's pending prop with :counts="[n00, n01, n10, n11]" and update the source line with the target, shots and date.
+
+  uv run --group hardware demos/bell_hardware.py record --target ionq.simulator --noise-model aria-1   (free, noisy simulator)
+  uv run --group hardware demos/bell_hardware.py record --target <target-id> --shots 500              (real QPU)
+
+The recording lands in demos/recordings/ in the quantum-computing repo; `uv run demos/bell_hardware.py` replays the latest one beside a fresh simulator run and prints the counts.
+
+Demo: quantum-computing repo, demos/bell_hardware.py. On stage it's offline: no Azure sign-in, no queue.
+
+Same circuit as the last slide. Left: the simulator, perfect, 01 and 10 never happen. Right: a real machine. Most shots still agree, but some come back 01 or 10. Those aren't a bug in the circuit; they're noise: qubits drifting, gates a fraction off, reads misjudged. That gap between the ideal and the real is why error correction needs so many physical qubits per useful one.
+-->
+
+---
 kicker: Demo · half adder
 ---
 
