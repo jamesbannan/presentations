@@ -8,7 +8,8 @@
     <ScaleZoom :quantum-from="3" />
 
   Props:
-    stops        — [{ kind, name, size }]; kind is coin | grain | cell | atom | electron
+    stops        — [{ kind, name, size }]; kind is dollar (an Australian $1) | coin |
+                   grain | cell | atom | electron
     quantumFrom  — index of the first stop drawn as quantum
     seed         — for the sand grain and the electron cloud
 -->
@@ -22,7 +23,7 @@ const props = defineProps({
   stops: {
     type: Array as () => Stop[],
     default: () => [
-      { kind: 'coin', name: 'Coin', size: '2 cm' },
+      { kind: 'dollar', name: '$1 coin', size: '25 mm' },
       { kind: 'grain', name: 'Grain of sand', size: 'half a millimetre' },
       { kind: 'cell', name: 'Cell', size: '1/100 mm' },
       { kind: 'atom', name: 'Atom', size: '1/10,000,000 mm' },
@@ -37,6 +38,7 @@ const uid = useId() ?? 'x'
 const ids = {
   vec: safeId('zs-vec', uid),
   band: safeId('zs-band', uid),
+  gold: safeId('zs-gold', uid),
 }
 
 const W = 1000
@@ -47,6 +49,7 @@ const f = (n: number) => Math.round(n * 100) / 100
 // The spot in each glyph that the next frame zooms into.
 const targets: Record<string, [number, number]> = {
   coin: [20, -16],
+  dollar: [22, 13],
   grain: [14, 12],
   cell: [-20, 14],
   atom: [36.4, -7],
@@ -102,6 +105,15 @@ const ticks = Array.from({ length: 36 }, (_, i) => {
   return `M${f(Math.cos(a) * 35)} ${f(Math.sin(a) * 35)} L${f(Math.cos(a) * 39)} ${f(Math.sin(a) * 39)}`
 }).join(' ')
 
+const milling = Array.from({ length: 90 }, (_, i) => {
+  const a = (i / 90) * Math.PI * 2
+  return `M${f(Math.cos(a) * 37.6)} ${f(Math.sin(a) * 37.6)} L${f(Math.cos(a) * 40)} ${f(Math.sin(a) * 40)}`
+}).join(' ')
+
+// A bounding kangaroo, facing right, about 36 × 18 at scale 1.
+const ROO = 'M-6 -2.4 C-2 -5.6 4 -6 8 -4.8 L10.4 -6.6 L10.6 -9.6 L12 -7.4 L13 -9.8 L13.6 -7.2 L16.8 -6 L16.4 -5 L12.8 -4.4 L11.2 -2.4 L14.2 -1 L13.6 -0.2 L9.8 -1.2 C8 0.6 5 1.4 2 1.4 C0.6 3.6 -1.6 4.6 -4.2 4.4 L-12.4 7.4 L-12.8 6.4 L-7.4 3.2 C-8.6 2.4 -8.6 1.6 -8.4 1 C-12 2.2 -15.6 3.2 -19.4 3.8 C-15.6 1.4 -11.6 -0.8 -6 -2.4 Z'
+const mob = [[-12, -15], [12, -17], [-15, 1], [9, -1], [-2, 15]]
+
 const orbits = [0, 60, 120]
 const electrons: [number, number][] = [[36.4, -7], [-24, -26], [-10, 34]]
 
@@ -126,6 +138,11 @@ const split = computed(() => {
         <stop :offset="split.b" style="stop-color: var(--violet)" />
         <stop offset="1" style="stop-color: var(--magenta)" />
       </linearGradient>
+      <radialGradient :id="ids.gold" cx="0.36" cy="0.32" r="0.75">
+        <stop offset="0" stop-color="#fdeaa8" />
+        <stop offset="0.55" stop-color="#e6b84a" />
+        <stop offset="1" stop-color="#b8862a" />
+      </radialGradient>
     </defs>
 
     <template v-for="(s, i) in layout" :key="i">
@@ -137,6 +154,14 @@ const split = computed(() => {
           <circle r="31" class="zs-coin-inner" />
           <path :d="ticks" />
           <path d="M-9 -12 L0 -18 L0 18 M-9 18 L9 18" class="zs-coin-mark" />
+        </g>
+
+        <g v-else-if="s.kind === 'dollar'" class="zs-dollar">
+          <circle r="40" :fill="`url(#${ids.gold})`" />
+          <path :d="milling" class="zs-dollar-milling" />
+          <circle r="35" class="zs-dollar-inner" />
+          <path v-for="(m, j) in mob" :key="j" :d="ROO" :transform="`translate(${m[0]} ${m[1]}) scale(0.6)`" class="zs-dollar-roo" />
+          <text y="27" text-anchor="middle" class="zs-dollar-text">1 DOLLAR</text>
         </g>
 
         <g v-else-if="s.kind === 'grain'" class="zs-grain">
@@ -230,6 +255,37 @@ const split = computed(() => {
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.zs-dollar circle {
+  stroke: #8a6414;
+  stroke-width: 1.4;
+}
+
+.zs-dollar .zs-dollar-inner {
+  fill: none;
+  stroke-width: 0.7;
+  stroke-opacity: 0.6;
+}
+
+.zs-dollar-milling {
+  fill: none;
+  stroke: #8a6414;
+  stroke-width: 0.8;
+  stroke-opacity: 0.7;
+}
+
+.zs-dollar-roo {
+  fill: #7a5410;
+  fill-opacity: 0.85;
+}
+
+.zs-dollar-text {
+  font-family: var(--font-display);
+  font-size: 6px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: #7a5410;
 }
 
 .zs-grain polygon {

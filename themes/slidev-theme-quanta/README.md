@@ -44,7 +44,7 @@ the deck works offline.
 | `<Odds>` | `theta`, `counts` (`[zeros, ones]`) or `chance`, plus `labels` (default `['0', '1']`) and `out-of` (total slots, so a tally still filling up grows in from both ends). A split bar of the chance of each answer |
 | `<Outcomes>` | `counts`, `labels` (default two-qubit bit strings), `title`, `ceiling` (share at the top of the chart, default 0.6). A histogram of measured outcomes; empty outcomes keep a dashed slot |
 | `<GroverCurve>` | `qubits`, `measured` (success rate at 0, 1, 2… rounds), `rounds` (theory only). Theory curve, measured dots, guessing line, and where to stop |
-| `<ScaleZoom>` | `stops` (`kind`: `coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
+| `<ScaleZoom>` | `stops` (`kind`: `dollar` (an Australian $1)\|`coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`, `play` (start grey and colour each read in turn as the slide opens; exports, the overview and reduced motion show the finished chart), `seconds` (default 3). A dot per simulated read, tallied with `<Odds>` underneath |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 

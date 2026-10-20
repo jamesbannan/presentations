@@ -154,7 +154,7 @@ kicker: Bits and qubits · why
 Real qubits are an electron, a particle of light, a single atom, or a circuit chilled until it acts like one.
 
 <!--
-So why does a qubit behave like this? Because of what it's made of. Zoom in from a coin, to a grain of sand, to a cell, to an atom, to an electron. Somewhere around the atom the rules change. Down there, nature doesn't keep a definite value for everything. It keeps odds.
+So why does a qubit behave like this? Because of what it's made of. Zoom in from a one-dollar coin, to a grain of sand, to a cell, to an atom, to an electron. Somewhere around the atom the rules change. Down there, nature doesn't keep a definite value for everything. It keeps odds.
 
 A qubit is one of those tiny things that we've learned to control: an electron's spin, a particle of light, a single trapped atom. Or the IBM and Google approach: a superconducting circuit big enough to see under a microscope, cooled colder than outer space until the whole thing behaves like one quantum object. The arrow on our globe is that object's state.
 -->
