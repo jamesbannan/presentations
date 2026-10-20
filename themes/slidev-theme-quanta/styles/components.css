@@ -355,6 +355,78 @@
   gap: 1.6em;
 }
 
+.slidev-layout .chart-solo {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.slidev-layout .run-cmd--centre {
+  text-align: center;
+}
+
+/* ---------- Gate sequences — gates on a wire, read left to right ---------- */
+.slidev-layout .gate-seq {
+  display: flex;
+  justify-content: center;
+  gap: 0.45em;
+  margin: 0 0 0.3em;
+  padding: 0 0.7em;
+  background: linear-gradient(var(--ink-soft), var(--ink-soft)) center / 100% 1px no-repeat;
+}
+
+.slidev-layout .gate {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75em;
+  height: 1.75em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--violet);
+  background: #fff;
+  border: 1.5px solid var(--violet);
+  border-radius: 4px;
+}
+
+.slidev-layout .gate--z {
+  color: var(--magenta);
+  border-color: var(--magenta);
+}
+
+/* ---------- Plate groups — plates under a shared, ruled label ---------- */
+.slidev-layout .plate-groups {
+  display: flex;
+  justify-content: center;
+  gap: 3.4em;
+  margin-top: 0.4em;
+}
+
+.slidev-layout .plate-group .plates {
+  gap: 1.6em;
+  margin-top: 0.7em;
+}
+
+.slidev-layout .plate-group .globe {
+  width: 74%;
+  margin: 0 auto;
+}
+
+.slidev-layout .plate-group .plate > p {
+  margin-top: 0.4em;
+}
+
+.slidev-layout .plate-group-label {
+  margin: 0;
+  padding-bottom: 0.45em;
+  border-bottom: 1px solid var(--grid);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
 /* ---------- Closing-slide contact links ---------- */
 /* One shared column, as wide as the longest link, so every plate matches. */
 .slidev-layout .contact-list {

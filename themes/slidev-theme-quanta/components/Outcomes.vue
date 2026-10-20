@@ -6,10 +6,12 @@
 
     <Outcomes title="Entangled" :counts="[487, 0, 0, 513]" />
     <Outcomes :counts="[248, 280, 246, 226]" :labels="['00', '01', '10', '11']" />
+    <Outcomes :counts="[269, 260]" :labels="['0000', '0110']" :captions="['0+0=00', '0+1=01']" />
 
   Props:
     counts   — shots per outcome
     labels   — the outcome for each count (default: two-qubit bit strings)
+    captions — optional second line under each label, saying what it means
     title    — heading above the bars
     ceiling  — the share at the top of the chart (default 0.6), so charts
                set side by side share a scale
@@ -20,6 +22,7 @@ import { computed } from 'vue'
 const props = defineProps({
   counts: { type: Array as () => number[], required: true },
   labels: { type: Array as () => string[], default: () => ['00', '01', '10', '11'] },
+  captions: { type: Array as () => string[], default: () => [] },
   title: { type: String, default: '' },
   ceiling: { type: Number, default: 0.6 },
 })
@@ -42,7 +45,7 @@ const bars = computed(() => {
     const x = 10 + slot * i + (slot - width) / 2
     return {
       x: f(x), y: f(BASE - h), w: f(width), h: f(h), cx: f(x + width / 2),
-      label, tone, empty: c === 0,
+      label, tone, empty: c === 0, caption: props.captions[i] ?? '',
       pct: `${(share * 100).toFixed(share === 0 ? 0 : 1)}%`,
     }
   })
@@ -50,7 +53,7 @@ const bars = computed(() => {
 </script>
 
 <template>
-  <svg class="motif outcomes" :viewBox="`0 0 ${W} 232`" role="img" :aria-label="title || 'Measured outcomes'">
+  <svg class="motif outcomes" :viewBox="`0 0 ${W} ${captions.length ? 254 : 232}`" role="img" :aria-label="title || 'Measured outcomes'">
     <text v-if="title" :x="W / 2" y="18" text-anchor="middle" class="oc-title">{{ title }}</text>
     <path :d="`M4 ${BASE} L${W - 4} ${BASE}`" class="oc-base" />
     <g v-for="(b, i) in bars" :key="i" :class="`oc-bar oc-bar--${b.tone}`">
@@ -58,6 +61,7 @@ const bars = computed(() => {
       <rect v-else :x="b.x" :y="b.y" :width="b.w" :height="b.h" rx="3" class="oc-fill" />
       <text :x="b.cx" :y="(b.empty ? BASE - 26 : b.y) - 8" text-anchor="middle" class="oc-pct">{{ b.pct }}</text>
       <text :x="b.cx" :y="BASE + 22" text-anchor="middle" class="oc-label">{{ b.label }}</text>
+      <text v-if="b.caption" :x="b.cx" :y="BASE + 44" text-anchor="middle" class="oc-caption">{{ b.caption }}</text>
     </g>
   </svg>
 </template>
@@ -103,6 +107,12 @@ const bars = computed(() => {
 .oc-pct {
   font-family: var(--font-mono);
   font-size: 12px;
+  fill: var(--ink-soft);
+}
+
+.oc-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
   fill: var(--ink-soft);
 }
 

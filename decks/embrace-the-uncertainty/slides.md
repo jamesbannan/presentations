@@ -224,6 +224,65 @@ If you take one sentence out of this section, take this one.
 -->
 
 ---
+kicker: Demo · gates
+---
+
+# Demo: the sign you can't see
+
+<div class="plate-groups" style="--plate: 200px">
+  <div class="plate-group">
+    <p class="plate-group-label">Measure straight away</p>
+    <div class="plates">
+      <div class="plate">
+        <p class="gate-seq"><span class="gate">H</span></p>
+        <Globe :theta="90" :phi="28.65" />
+        <Odds :counts="[481, 519]" />
+        <p><b>Points east</b></p>
+      </div>
+      <div class="plate">
+        <p class="gate-seq"><span class="gate">H</span><span class="gate gate--z">Z</span></p>
+        <Globe :theta="90" :phi="208.65" />
+        <Odds :counts="[539, 461]" />
+        <p><b>Points west</b></p>
+      </div>
+    </div>
+  </div>
+  <div class="plate-group">
+    <p class="plate-group-label">Add one more H first</p>
+    <div class="plates">
+      <div class="plate">
+        <p class="gate-seq"><span class="gate">H</span><span class="gate">H</span></p>
+        <Globe :theta="0" />
+        <Odds :counts="[1000, 0]" />
+        <p><b>Always 0</b></p>
+      </div>
+      <div class="plate">
+        <p class="gate-seq"><span class="gate">H</span><span class="gate gate--z">Z</span><span class="gate">H</span></p>
+        <Globe :theta="180" />
+        <Odds :counts="[0, 1000]" />
+        <p><b>Always 1</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="run-cmd run-cmd--centre">uv run demos/gates.py</p>
+
+<p class="source">A typical run: 1,000 shots of each on the local QDK simulator</p>
+
+<!--
+Demo: quantum-computing repo, demos/gates.py (Q# in demos/src/Gates.qs). Runs locally, no Azure, no network.
+
+Gates are the moves you make on the arrow. H takes the north arrow and lays it on the equator, pointing east. Measure now: 50/50. Add a Z after the H and the arrow swings round to point west. Same height, so the same odds: still 50/50. Measure those two and you can't tell them apart.
+
+But they are different. Remember the "west or east?" question from earlier? A second H is how you ask it. It turns east into north and west into south. So H H comes back 0 every single time, and H Z H comes back 1 every single time. The difference you couldn't measure decided everything.
+
+In amplitude terms: H and H Z both have 0.707 on each answer, but H Z's |1> amplitude is negative. Measurement only sees the size, never the sign. The second H makes the two paths interfere: for H H the paths to 1 cancel, for H Z H the paths to 0 cancel. That cancelling is the engine of every quantum algorithm, Grover's included.
+
+The script also runs plain X (always 1, the quantum NOT). In VS Code: Histogram on Superposition and PhaseFlip (identical), then Debug to show the minus sign, then Histogram on Interference and PhaseRevealed.
+-->
+
+---
 kicker: Demo · entanglement
 ---
 
@@ -260,6 +319,50 @@ Left: the entangled pair. Each qubit on its own is 50/50, but together they only
 That zero is the whole demo. Random individually, perfectly correlated together. The numbers here are from one run; live, they'll wobble, but the zeros won't.
 
 Useful flags: --shots 5000, --dump-state to show the state before measurement.
+-->
+
+---
+kicker: Demo · half adder
+---
+
+# Demo: one pass adds every pair, one read shows one
+
+<div class="split" style="--split: 0.9fr 1.1fr">
+<div>
+
+```rust
+H(a); H(b);          // every input pair at once
+CCNOT(a, b, carry);  // carry = a AND b
+CNOT(a, sum);        // sum = a XOR b
+CNOT(b, sum);
+MResetEachZ([a, b, sum, carry])
+```
+
+<p class="run-cmd">uv run demos/adder.py</p>
+
+</div>
+<Outcomes
+  class="chart-solo"
+  title="a b sum carry"
+  :counts="[269, 260, 246, 225]"
+  :labels="['0000', '0110', '1010', '1101']"
+  :captions="['0+0=00', '0+1=01', '1+0=01', '1+1=10']"
+  :ceiling="0.4"
+/>
+</div>
+
+<p class="source">A typical run: 1,000 shots on the local QDK simulator. Wrong sums: 0</p>
+
+<!--
+Demo: quantum-computing repo, demos/adder.py (Q# in demos/src/Adder.qs). Runs locally, no Azure, no network.
+
+Classical logic is a special case of a quantum circuit. CNOT is XOR, CCNOT is AND, so a half adder is three gates. Feed it ordinary bits and you get the ordinary truth table; the script prints that first.
+
+Now the twist: H on both inputs first. One pass through the adder and the state holds all four additions at once, each with amplitude 0.5. This is the "quantum computers try every answer in parallel" headline, and it's true as far as it goes.
+
+Then you measure. Four bars, about a quarter each, and never a wrong sum. But each run hands you one row of the truth table, at random. To see all four you'd run it four-plus times, which is no faster than a classical adder. Parallelism on its own isn't a speed-up. You need interference to make the answer you want the likely one, which is exactly what Grover does next.
+
+In VS Code: Circuit on HalfAdder, Debug on AddEverything stepped to MResetEachZ to show the four basis states, then Histogram on AddEverything.
 -->
 
 ---

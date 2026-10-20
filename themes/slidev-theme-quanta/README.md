@@ -42,7 +42,7 @@ the deck works offline.
 | `<Ket>` | `bra`. `<Ket>ψ</Ket>` renders `|ψ⟩` |
 | `<Globe>` | `theta` (0 = north = 0, 180 = south = 1), `phi`, `bit` (classical style), `ghosts` (faint arrows elsewhere), `latitude`, `was` (old angle, drawn with a snap arc), `ask` (`ns`\|`ew`: which question a read asks; due east is `theta` 90, `phi` 28.65), `wander` (hop to a random direction every `hop` ms, default 1200, leaving the last `trail` positions fading, default 5; holds still under reduced motion), `seed` |
 | `<Odds>` | `theta`, `counts` (`[zeros, ones]`) or `chance`, plus `labels` (default `['0', '1']`) and `out-of` (total slots, so a tally still filling up grows in from both ends). A split bar of the chance of each answer |
-| `<Outcomes>` | `counts`, `labels` (default two-qubit bit strings), `title`, `ceiling` (share at the top of the chart, default 0.6). A histogram of measured outcomes; empty outcomes keep a dashed slot |
+| `<Outcomes>` | `counts`, `labels` (default two-qubit bit strings), `title`, `ceiling` (share at the top of the chart, default 0.6), `captions` (a second, smaller line under each label, e.g. `'0+1=01'`). A histogram of measured outcomes; empty outcomes keep a dashed slot |
 | `<GroverCurve>` | `qubits`, `measured` (success rate at 0, 1, 2… rounds), `rounds` (theory only). Theory curve, measured dots, guessing line, and where to stop |
 | `<ScaleZoom>` | `stops` (`kind`: `dollar` (an Australian $1)\|`coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`, `play` (start grey and colour each read in turn as the slide opens; exports, the overview and reduced motion show the finished chart), `seconds` (default 3). A dot per simulated read, tallied with `<Odds>` underneath |
@@ -72,12 +72,18 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
   a `<p>` under it; `<b>` in the caption is the heading. Set `--plate` to
   change the width. `.plate-step` is a narrow column between plates, for an
   arrow or a `<Readout>`.
+- `.plate-groups` sets `.plate-group`s side by side, each a `.plate-group-label`
+  heading over its own `.plates`, at a smaller plate size.
+- `.gate-seq` is a row of `.gate` chips on a wire, drawn above a plate's figure
+  to show the circuit it ran. Add `gate--z` for a phase gate.
 - `.split` is a two-column grid with a figure on one side and text on the
   other. Set `--split` to change the ratio.
 - `.mini-globe` sizes a `<Globe>` to sit in a table header.
 - `.zoom-figure` spaces a `<ScaleZoom>` from the text around it.
-- `.run-cmd` is a shell command to run a demo, with a `$` prompt.
+- `.run-cmd` is a shell command to run a demo, with a `$` prompt. Add
+  `run-cmd--centre` to centre it.
 - `.chart-pair` sets two charts side by side at the same width.
+- `.chart-solo` caps a single chart's width, for one beside text in a `.split`.
 
 ## Writing SVG components for Slidev
 
