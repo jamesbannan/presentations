@@ -172,7 +172,9 @@ async function checkDeck(deck) {
   await new Promise(done => server.listen(PORT, done))
 
   const browser = await chromium.launch()
-  const page = await browser.newPage({ viewport: { width: 1600, height: 900 } })
+  // Reduced motion holds animated components at their finished frame, so
+  // screenshots are the same every run.
+  const page = await browser.newPage({ viewport: { width: 1600, height: 900 }, reducedMotion: 'reduce' })
 
   const failures = []
   const errors = []

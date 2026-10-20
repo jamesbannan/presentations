@@ -7,6 +7,8 @@
     <Shots :theta="55" />                       400 reads
     <Shots :theta="55" :reads="1000" :per-row="50" />
     <Shots :theta="55" sorted />                grouped: 0s first, then 1s
+    <Shots :theta="55" play />                  starts grey, colours each read in turn
+                                                and fills the tally as the slide opens
 
   Props:
     theta  — the arrow, in degrees from the north pole
@@ -14,9 +16,15 @@
     perRow — dots per row
     sorted — group the outcomes so the split reads as a bar
     seed   — for the reads
+    play   — every time the slide opens, start with grey dots and colour
+             them one at a time, filling the tally bar as it goes. Exports,
+             the overview, the next-slide preview and reduced motion all
+             show the finished chart
+    seconds — how long `play` takes for all the reads (default 3)
 -->
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useIsSlideActive, useNav, useSlideContext } from '@slidev/client'
 import { rng } from '../composables/motif'
 
 const props = defineProps({
@@ -25,6 +33,8 @@ const props = defineProps({
   perRow: { type: Number, default: 40 },
   sorted: { type: Boolean, default: false },
   seed: { type: Number, default: 21 },
+  play: { type: Boolean, default: false },
+  seconds: { type: Number, default: 3 },
 })
 
 const STEP = 10
@@ -36,9 +46,37 @@ const outcomes = computed(() => {
   return props.sorted ? [...all].sort((a, b) => a - b) : all
 })
 
+// How many reads are coloured in. Without `play`, all of them.
+const shown = ref(props.reads)
+const { $renderContext } = useSlideContext()
+const { isPrintMode } = useNav()
+const active = useIsSlideActive()
+let frame = 0
+
+function run() {
+  cancelAnimationFrame(frame)
+  shown.value = 0
+  const start = performance.now()
+  const tick = (now: number) => {
+    const t = Math.min(1, (now - start) / (props.seconds * 1000))
+    shown.value = Math.round(t * props.reads)
+    if (t < 1) frame = requestAnimationFrame(tick)
+  }
+  frame = requestAnimationFrame(tick)
+}
+
+watch(active, (on) => {
+  const live = ['slide', 'presenter'].includes($renderContext?.value as string)
+  const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  if (on && props.play && live && !isPrintMode.value && !still) run()
+}, { immediate: true })
+
+onBeforeUnmount(() => cancelAnimationFrame(frame))
+
 const tally = computed(() => {
-  const ones = outcomes.value.reduce((n, o) => n + o, 0)
-  return [outcomes.value.length - ones, ones]
+  const seen = outcomes.value.slice(0, shown.value)
+  const ones = seen.reduce((n, o) => n + o, 0)
+  return [seen.length - ones, ones]
 })
 
 const rowCount = computed(() => Math.ceil(props.reads / props.perRow))
@@ -61,10 +99,10 @@ const dots = computed(() =>
       <circle
         v-for="(d, i) in dots" :key="i"
         :cx="d.x" :cy="d.y" r="2.9"
-        :class="d.o ? 'shots-one' : 'shots-zero'"
+        :class="i >= shown ? 'shots-wait' : d.o ? 'shots-one' : 'shots-zero'"
       />
     </svg>
-    <Odds :counts="tally" />
+    <Odds :counts="tally" :out-of="reads" />
   </div>
 </template>
 
@@ -88,5 +126,9 @@ const dots = computed(() =>
 .shots-one {
   fill: var(--magenta);
   opacity: 0.85;
+}
+
+.shots-wait {
+  fill: var(--grid);
 }
 </style>

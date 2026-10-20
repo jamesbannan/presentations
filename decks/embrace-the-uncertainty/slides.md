@@ -135,10 +135,10 @@ kicker: Bits and qubits · shots
 
 Set up the same qubit 500 times. Read it each time. Count.
 
-<Shots :theta="55" :reads="500" :per-row="50" :seed="18" />
+<Shots :theta="55" :reads="500" :per-row="50" :seed="18" play />
 
 <!--
-One read tells you almost nothing. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
+One read tells you almost nothing. Watch the reads come in one at a time: the first handful could say anything, but the split settles down fast. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
 -->
 
 ---

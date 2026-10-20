@@ -25,7 +25,7 @@ built and render-checked until the rest of the talk is written.
 | 4 | A qubit can point anywhere | Same globe, any direction |
 | 5 | How far north sets the odds | Three latitudes and their odds |
 | 6 | Reading it moves the arrow | Two clicks: the read, then the snapped arrow |
-| 7 | So you run it hundreds of times | 500 simulated reads of the cover's arrow |
+| 7 | So you run it hundreds of times | 500 simulated reads of the cover's arrow, coloured in one at a time as the slide opens |
 | 8 | Why? Qubits are built from tiny things | Zoom from a coin to an electron; where the rules change |
 | 9 | Uncertainty is built in | Heisenberg as two questions on one globe; one click |
 | 10 | Bit vs qubit | Summary table |
