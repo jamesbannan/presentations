@@ -61,7 +61,7 @@ kicker: Bits and qubits · quantum
 # A qubit can point anywhere
 
 <div class="split">
-<Globe :theta="62" :ghosts="18" />
+<Globe :theta="62" wander />
 <div>
 
 - Same globe, same two poles
@@ -72,7 +72,7 @@ kicker: Bits and qubits · quantum
 </div>
 
 <!--
-A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. The faint arrows are all valid qubits. The direction the arrow points is the state. That's all "superposition" means here: pointing somewhere other than straight at a pole.
+A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. Watch it hop: every one of those directions, and the fading ones it just left, is a valid qubit. The direction the arrow points is the state. That's all "superposition" means here: pointing somewhere other than straight at a pole.
 -->
 
 ---

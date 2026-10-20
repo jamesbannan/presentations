@@ -8,6 +8,7 @@
     <Globe :theta="60" :ghosts="14" />   …with faint arrows showing it could point anywhere
     <Globe :theta="0" :was="60" />       …after it's read: snapped to 0, old arrow ghosted
     <Globe :theta="0" ask="ew" />        the same globe asked a different question: west or east?
+    <Globe :theta="60" wander />         the arrow hops between random directions, leaving a fading trail
 
   Props:
     theta    — degrees from the north pole (0 = 0, 180 = 1)
@@ -17,6 +18,12 @@
     latitude — draw the arrow's line of latitude
     was      — a previous theta: ghosts the old arrow and draws the snap
     seed     — for the ghosts
+    wander   — hop the arrow to a new random direction every `hop` ms,
+               leaving the last `trail` positions fading behind it. Starts
+               at theta/phi, is seeded, and holds still under
+               prefers-reduced-motion
+    hop      — milliseconds between hops (default 1200)
+    trail    — how many past positions to keep (default 5)
     ask      — which question a read asks: 'ns' (north or south, the
                default) or 'ew' (west or east, an axis drawn across the
                globe). An arrow points due east at theta 90, phi 28.65
@@ -25,7 +32,7 @@
   stylesheet, not in attributes: UnoCSS attributify reads those as utilities.
 -->
 <script setup lang="ts">
-import { computed, useId } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
 import { project, rng, safeId, sphereCircle } from '../composables/motif'
 
 const props = defineProps({
@@ -37,6 +44,9 @@ const props = defineProps({
   was: { type: Number, default: null },
   seed: { type: Number, default: 13 },
   ask: { type: String, default: 'ns' },
+  wander: { type: Boolean, default: false },
+  hop: { type: Number, default: 1200 },
+  trail: { type: Number, default: 5 },
 })
 
 const uid = useId() ?? 'x'
@@ -71,6 +81,31 @@ const axis = (() => {
   return `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`
 })()
 
+// Wandering: the arrow's live direction, and where it has been.
+const live = ref({ theta: props.theta, phi: props.phi })
+const theta = computed(() => (props.wander ? live.value.theta : props.theta))
+const phi = computed(() => (props.wander ? live.value.phi : props.phi))
+const hops = ref(0)
+const trailTips = ref<{ id: number, x: number, y: number, front: boolean }[]>([])
+let timer: ReturnType<typeof setInterval> | undefined
+
+onMounted(() => {
+  if (!props.wander) return
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+  const r = rng(props.seed + 101)
+  timer = setInterval(() => {
+    const q = P(unit(rad(theta.value), rad(phi.value)))
+    trailTips.value = [{ id: hops.value, x: f(q.x), y: f(q.y), front: q.depth >= 0 }, ...trailTips.value]
+      .slice(0, props.trail)
+    // Uniform over the sphere, kept just off the poles so no badge lights up.
+    const z = (1 - 2 * r()) * 0.96
+    live.value = { theta: (Math.acos(z) * 180) / Math.PI, phi: r() * 360 }
+    hops.value++
+  }, props.hop)
+})
+
+onBeforeUnmount(() => clearInterval(timer))
+
 // Due east is the azimuth that the projection draws flat across the page.
 const EAST = 0.5
 const ew = (() => {
@@ -79,15 +114,15 @@ const ew = (() => {
   return { axis: `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`, west: P([-Math.cos(EAST), -Math.sin(EAST), 0]), east: P([Math.cos(EAST), Math.sin(EAST), 0]) }
 })()
 const atSide = computed(() => {
-  const d = Math.sin(rad(props.theta)) * Math.cos(rad(props.phi) - EAST)
+  const d = Math.sin(rad(theta.value)) * Math.cos(rad(phi.value) - EAST)
   return d >= 0.999 ? 'e' : d <= -0.999 ? 'w' : null
 })
 
-const tip = computed(() => P(unit(rad(props.theta), rad(props.phi))))
-const atPole = computed(() => (props.theta <= 0.5 ? 0 : props.theta >= 179.5 ? 1 : null))
+const tip = computed(() => P(unit(rad(theta.value), rad(phi.value))))
+const atPole = computed(() => (theta.value <= 0.5 ? 0 : theta.value >= 179.5 ? 1 : null))
 
 const ring = computed(() =>
-  props.latitude && atPole.value === null ? sphereCircle(latitudeAt(rad(props.theta)), R) : null,
+  props.latitude && atPole.value === null ? sphereCircle(latitudeAt(rad(theta.value)), R) : null,
 )
 
 // Ghost arrows: spread over the sphere (a Fibonacci spiral, jittered by the
@@ -187,6 +222,19 @@ const snap = computed(() => {
       <path :d="snap.arc" class="globe-snap-arc" :marker-end="`url(#${ids.head})`" />
     </g>
 
+    <!-- Where a wandering arrow has been -->
+    <g v-if="wander" class="globe-trail">
+      <g
+        v-for="(t, i) in trailTips"
+        :key="t.id"
+        :class="{ 'globe-trail--back': !t.front }"
+        :style="{ opacity: 1 - (i + 1) / (trail + 1) }"
+      >
+        <path :d="`M0 0 L${t.x} ${t.y}`" />
+        <circle :cx="t.x" :cy="t.y" r="4" />
+      </g>
+    </g>
+
     <!-- The arrow -->
     <path
       :d="`M0 0 L${f(tip.x)} ${f(tip.y)}`"
@@ -194,7 +242,7 @@ const snap = computed(() => {
       :stroke="bit ? undefined : `url(#${ids.vec})`"
       fill="none"
     />
-    <circle :cx="tip.x" :cy="tip.y" r="12" class="globe-tip-halo" />
+    <circle :key="`halo${hops}`" :cx="tip.x" :cy="tip.y" r="12" class="globe-tip-halo" :class="{ 'globe-tip-halo--pop': hops > 0 }" />
     <circle :cx="tip.x" :cy="tip.y" r="5.2" class="globe-tip" />
     <circle r="2.6" class="globe-origin" />
 
@@ -327,6 +375,43 @@ const snap = computed(() => {
 .globe-tip-halo {
   fill: var(--magenta);
   opacity: 0.16;
+}
+
+.globe-trail g {
+  transition: opacity 0.6s ease;
+}
+
+.globe-trail path {
+  stroke: var(--violet);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 3 3;
+}
+
+.globe-trail circle {
+  fill: var(--magenta);
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.globe-trail--back path {
+  stroke-dasharray: 1 3;
+}
+
+.globe-trail--back circle {
+  fill: var(--paper);
+  stroke: var(--magenta);
+}
+
+.globe-tip-halo--pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: globe-pop 0.5s ease-out;
+}
+
+@keyframes globe-pop {
+  from { transform: scale(2.4); opacity: 0.45; }
+  to { transform: scale(1); }
 }
 
 .globe-origin {
