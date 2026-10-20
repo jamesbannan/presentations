@@ -238,13 +238,13 @@ kicker: Bits and qubits · so what?
     <Patterns mode="odds" />
     <p><b>4 qubits</b>Odds on all 16. A read shows one.</p>
   </div>
-  <div class="plate" v-click="3">
+  <div class="plate" v-click="2">
     <Patterns mode="focus" />
     <p><b>Then interference</b>Wrong answers cancel out.</p>
   </div>
 </div>
 
-<div class="doubling" v-click="2">
+<div class="doubling" v-click="3">
   <span class="doubling-lead">Each qubit doubles the patterns. Memory to simulate them classically:</span>
   <div><b>30 qubits</b><span>16 GB · a laptop</span></div>
   <div><b>40 qubits</b><span>16 TB · a cluster</span></div>
@@ -261,9 +261,9 @@ A classical register holds exactly one of those patterns. Your program works on 
 
 [click] Four qubits don't hold a pattern. They hold odds on every pattern, all sixteen at once, and every gate you apply reshapes all of those odds in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, at those odds. That's the half adder demo coming up.
 
-[click] And here's what scares classical computers. Every qubit you add doubles the patterns. To simulate qubits on a normal computer you have to store a number for every pattern: thirty qubits is sixteen gigabytes, about your laptop. Forty is sixteen terabytes, a cluster. Sixty is sixteen exabytes, more memory than any computer ever built. Three hundred qubits: more numbers than there are atoms in the observable universe. (16 bytes per pattern, one double-precision complex number; binary units.)
-
 [click] So where does the power come from, if a read gives one pattern? Interference. The odds have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of odds. You'll see the hidden sign in the next demo.
+
+[click] And here's what scares classical computers. Every qubit you add doubles the patterns. To simulate qubits on a normal computer you have to store a number for every pattern: thirty qubits is sixteen gigabytes, about your laptop. Forty is sixteen terabytes, a cluster. Sixty is sixteen exabytes, more memory than any computer ever built. Three hundred qubits: more numbers than there are atoms in the observable universe. (16 bytes per pattern, one double-precision complex number; binary units.)
 
 [click] Which is why it isn't a faster computer. It's a different one. For most work, spreadsheets, web servers, your laptop wins. But for a few problems with the right structure, simulating molecules and materials, and factoring the big numbers that today's public-key encryption relies on, it's not faster, it's a different league. That second one is why we're here.
 -->
