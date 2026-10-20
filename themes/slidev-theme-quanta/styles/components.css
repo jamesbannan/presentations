@@ -427,6 +427,96 @@
   color: var(--violet);
 }
 
+/* A row of <Patterns> grids: wider gaps so the grids read as separate. */
+.slidev-layout .patterns-row {
+  gap: 2.4em;
+  margin-top: 0.2em;
+}
+
+.slidev-layout .patterns-row .patterns {
+  width: 54%;
+}
+
+.slidev-layout .patterns-row .plate > p {
+  margin-top: 0.4em;
+}
+
+/* ---------- Doubling — a row of steps on a wire, each a size and a gloss ----------
+   <div class="doubling">
+     <span class="doubling-lead">Lead-in line</span>
+     <div><b>30 qubits</b><span>16 GB · a laptop</span></div>
+   </div> */
+.slidev-layout .doubling {
+  display: grid;
+  grid-template-columns: repeat(var(--steps, 4), 1fr);
+  column-gap: 1.4em;
+  margin: 0.8em auto 0;
+  max-width: 860px;
+}
+
+.slidev-layout .doubling-lead {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--violet);
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.slidev-layout .doubling > div {
+  position: relative;
+  padding-top: 0.6em;
+  border-top: 2px solid var(--grid);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.slidev-layout .doubling > div::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--violet);
+}
+
+.slidev-layout .doubling > div:last-child::before {
+  background: var(--magenta);
+  border-color: var(--magenta);
+}
+
+.slidev-layout .doubling b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.slidev-layout .doubling > div span {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Takeaway — a closing line under a figure, lead in bold ---------- */
+.slidev-layout .takeaway {
+  margin: 0.8em auto 0;
+  max-width: 860px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.slidev-layout .takeaway b {
+  color: var(--violet);
+}
+
 /* ---------- Closing-slide contact links ---------- */
 /* One shared column, as wide as the longest link, so every plate matches. */
 .slidev-layout .contact-list {

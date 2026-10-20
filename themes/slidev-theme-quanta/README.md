@@ -46,6 +46,7 @@ the deck works offline.
 | `<GroverCurve>` | `qubits`, `measured` (success rate at 0, 1, 2… rounds), `rounds` (theory only). Theory curve, measured dots, guessing line, and where to stop |
 | `<ScaleZoom>` | `stops` (`kind`: `dollar` (an Australian $1)\|`coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`, `play` (start grey and colour each read in turn as the slide opens; exports, the overview and reduced motion show the finished chart), `seconds` (default 3). A dot per simulated read, tallied with `<Odds>` underneath |
+| `<Patterns>` | `qubits` (default 4), `mode` (`bits`: one pattern held, in ink \| `odds`: a share of the odds on every pattern \| `focus`: odds piled onto one, after interference), `pick` (the pattern held or found, as an index; default 11 = `1011`), `seed`. Every pattern a register can hold, as a grid |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
 Also `<Folio>` (slide number as a ket, qubit dots and binary), `<ContactLink>`
@@ -83,6 +84,12 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
 - `.run-cmd` is a shell command to run a demo, with a `$` prompt. Add
   `run-cmd--centre` to centre it.
 - `.chart-pair` sets two charts side by side at the same width.
+- `.patterns-row` sets a row of `.plates` holding `<Patterns>` grids, sized to sit
+  above a `.doubling` strip.
+- `.doubling` is a row of steps on a wire: a `.doubling-lead` span, then a
+  `<div>` per step with `<b>` and a `<span>` gloss. The last step's node is
+  magenta. Set `--steps` if there aren't four.
+- `.takeaway` is a centred closing line under a figure; its `<b>` lead is violet.
 - `.chart-solo` caps a single chart's width, for one beside text in a `.split`.
 
 ## Writing SVG components for Slidev

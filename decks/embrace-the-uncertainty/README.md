@@ -30,14 +30,15 @@ built and render-checked until the rest of the talk is written.
 | 9 | Uncertainty is built in | Heisenberg as two questions on one globe; one click |
 | 10 | Bit vs qubit | Summary table |
 | 11 | The one-liner | Statement |
-| 12 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
-| 13 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
-| 14 | Demo: the same pair on a real machine | `bell_hardware.py`: simulator vs hardware. **Hardware chart is a placeholder** until a run is recorded |
-| 15 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
-| 16 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
+| 12 | Why that makes a different kind of computer | 16-pattern grids: 4 bits hold one, 4 qubits spread odds over all, interference focuses them; memory to simulate 30–300 qubits; four clicks |
+| 13 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
+| 14 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
+| 15 | Demo: the same pair on a real machine | `bell_hardware.py`: simulator vs hardware. **Hardware chart is a placeholder** until a run is recorded |
+| 16 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
+| 17 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
-`Odds`, `Shots`, `Readout`, `ScaleZoom`), so there are no image files to maintain. The
+`Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), so there are no image files to maintain. The
 odds come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
 
