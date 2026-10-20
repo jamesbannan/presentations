@@ -39,6 +39,7 @@ const ids = {
   vec: safeId('zs-vec', uid),
   band: safeId('zs-band', uid),
   gold: safeId('zs-gold', uid),
+  emboss: safeId('zs-emboss', uid),
 }
 
 const W = 1000
@@ -49,7 +50,7 @@ const f = (n: number) => Math.round(n * 100) / 100
 // The spot in each glyph that the next frame zooms into.
 const targets: Record<string, [number, number]> = {
   coin: [20, -16],
-  dollar: [22, 13],
+  dollar: [21, -24],
   grain: [14, 12],
   cell: [-20, 14],
   atom: [36.4, -7],
@@ -105,14 +106,20 @@ const ticks = Array.from({ length: 36 }, (_, i) => {
   return `M${f(Math.cos(a) * 35)} ${f(Math.sin(a) * 35)} L${f(Math.cos(a) * 39)} ${f(Math.sin(a) * 39)}`
 }).join(' ')
 
-const milling = Array.from({ length: 90 }, (_, i) => {
-  const a = (i / 90) * Math.PI * 2
-  return `M${f(Math.cos(a) * 37.6)} ${f(Math.sin(a) * 37.6)} L${f(Math.cos(a) * 40)} ${f(Math.sin(a) * 40)}`
-}).join(' ')
-
+// The Australian $1, after Stuart Devlin's 1984 design: a big kangaroo
+// looking back over its shoulder, a mob behind it, and "1 DOLLAR".
 // A bounding kangaroo, facing right, about 36 × 18 at scale 1.
 const ROO = 'M-6 -2.4 C-2 -5.6 4 -6 8 -4.8 L10.4 -6.6 L10.6 -9.6 L12 -7.4 L13 -9.8 L13.6 -7.2 L16.8 -6 L16.4 -5 L12.8 -4.4 L11.2 -2.4 L14.2 -1 L13.6 -0.2 L9.8 -1.2 C8 0.6 5 1.4 2 1.4 C0.6 3.6 -1.6 4.6 -4.2 4.4 L-12.4 7.4 L-12.8 6.4 L-7.4 3.2 C-8.6 2.4 -8.6 1.6 -8.4 1 C-12 2.2 -15.6 3.2 -19.4 3.8 C-15.6 1.4 -11.6 -0.8 -6 -2.4 Z'
-const mob = [[-12, -15], [12, -17], [-15, 1], [9, -1], [-2, 15]]
+// Standing upright, facing left, feet at the origin, about 24 tall.
+const ROO_UP = 'M-3 -19 L0.4 -21.4 L1 -24.6 L2 -21.6 L3.4 -24 L3.6 -20.6 C5.4 -18 5.8 -14 6.4 -10 C7.4 -6 7.6 -3 6.4 -1 C9 0 12 1.6 14.4 4.4 C11 2.8 8 2 5.6 1.6 L4.8 2.6 L-2.6 3 L-2.8 2 L1.6 1.2 C0.6 -1 0.4 -3 0 -5 C-0.8 -8 -1.6 -11 -1.4 -13 L-4.6 -11 L-4.8 -11.8 L-1.4 -14.6 L-0.6 -17 Z'
+const ROO_BIG = 'M13 -11.2 L15.4 -13.6 C17.2 -15 19.2 -15.8 20.8 -15.6 L21.4 -19.8 L22.6 -15.8 L24.2 -19.4 L24.2 -15 C25.4 -13.6 25.6 -11.2 25 -8.6 C25.8 -3 26.6 2.6 27.2 6.2 L28.6 9.2 L26.8 9.4 L25 6.4 C24 4 23 1.6 22 0 C21.6 3.6 20 7.4 17.4 10 L14.8 14.4 L23.6 17.4 L23.4 18.8 L12.4 17.8 C10.6 17.6 10.4 16 11 14.6 L11.6 12.6 C8 12.4 4.4 11.4 1.6 10.2 C-8 11.2 -20 11.6 -31 10.4 C-22 8.8 -10 6.6 -1.6 4.6 C-1.4 -0.6 2.6 -5.6 8.6 -7.2 C11.4 -8 13.4 -9 15.4 -10.2 Z'
+const mob = [
+  { d: ROO, at: 'translate(2 -24) scale(-0.55 0.55)' },
+  { d: ROO, at: 'translate(-10 -15) scale(-0.55 0.55)' },
+  { d: ROO_UP, at: 'translate(-24 6) scale(0.62)' },
+  { d: ROO_UP, at: 'translate(-12 7) scale(0.7)' },
+  { d: ROO_BIG, at: '' },
+]
 
 const orbits = [0, 60, 120]
 const electrons: [number, number][] = [[36.4, -7], [-24, -26], [-10, 34]]
@@ -138,11 +145,24 @@ const split = computed(() => {
         <stop :offset="split.b" style="stop-color: var(--violet)" />
         <stop offset="1" style="stop-color: var(--magenta)" />
       </linearGradient>
-      <radialGradient :id="ids.gold" cx="0.36" cy="0.32" r="0.75">
-        <stop offset="0" stop-color="#fdeaa8" />
-        <stop offset="0.55" stop-color="#e6b84a" />
-        <stop offset="1" stop-color="#b8862a" />
+      <radialGradient :id="ids.gold" cx="0.38" cy="0.32" r="0.8">
+        <stop offset="0" stop-color="#f7ecc6" />
+        <stop offset="0.6" stop-color="#ddc890" />
+        <stop offset="1" stop-color="#b9a064" />
       </radialGradient>
+      <filter :id="ids.emboss">
+        <feOffset dx="-0.35" dy="-0.35" in="SourceAlpha" result="hi" />
+        <feFlood flood-color="#fffbe8" />
+        <feComposite in2="hi" operator="in" result="hiC" />
+        <feOffset dx="0.4" dy="0.4" in="SourceAlpha" result="lo" />
+        <feFlood flood-color="#7d6a38" />
+        <feComposite in2="lo" operator="in" result="loC" />
+        <feMerge>
+          <feMergeNode in="loC" />
+          <feMergeNode in="hiC" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
     </defs>
 
     <template v-for="(s, i) in layout" :key="i">
@@ -158,10 +178,12 @@ const split = computed(() => {
 
         <g v-else-if="s.kind === 'dollar'" class="zs-dollar">
           <circle r="40" :fill="`url(#${ids.gold})`" />
-          <path :d="milling" class="zs-dollar-milling" />
-          <circle r="35" class="zs-dollar-inner" />
-          <path v-for="(m, j) in mob" :key="j" :d="ROO" :transform="`translate(${m[0]} ${m[1]}) scale(0.6)`" class="zs-dollar-roo" />
-          <text y="27" text-anchor="middle" class="zs-dollar-text">1 DOLLAR</text>
+          <circle r="36.6" class="zs-dollar-inner" />
+          <g :filter="`url(#${ids.emboss})`" class="zs-dollar-relief">
+            <path v-for="(m, j) in mob" :key="j" :d="m.d" :transform="m.at || undefined" />
+            <text x="-14" y="28" text-anchor="middle" class="zs-dollar-one">1</text>
+            <text x="10" y="26" text-anchor="middle" class="zs-dollar-word">DOLLAR</text>
+          </g>
         </g>
 
         <g v-else-if="s.kind === 'grain'" class="zs-grain">
@@ -258,34 +280,33 @@ const split = computed(() => {
 }
 
 .zs-dollar circle {
-  stroke: #8a6414;
+  stroke: #8f7a44;
   stroke-width: 1.4;
 }
 
 .zs-dollar .zs-dollar-inner {
   fill: none;
-  stroke-width: 0.7;
-  stroke-opacity: 0.6;
-}
-
-.zs-dollar-milling {
-  fill: none;
-  stroke: #8a6414;
+  stroke: #a48d52;
   stroke-width: 0.8;
-  stroke-opacity: 0.7;
 }
 
-.zs-dollar-roo {
-  fill: #7a5410;
-  fill-opacity: 0.85;
+.zs-dollar-relief {
+  fill: #cdb67a;
 }
 
-.zs-dollar-text {
-  font-family: var(--font-display);
-  font-size: 6px;
+.zs-dollar-one,
+.zs-dollar-word {
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  fill: #7a5410;
+}
+
+.zs-dollar-one {
+  font-size: 22px;
+}
+
+.zs-dollar-word {
+  font-size: 6.6px;
+  letter-spacing: 0.3px;
 }
 
 .zs-grain polygon {
