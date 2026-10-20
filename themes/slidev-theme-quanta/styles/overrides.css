@@ -17,11 +17,6 @@
   height: 2px !important;
 }
 
-.slidev-nav-arrow,
-.slidev-icon-btn {
-  color: var(--ink) !important;
-}
-
 ::selection {
   background: var(--violet);
   color: var(--paper);
