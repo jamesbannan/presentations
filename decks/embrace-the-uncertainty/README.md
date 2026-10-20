@@ -13,8 +13,8 @@ npm run export -- embrace-the-uncertainty
 
 ## Status
 
-The cover, Part one and the closing slide are written. The slides after
-Part one are layout specimens, one per layout, kept so the theme can be
+The cover, Part one, the two demo slides and the closing slide are written.
+The slides after the demos are layout specimens, one per layout, kept so the theme can be
 built and render-checked until the rest of the talk is written.
 
 | # | Slide | Notes |
@@ -30,8 +30,23 @@ built and render-checked until the rest of the talk is written.
 | 9 | Uncertainty is built in | Heisenberg as two questions on one globe; one click |
 | 10 | Bit vs qubit | Summary table |
 | 11 | The one-liner | Statement |
+| 12 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
+| 13 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`), so there are no image files to maintain. The
 odds come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
+
+## Demos
+
+The demos live in the `quantum-computing` repo and run locally on the QDK
+simulator (`uv run demos/bell_pair.py`, `uv run demos/grover.py`). Each demo
+slide shows the Q# at the heart of it, the command, and the result of a
+typical run drawn by `Outcomes` / `GroverCurve`, so the slide doubles as a
+backup if the live run fails. The demos aren't seeded, so live numbers will
+differ slightly from the slide. To refresh the slide, rerun the demo and copy
+its printed table into the component props.
+
+The demo slides sit after Part one for now. Move them into the entanglement
+and Grover sections once those are written.

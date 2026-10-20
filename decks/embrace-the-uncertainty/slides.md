@@ -224,6 +224,85 @@ If you take one sentence out of this section, take this one.
 -->
 
 ---
+kicker: Demo · entanglement
+---
+
+# Demo: two qubits that always agree
+
+<div class="split" style="--split: 0.78fr 1.22fr">
+<div>
+
+```rust
+use (a, b) = (Qubit(), Qubit());
+H(a);        // a: a coin toss
+CNOT(a, b);  // b: follows a
+return (MResetZ(a), MResetZ(b));
+```
+
+<p class="run-cmd">uv run demos/bell_pair.py</p>
+
+</div>
+<div class="chart-pair">
+  <Outcomes title="Entangled" :counts="[487, 0, 0, 513]" />
+  <Outcomes title="Not entangled" :counts="[248, 280, 246, 226]" />
+</div>
+</div>
+
+<p class="source">A typical run: 1,000 shots of each on the local QDK simulator</p>
+
+<!--
+Demo: quantum-computing repo, demos/bell_pair.py (Q# in demos/src/BellPair.qs). Runs locally, no Azure, no network.
+
+Two qubits. H turns the first into a coin toss. CNOT flips the second only if the first is a 1, so the second follows the first. Then read both, a thousand times.
+
+Left: the entangled pair. Each qubit on its own is 50/50, but together they only ever come back 00 or 11. 01 and 10: zero, every run. Right: the control, two independent coin tosses. All four outcomes, roughly a quarter each.
+
+That zero is the whole demo. Random individually, perfectly correlated together. The numbers here are from one run; live, they'll wobble, but the zeros won't.
+
+Useful flags: --shots 5000, --dump-state to show the state before measurement.
+-->
+
+---
+kicker: Demo · Grover's search
+---
+
+# Demo: Grover's search has to know when to stop
+
+<div class="split" style="--split: 0.72fr 1.28fr">
+<div>
+
+```rust
+ApplyToEach(H, register); // all 16
+for _ in 1..iterations {
+    ReflectAboutMarked(marked, register);
+    ReflectAboutUniform(register);
+}
+return MeasureInteger(register);
+```
+
+<p class="run-cmd">uv run demos/grover.py</p>
+
+</div>
+<div>
+  <GroverCurve :qubits="4" :measured="[0.064, 0.503, 0.889, 0.957, 0.561, 0.108, 0.012, 0.375, 0.834, 0.994]" />
+</div>
+</div>
+
+<p class="source">A typical run: 16 candidates, looking for 9, 1,000 shots per point on the local QDK simulator</p>
+
+<!--
+Demo: quantum-computing repo, demos/grover.py (Q# in demos/src/Grover.qs).
+
+Four qubits, so 16 candidates, and we're looking for number 9. Start with all 16 equally likely. Each round does two things: flag the answer, then boost whatever was flagged. Interference doing the work: wrong answers cancel, the right one builds up.
+
+The script runs it with 0 rounds, 1 round, 2, and so on, a thousand times each. Watch the dots. Three rounds: about 96%. Theory says stop there. Keep going and it falls apart: six rounds, about 1%, worse than guessing. Then it climbs back.
+
+Grover isn't a lookup, it's a rotation. Knowing when to stop is the algorithm. And on 16 items it needs about 3 rounds, versus up to 16 checks classically: a square-root speedup, not magic. That's why it doesn't kill AES.
+
+For the extension: GroverAtOptimum and GroverOverIterated have Run/Histogram CodeLenses in VS Code.
+-->
+
+---
 layout: section
 numeral: 1
 kicker: Layout · section

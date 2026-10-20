@@ -336,6 +336,25 @@
   min-width: 0;
 }
 
+/* ---------- Demos — a command to run, and charts side by side ---------- */
+.slidev-layout .run-cmd {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+  margin-top: 0.8em;
+}
+
+.slidev-layout .run-cmd::before {
+  content: '$ ';
+  color: var(--violet);
+}
+
+.slidev-layout .chart-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6em;
+}
+
 /* ---------- Closing-slide contact links ---------- */
 /* One shared column, as wide as the longest link, so every plate matches. */
 .slidev-layout .contact-list {

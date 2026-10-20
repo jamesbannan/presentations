@@ -42,6 +42,8 @@ the deck works offline.
 | `<Ket>` | `bra`. `<Ket>ψ</Ket>` renders `|ψ⟩` |
 | `<Globe>` | `theta` (0 = north = 0, 180 = south = 1), `phi`, `bit` (classical style), `ghosts` (faint arrows elsewhere), `latitude`, `was` (old angle, drawn with a snap arc), `ask` (`ns`\|`ew`: which question a read asks; due east is `theta` 90, `phi` 28.65), `seed` |
 | `<Odds>` | `theta`, `counts` (`[zeros, ones]`) or `chance`, plus `labels` (default `['0', '1']`). A split bar of the chance of each answer |
+| `<Outcomes>` | `counts`, `labels` (default two-qubit bit strings), `title`, `ceiling` (share at the top of the chart, default 0.6). A histogram of measured outcomes; empty outcomes keep a dashed slot |
+| `<GroverCurve>` | `qubits`, `measured` (success rate at 0, 1, 2… rounds), `rounds` (theory only). Theory curve, measured dots, guessing line, and where to stop |
 | `<ScaleZoom>` | `stops` (`kind`: `coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`. A dot per simulated read, tallied with `<Odds>` underneath |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
@@ -74,6 +76,8 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
   other. Set `--split` to change the ratio.
 - `.mini-globe` sizes a `<Globe>` to sit in a table header.
 - `.zoom-figure` spaces a `<ScaleZoom>` from the text around it.
+- `.run-cmd` is a shell command to run a demo, with a `$` prompt.
+- `.chart-pair` sets two charts side by side at the same width.
 
 ## Writing SVG components for Slidev
 
