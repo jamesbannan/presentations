@@ -370,6 +370,12 @@ But they are different. Remember the "west or east?" question from earlier? A se
 
 In amplitude terms: H and H Z both have 0.707 on each answer, but H Z's |1> amplitude is negative. Measurement only sees the size, never the sign. The second H makes the two paths interfere: for H H the paths to 1 cancel, for H Z H the paths to 0 cancel. That cancelling is the engine of every quantum algorithm, Grover's included.
 
+If someone asks "how do you know the arrow points west if you never looked?": we know because we did the maths, not because we looked. Looking would destroy it.
+- Think of a recipe. If you follow it exactly, you know what's in the oven without opening the door. Gates are exact recipes: H always tips north to east, and Z always swings east to west. Nothing random happens until the read, so the arrow can be worked out on paper.
+- The laptop running this demo is doing that paperwork. A simulator stores every number for every arrow in memory. That's how the Debug view can show the minus sign, and it's why simulating more qubits needs so much memory, as on the earlier slide.
+- On a real quantum computer, nobody gets to peek. To check the arrow, you run the same recipe thousands of times, ask "north or south?" on some runs and "east or west?" on others, and rebuild the arrow from the tallies. It's like working out the shape of an object from its shadows on different walls. This is called state tomography. It's slow, so it's used to test the machine, not to read answers.
+- The bars on this slide are real shot counts, which is why they say 481 and 519 rather than exactly 500. The globes are the calculated arrow.
+
 The script also runs plain X (always 1, the quantum NOT). In VS Code: Histogram on Superposition and PhaseFlip (identical), then Debug to show the minus sign, then Histogram on Interference and PhaseRevealed.
 -->
 
