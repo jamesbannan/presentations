@@ -36,7 +36,8 @@ built and render-checked until the rest of the talk is written.
 | 15 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
 | 16 | Demo: the same pair on a real machine | `bell_hardware.py`: simulator vs hardware. **Hardware chart is a placeholder** until a run is recorded |
 | 17 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
-| 18 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
+| 18 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
+| 19 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), so there are no image files to maintain. The

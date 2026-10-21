@@ -46,7 +46,7 @@ the deck works offline.
 | `<GroverCurve>` | `qubits`, `measured` (success rate at 0, 1, 2… rounds), `rounds` (theory only). Theory curve, measured dots, guessing line, and where to stop |
 | `<ScaleZoom>` | `stops` (`kind`: `dollar` (an Australian $1)\|`coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`, `play` (start grey and colour each read in turn as the slide opens; exports, the overview and reduced motion show the finished chart), `seconds` (default 3). A dot per simulated read, tallied with `<Odds>` underneath |
-| `<Patterns>` | `qubits` (default 4), `mode` (`bits`: one pattern held, in ink \| `odds`: a share of the odds on every pattern \| `focus`: odds piled onto one, after interference), `pick` (the pattern held or found, as an index; default 11 = `1011`), `seed`. Every pattern a register can hold, as a grid |
+| `<Patterns>` | `qubits` (default 4), `mode` (`bits`: one pattern held, in ink \| `odds`: a share of the odds on every pattern \| `focus`: odds piled onto one, after interference \| `grover`: the exact odds after `rounds` of Grover's search for `pick`, to an absolute scale, with `pick` outlined), `pick` (the pattern held or found, as an index; default 11 = `1011`), `seed`, `rounds` (default 0). Every pattern a register can hold, as a grid |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
 Also `<Folio>` (slide number as a ket, qubit dots and binary), `<ContactLink>`

@@ -6,17 +6,22 @@
     <Patterns mode="bits" />    a classical register: one pattern, solid ink
     <Patterns mode="odds" />    qubits: a share of the odds on every pattern
     <Patterns mode="focus" />   after interference: the odds piled onto one
+    <Patterns mode="grover" :rounds="1" />   Grover's search after that many
+                                rounds, looking for `pick`: the exact odds
 
-  The filled square's area is that pattern's share of the odds. Cells are
-  labelled in 'bits' mode, and only `pick` is in 'focus' mode, so labels
-  never sit on a part-filled square.
+  The filled square's area is that pattern's share of the odds; in 'grover'
+  mode it's to an absolute scale, so you can watch the answer grow. Cells are
+  labelled in 'bits' mode, and only `pick` is in 'focus' mode (and in 'grover'
+  mode once it holds most of the odds), so labels never sit on a small square.
+  In 'grover' mode the `pick` cell is outlined so the target shows from round 0.
 
   Props:
     qubits — register width (default 4)
-    mode   — 'bits' | 'odds' | 'focus'
+    mode   — 'bits' | 'odds' | 'focus' | 'grover'
     pick   — the pattern held ('bits') or found ('focus'), as an index
              (default 11, i.e. 1011)
     seed   — for the spread of odds in 'odds' mode
+    rounds — Grover rounds applied in 'grover' mode (default 0)
 -->
 <script setup lang="ts">
 import { computed } from 'vue'
@@ -27,6 +32,7 @@ const props = defineProps({
   mode: { type: String, default: 'odds' },
   pick: { type: Number, default: 11 },
   seed: { type: Number, default: 7 },
+  rounds: { type: Number, default: 0 },
 })
 
 const CELL = 50
@@ -41,12 +47,16 @@ const height = computed(() => down.value * CELL + (down.value - 1) * GAP)
 const cells = computed(() => {
   const n = 2 ** props.qubits
   const r = rng(props.seed)
+  // Grover: the target's odds after k rounds are sin²((2k+1)θ), sin θ = 1/√N.
+  const hit = Math.sin((2 * props.rounds + 1) * Math.asin(1 / Math.sqrt(n))) ** 2
+  const grover = props.mode === 'grover'
   const weights = Array.from({ length: n }, (_, i) => {
     if (props.mode === 'bits') return i === props.pick ? 1 : 0
     if (props.mode === 'focus') return i === props.pick ? 1 : 0.03
+    if (grover) return i === props.pick ? hit : (1 - hit) / (n - 1)
     return 0.3 + 0.7 * r()
   })
-  const top = Math.max(...weights)
+  const top = grover ? 1 : Math.max(...weights)
   return weights.map((w, i) => {
     const side = Math.sqrt(w / top) * (CELL - 8)
     const x = (i % across.value) * (CELL + GAP)
@@ -58,7 +68,7 @@ const cells = computed(() => {
       label: i.toString(2).padStart(props.qubits, '0'),
       strong: i === props.pick,
       empty: w === 0,
-      labelled: props.mode === 'bits' || (props.mode === 'focus' && i === props.pick),
+      labelled: props.mode === 'bits' || (i === props.pick && (props.mode === 'focus' || (grover && hit > 0.4))),
     }
   })
 })
@@ -68,8 +78,8 @@ const cells = computed(() => {
   <svg class="motif patterns" :class="`patterns--${mode}`" :viewBox="`-2 -2 ${width + 4} ${height + 4}`" role="img"
     :aria-label="`${2 ** qubits} patterns of ${qubits} bits`">
     <g v-for="(c, i) in cells" :key="i">
-      <rect :x="c.x" :y="c.y" :width="CELL" :height="CELL" rx="6" class="pt-cell" />
-      <rect v-if="!c.empty" :x="c.sx" :y="c.sy" :width="c.side" :height="c.side" rx="4" class="pt-fill" />
+      <rect :x="c.x" :y="c.y" :width="CELL" :height="CELL" rx="6" class="pt-cell" :class="{ 'pt-cell--mark': mode === 'grover' && c.strong }" />
+      <rect v-if="!c.empty" :x="c.sx" :y="c.sy" :width="c.side" :height="c.side" rx="4" class="pt-fill" :class="{ 'pt-fill--mark': mode === 'grover' && c.strong }" />
       <text v-if="c.labelled" :x="c.cx" :y="c.cy + 3.5" text-anchor="middle" class="pt-label" :class="{ 'pt-label--on': c.strong }">{{ c.label }}</text>
     </g>
   </svg>
@@ -101,6 +111,16 @@ const cells = computed(() => {
 }
 
 .patterns--focus .pt-fill {
+  fill: var(--magenta);
+}
+
+.pt-cell--mark {
+  stroke: var(--magenta);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+
+.pt-fill--mark {
   fill: var(--magenta);
 }
 

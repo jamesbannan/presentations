@@ -512,6 +512,56 @@ In VS Code: Circuit on HalfAdder, Debug on AddEverything stepped to MResetEachZ 
 -->
 
 ---
+kicker: Grover's search · what it is
+---
+
+# Grover's search: boost the right answer
+
+Find the one item that passes a check, with no index to help. Classically, you try them **one at a time**.
+
+<div class="plates patterns-row" style="--plate: 220px; margin-top: 0.6em">
+  <div class="plate">
+    <Patterns mode="grover" :pick="9" :rounds="0" />
+    <p><b>Start</b>Even odds on all 16: a guess.</p>
+  </div>
+  <div class="plate" v-click="1">
+    <Patterns mode="grover" :pick="9" :rounds="1" />
+    <p><b>One round</b>Flag the answer, then boost it: 47%.</p>
+  </div>
+  <div class="plate" v-click="2">
+    <Patterns mode="grover" :pick="9" :rounds="3" />
+    <p><b>Three rounds</b>96%. Now read.</p>
+  </div>
+</div>
+
+<div class="doubling" v-click="3" style="--steps: 3">
+  <span class="doubling-lead">To find one item in the pile, worst case:</span>
+  <div><b>16 items</b><span>16 checks · 3 rounds</span></div>
+  <div><b>A million</b><span>1,000,000 checks · about 800 rounds</span></div>
+  <div><b>A trillion</b><span>10¹² checks · about 800,000 rounds</span></div>
+</div>
+
+<p class="takeaway" v-click="4"><b>A square-root speed-up, for almost any search.</b> Not exponential, which is why longer keys keep symmetric encryption like AES safe.</p>
+
+<!--
+Lov Grover, Bell Labs, 1996. Next to Shor's algorithm, which we'll get to, it's the most famous quantum algorithm. If you've never heard of it, here's the problem it solves.
+
+You've got a pile of possibilities and a way to check any one of them: "is this the one?" But there's no index, no sorting, no shortcut. Think of a combination lock, a password you can only test by trying it, or a phone book where you have the number and need the name. Classically you have no choice: try them one by one. Sixteen items, up to sixteen checks. A million items, up to a million.
+
+Start: four qubits, sixteen patterns, all equally likely. Read now and it's a pure guess: one in sixteen. The dashed square is the answer we're after, 1001, but the computer doesn't know that yet.
+
+[click] One Grover round is two steps. First, flag: a piece of circuit that can check an answer, but not find one, flips the sign of the right answer. That's the Z trick from the gates demo: the sign you can't see. Nothing you could measure has changed yet. Second, boost: flip every pattern's odds around the average. The flagged one was below the average, so it bounces up high; everything else drops a little. After one round the answer is already 47%.
+
+[click] Repeat. After three rounds it's 96%. Now read, and you almost certainly get the answer. Three rounds instead of up to sixteen checks.
+
+[click] And that's the scaling. Grover needs about the square root of the number of items. A million items: about 800 rounds instead of a million checks. A trillion: about 800,000 instead of a trillion. (It's π/4 times the square root.) That's a big win, and it works on almost anything you can check: scheduling, puzzles, constraint solving, guessing keys.
+
+[click] Why it matters. One: it's general. Shor only works on problems with a hidden structure; Grover works on any search where you can check an answer. Two: it's the limit. It's been proven that no quantum computer can search an unstructured pile faster than this. So it's not the start of something bigger; this is the ceiling. Three, and this is our story: it's the best a quantum computer can do against symmetric encryption like AES. Guessing a 128-bit key is 2^128 tries classically; Grover brings it to about 2^64 rounds. Double the key to 256 bits and Grover still faces 2^128 rounds: out of reach. Those rounds also have to run one after another on error-corrected hardware, so the real-world gain is even smaller. Longer keys, problem solved. Contrast that with RSA, coming up, where there's no such easy fix.
+
+One catch, and it's the demo: too many rounds and the answer drains away again. Knowing when to stop is part of the algorithm.
+-->
+
+---
 kicker: Demo · Grover's search
 ---
 
