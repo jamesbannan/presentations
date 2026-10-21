@@ -393,6 +393,98 @@
   border-color: var(--magenta);
 }
 
+/* ---------- Gate moves — before, gate, after, on a wire ----------
+   <div class="gate-move"><Globe :theta="0" /><span class="gate">X</span><Globe :theta="180" /></div>
+   Wrap two in .gate-pair, with .gate--ctrl over .gate--target, for a CNOT.
+   .qbit is a plain 0 (or, with qbit--one, 1) where a globe is too much. */
+.slidev-layout .gate-moves {
+  gap: 1.4em;
+  margin-top: 1em;
+}
+
+.slidev-layout .gate-moves .plate > .gate-move,
+.slidev-layout .gate-moves .plate > .gate-pair {
+  height: 112px;
+  width: 100%;
+}
+
+.slidev-layout .gate-move {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  background: linear-gradient(var(--ink-soft), var(--ink-soft)) center / 34% 1px no-repeat;
+}
+
+.slidev-layout .gate-move .globe {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.slidev-layout .gate-move .gate {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.slidev-layout .gate-pair {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.1em;
+}
+
+.slidev-layout .gate-pair .gate-move {
+  gap: 1.6em;
+  background-size: 60% 1px;
+}
+
+.slidev-layout .gate-pair::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  bottom: 30%;
+  width: 1.5px;
+  margin-left: -0.75px;
+  background: var(--violet);
+}
+
+.slidev-layout .gate--ctrl {
+  width: 0.7em;
+  height: 0.7em;
+  margin: 0 0.525em;
+  border: 0;
+  border-radius: 50%;
+  background: var(--violet);
+}
+
+.slidev-layout .gate--target {
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--violet), var(--violet)) center / 1.5px 100% no-repeat,
+    linear-gradient(var(--violet), var(--violet)) center / 100% 1.5px no-repeat,
+    #fff;
+}
+
+.slidev-layout .qbit {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--cyan);
+}
+
+.slidev-layout .qbit--one {
+  background: var(--magenta);
+}
+
 /* ---------- Plate groups — plates under a shared, ruled label ---------- */
 .slidev-layout .plate-groups {
   display: flex;

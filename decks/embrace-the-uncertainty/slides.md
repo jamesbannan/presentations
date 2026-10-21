@@ -269,6 +269,52 @@ A classical register holds exactly one of those patterns. Your program works on 
 -->
 
 ---
+kicker: Bits and qubits · gates
+---
+
+# Gates turn the arrow
+
+Classical code runs on logic gates: AND, OR, NOT. Quantum gates **turn the arrow** instead.
+
+<div class="plates gate-moves" style="--plate: 240px">
+  <div class="plate">
+    <div class="gate-move"><Globe :theta="0" /><span class="gate">X</span><Globe :theta="180" /></div>
+    <p><b>X: flip</b>North to south. A quantum NOT.</p>
+  </div>
+  <div class="plate" v-click="1">
+    <div class="gate-move"><Globe :theta="0" /><span class="gate">H</span><Globe :theta="90" :phi="28.65" /></div>
+    <p><b>H: tip over</b>North to the equator. A sure 0 becomes a coin toss.</p>
+  </div>
+  <div class="plate" v-click="2">
+    <div class="gate-move"><Globe :theta="90" :phi="28.65" /><span class="gate gate--z">Z</span><Globe :theta="90" :phi="208.65" /></div>
+    <p><b>Z: half a spin</b>East to west. Same odds, so a read can't tell.</p>
+  </div>
+  <div class="plate" v-click="3">
+    <div class="gate-pair">
+      <div class="gate-move"><span class="qbit qbit--one">1</span><span class="gate gate--ctrl"></span><span class="qbit qbit--one">1</span></div>
+      <div class="gate-move"><span class="qbit">0</span><span class="gate gate--target"></span><span class="qbit qbit--one">1</span></div>
+    </div>
+    <p><b>CNOT: follow</b>Two qubits. Flip the second if the first is 1.</p>
+  </div>
+</div>
+
+<p class="takeaway" v-click="4"><b>A gate never reads the qubit, and every gate can be undone.</b> A program is gates on wires, then one read at the end.</p>
+
+<!--
+A classical program, all the way down, is logic gates: AND, OR, NOT, shuffling bits. Quantum programs are built from gates too. The difference: a quantum gate doesn't set a bit, it turns the arrow. Four of them carry the whole talk.
+
+X: flip. North to south, 0 to 1. It's the quantum NOT, and on a plain 0 or 1 it behaves exactly like one.
+
+[click] H, the Hadamard gate: tip the arrow over. From the north pole down onto the equator, pointing east. A sure 0 becomes a perfect coin toss. Almost every quantum program starts with a row of these.
+
+[click] Z: spin the arrow half a turn around the pole. East becomes west. Here's the catch: north-or-south odds don't change at all, still 50/50, so if you read it now you can't tell Z ever happened. Remember that; it's the next demo.
+
+[click] CNOT, controlled-NOT: the first two-qubit gate. If the first qubit is 1, flip the second; if it's 0, leave it. On plain 0s and 1s that's ordinary logic, XOR in fact. Feed it a first qubit that's a coin toss and the two qubits come out linked. That's entanglement: the demo after next.
+
+[click] Two rules that make these unlike classical gates. A gate never reads the qubit, so it never collapses anything; only the read at the end does. And every gate can be run backwards. AND can't: if AND gives you 0, you don't know which inputs made it. Gates turn the arrow; they don't throw information away. And remember the last slide: each gate reshapes the odds on every pattern at once. A quantum program is just a sequence of these turns, timed so that interference does the work, then one read.
+-->
+
+---
 kicker: Demo · gates
 ---
 

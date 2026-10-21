@@ -89,6 +89,10 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
 - `.doubling` is a row of steps on a wire: a `.doubling-lead` span, then a
   `<div>` per step with `<b>` and a `<span>` gloss. The last step's node is
   magenta. Set `--steps` if there aren't four.
+- `.gate-moves` is a `.plates` row of gate explainers. Each plate holds a
+  `.gate-move`: a before `Globe`, a `.gate` chip and an after `Globe` on a
+  wire. A `.gate-pair` stacks two `.gate-move` rows of `.qbit` / `.qbit--one`
+  dots joined by a `.gate--ctrl` dot and a `.gate--target` ⊕ for CNOT.
 - `.takeaway` is a centred closing line under a figure; its `<b>` lead is violet.
 - `.chart-solo` caps a single chart's width, for one beside text in a `.split`.
 

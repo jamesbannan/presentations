@@ -31,11 +31,12 @@ built and render-checked until the rest of the talk is written.
 | 10 | Bit vs qubit | Summary table |
 | 11 | The one-liner | Statement |
 | 12 | Why that makes a different kind of computer | 16-pattern grids: 4 bits hold one, 4 qubits spread odds over all, interference focuses them; memory to simulate 30–300 qubits; four clicks |
-| 13 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
-| 14 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
-| 15 | Demo: the same pair on a real machine | `bell_hardware.py`: simulator vs hardware. **Hardware chart is a placeholder** until a run is recorded |
-| 16 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
-| 17 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
+| 13 | Gates turn the arrow | X, H and Z as before → after turns of the arrow, then CNOT on two qubits; four clicks |
+| 14 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
+| 15 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
+| 16 | Demo: the same pair on a real machine | `bell_hardware.py`: simulator vs hardware. **Hardware chart is a placeholder** until a run is recorded |
+| 17 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
+| 18 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), so there are no image files to maintain. The
