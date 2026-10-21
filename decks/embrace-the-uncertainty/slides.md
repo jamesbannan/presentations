@@ -415,7 +415,7 @@ Left: the entangled pair. Each qubit on its own is 50/50, but together they only
 
 That zero is the whole demo. Random individually, perfectly correlated together. The numbers here are from one run; live, they'll wobble, but the zeros won't.
 
-Useful flags: --shots 5000, --dump-state to show the state before measurement.
+Useful flags: --shots 5000, and --dump-state to print both stored states before measurement: the Bell pair has amplitude only on 00 and 11, while the control has 0.5 on all four.
 -->
 
 ---
