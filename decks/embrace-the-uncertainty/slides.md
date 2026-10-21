@@ -496,6 +496,18 @@ Now the twist: H on both inputs first. One pass through the adder and the state 
 
 Then you measure. Four bars, about a quarter each, and never a wrong sum. But each run hands you one row of the truth table, at random. To see all four you'd run it four-plus times, which is no faster than a classical adder. Parallelism on its own isn't a speed-up. You need interference to make the answer you want the likely one, which is exactly what Grover does next.
 
+Why this demo matters: it's the myth-buster. The most common headline about quantum computing is "it tries every answer at once". This demo shows that line is half true, and the missing half is the part that matters. The computer really did work out all four sums in one pass. You just can't have them. Reading is the bottleneck, not computing.
+
+What the results mean:
+
+- Quantum isn't fuzzy. Every shot was a correct sum, and zero were wrong. The randomness is in which answer you get, not whether it's right. (That's on a perfect simulator. Real hardware adds noise, which is the error-correction story.)
+- A quantum computer can run any classical logic. CNOT is XOR and CCNOT is AND, so in principle anything your laptop does can be built from these gates. It wouldn't be faster, though, and it would cost far more. Quantum computers won't replace your laptop; they're a co-processor for a few special problems.
+- Gates can't throw information away, which is why we needed four qubits to add two bits. A classical adder just overwrites. Here the inputs stay on their wires, because every gate must be reversible. That overhead scales up: the arithmetic inside Shor's algorithm needs thousands of these error-corrected qubits, which is why it isn't running yet.
+- The real speed-ups come from asking a question about all the answers together, rather than for every answer. "Which row is the sum of 1 and 1?" gains nothing. "What pattern runs through all of them?" is where interference wins. Shor asks exactly that kind of question about the numbers behind RSA, and that's why public-key encryption is in trouble.
+- That's also why "a quantum computer will try every password, or every AES key, at once" is sci-fi. You'd get one random key back. The best you can do is Grover, the next demo, which only gives a square-root speed-up. That's why doubling key lengths is enough to protect symmetric encryption.
+
+One-liner to land it: "It computes every answer, and then it hands you one at random. The skill is in arranging the gates so that the one you get is the one you want."
+
 In VS Code: Circuit on HalfAdder, Debug on AddEverything stepped to MResetEachZ to show the four basis states, then Histogram on AddEverything.
 -->
 
