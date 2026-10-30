@@ -419,40 +419,41 @@ Useful flags: --shots 5000, and --dump-state to print both stored states before 
 -->
 
 ---
-kicker: Demo · real hardware
+kicker: Demo · real-world noise
 ---
 
-# Demo: the same pair on a real machine
+# Demo: the same pair, with a real machine's noise
 
-<div class="split" style="--split: 0.78fr 1.22fr">
+<div class="split" style="--split: 0.9fr 1.1fr">
 <div>
 
-Same Bell pair, sent to **Azure Quantum** ahead of time and replayed here, offline.
+Recorded on **Azure Quantum**, replayed offline. The target emulates Quantinuum's H2 machine, **noise and all**.
 
-On the simulator, 01 and 10 never happen. On hardware, a few do. **That gap is noise.**
+Perfect qubits never disagree. These did, **5 times in 500**.
 
-<p class="run-cmd">uv run demos/bell_hardware.py</p>
+<p class="run-cmd">uv run demos/bell_hardware.py --recording demos/recordings/*h2-1e*</p>
 
 </div>
 <div class="chart-pair">
   <Outcomes title="Simulator" :counts="[487, 0, 0, 513]" />
-  <Outcomes title="Hardware" pending="Record a run, then fill in" />
+  <Outcomes title="H2 emulator" :counts="[261, 4, 1, 234]" />
 </div>
 </div>
 
-<p class="source">Simulator: a typical run, 1,000 shots on the local QDK. Hardware: placeholder until a run is recorded</p>
+<p class="source">Simulator: 1,000 shots, local QDK. H2 emulator: 500 shots, quantinuum.sim.h2-1e on Azure Quantum, 29 Oct 2026</p>
 
 <!--
-TODO before the talk: record a hardware run, then replace the Hardware chart's pending prop with :counts="[n00, n01, n10, n11]" and update the source line with the target, shots and date.
+Demo: quantum-computing repo, demos/bell_hardware.py, replaying the recording from Azure Quantum. On stage it's offline: no Azure sign-in, no queue. Use the --recording command on the slide. Plain `uv run demos/bell_hardware.py` replays the most recent recording, which is the noiseless Rigetti run.
 
-  uv run --group hardware demos/bell_hardware.py record --target ionq.simulator --noise-model aria-1   (free, noisy simulator)
-  uv run --group hardware demos/bell_hardware.py record --target <target-id> --shots 500              (real QPU)
+Same circuit as the last slide. Left: the simulator, perfect qubits, 01 and 10 never happen. Right: the same circuit sent to Azure Quantum, to Quantinuum's H2 emulator. Most shots still agree. But 5 out of 500 came back 01 or 10: the two qubits disagreed, which a perfect Bell pair never does.
 
-The recording lands in demos/recordings/ in the quantum-computing repo; `uv run demos/bell_hardware.py` replays the latest one beside a fresh simulator run and prints the counts.
+What's an emulator? A classical program that copies a real quantum computer's behaviour, including its noise, measured from the real thing. It's honest about this being a model: no queue, and it doesn't cost real-hardware prices. But the noise in it is the noise a real H2 machine has. If anyone asks: yes, a real quantum computer would look like this, and a run on the real H2 is on the to-do list.
 
-Demo: quantum-computing repo, demos/bell_hardware.py. On stage it's offline: no Azure sign-in, no queue.
+Where does the noise come from? Qubits are tiny physical things, ions held in place by electric fields in this case. Heat, stray fields and tiny timing errors nudge the arrow. Each gate is a fraction off, and each read can be misjudged. None of that is a bug in the circuit.
 
-Same circuit as the last slide. Left: the simulator, perfect, 01 and 10 never happen. Right: a real machine. Most shots still agree, but some come back 01 or 10. Those aren't a bug in the circuit; they're noise: qubits drifting, gates a fraction off, reads misjudged. That gap between the ideal and the real is why error correction needs so many physical qubits per useful one.
+Why 1% matters. One percent sounds tiny, and Quantinuum's machines are among the most accurate there are. But this circuit is two gates. A useful algorithm, like breaking RSA, needs millions or billions of gate steps. At even a fraction of a percent per step, the answer drowns in errors long before the end. That's why error correction is needed, and why it spreads one reliable "logical" qubit over many physical ones: hundreds to thousands each. That gap between 2 gates and a billion is most of the distance to Q-Day.
+
+Other recordings in the repo, not shown: quantinuum.sim.h2-1sc is a syntax checker, which only validates the program and returns 00 every time. rigetti.sim.qvm is a perfect simulator, with no noise, so it looks exactly like the left chart.
 -->
 
 ---
