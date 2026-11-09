@@ -513,6 +513,26 @@ In VS Code: Circuit on HalfAdder, Debug on AddEverything stepped to MResetEachZ 
 -->
 
 ---
+layout: section
+numeral: 2
+kicker: Part two
+---
+
+# Grover and Shor
+
+## Two famous algorithms. One speeds up search; the other breaks the locks.
+
+<!--
+So far: what a qubit is, how gates steer it, and that real machines are noisy. Now, what is it actually good for? Two algorithms carry most of the headlines, and most of the security worry.
+
+Grover searches. It finds a needle in a haystack faster, but only by a square root. Useful, not magic.
+
+Shor factors. It finds the hidden structure inside RSA and elliptic-curve keys, and that's the one that breaks today's public-key cryptography once the hardware is big enough.
+
+Keep both in mind: one is a modest speed-up we can absorb with longer keys, the other is a clean break we have to migrate away from.
+-->
+
+---
 kicker: Grover's search · what it is
 ---
 
