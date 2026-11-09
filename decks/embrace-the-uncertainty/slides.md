@@ -385,7 +385,7 @@ kicker: Demo · entanglement
 
 # Demo: two qubits that always agree
 
-<div class="split" style="--split: 0.78fr 1.22fr">
+<div class="split" style="--split: 0.72fr 1.28fr">
 <div>
 
 ```rust
@@ -399,8 +399,8 @@ return (MResetZ(a), MResetZ(b));
 
 </div>
 <div class="chart-pair">
-  <Outcomes title="Entangled" :counts="[487, 0, 0, 513]" />
-  <Outcomes title="Not entangled" :counts="[248, 280, 246, 226]" />
+  <Outcomes :stretch="130" title="Entangled" :counts="[487, 0, 0, 513]" />
+  <Outcomes :stretch="130" title="Not entangled" :counts="[248, 280, 246, 226]" />
 </div>
 </div>
 
@@ -424,7 +424,7 @@ kicker: Demo · real hardware
 
 # Demo: the same pair on a real machine
 
-<div class="split" style="--split: 0.9fr 1.1fr">
+<div class="split" style="--split: 0.8fr 1.2fr">
 <div>
 
 The same Bell pair, run on **IonQ's Forte-1**, a real quantum computer, and replayed here offline.
@@ -435,8 +435,8 @@ Perfect qubits never disagree. These did, **once in 100**. **That gap is noise.*
 
 </div>
 <div class="chart-pair">
-  <Outcomes title="Simulator" :counts="[487, 0, 0, 513]" />
-  <Outcomes title="IonQ Forte-1" :counts="[48, 1, 0, 51]" />
+  <Outcomes :stretch="130" title="Simulator" :counts="[487, 0, 0, 513]" />
+  <Outcomes :stretch="130" title="IonQ Forte-1" :counts="[48, 1, 0, 51]" />
 </div>
 </div>
 

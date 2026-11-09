@@ -19,6 +19,9 @@
     pending  — placeholder text. Draws every slot dashed with "?" for its
                share and an amber stamp across the chart, for a slide whose
                data hasn't been recorded yet. `counts` can be left out
+    stretch  — extra height for the bars, in chart units (default 0). The
+               chart keeps its width and grows taller, to fill a slide
+               without widening it, e.g. :stretch="120"
 -->
 <script setup lang="ts">
 import { computed } from 'vue'
@@ -30,11 +33,12 @@ const props = defineProps({
   title: { type: String, default: '' },
   ceiling: { type: Number, default: 0.6 },
   pending: { type: String, default: '' },
+  stretch: { type: Number, default: 0 },
 })
 
 const W = 300
 const TOP = 46
-const BASE = 196
+const BASE = computed(() => 196 + Math.max(0, props.stretch))
 const f = (n: number) => Math.round(n * 100) / 100
 
 const PENDING_H = 70
@@ -47,12 +51,12 @@ const bars = computed(() => {
   const width = slot * 0.62
   return counts.map((c, i) => {
     const share = c / total
-    const h = Math.min(1, share / props.ceiling) * (BASE - TOP)
+    const h = Math.min(1, share / props.ceiling) * (BASE.value - TOP)
     const label = props.labels[i] ?? String(i)
     const tone = /^0+$/.test(label) ? 'zero' : /^1+$/.test(label) ? 'one' : 'mixed'
     const x = 10 + slot * i + (slot - width) / 2
     return {
-      x: f(x), y: f(BASE - h), w: f(width), h: f(h), cx: f(x + width / 2),
+      x: f(x), y: f(BASE.value - h), w: f(width), h: f(h), cx: f(x + width / 2),
       label, tone, empty: c === 0, caption: props.captions[i] ?? '',
       pct: props.pending ? '?' : `${(share * 100).toFixed(share === 0 ? 0 : 1)}%`,
     }
@@ -61,7 +65,7 @@ const bars = computed(() => {
 </script>
 
 <template>
-  <svg class="motif outcomes" :viewBox="`0 0 ${W} ${captions.length ? 254 : 232}`" role="img" :aria-label="title || 'Measured outcomes'">
+  <svg class="motif outcomes" :viewBox="`0 0 ${W} ${BASE + (captions.length ? 58 : 36)}`" role="img" :aria-label="title || 'Measured outcomes'">
     <text v-if="title" :x="W / 2" y="18" text-anchor="middle" class="oc-title">{{ title }}</text>
     <path :d="`M4 ${BASE} L${W - 4} ${BASE}`" class="oc-base" />
     <g v-for="(b, i) in bars" :key="i" :class="`oc-bar oc-bar--${b.tone}`">
