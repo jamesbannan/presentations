@@ -34,7 +34,7 @@ built and render-checked until the rest of the talk is written.
 | 13 | Gates turn the arrow | X, H and Z as before → after turns of the arrow, then CNOT on two qubits; four clicks |
 | 14 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
 | 15 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
-| 16 | Demo: the same pair, with a real machine's noise | `bell_hardware.py`: local simulator vs a recorded Azure Quantum run on Quantinuum's H2 emulator (`quantinuum.sim.h2-1e`, 500 shots, 5 mixed) |
+| 16 | Demo: the same pair on a real machine | `bell_hardware.py`: local simulator vs a Bell pair run on IonQ Forte-1 hardware via Open Quantum (100 shots, 1 mixed) |
 | 17 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
 | 18 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
 | 19 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
@@ -55,12 +55,11 @@ backup if the live run fails. The demos aren't seeded, so live numbers will
 differ slightly from the slide. To refresh the slide, rerun the demo and copy
 its printed table into the component props.
 
-`bell_hardware.py` replays a run recorded on Azure Quantum ahead of time, so
-it's offline on stage too. The slide shows the `quantinuum.sim.h2-1e` recording,
-an emulator of Quantinuum's H2 with its noise, and its run command passes
-`--recording` so the live replay matches. If you record a run on a real QPU,
-copy its counts into the second chart and update the title, chart label and
-source line. `<Outcomes pending>` is still available for a chart awaiting data.
+`bell_hardware.py` replays a run recorded ahead of time (Azure Quantum or Open
+Quantum), so it's offline on stage too. The slide shows the IonQ Forte-1 hardware run, the
+most recent recording, so the plain command replays it. The notes cover the
+`quantinuum.sim.h2-1e` emulator run as a backup.
+`<Outcomes pending>` is still available for a chart awaiting data.
 
 The demo slides sit after Part one for now. Move them into the gates, entanglement
 and algorithms sections once those are written.
