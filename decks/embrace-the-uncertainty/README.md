@@ -40,21 +40,22 @@ built and render-checked until the rest of the talk is written.
 | 19 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
 | 20 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 | 21 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
-| 22 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5; `shor_estimate.py` for RSA-2048 is in the notes |
-| 23 | Part three: Q-Day | Section |
-| 24 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
-| 25 | The bar keeps dropping | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
-| 26 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert odds, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
-| 27 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
-| 28 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
-| 29 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
-| 30 | Part four: What to do | Section |
-| 31 | The replacements are already standards | `NoisyLattice`: the lattice problem; ML-KEM, ML-DSA and SLH-DSA (FIPS 203–205); one click |
-| 32 | The catch: everything gets bigger | `KeySizes`: classical vs post-quantum bytes against one network packet; two clicks |
-| 33 | Hybrid: belt and braces, already switched on | `HybridKex` plus a live `openssl s_client` check that this conference's site negotiates `X25519MLKEM768`; one click |
-| 34 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
-| 35 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
-| 36 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
+| 22 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5 |
+| 23 | Demo: what would RSA-2048 take? | `shor_estimate.py`: `ShorCost`, physical qubits and run time from 32-bit keys to RSA-2048 (36M qubits, 183 days) on the resource estimator; optimised circuits in the notes; one click |
+| 24 | Part three: Q-Day | Section |
+| 25 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
+| 26 | The bar keeps dropping | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
+| 27 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert odds, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
+| 28 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
+| 29 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
+| 30 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
+| 31 | Part four: What to do | Section |
+| 32 | The replacements are already standards | `NoisyLattice`: the lattice problem; ML-KEM, ML-DSA and SLH-DSA (FIPS 203–205); one click |
+| 33 | The catch: everything gets bigger | `KeySizes`: classical vs post-quantum bytes against one network packet; two clicks |
+| 34 | Hybrid: belt and braces, already switched on | `HybridKex` plus a live `openssl s_client` check that this conference's site negotiates `X25519MLKEM768`; one click |
+| 35 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
+| 36 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
+| 37 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
@@ -65,10 +66,10 @@ odds come from the arrow's angle, so a figure stays correct if you change its
 ## Demos
 
 The demos live in the `quantum-computing` repo and run locally on the QDK
-simulator (`gates.py`, `bell_pair.py`, `bell_hardware.py`, `adder.py`, `grover.py`, `shor.py`, in that order;
+simulator (`gates.py`, `bell_pair.py`, `bell_hardware.py`, `adder.py`, `grover.py`, `shor.py`, `shor_estimate.py`, in that order;
 run each with `uv run demos/<name>.py`). Each demo
 slide shows the Q# at the heart of it, the command, and the result of a
-typical run drawn by `Globe`/`Odds`, `Outcomes` or `GroverCurve`, so the slide doubles as a
+typical run drawn by `Globe`/`Odds`, `Outcomes`, `GroverCurve` or `ShorCost`, so the slide doubles as a
 backup if the live run fails. The demos aren't seeded, so live numbers will
 differ slightly from the slide. To refresh the slide, rerun the demo and copy
 its printed table into the component props.
@@ -78,7 +79,7 @@ Quantum), so it's offline on stage too. The slide shows the IonQ Forte-1 hardwar
 most recent recording, so the plain command replays it. The notes cover the
 `quantinuum.sim.h2-1e` emulator run as a backup.
 
-Slide 33's check isn't in the demos repo: it's a one-line `openssl s_client`
+Slide 34's check isn't in the demos repo: it's a one-line `openssl s_client`
 against `dddadelaide.com`. Use Homebrew's OpenSSL 3.5 or later; macOS's
 `/usr/bin/openssl` is LibreSSL and won't offer the hybrid. The output is on the
 slide as a backup.

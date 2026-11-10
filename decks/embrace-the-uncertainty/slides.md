@@ -725,9 +725,60 @@ Under the hood: 9 phase bits, but measured one at a time on a single reused cont
 
 Flags: --number 21 --a 2 (period 6, more ways to fail), --seed N for a repeatable run, --shots.
 
-The reality check, if there's time: uv run demos/shor_estimate.py points this same Q# at real key sizes through Microsoft's resource estimator (about 5 GB of RAM for 2048 bits; --max-bits 1024 is lighter, and the plot is in output/shor_estimate.png). This textbook circuit at RSA-2048, on superconducting-style hardware with 0.1% errors, needs about 36 million physical qubits for about 183 days. Gidney and Ekerå's optimised circuit takes that to about 2 days, and Gidney's 2025 paper to under a million qubits and under a week. Today's devices have a thousand or so. In VS Code: Estimate on EstimateRsa2048Textbook and EstimateRsa2048GidneyEkera in ShorEstimate.qs.
-
 For the extension: Histogram on PeriodFindingSevenModFifteen, Run on FactorFifteen to watch the attempts in the Debug Console.
+
+Next slide: the same Q# pointed at a real key size.
+-->
+
+---
+kicker: Demo · Shor's algorithm at scale
+class: demo
+clicks: 1
+---
+
+# Demo: what would RSA-2048 take?
+
+<div class="split" style="--split: 0.9fr 1.1fr">
+<div>
+
+```rust
+// one step of Shor.qs, at 2048 bits
+use work = Qubit[2048];
+use control = Qubit();
+Controlled ModularMultiplyByConstant(
+    [control], (modulus, 11L, work));
+// Shor needs 4,097 of these
+```
+
+The **resource estimator** counts every gate, then sizes the machine. Error correction turns **6,148** qubits into **36&nbsp;million**.
+
+<p class="run-cmd">uv run demos/shor_estimate.py</p>
+
+</div>
+<div>
+  <ShorCost :upto="$clicks + 6" />
+</div>
+</div>
+
+<p class="source">Microsoft Resource Estimator · textbook circuit · superconducting-style qubits, 0.1% errors</p>
+
+<!--
+Demo: quantum-computing repo, demos/shor_estimate.py (Q# in demos/src/ShorEstimate.qs, reusing Shor.qs). The numbers don't change between runs: no randomness, it's counting, not simulating. A few seconds once it's warmed up; the 2048-bit trace needs about 5 GB of RAM (--max-bits 1024 is lighter). The plot is in output/shor_estimate.png.
+
+What it does: we can't simulate 2048 qubits, nobody can, but we don't need to run the circuit to cost it. Microsoft's resource estimator walks through the same Q# that factored 15 on the last slide, counts every gate, then asks: on a given kind of hardware, with a given error rate, how many physical qubits and how long? Shor at n bits is 2n + 1 of these controlled multiplications, all the same size, so the script traces one and multiplies by 4,097.
+
+Read the chart a row at a time: every time the key doubles, the qubits roughly double and the time goes up about eight or nine times. Click for RSA-2048: about 36 million physical qubits running for about 183 days. 6,148 logical qubits doing the work, and error correction wraps every one of those in thousands of noisy physical ones. That's the 1% error rate from the hardware demo coming back to bite.
+
+Today's biggest machines have a thousand or so physical qubits, none of them error-corrected. So: safe today, by a factor of tens of thousands.
+
+But this is the textbook circuit: deliberately naive, written to be readable. The script also prints the optimised circuits:
+- Gidney and Ekerå 2021: about 92 times fewer gates. On the same hardware, about 56 million qubits but about 2 days.
+- Gidney 2025: under a million noisy qubits, under a week.
+The hardware model matters as much: on trapped-ion-style timings (slower gates) the textbook circuit takes 165 years; on Microsoft's Majorana target with 10⁻⁶ errors, about 5 million qubits and 33 days.
+
+That's the point to land: the estimate keeps falling, as much from better algorithms as from better hardware. That's Part three.
+
+In VS Code: Estimate CodeLens on EstimateRsa2048Textbook and EstimateRsa2048GidneyEkera in ShorEstimate.qs shows the full breakdown, including the T-factories.
 -->
 
 ---
