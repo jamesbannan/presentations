@@ -732,6 +732,196 @@ For the extension: Histogram on PeriodFindingSevenModFifteen, Run on FactorFifte
 
 ---
 layout: section
+numeral: 3
+kicker: Part three
+---
+
+# Q-Day
+
+## The day Shor runs for real. Some call it the Q-Pocalypse.
+
+<!--
+Q-Day is the name for the day someone switches on a quantum computer big enough, and clean enough, to run Shor's algorithm against a real key. Not 15. A 2048-bit RSA key, or the 256-bit elliptic curve key in your browser, your SSH config or your bitcoin wallet.
+
+The tabloid name is the Q-Pocalypse. This section is about what actually breaks that day, how close we are, when it might come, and why the honest answer to "when?" is "we don't know, and that's exactly why you start now".
+
+Nobody's announced Q-Day yet. Hold on to that: the danger isn't the day itself, it's everything we've done before it.
+-->
+
+---
+kicker: Q-Day · what breaks
+---
+
+# What Shor breaks, and what Grover only dents
+
+<div class="split" style="--split: 1.15fr 0.85fr; align-items: stretch; margin-top: 0.9em">
+<div class="panel magenta">
+  <h3>Broken by Shor</h3>
+  <p class="panel-lead">RSA · Diffie-Hellman · elliptic curves (ECDH, ECDSA, Ed25519)</p>
+  <ul>
+    <li>Every HTTPS handshake and certificate</li>
+    <li>SSH keys, VPNs, Wi-Fi enterprise logins</li>
+    <li>Code signing and software updates</li>
+    <li>JWTs (RS256, ES256), passkeys</li>
+    <li>Bitcoin and Ethereum wallets</li>
+  </ul>
+  <p>The fix is new maths, not bigger keys.</p>
+</div>
+<div class="panel cyan" v-click="1">
+  <h3>Dented by Grover</h3>
+  <p class="panel-lead">AES · SHA-2 · SHA-3 · HMAC</p>
+  <ul>
+    <li>Disk and database encryption</li>
+    <li>The bulk of every HTTPS connection</li>
+    <li>Hashes and password storage</li>
+  </ul>
+  <p>The fix is bigger keys: AES-256, SHA-384.</p>
+</div>
+</div>
+
+<p class="takeaway" v-click="2" style="margin-top: 1.3em"><b>Shor breaks the handshake, and the handshake carries the key to everything else.</b> Read the handshake from a recording, and you can read the whole conversation.</p>
+
+<!--
+Two families of cryptography, two very different stories.
+
+On the left, public-key cryptography: RSA, Diffie-Hellman, and elliptic curves. These are the ones built on a hidden rhythm, factoring or its elliptic-curve cousin, the discrete logarithm. That's exactly the structure Shor's algorithm finds. Once a big enough machine exists, these aren't weakened, they're broken: from a public key you can work out the private key.
+
+Where do you meet them? Everywhere two parties who've never met need to agree on a secret or prove who they are. The HTTPS handshake and the certificate that proves it's really your bank. SSH keys. VPNs. The signature on every software update you install. JWTs signed with RS256 or ES256. Passkeys, which are elliptic-curve keys under the hood. And every Bitcoin and Ethereum wallet.
+
+You can't fix this by making the keys longer. Shor scales gracefully with key size, so a bigger RSA key only buys a little time. The fix is new maths: algorithms with no hidden rhythm for Shor to find. That's post-quantum cryptography, and it's coming up.
+
+[click] On the right, symmetric cryptography: AES, the SHA hashes, HMAC. No hidden rhythm here, so Shor doesn't apply. The best quantum attack is Grover's search, the square-root speed-up from earlier. In theory that halves the effective strength: AES-128 behaves more like a 64-bit key against a quantum attacker. In practice Grover runs step after step, it doesn't spread well across many machines, and nobody thinks AES-128 falls soon. But the fix is cheap, so take it: AES-256 and SHA-384. Australia's ISM already asks for AES-256 and SHA-384 or SHA-512 on new equipment by 2030 (ISM-1917).
+
+[click] Here's why the left-hand side matters so much. Real systems use both. The public-key handshake agrees a fresh AES key, then AES encrypts the actual data. AES is fine, but the AES key was carried inside the handshake. Record the handshake today, break it with Shor later, pull out the AES key, and read the whole conversation. So "AES is quantum-safe" is true, and it doesn't save you if the handshake isn't.
+-->
+
+---
+kicker: Q-Day · how close?
+clicks: 2
+---
+
+# The bar keeps dropping
+
+<div style="max-width: 860px; margin: 1.4em auto 0">
+  <QubitBudget :upto="$clicks + 1" />
+</div>
+
+<p class="source" style="text-align: center">Gidney &amp; Ekerå (Quantum 5, 433) · Gidney 2025 (arXiv 2505.15917) · Babbush, Zalcman, Gidney et al. 2026 (PRX Quantum 7, 031001) · physical qubits at 0.1% error</p>
+
+<!--
+How big does a machine have to be? This is physical qubits, on a log scale: each gridline is ten times the last.
+
+In 2019, Craig Gidney and Martin Ekerå at Google worked out that breaking a 2048-bit RSA key would take about 20 million noisy qubits, running for about 8 hours.
+
+[click] In 2025, Gidney did it again: under a million qubits, in under a week. Same hardware assumptions, a twentieth of the machine, just by finding cleverer ways to do the arithmetic.
+
+[click] And in 2026, a Google team including Gidney looked at the elliptic curve Bitcoin and Ethereum use, 256-bit. Elliptic curve keys are much smaller than RSA keys, so they need fewer qubits: no more than about 1,200 error-corrected qubits, which on today's style of superconducting hardware is under half a million physical ones, running in minutes. Minutes matters: when you spend bitcoin, your public key sits in public for the ten or so minutes before the block is mined. A machine that works in minutes could race you to it.
+
+Down at the bottom, the dashed line: the biggest machines today have around a thousand to a few thousand qubits. IBM's Condor has 1,121; neutral-atom arrays have held a few thousand atoms. And these are the noisy kind, without error correction at scale. All the estimates above assume a 0.1% error rate and full error correction running underneath.
+
+So we're a few hundred times short on count, and further than that on quality. That's real comfort. But look at the direction: the estimates fell twenty-fold in six years, mostly from better algorithms, not better hardware. The bar is dropping while the machines are climbing. Nobody knows where they meet.
+
+Why so many physical qubits? Error correction. Each reliable, logical qubit is built from hundreds to thousands of noisy physical ones, constantly checked and corrected (Fowler et al. 2012 is the classic reference). That's the overhead from the hardware-reality slide.
+-->
+
+---
+kicker: Q-Day · when?
+clicks: 3
+---
+
+# Q-Day: nobody knows when. The deadlines are set anyway.
+
+<div style="max-width: 800px; margin: 0.6em auto 0">
+  <QdayTimeline :stage="$clicks" />
+</div>
+
+<p class="source" style="text-align: center">Global Risk Institute, Quantum Threat Timeline Report 2025 · ASD, Planning for post-quantum cryptography · NIST IR 8547</p>
+
+<!--
+So when is Q-Day? Here's the honest answer: nobody knows. Here's today, and fifteen years of runway.
+
+[click] Every year the Global Risk Institute asks a panel of quantum experts how likely a code-breaking machine is, and when. The latest report, published in March 2026 with 26 experts: a 28 to 49 percent chance within ten years, and 51 to 70 percent within fifteen. It's a range because the experts' answers are themselves ranges. The ten-year number is the highest in the seven years they've run the survey. Read that as: roughly a coin flip in the mid 2030s, and getting more likely, not less. The dashed line is just a guide between the two published points.
+
+[click] Australia isn't waiting for the answer. The Australian Signals Directorate's guidance: have a refined transition plan by the end of 2026, which is about now. Start the transition, critical systems first, by the end of 2028. And stop using RSA, Diffie-Hellman and elliptic curves entirely by the end of 2030. That's for government, and anyone who sells to it, which is a lot of this room.
+
+[click] The US is on a similar clock. NIST's IR 8547, finalised in October 2026: quantum-vulnerable public-key algorithms are deprecated after 2030 and disallowed after 2035. Some US federal systems have even earlier deadlines.
+
+Notice the deadlines sit well before the odds get high. That's deliberate. Migration is slow, years for a big organisation, so the regulators have worked backwards from the risk, not forwards from the prediction. Which is a very "embrace the uncertainty" way to run a project.
+-->
+
+---
+layout: statement
+kicker: Q-Day · the risk register
+---
+
+# Probability: unknown. Impact: catastrophic. Timeline: uncertain.
+
+## You can't wait for certainty. Plan for the deadline, not the prediction.
+
+<!--
+If you've ever filled in a risk register, you know this row. Probability unknown. Impact catastrophic. Timeline uncertain.
+
+Normally that row gets a shrug and a "monitor". The trouble with this one is that the clock doesn't start on Q-Day. For some of your data, it started years ago. Which brings us to the scariest four words in the section.
+-->
+
+---
+kicker: Q-Day · harvest now, decrypt later
+clicks: 2
+---
+
+# Harvest now, decrypt later
+
+<div style="max-width: 770px; margin: 0.4em auto 0">
+  <Mosca :exposed="$clicks >= 1" />
+</div>
+
+<p class="takeaway" v-click="2"><b>Time to migrate + time it stays secret &gt; time to Q-Day?</b> Then that data is already exposed. It's being recorded today.</p>
+
+<!--
+Here's the bit that makes Q-Day a today problem. Encrypted traffic is easy to record. Storage is cheap. So a patient adversary can copy encrypted data now, sit on it, and decrypt it when the machine arrives. Harvest now, decrypt later. It's the reason every security agency gives for starting the migration now.
+
+This picture is Michele Mosca's rule of thumb. Each row is a kind of data. The violet part is how long you'll keep sending it with today's crypto: until you finish migrating, here the end of 2030, the ASD deadline. Everything sent in that window can be recorded. The cyan part is how long it has to stay secret after that. The pink band is Q-Day: somewhere in here. I've started the band in 2032, early but within what the experts call plausible.
+
+[click] Now shade everything that still needs to be secret once Q-Day might have arrived.
+
+A login session only needs to stay secret for hours: once you've migrated, it's done. Safe. A credit card number lasts a few years: just touches the band. Trade secrets, ten years: well into it. Cabinet papers stay closed for twenty years in Australia. Health records, your whole life. Those rows were exposed the moment they were sent.
+
+[click] That's Mosca's inequality. How long until you've migrated, plus how long the data must stay secret: if that's longer than the time until Q-Day, you're already too late for that data. You can't un-record it. The only lever you control is the violet bar: migrate sooner, and everything you send from then on is safe.
+-->
+
+---
+kicker: Q-Day · hype-o-meter
+---
+
+# The Q-Pocalypse, rated
+
+<div class="hype">
+  <div><span class="tag magenta">Real</span><b>Recorded secrets get read</b><span>Anything sent with RSA or elliptic curves today can be stored now and opened on Q-Day.</span></div>
+  <div v-click="1"><span class="tag magenta">Real</span><b>Signatures get forged</b><span>Fake certificates, logins and software updates, on anything that hasn't migrated.</span></div>
+  <div v-click="2"><span class="tag magenta">Real</span><b>A quarter of all bitcoin is up for grabs</b><span>25–30% sits in addresses whose public key is already on the blockchain.</span></div>
+  <div v-click="3"><span class="tag cyan">Myth</span><b>AES is dead</b><span>Grover only dents it. AES-256 keeps a comfortable margin.</span></div>
+  <div v-click="4"><span class="tag amber">Sci-fi</span><b>Quantum cracks Bitcoin tomorrow</b><span>Today's machines are hundreds of times too small, and far too noisy.</span></div>
+  <div v-click="5"><span class="tag cyan">Myth</span><b>There's nothing we can do</b><span>Quantum-safe algorithms are already standardised, and already in your browser.</span></div>
+</div>
+
+<!--
+Let's run the Q-Pocalypse headlines through the hype-o-meter.
+
+Real: recorded secrets get read. That's harvest now, decrypt later. It's not a prediction about Q-Day, it's a description of what can be stored today.
+
+[click] Real: signatures get forged. On Q-Day, anyone with the machine can work out a private key from a public one. Public keys are, by design, public: they're in every certificate and every signed update. So they can pretend to be your bank, or push a "software update" signed with your vendor's key, to anything that hasn't moved to quantum-safe signatures. Unlike harvesting, this needs the machine, so it only starts on Q-Day. But it needs everything migrated, firmware included, by then.
+
+[click] Real, and a bit of fun: about a quarter of all bitcoin is exposed. Bitcoin addresses that have spent before, or older address types, have their public key sitting on the blockchain. Estimates in 2026 range from about 25 percent, ChainQuery, to 30 percent, Glassnode, of all bitcoin. On Q-Day those are a race. Bitcoin hasn't agreed how it would migrate.
+
+[click] Myth: AES is dead. You've seen why. Grover dents it, AES-256 shrugs it off.
+
+[click] Sci-fi: quantum cracks Bitcoin tomorrow. The best machines are a few hundred times too small, and nowhere near clean enough. Not tomorrow. Probably not this decade, but we don't get to be sure.
+
+[click] And myth: there's nothing we can do. There is. NIST published quantum-safe replacements in 2024: ML-KEM for agreeing keys, ML-DSA and SLH-DSA for signatures. Chrome, Edge, Firefox and Safari already use a hybrid ML-KEM key exchange with many sites; if you came here on the conference Wi-Fi, some of your traffic today was already quantum-safe. The hard part isn't the maths any more. It's finding everything in your estate that uses the old maths, and swapping it out before the deadlines. That's where we're going next.
+-->
+
+---
+layout: section
 numeral: 1
 kicker: Layout · section
 ---

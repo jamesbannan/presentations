@@ -13,7 +13,7 @@ npm run export -- embrace-the-uncertainty
 
 ## Status
 
-The cover, Part one, the five demo slides and the closing slide are written.
+The cover, Part one, the demo slides, Part two (Grover and Shor), Part three (Q-Day) and the closing slide are written.
 The slides after the demos are layout specimens, one per layout, kept so the theme can be
 built and render-checked until the rest of the talk is written.
 
@@ -41,9 +41,16 @@ built and render-checked until the rest of the talk is written.
 | 20 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 | 21 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
 | 22 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5; `shor_estimate.py` for RSA-2048 is in the notes |
+| 23 | Part three: Q-Day | Section |
+| 24 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
+| 25 | The bar keeps dropping | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
+| 26 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert odds, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
+| 27 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
+| 28 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
+| 29 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
-`Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), so there are no image files to maintain. The
+`Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), and Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, so there are no image files to maintain. The
 odds come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
 

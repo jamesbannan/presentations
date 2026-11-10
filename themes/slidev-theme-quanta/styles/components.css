@@ -204,6 +204,99 @@
   backdrop-filter: blur(2px);
 }
 
+/* A tone on the top edge and heading: `<div class="panel magenta">`. */
+.slidev-layout .panel.cyan { border-top-color: var(--cyan); }
+.slidev-layout .panel.magenta { border-top-color: var(--magenta); }
+.slidev-layout .panel.amber { border-top-color: var(--amber); }
+.slidev-layout .panel.cyan h3 { color: var(--cyan); }
+.slidev-layout .panel.magenta h3 { color: var(--magenta); }
+.slidev-layout .panel.amber h3 { color: var(--amber); }
+
+.slidev-layout .panel h3 {
+  margin: 0 0 0.4em;
+}
+
+/* The lead line of a panel: the names that matter, in display type. */
+.slidev-layout .panel .panel-lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 0.6em;
+}
+
+/* A plain list in a panel: small dots, no indent. */
+.slidev-layout .panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slidev-layout .panel ul > li {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  padding-left: 1em;
+  position: relative;
+}
+
+.slidev-layout .panel ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.36em;
+  height: 0.36em;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.slidev-layout .panel ul + p {
+  margin: 0.7em 0 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+/* ---------- Hype — claims rated on a hype-o-meter ----------
+   <div class="hype">
+     <div><span class="tag magenta">Real</span><b>The claim</b><span>Why</span></div>
+   </div>
+   The tag sits in its own column so every claim lines up. */
+.slidev-layout .hype {
+  display: grid;
+  gap: 0.75em;
+  margin-top: 0.4em;
+}
+
+.slidev-layout .hype > div {
+  display: grid;
+  grid-template-columns: 4.8em 1fr;
+  column-gap: 1em;
+  align-items: baseline;
+}
+
+.slidev-layout .hype .tag {
+  grid-row: span 2;
+  justify-self: start;
+  align-self: center;
+  font-size: 0.66rem;
+}
+
+.slidev-layout .hype b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.slidev-layout .hype > div > span:not(.tag) {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
 /* ---------- Tag — a small status chip ---------- */
 .slidev-layout .tag {
   display: inline-block;
