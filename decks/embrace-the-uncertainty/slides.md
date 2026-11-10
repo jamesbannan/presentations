@@ -630,26 +630,26 @@ kicker: Shor's algorithm · what it is
 
 RSA's lock: multiplying primes is easy, splitting them back out is **hard**. Shor turns the splitting into finding a **rhythm**.
 
-<div class="period-figure">
+<div class="period-figure" style="max-width: 640px">
   <Period :multiplier="7" :modulus="15" />
-  <p>Powers of 7, keeping the remainder after dividing by 15</p>
+  <p style="margin-top: 0.5em">Powers of 7, keeping the remainder after dividing by 15</p>
 </div>
 
-<div class="chain" v-click="1">
+<div class="chain" v-click="1" style="margin-top: 0.9em">
   <span>Rhythm: 4</span>
   <span>7² = 49</span>
   <span>48 and 50</span>
   <span class="chain-end">15 = 3 × 5</span>
 </div>
 
-<div class="doubling" v-click="2" style="--steps: 3; margin-top: 0.5em">
+<div class="doubling" v-click="2" style="--steps: 3; margin-top: 1.3em">
   <span class="doubling-lead">To split a 2,048-bit RSA key:</span>
   <div><b>Classically</b><span>about 2¹¹² steps · out of reach</span></div>
   <div><b>Today's machines</b><span>~1,000 noisy qubits · Shor has split 21</span></div>
   <div><b>With Shor</b><span>under a week · ~1 million noisy qubits</span></div>
 </div>
 
-<p class="takeaway" v-click="3" style="margin-top: 0.5em"><b>Exponential, not square-root.</b> Longer keys won't save RSA or elliptic curves; new maths will.</p>
+<p class="takeaway" v-click="3" style="margin-top: 1.1em"><b>Exponential, not square-root.</b> Longer keys won't save RSA or elliptic curves; new maths will.</p>
 
 <!--
 Peter Shor, Bell Labs, 1994. Two years before Grover, and it's the reason governments and banks care about quantum computers at all.
