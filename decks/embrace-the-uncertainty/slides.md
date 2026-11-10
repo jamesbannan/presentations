@@ -316,6 +316,7 @@ X: flip. North to south, 0 to 1. It's the quantum NOT, and on a plain 0 or 1 it 
 
 ---
 kicker: Demo · gates
+class: demo
 ---
 
 # Demo: the sign you can't see
@@ -381,11 +382,12 @@ The script also runs plain X (always 1, the quantum NOT). In VS Code: Histogram 
 
 ---
 kicker: Demo · entanglement
+class: demo
 ---
 
 # Demo: two qubits that always agree
 
-<div class="split" style="--split: 0.72fr 1.28fr">
+<div class="split" style="--split: 0.8fr 1.2fr">
 <div>
 
 ```rust
@@ -420,6 +422,7 @@ Useful flags: --shots 5000, and --dump-state to print both stored states before 
 
 ---
 kicker: Demo · real hardware
+class: demo
 ---
 
 # Demo: the same pair on a real machine
@@ -458,15 +461,16 @@ If you want the emulator run on stage instead: uv run demos/bell_hardware.py --r
 
 ---
 kicker: Demo · half adder
+class: demo
 ---
 
 # Demo: one pass adds every pair, one read shows one
 
-<div class="split" style="--split: 0.9fr 1.1fr">
+<div class="split" style="--split: 1fr 1fr">
 <div>
 
 ```rust
-H(a); H(b);          // every input pair at once
+H(a); H(b);          // every pair at once
 CCNOT(a, b, carry);  // carry = a AND b
 CNOT(a, sum);        // sum = a XOR b
 CNOT(b, sum);
@@ -584,18 +588,19 @@ One catch, and it's the demo: too many rounds and the answer drains away again. 
 
 ---
 kicker: Demo · Grover's search
+class: demo
 ---
 
 # Demo: Grover's search has to know when to stop
 
-<div class="split" style="--split: 0.72fr 1.28fr">
+<div class="split" style="--split: 0.94fr 1.06fr">
 <div>
 
 ```rust
 ApplyToEach(H, register); // all 16
 for _ in 1..iterations {
-    ReflectAboutMarked(marked, register);
-    ReflectAboutUniform(register);
+  ReflectAboutMarked(marked, register);
+  ReflectAboutUniform(register);
 }
 return MeasureInteger(register);
 ```
@@ -673,11 +678,12 @@ And the reason to care now rather than on Q-Day: harvest now, decrypt later. Any
 
 ---
 kicker: Demo · Shor's algorithm
+class: demo
 ---
 
 # Demo: factoring 15, the hard way
 
-<div class="split" style="--split: 0.95fr 1.05fr">
+<div class="split" style="--split: 1.12fr 0.88fr">
 <div>
 
 ```rust
@@ -688,7 +694,7 @@ let r = PeriodCandidate(15, y, 9);
 let (p, q) = FactorsFromPeriod(7, 15, r);
 ```
 
-Only **one line** is quantum. Half its readings give **3 × 5**; the rest are duds, so it runs again.
+Only **one line** is quantum. Half its readings give **3&nbsp;×&nbsp;5**; the rest are duds, so it runs again.
 
 <p class="run-cmd">uv run demos/shor.py</p>
 

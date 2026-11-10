@@ -22,7 +22,7 @@ the deck works offline.
 | --- | --- | --- |
 | `cover` | `kicker`, `motif` (`bloch`\|`none`), `theta`, `phi` | Title left, Bloch sphere right (state set by `theta`/`phi` in degrees), circuit along the foot |
 | `section` | `numeral`, `kicker` | Part number as a big ket in a register card, with its binary; lattice behind, interference wave under the heading |
-| `default` | `kicker`, `motif` (`lattice`\|`none`) | Circuit mark top-left, lattice corner top-right, folio bottom-right |
+| `default` | `kicker`, `motif` (`lattice`\|`none`), `class` | Circuit mark top-left, lattice corner top-right, folio bottom-right. `class: demo` sets code blocks at 16px instead of 12px, for code the room has to read |
 | `statement` | `kicker` | Large centred line over a wave packet |
 | `quote` | `cite` | Quote held between a bra and a ket |
 | `figure` | `src`, `caption`, `kicker`, `fit` | Image in a frame with registration marks, or a double-slit fringe placeholder when `src` is unset |

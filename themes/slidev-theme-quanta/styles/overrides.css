@@ -12,6 +12,14 @@
   border-radius: 4px;
 }
 
+/* `class: demo` on a slide: bigger code, readable from the back of the room.
+   Slidev sizes code blocks through these variables with !important. */
+.slidev-layout.demo {
+  --slidev-code-font-size: 16px;
+  --slidev-code-line-height: 26px;
+  --slidev-code-padding: 14px 18px;
+}
+
 .slidev-layout .slidev-progress {
   background: var(--superposition) !important;
   height: 2px !important;
