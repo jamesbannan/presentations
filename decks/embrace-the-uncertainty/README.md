@@ -39,6 +39,8 @@ built and render-checked until the rest of the talk is written.
 | 18 | Part two: Grover and Shor | Section |
 | 19 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
 | 20 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
+| 21 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
+| 22 | Demo: factoring 15, the hard way | Placeholder: `shor.py` isn't written yet; pending chart of 3-bit rhythm readings |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), so there are no image files to maintain. The
@@ -60,7 +62,10 @@ its printed table into the component props.
 Quantum), so it's offline on stage too. The slide shows the IonQ Forte-1 hardware run, the
 most recent recording, so the plain command replays it. The notes cover the
 `quantinuum.sim.h2-1e` emulator run as a backup.
-`<Outcomes pending>` is still available for a chart awaiting data.
+
+The Shor demo slide is a placeholder until `shor.py` is written: it uses
+`<Outcomes pending>`. Swap in the real counts, and the command if the script
+has a different name, once it exists.
 
 The demo slides sit after Part one for now. Move them into the gates, entanglement
 and algorithms sections once those are written.

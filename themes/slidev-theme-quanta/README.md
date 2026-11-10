@@ -47,6 +47,7 @@ the deck works offline.
 | `<ScaleZoom>` | `stops` (`kind`: `dollar` (an Australian $1)\|`coin`\|`grain`\|`cell`\|`atom`\|`electron`), `quantum-from`, `seed`. A powers-of-ten zoom with the everyday/quantum boundary marked |
 | `<Shots>` | `theta`, `reads`, `per-row`, `sorted`, `seed`, `play` (start grey and colour each read in turn as the slide opens; exports, the overview and reduced motion show the finished chart), `seconds` (default 3). A dot per simulated read, tallied with `<Odds>` underneath |
 | `<Patterns>` | `qubits` (default 4), `mode` (`bits`: one pattern held, in ink \| `odds`: a share of the odds on every pattern \| `focus`: odds piled onto one, after interference \| `grover`: the exact odds after `rounds` of Grover's search for `pick`, to an absolute scale, with `pick` outlined), `pick` (the pattern held or found, as an index; default 11 = `1011`), `seed`, `rounds` (default 0). Every pattern a register can hold, as a grid |
+| `<Period>` | `multiplier` (default 7), `modulus` (default 15), `terms` (default 12). Powers of `multiplier`, keeping the remainder after dividing by `modulus`, as a row of tiles: one colour per value, a bracket under every repeat, the first labelled with the period. The rhythm Shor's algorithm finds |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
 Also `<Folio>` (slide number as a ket, qubit dots and binary), `<ContactLink>`
@@ -95,6 +96,10 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
   dots joined by a `.gate--ctrl` dot and a `.gate--target` ⊕ for CNOT.
 - `.takeaway` is a centred closing line under a figure; its `<b>` lead is violet.
 - `.chart-solo` caps a single chart's width, for one beside text in a `.split`.
+  Add `chart-solo--wide` for a chart with many outcomes.
+- `.period-figure` holds a `<Period>` strip with a `<p>` caption under it.
+- `.chain` is a worked sum on one row: `<span>` steps joined by arrows. Give
+  the last `chain-end` to highlight the result.
 
 ## Writing SVG components for Slidev
 

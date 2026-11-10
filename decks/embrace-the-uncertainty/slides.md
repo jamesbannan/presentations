@@ -623,6 +623,88 @@ For the extension: GroverAtOptimum and GroverOverIterated have Run/Histogram Cod
 -->
 
 ---
+kicker: Shor's algorithm · what it is
+---
+
+# Shor's algorithm: find the rhythm, break the lock
+
+RSA's lock: multiplying primes is easy, splitting them back out is **hard**. Shor turns the splitting into finding a **rhythm**.
+
+<div class="period-figure">
+  <Period :multiplier="7" :modulus="15" />
+  <p>Powers of 7, keeping the remainder after dividing by 15</p>
+</div>
+
+<div class="chain" v-click="1">
+  <span>Rhythm: 4</span>
+  <span>7² = 49</span>
+  <span>48 and 50</span>
+  <span class="chain-end">15 = 3 × 5</span>
+</div>
+
+<div class="doubling" v-click="2" style="--steps: 3; margin-top: 0.5em">
+  <span class="doubling-lead">To split a 2,048-bit RSA key:</span>
+  <div><b>Classically</b><span>about 2¹¹² steps · out of reach</span></div>
+  <div><b>Today's machines</b><span>~1,000 noisy qubits · Shor has split 21</span></div>
+  <div><b>With Shor</b><span>under a week · ~1 million noisy qubits</span></div>
+</div>
+
+<p class="takeaway" v-click="3" style="margin-top: 0.5em"><b>Exponential, not square-root.</b> Longer keys won't save RSA or elliptic curves; new maths will.</p>
+
+<!--
+Peter Shor, Bell Labs, 1994. Two years before Grover, and it's the reason governments and banks care about quantum computers at all.
+
+The lock. RSA, the public-key encryption behind a lot of the internet's certificates and signatures, is built on one lopsided fact. Multiplying two big primes together is easy: a laptop does it instantly. Going backwards, taking the product and finding the two primes, is brutally hard. Your public key is the product; the primes are the secret. Nobody has found a fast way to split a big number on a normal computer.
+
+Shor's trick is to swap the hard question for a different one. Pick any number, say 7. Take its powers, 1, 7, 49, 343, and after each one keep only the remainder when you divide by 15, the number we want to split. Look at the row: 1, 7, 4, 13, then 1, 7, 4, 13 again. It repeats. Every number does this, and how often it repeats, the rhythm, secretly carries the factors.
+
+[click] Here's the payoff, and it's school maths. The rhythm is 4. Take 7 to the power of half the rhythm: 7 squared, 49. Look either side of it: 48 and 50. Each of those shares a factor with 15: 48 shares 3, 50 shares 5. Out pop 3 and 5. Only the rhythm needs a quantum computer; everything after it is maths you could do with a pencil, using Euclid's algorithm from 300 BC.
+
+So why is the rhythm hard? For 15 the pattern repeats after 4 steps and you can just look. For a 2,048-bit RSA number, the rhythm can be a number with hundreds of digits. You'd be listing remainders until the heat death of the universe.
+
+What does the quantum computer do? The same tools as everything else today. Put the exponent in superposition: all of 0, 1, 2, 3 and on, at once. Compute the remainders for all of them in one pass, like the half adder adding every pair. Reading now would just give one random remainder, useless. Instead, a final step called the quantum Fourier transform makes the paths interfere, like Grover's boost, so that only readings in step with the rhythm survive. A handful of reads, and the rhythm drops out. It's the same idea as tapping along to a song: you don't need to hear every beat to know the tempo.
+
+[click] How close is it? Classically, the best known method needs around 2 to the 112 steps for RSA-2048. That's NIST's rating for it, and it's far out of reach. Today's biggest machines have around a thousand noisy physical qubits, give or take, and the biggest numbers Shor has actually been run on are 15 and 21, the same tiny scale as the demo coming up. That's both funny and reassuring. But the estimate keeps falling. In 2019 it was 20 million noisy qubits for eight hours (Gidney and Ekerå). In May 2025, Craig Gidney at Google brought it to under a million noisy qubits, in under a week. That assumes a 0.1% error per gate: ten times better than the 1% we saw on the real machine. Not today, but no longer science fiction.
+
+[click] Why this one is different. Grover gave a square-root speed-up, so doubling the key length was enough. Shor's speed-up is exponential: making RSA keys bigger only buys a little time, because the quantum effort grows gently with the key size. The same idea also breaks elliptic-curve cryptography, the ECDH and ECDSA in most TLS handshakes and in Bitcoin, and needs even fewer qubits to do it. So the fix isn't longer keys; it's different maths that has no hidden rhythm to find. That's post-quantum cryptography, and it's where we're going next.
+
+And the reason to care now rather than on Q-Day: harvest now, decrypt later. Anything encrypted with RSA or elliptic curves today can be recorded today and opened when the machine arrives.
+-->
+
+---
+kicker: Demo · Shor's algorithm
+---
+
+# Demo: factoring 15, the hard way
+
+<div class="split" style="--split: 0.8fr 1.2fr">
+<div>
+
+Pick 7. The quantum part finds the **rhythm** of 7ˣ mod 15; everything after that is ordinary maths.
+
+Readings should land only **in step with the rhythm**: the rest cancel out.
+
+<p class="run-cmd">uv run demos/shor.py</p>
+
+</div>
+<div class="chart-solo chart-solo--wide">
+  <Outcomes :stretch="60" title="Rhythm readings" :labels="['000', '001', '010', '011', '100', '101', '110', '111']" :captions="['0', '1', '2', '3', '4', '5', '6', '7']" pending="Demo still to come" />
+</div>
+</div>
+
+<p class="source">Placeholder: the demo and its recorded run are still to be written</p>
+
+<!--
+PLACEHOLDER. The demo isn't written yet, so the command and the chart are stand-ins. Replace the pending chart with the real counts once demos/shor.py exists (and update the run command if the script has a different name).
+
+What it should show. Factor 15 with 7, as on the previous slide. A counting register in superposition holds every exponent at once; the circuit computes 7 to that power, mod 15, for all of them; then a quantum Fourier transform makes the readings interfere. With a 3-qubit counting register, there are 8 possible readings (000 to 111, or 0 to 7), and only the ones in step with the rhythm survive: 0, 2, 4 and 6, about a quarter each (000, 010, 100, 110). The odd ones should be at or near zero. That's interference again, wrong answers cancelling, the same as Grover.
+
+From a reading to the factors. A reading of 2 out of 8 is a quarter of a turn, so the rhythm is 4. A reading of 6 is three quarters, same rhythm. 0 tells you nothing: run it again. Then the classical step from the last slide: 7 squared is 49, 48 and 50 share 3 and 5 with 15. Done.
+
+Why it's funny and reassuring. This is, honestly, about the state of the art for running Shor end to end. 15 was first factored this way in 2001 and 21 in 2012. Breaking RSA-2048 needs on the order of a million noisy qubits running for days. That's the gap between this slide and Q-Day.
+-->
+
+---
 layout: section
 numeral: 1
 kicker: Layout · section

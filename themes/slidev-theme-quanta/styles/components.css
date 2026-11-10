@@ -360,6 +360,23 @@
   margin: 0 auto;
 }
 
+.slidev-layout .chart-solo--wide {
+  max-width: 420px;
+}
+
+/* ---------- Period figure — a <Period> strip with a caption under it ---------- */
+.slidev-layout .period-figure {
+  max-width: 780px;
+  margin: 0.7em auto 0;
+}
+
+.slidev-layout .period-figure > p {
+  margin: 0.2em 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
 .slidev-layout .run-cmd--centre {
   text-align: center;
 }
@@ -607,6 +624,47 @@
 
 .slidev-layout .takeaway b {
   color: var(--violet);
+}
+
+/* ---------- Chain — a short worked sum, step by step ----------
+   <div class="chain">
+     <span>First step</span><span>Then this</span><span class="chain-end">Result</span>
+   </div>
+   Steps sit on one row with arrows between; the last can be highlighted. */
+.slidev-layout .chain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4em 0;
+  margin: 0.5em auto 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink);
+}
+
+.slidev-layout .chain > span {
+  padding: 0.3em 0.75em;
+  border: 1.5px solid var(--grid);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.slidev-layout .chain > span + span::before {
+  content: '→';
+  position: relative;
+  margin: 0 0.85em 0 -1.95em;
+  color: var(--violet);
+}
+
+.slidev-layout .chain > span + span {
+  margin-left: 1.9em;
+}
+
+.slidev-layout .chain .chain-end {
+  border-color: var(--magenta);
+  color: var(--magenta);
+  font-weight: 600;
 }
 
 /* ---------- Closing-slide contact links ---------- */
