@@ -263,7 +263,8 @@
    <div class="hype">
      <div><span class="tag magenta">Real</span><b>The claim</b><span>Why</span></div>
    </div>
-   The tag sits in its own column so every claim lines up. */
+   The tag sits in its own column so every claim lines up. Set --hype-tag
+   to widen that column for longer tags. */
 .slidev-layout .hype {
   display: grid;
   gap: 0.75em;
@@ -272,7 +273,7 @@
 
 .slidev-layout .hype > div {
   display: grid;
-  grid-template-columns: 4.8em 1fr;
+  grid-template-columns: var(--hype-tag, 4.8em) 1fr;
   column-gap: 1em;
   align-items: baseline;
 }
@@ -282,6 +283,7 @@
   justify-self: start;
   align-self: center;
   font-size: 0.66rem;
+  white-space: nowrap;
 }
 
 .slidev-layout .hype b {

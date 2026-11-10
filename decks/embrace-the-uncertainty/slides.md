@@ -922,6 +922,287 @@ Real: recorded secrets get read. That's harvest now, decrypt later. It's not a p
 
 ---
 layout: section
+numeral: 4
+kicker: Part four
+---
+
+# What to do
+
+## The new maths is ready. The hard part is finding everything that still uses the old maths.
+
+<!--
+Enough doom. This part is the to-do list.
+
+The good news first: the cryptographers have done their bit. Quantum-safe replacements are standardised, they're in the libraries you already use, and some of your traffic is already using them. The hard part is ours: finding every place the old maths hides, and swapping it out before the deadlines on the timeline slide.
+
+Five things: the new algorithms, the catch, the switch that's already on, how to write code that can change, and how to find what you've got. Then a 30, 90, 365-day plan you can take back to work on Monday.
+-->
+
+---
+kicker: What to do · the new maths
+clicks: 1
+---
+
+# The replacements are already standards
+
+<div class="split" style="--split: 0.82fr 1.18fr; margin-top: 0.7em">
+<div>
+  <NoisyLattice :solved="$clicks >= 1" />
+  <p class="takeaway" style="margin-top: 0.5em; font-size: 0.75rem">Find the grid point nearest the star. Easy in 2 dimensions. ML-KEM-768 hides it in 768.</p>
+</div>
+<div class="hype" style="--hype-tag: 6.2em">
+  <div><span class="tag cyan">FIPS 203</span><b>ML-KEM: agree a key</b><span>Replaces ECDH and RSA key exchange. Built on lattices. Already in your browser.</span></div>
+  <div><span class="tag">FIPS 204</span><b>ML-DSA: sign</b><span>Replaces RSA and ECDSA signatures. Built on lattices. The default choice.</span></div>
+  <div><span class="tag amber">FIPS 205</span><b>SLH-DSA: sign, conservatively</b><span>Built only on hash functions. Big and slow, but it doesn't bet on lattices.</span></div>
+</div>
+</div>
+
+<p class="source">NIST FIPS 203, 204 and 205, August 2024 · ASD prefers ML-KEM-1024 and ML-DSA-87</p>
+
+<!--
+In August 2024, after an eight-year public competition, NIST published three quantum-safe standards. They're called post-quantum cryptography, which is a slightly confusing name: it's ordinary maths running on ordinary computers, designed so that a quantum computer doesn't help.
+
+Remember why Shor works: RSA and elliptic curves hide a rhythm, and a quantum computer is brilliant at finding rhythms. So the replacements are built on problems with no rhythm to find.
+
+Most of them use lattices. Picture a grid of points, slanted, going on forever. Take one grid point, nudge it by a little random noise, and publish where it landed. That's the star, the public key. The secret is which grid point you started from.
+
+[click] In two dimensions it's easy: you can see it by eye. That one. But ML-KEM-768 does this in 768 dimensions. There the nearest grid point is hopelessly hard to find, for ordinary computers and, as far as anyone knows, for quantum ones too. The noise smears out any rhythm, so there's nothing for Shor to grab hold of. (Strictly, ML-KEM is "learning with errors": solving equations that each have a little noise added. Same picture.)
+
+The three standards:
+
+ML-KEM, FIPS 203, is for agreeing a key: the handshake job ECDH and RSA key exchange do today. It's the one your browser already uses.
+
+ML-DSA, FIPS 204, is for signatures: certificates, code signing, tokens. Also lattices. This is the default replacement for RSA and ECDSA signatures.
+
+SLH-DSA, FIPS 205, is also for signatures, but built only on hash functions, the same family as SHA-256. We've trusted hashes for decades, so it's the conservative choice: if someone finds a clever attack on lattices, SLH-DSA doesn't care. The price is big, slow signatures. Think firmware and root certificates: signed rarely, trusted for a long time.
+
+There are more on the way. FN-DSA, a smaller lattice signature (Falcon), is being standardised as FIPS 206 but isn't final yet. And in March 2025 NIST picked HQC, built on error-correcting codes rather than lattices, as a backup for ML-KEM; its draft standard is still pending.
+
+For Australian government work, ASD's ISM approves ML-KEM-768 or 1024 and ML-DSA-65 or 87, and prefers the bigger 1024 and 87. SLH-DSA is approved too.
+-->
+
+---
+kicker: What to do · the catch
+clicks: 2
+---
+
+# The catch: everything gets bigger
+
+<div style="max-width: 700px; margin: 0.3em auto 0">
+  <KeySizes :stage="$clicks" />
+</div>
+
+<p class="takeaway" v-click="2"><b>Your browser's first hello no longer fits in one packet.</b> An ML-DSA-signed JWT is over 4 KB: too big for a cookie.</p>
+
+<p class="source">FIPS 203, 204 and 205 · bytes one side sends: a public key, or a signature</p>
+
+<!--
+There's a catch, and it's the one that will actually bite developers. The new keys and signatures are much bigger.
+
+Here's what goes over the wire today. To agree a key, X25519 sends 32 bytes. To sign, Ed25519 is 64 bytes, RSA-2048 is 256. Tiny. We've spent twenty years designing protocols, packets, headers and databases around tiny.
+
+[click] Now the replacements. ML-KEM-768 sends a 1,184-byte public key: 37 times bigger. An ML-DSA-65 signature is 3,309 bytes: 52 times Ed25519. And SLH-DSA, the conservative one, is 7,856 bytes per signature, 123 times.
+
+[click] Why does that matter? This dashed line is roughly one network packet, about 1,500 bytes. Your browser's first message in a TLS handshake used to fit in one packet. With ML-KEM in it, it doesn't. When Chrome turned it on, some old firewalls and middleboxes that assumed a hello fits in one packet simply broke. Google and Cloudflare spent a year finding and fixing them.
+
+And it's not just network gear. Take a JWT. An ML-DSA-65 signature is 3,309 bytes, which base64-encodes to 4,412 characters. Add the header and claims and the token is well over 4 KB. Browsers cap a cookie at 4,096 bytes. So if your session token lives in a cookie, the post-quantum version won't fit. ML-DSA in JWTs is now standardised, RFC 9964, so this is a real design question, not a hypothetical.
+
+Same story for database columns sized for a 256-byte signature, HTTP header limits on proxies, smart cards and HSMs with small buffers, QR codes, and IoT radios. Bigger keys are the migration's real cost. Find the places that assume small, early.
+-->
+
+---
+kicker: What to do · hybrid
+class: demo
+clicks: 1
+---
+
+# Hybrid: belt and braces, already switched on
+
+<div style="max-width: 780px; margin: 0.5em auto 0">
+  <HybridKex :broken="$clicks >= 1" />
+</div>
+
+```bash
+$ openssl s_client -connect dddadelaide.com:443 </dev/null | grep -E "group|signature type"
+Peer signature type: ecdsa_secp256r1_sha256
+Negotiated TLS1.3 group: X25519MLKEM768
+```
+
+<p class="takeaway" style="margin-top: 0.6em"><b>This conference's website already agrees its keys quantum-safely.</b> Its certificate is still elliptic-curve: there are no post-quantum certificates on the web yet.</p>
+
+<!--
+ML-KEM is new. X25519 has been battered by attackers for over a decade. So how do you adopt the new thing without betting everything on it? You run both.
+
+A hybrid key exchange does the old exchange and the new exchange side by side, in the same handshake, and mixes both secrets into one session key. To read the traffic, an attacker has to break both.
+
+[click] Q-Day arrives and X25519 falls. The session key is still safe, because ML-KEM still holds. And if someone finds a flaw in ML-KEM next year, X25519 still holds today. Belt and braces.
+
+This isn't a plan, it's shipping. Chrome and Edge since version 131, Firefox since 132, Apple's operating systems since version 26. Go's TLS library does it by default, so does OpenSSL 3.5, and OpenSSH 10 made a hybrid ML-KEM exchange its default in April 2025. Cloudflare says about 70 percent of human traffic it sees is now post-quantum.
+
+Here's the proof. This is OpenSSL 3.5 talking to the DDD Adelaide website. Negotiated group: X25519MLKEM768. That's the hybrid: X25519 plus ML-KEM-768. If you booked your ticket in a modern browser, that handshake was already safe from harvest now, decrypt later. (On a Mac the built-in openssl is LibreSSL; use Homebrew's openssl@3.)
+
+But look at the line above: the signature on the certificate is still ECDSA, elliptic curve. There are no post-quantum certificates on the public web yet. Chrome's plan is a new, more compact kind of certificate, Merkle Tree Certificates, rather than stuffing ML-DSA into today's certificates, partly because of the size problem we just saw. Cloudflare is aiming to issue them from early 2027. That's fine for now: a forged certificate only matters once Q-Day has arrived, but recorded key exchanges matter today. So the industry fixed key agreement first.
+
+One Australian wrinkle. ASD's ISM says hybrid schemes are "not recommended; however, not prohibited". ASD would rather government systems go straight to ML-KEM-1024 on its own by 2030. For the public internet, hybrid is what everyone ships. Know which rulebook your system answers to.
+-->
+
+---
+kicker: What to do · crypto-agility
+class: demo
+---
+
+# Crypto-agility: make the algorithm a setting
+
+<div class="split" style="--split: 1fr 1fr; align-items: center; margin-top: 0.7em">
+<div class="hype">
+  <div><span class="tag cyan">One</span><b>Name it once</b><span>The algorithm lives in config or one shared library, not copied into 40 services.</span></div>
+  <div><span class="tag">Two</span><b>Label every output</b><span>Tokens, ciphertexts and signatures say what made them, so old and new can live side by side.</span></div>
+  <div><span class="tag magenta">Three</span><b>Leave room</b><span>Keys and signatures grow 40 to 120 times. Check columns, headers, cookies and HSMs.</span></div>
+</div>
+<div>
+
+```ts
+// Brittle: welded in, in every service
+crypto.sign('sha256', data, rsaKey)
+
+// Agile: one policy, labelled output
+const signer = keyring.signer('docs')
+// ES256 today. ML-DSA-65 tomorrow.
+return {
+  alg: signer.alg,
+  kid: signer.kid,
+  sig: signer.sign(data),
+}
+```
+
+</div>
+</div>
+
+<!--
+This is the most important slide for developers in the room, because it's the bit you control in your own code.
+
+The last migration like this, SHA-1 to SHA-256, took the industry more than a decade. Most of that time wasn't spent on maths. It was spent finding hard-coded algorithms and changing them one by one. Crypto-agility means building things so that next time, changing the algorithm is a config change and a deploy, not a rewrite.
+
+Three habits.
+
+Name it once. The top snippet is in thousands of codebases: RSA and SHA-256 welded into the call. Copy it into 40 services and you have 40 migrations. Put the choice behind one policy, one shared library or one key service, and you have one.
+
+Label every output. The bottom snippet is a made-up wrapper, keyring, but the pattern is real: every signature carries which algorithm and which key made it. JWTs already work this way with the alg and kid headers, and RFC 9964 has added ML-DSA-44, 65 and 87 as alg values. Labelled outputs let you verify old signatures while issuing new ones, which is what a migration actually looks like for a few years: both at once.
+
+Leave room. From the last slide: keys and signatures grow forty to over a hundred times. Fixed-width database columns, header size limits, cookie storage, embedded devices, HSM key slots. Size things for the new world now, even before you switch.
+
+And the libraries are ready. ML-KEM is in Go's standard library since 1.24, Java since 24, .NET 10 (ML-DSA is still marked experimental there), OpenSSL 3.5, and Node's WebCrypto. You don't need to implement anything. You need to be able to choose.
+-->
+
+---
+kicker: What to do · inventory
+class: demo
+---
+
+# Step one: find all your crypto
+
+<div class="split" style="--split: 0.76fr 1.24fr; align-items: center">
+<div class="panel magenta">
+  <h3>Where it hides</h3>
+  <ul>
+    <li>Your code and every library it pulls in</li>
+    <li>Certificates: TLS, code signing, SAML, JWT</li>
+    <li>Protocols: TLS, SSH, VPNs, Wi-Fi</li>
+    <li>Hardware: HSMs, smart cards, IoT</li>
+    <li>Data that must stay secret for years</li>
+    <li>Vendors and SaaS you can't see inside</li>
+  </ul>
+  <p>Write it down as a CBOM: an SBOM for crypto.</p>
+</div>
+<div>
+
+```json
+{
+  "type": "cryptographic-asset",
+  "name": "RSA-2048",
+  "cryptoProperties": {
+    "assetType": "algorithm",
+    "algorithmProperties": {
+      "primitive": "signature",
+      "nistQuantumSecurityLevel": 0 } },
+  "evidence": { "occurrences": [
+    { "location": "src/auth/jwt.ts", "line": 42 } ] }
+}
+```
+
+</div>
+</div>
+
+<p class="source">CycloneDX 1.6 CBOM · scanners: CBOMkit (PQCA, Linux Foundation)</p>
+
+<!--
+You can't migrate what you can't find, and almost nobody knows where all their cryptography is. So step one is an inventory.
+
+It hides in more places than you'd think. Your own code is the easy part. Then every library it pulls in. Every certificate and key: TLS, code signing, SAML for single sign-on, the keys that sign your JWTs. Protocol settings in load balancers, SSH configs and VPNs. Hardware: HSMs, smart cards, firmware that can't easily be updated, IoT devices that'll be in the field for fifteen years. Data at rest with a long shelf life, the rows on the Mosca slide. And your vendors and SaaS providers, where you can't see inside and have to ask.
+
+Write it down in a standard format. You know the SBOM, the software bill of materials. CycloneDX 1.6 added a cryptographic bill of materials, a CBOM. This is one entry: an RSA-2048 signature algorithm, found at line 42 of our token code. And look at this field: NIST quantum security level, zero. The format itself flags it as quantum-vulnerable.
+
+You don't have to write these by hand. CBOMkit, which IBM Research donated to the Post-Quantum Cryptography Alliance at the Linux Foundation, scans source code and container images and produces CBOMs. Commercial tools do too, and your network team can scan what your endpoints actually negotiate, like the openssl line from before.
+
+Then rank it with Mosca: long-lived secrets and long-lived devices first. That ranked list is your migration plan, and in Australia it's what ASD expects in a transition plan, and what APRA has signalled it will look for at regulated financial institutions.
+-->
+
+---
+kicker: What to do · the roadmap
+clicks: 3
+---
+
+# 30 days, 90 days, a year
+
+<div class="split" style="--split: 1fr 1fr 1fr; gap: 1.2em; align-items: stretch; margin-top: 0.8em">
+<div class="panel cyan">
+  <h3>30 days</h3>
+  <p class="panel-lead">Own it</p>
+  <ul>
+    <li>Name an owner, and read ASD's PQC guidance</li>
+    <li>Check what your sites and SSH negotiate</li>
+    <li>Turn on hybrid where it's a switch: CDN, load balancer, OpenSSH 10</li>
+    <li>Ask your key vendors for their PQC roadmap</li>
+  </ul>
+</div>
+<div class="panel" v-click="1">
+  <h3>90 days</h3>
+  <p class="panel-lead">Find it</p>
+  <ul>
+    <li>Scan code, certificates and config into a CBOM</li>
+    <li>Rank it with Mosca: longest-lived secrets first</li>
+    <li>No new RSA or elliptic-curve designs without an exit</li>
+    <li>AES-256 and SHA-384 for anything new</li>
+  </ul>
+</div>
+<div class="panel magenta" v-click="2">
+  <h3>365 days</h3>
+  <p class="panel-lead">Start moving</p>
+  <ul>
+    <li>Quantum-safe key exchange everywhere you end TLS</li>
+    <li>Pilot ML-DSA where you own both ends: internal PKI, code signing, service tokens</li>
+    <li>Test the bigger sizes: headers, cookies, HSMs</li>
+    <li>PQC clauses in contracts and procurement</li>
+  </ul>
+</div>
+</div>
+
+<p class="takeaway" v-click="3"><b>Q-Day is uncertain. Your deadline isn't.</b> ASD: plan by the end of 2026, start by 2028, finished by 2030.</p>
+
+<!--
+So here's the plan to take back to work.
+
+The first 30 days: own it. Somebody's name goes against this risk. Read ASD's "Planning for post-quantum cryptography"; it's short. Run that openssl line against your own websites, and check your SSH clients and servers; a KexAlgorithms line pinned years ago can quietly opt you out of OpenSSH 10's quantum-safe default. Turn on hybrid key exchange wherever it's just a switch: most CDNs and cloud load balancers have it, many already on by default. And email your important vendors asking for their PQC roadmap. Their answers are data.
+
+[click] 90 days: find it. Build the inventory from the last slide, starting with your crown jewels. Rank it with Mosca: what has to stay secret longest, and what's hardest to change, like hardware and firmware. Stop the bleeding: no new designs built on RSA or elliptic curves without a plan to swap them out. And for anything new, use AES-256 and SHA-384; it's cheap, and it's what ASD asks for by 2030.
+
+[click] A year: start moving. Quantum-safe key exchange everywhere you terminate TLS, which deals with harvest now, decrypt later for your traffic. Pilot ML-DSA signatures where you control both ends: an internal certificate authority, code signing, service-to-service tokens. That's where you'll find the size problems while they're cheap. And put post-quantum requirements into contracts and procurement, so the next thing you buy isn't another migration.
+
+[click] Q-Day is uncertain, and it'll stay uncertain. Your deadline isn't. If you work with Australian government, ASD wants a transition plan by the end of this year, the work started by the end of 2028, and the old algorithms gone by the end of 2030. That's four years. SHA-1 took more than ten. Start now.
+-->
+
+---
+layout: section
 numeral: 1
 kicker: Layout · section
 ---

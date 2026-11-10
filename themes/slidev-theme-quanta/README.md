@@ -51,6 +51,9 @@ the deck works offline.
 | `<QubitBudget>` | `estimates` (`[{ target, who, qubits, count, time }]`, oldest first; defaults to the published RSA-2048 and 256-bit elliptic-curve estimates), `today` (`{ qubits, count, note }`), `upto` (how many estimates to show; bind to `$clicks` with `clicks:` in the frontmatter). Physical qubits needed to break public-key encryption on a log scale, with today's machines as a dashed line and the gap still to close |
 | `<QdayTimeline>` | `from`, `to` (axis years, default 2026–2041), `now` (default 2026.85), `odds` (`[{ year, low, high }]` in percent; default the Global Risk Institute 2025 ranges), `lanes` (`[{ name, place, tone, marks: [{ year, title, detail }] }]`; default ASD and NIST deadlines), `stage` (0 axis, 1 odds, 2+ one lane each). Expert odds of a code-breaking machine over a year axis, with regulator deadlines as lanes beneath |
 | `<Mosca>` | `assets` (`[{ label, life, years }]`), `migrated` (year migration ends, default 2031), `qday` (`[first, last]` band, default `[2032, 2046]`), `from`, `to`, `now`, `exposed` (shade what's still secret after the band starts, default true). Harvest now, decrypt later as Mosca's inequality: time to migrate plus shelf life against Q-Day |
+| `<KeySizes>` | `groups` (`[{ label, rows: [{ name, bytes, pq }] }]`; default the key-agreement and signature sizes of X25519, ML-KEM-768, Ed25519, RSA-2048, ML-DSA-65 and SLH-DSA-128s), `max` (axis bytes, default 8000), `marks` (`[{ bytes, label }]`; default one network packet at 1,500), `stage` (0 classical rows, 1 adds post-quantum rows, 2 adds the marks). Bytes on the wire as bars, each labelled with how many times bigger it is than its group's first row |
+| `<NoisyLattice>` | `hidden` (the secret grid point, default `[3, 2]`), `noise` (offset of the public point from it, default `[16, 8]`), `solved` (ring the secret). A slanted grid with a public point just off one of its dots: the problem ML-KEM and ML-DSA rest on. Not the decorative `<Lattice>` |
+| `<HybridKex>` | `classical`, `pq` (`{ name, note }` boxes), `result` (`{ name, note }`), `broken` (strike the classical half: the session key still holds). Hybrid key exchange: two secrets mixed into one key |
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
 Also `<Folio>` (slide number as a ket, qubit dots and binary), `<ContactLink>`
@@ -103,8 +106,10 @@ Bloch sphere, and it stops under `prefers-reduced-motion`.
 - `.chart-solo` caps a single chart's width, for one beside text in a `.split`.
   Add `chart-solo--wide` for a chart with many outcomes.
 - `.period-figure` holds a `<Period>` strip with a `<p>` caption under it.
-- `.hype` is a hype-o-meter: a `<div>` per claim holding a `.tag` rating, the
-  claim in `<b>` and a `<span>` why, with the tags in their own column.
+- `.hype` is a tagged list, for example a hype-o-meter: a `<div>` per item
+  holding a `.tag` (a rating, a standard number, a step), the item in `<b>` and
+  a `<span>` why, with the tags in their own column. Set `--hype-tag` to widen
+  that column for longer tags.
 - `.chain` is a worked sum on one row: `<span>` steps joined by arrows. Give
   the last `chain-end` to highlight the result.
 

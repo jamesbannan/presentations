@@ -13,7 +13,7 @@ npm run export -- embrace-the-uncertainty
 
 ## Status
 
-The cover, Part one, the demo slides, Part two (Grover and Shor), Part three (Q-Day) and the closing slide are written.
+The cover, Part one, the demo slides, Part two (Grover and Shor), Part three (Q-Day), Part four (what to do) and the closing slide are written.
 The slides after the demos are layout specimens, one per layout, kept so the theme can be
 built and render-checked until the rest of the talk is written.
 
@@ -48,9 +48,17 @@ built and render-checked until the rest of the talk is written.
 | 27 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
 | 28 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
 | 29 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
+| 30 | Part four: What to do | Section |
+| 31 | The replacements are already standards | `NoisyLattice`: the lattice problem; ML-KEM, ML-DSA and SLH-DSA (FIPS 203–205); one click |
+| 32 | The catch: everything gets bigger | `KeySizes`: classical vs post-quantum bytes against one network packet; two clicks |
+| 33 | Hybrid: belt and braces, already switched on | `HybridKex` plus a live `openssl s_client` check that this conference's site negotiates `X25519MLKEM768`; one click |
+| 34 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
+| 35 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
+| 36 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
-`Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), and Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, so there are no image files to maintain. The
+`Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
+by `NoisyLattice`, `KeySizes` and `HybridKex`, so there are no image files to maintain. The
 odds come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
 
@@ -69,6 +77,11 @@ its printed table into the component props.
 Quantum), so it's offline on stage too. The slide shows the IonQ Forte-1 hardware run, the
 most recent recording, so the plain command replays it. The notes cover the
 `quantinuum.sim.h2-1e` emulator run as a backup.
+
+Slide 33's check isn't in the demos repo: it's a one-line `openssl s_client`
+against `dddadelaide.com`. Use Homebrew's OpenSSL 3.5 or later; macOS's
+`/usr/bin/openssl` is LibreSSL and won't offer the hybrid. The output is on the
+slide as a backup.
 
 `<Outcomes pending>` is still available for a chart awaiting data.
 
