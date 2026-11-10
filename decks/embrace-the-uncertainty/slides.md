@@ -677,31 +677,51 @@ kicker: Demo · Shor's algorithm
 
 # Demo: factoring 15, the hard way
 
-<div class="split" style="--split: 0.8fr 1.2fr">
+<div class="split" style="--split: 0.95fr 1.05fr">
 <div>
 
-Pick 7. The quantum part finds the **rhythm** of 7ˣ mod 15; everything after that is ordinary maths.
+```rust
+// quantum: find the rhythm
+let y = BigIntAsInt(EstimatePhase(7L, 15L, 9));
+// classical: rhythm → factors
+let r = PeriodCandidate(15, y, 9);
+let (p, q) = FactorsFromPeriod(7, 15, r);
+```
 
-Readings should land only **in step with the rhythm**: the rest cancel out.
+Only **one line** is quantum. Half its readings give **3 × 5**; the rest are duds, so it runs again.
 
 <p class="run-cmd">uv run demos/shor.py</p>
 
 </div>
 <div class="chart-solo chart-solo--wide">
-  <Outcomes :stretch="60" title="Rhythm readings" :labels="['000', '001', '010', '011', '100', '101', '110', '111']" :captions="['0', '1', '2', '3', '4', '5', '6', '7']" pending="Demo still to come" />
+  <Outcomes :stretch="90" :ceiling="0.3" title="Readings, out of 512" :counts="[119, 132, 126, 123]" :labels="['0', '128', '256', '384']" :captions="['no clue', '3 × 5', 'wrong', '3 × 5']" :tones="['muted', 'one', 'muted', 'one']" />
 </div>
 </div>
 
-<p class="source">Placeholder: the demo and its recorded run are still to be written</p>
+<p class="source">A typical run: 500 shots of period finding for 7 and 15, 9 phase bits, 16 qubits on the local QDK simulator</p>
 
 <!--
-PLACEHOLDER. The demo isn't written yet, so the command and the chart are stand-ins. Replace the pending chart with the real counts once demos/shor.py exists (and update the run command if the script has a different name).
+Demo: quantum-computing repo, demos/shor.py (Q# in demos/src/Shor.qs). Runs locally in a few seconds.
 
-What it should show. Factor 15 with 7, as on the previous slide. A counting register in superposition holds every exponent at once; the circuit computes 7 to that power, mod 15, for all of them; then a quantum Fourier transform makes the readings interfere. With a 3-qubit counting register, there are 8 possible readings (000 to 111, or 0 to 7), and only the ones in step with the rhythm survive: 0, 2, 4 and 6, about a quarter each (000, 010, 100, 110). The odd ones should be at or near zero. That's interference again, wrong answers cancelling, the same as Grover.
+The code on the left is the whole algorithm in three lines. One line is quantum: EstimatePhase finds the rhythm of 7 to the x, mod 15. The other two are ordinary maths, Python-grade stuff, done in Q# so the plot and the algorithm agree.
 
-From a reading to the factors. A reading of 2 out of 8 is a quarter of a turn, so the rhythm is 4. A reading of 6 is three quarters, same rhythm. 0 tells you nothing: run it again. Then the classical step from the last slide: 7 squared is 49, 48 and 50 share 3 and 5 with 15. Done.
+The quantum part runs 500 times. Out of 512 possible readings, only four ever come back: 0, 128, 256 and 384, about a quarter each. That's interference again: every reading that isn't in step with the rhythm cancels out, the same trick as Grover. 512 split into 4 equal steps is 128, and that 4 is the rhythm.
 
-Why it's funny and reassuring. This is, honestly, about the state of the art for running Shor end to end. 15 was first factored this way in 2001 and 21 in 2012. Breaking RSA-2048 needs on the order of a million noisy qubits running for days. That's the gap between this slide and Q-Day.
+Reading each one, as a fraction of 512:
+- 128 is a quarter, so the rhythm is 4. 7 squared is 49, 48 and 50 give 3 and 5. Works.
+- 384 is three quarters. Same rhythm, 4. Works.
+- 0 tells you nothing at all.
+- 256 is a half, which suggests a rhythm of 2, and that's wrong: 7 squared mod 15 is 4, not 1. Dud.
+
+So about half the runs factor 15 (51% in this one) and the rest get thrown away. Shor's algorithm is probabilistic by design: check the answer (multiplying is easy), and if it's wrong, run again. The script then runs the whole thing end to end with a random starting number each time, narrating every attempt, so live you may see a dud or two before it lands on 15 = 3 × 5.
+
+Under the hood: 9 phase bits, but measured one at a time on a single reused control qubit, which is how real resource estimates count it. 16 qubits in the simulator for a 4-bit number.
+
+Flags: --number 21 --a 2 (period 6, more ways to fail), --seed N for a repeatable run, --shots.
+
+The reality check, if there's time: uv run demos/shor_estimate.py points this same Q# at real key sizes through Microsoft's resource estimator (about 5 GB of RAM for 2048 bits; --max-bits 1024 is lighter, and the plot is in output/shor_estimate.png). This textbook circuit at RSA-2048, on superconducting-style hardware with 0.1% errors, needs about 36 million physical qubits for about 183 days. Gidney and Ekerå's optimised circuit takes that to about 2 days, and Gidney's 2025 paper to under a million qubits and under a week. Today's devices have a thousand or so. In VS Code: Estimate on EstimateRsa2048Textbook and EstimateRsa2048GidneyEkera in ShorEstimate.qs.
+
+For the extension: Histogram on PeriodFindingSevenModFifteen, Run on FactorFifteen to watch the attempts in the Debug Console.
 -->
 
 ---

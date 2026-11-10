@@ -40,7 +40,7 @@ built and render-checked until the rest of the talk is written.
 | 19 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
 | 20 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
 | 21 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
-| 22 | Demo: factoring 15, the hard way | Placeholder: `shor.py` isn't written yet; pending chart of 3-bit rhythm readings |
+| 22 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5; `shor_estimate.py` for RSA-2048 is in the notes |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), so there are no image files to maintain. The
@@ -50,7 +50,7 @@ odds come from the arrow's angle, so a figure stays correct if you change its
 ## Demos
 
 The demos live in the `quantum-computing` repo and run locally on the QDK
-simulator (`gates.py`, `bell_pair.py`, `bell_hardware.py`, `adder.py`, `grover.py`, in that order;
+simulator (`gates.py`, `bell_pair.py`, `bell_hardware.py`, `adder.py`, `grover.py`, `shor.py`, in that order;
 run each with `uv run demos/<name>.py`). Each demo
 slide shows the Q# at the heart of it, the command, and the result of a
 typical run drawn by `Globe`/`Odds`, `Outcomes` or `GroverCurve`, so the slide doubles as a
@@ -63,9 +63,7 @@ Quantum), so it's offline on stage too. The slide shows the IonQ Forte-1 hardwar
 most recent recording, so the plain command replays it. The notes cover the
 `quantinuum.sim.h2-1e` emulator run as a backup.
 
-The Shor demo slide is a placeholder until `shor.py` is written: it uses
-`<Outcomes pending>`. Swap in the real counts, and the command if the script
-has a different name, once it exists.
+`<Outcomes pending>` is still available for a chart awaiting data.
 
 The demo slides sit after Part one for now. Move them into the gates, entanglement
 and algorithms sections once those are written.

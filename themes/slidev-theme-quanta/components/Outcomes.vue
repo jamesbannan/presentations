@@ -19,6 +19,9 @@
     pending  — placeholder text. Draws every slot dashed with "?" for its
                share and an amber stamp across the chart, for a slide whose
                data hasn't been recorded yet. `counts` can be left out
+    tones    — optional colour per bar, overriding the bit-string colours:
+               'zero' (cyan), 'one' (magenta), 'mixed' (violet) or 'muted'
+               (grey), e.g. to mark which readings are useful
     stretch  — extra height for the bars, in chart units (default 0). The
                chart keeps its width and grows taller, to fill a slide
                without widening it, e.g. :stretch="120"
@@ -34,6 +37,7 @@ const props = defineProps({
   ceiling: { type: Number, default: 0.6 },
   pending: { type: String, default: '' },
   stretch: { type: Number, default: 0 },
+  tones: { type: Array as () => string[], default: () => [] },
 })
 
 const W = 300
@@ -53,7 +57,7 @@ const bars = computed(() => {
     const share = c / total
     const h = Math.min(1, share / props.ceiling) * (BASE.value - TOP)
     const label = props.labels[i] ?? String(i)
-    const tone = /^0+$/.test(label) ? 'zero' : /^1+$/.test(label) ? 'one' : 'mixed'
+    const tone = props.tones[i] || (/^0+$/.test(label) ? 'zero' : /^1+$/.test(label) ? 'one' : 'mixed')
     const x = 10 + slot * i + (slot - width) / 2
     return {
       x: f(x), y: f(BASE.value - h), w: f(width), h: f(h), cx: f(x + width / 2),
@@ -108,6 +112,7 @@ const bars = computed(() => {
 .oc-bar--zero { --tone: var(--cyan); }
 .oc-bar--one { --tone: var(--magenta); }
 .oc-bar--mixed { --tone: var(--violet); }
+.oc-bar--muted { --tone: #9aa3ba; }
 
 .oc-fill {
   fill: var(--tone);
