@@ -20,7 +20,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 1 | Cover | |
 | 2 | Thanks to our sponsors | Organiser slide, from DDD Adelaide's `Speaker_slides_2026.pptx` |
 | 3 | Feedback form here | Organiser slide, rebuilt from the same deck with this talk's own feedback QR code |
-| 4 | Four parts, from qubits to your to-do list | Contents: one panel per part, with a large ket numeral in that part's colour |
+| 4 | Four parts, from qubits to your to-do list | Contents: one panel per part, with a large ket numeral in that part's colour; four clicks |
 | 5 | Part one: Bits and qubits | Section |
 | 6 | A bit points one of two ways | Arrow on a globe, north or south only |
 | 7 | A qubit can point anywhere | Same globe, any direction |
