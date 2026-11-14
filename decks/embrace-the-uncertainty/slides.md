@@ -1253,114 +1253,56 @@ The first 30 days: own it. Somebody's name goes against this risk. Read ASD's "P
 -->
 
 ---
-layout: section
-numeral: 1
-kicker: Layout · section
+kicker: Summary
+clicks: 4
 ---
 
-# Section heading
+# What to take back to work
 
-## A short line that frames the part
-
----
-kicker: Layout · default
----
-
-# Content slide
-
-- A first-level point, with a qubit for a bullet
-- Inline notation without special glyphs: <Ket>0</Ket>, <Ket>1</Ket>, <Ket>+</Ket> and <Ket>ψ</Ket>
-  - A second-level point
-- **Strong** text, `inline code`, and a <span class="qgrad">gradient run</span>
-- Status tags: <span class="tag cyan">Real</span> <span class="tag">Emerging</span> <span class="tag magenta">Sci-fi</span>
-
-<p class="placeholder">Specimen slide: replace with talk content</p>
-
----
-kicker: Layout · default · timeline
----
-
-# A sequence, drawn as a circuit
-
-<ol class="timeline">
-  <li><b>Step one</b><span>A short gloss on the first step</span></li>
-  <li><b>Step two</b><span>A short gloss on the second step</span></li>
-  <li><b>Step three</b><span>A short gloss on the third step</span></li>
-</ol>
-
-<div class="panel" style="margin-top: 1.6em">
-
-A `.panel` for a callout, like a reading off an instrument.
-
+<div class="split summary" style="--split: 1fr 1fr; gap: 0.8em 1.4em; margin-top: 0.2em">
+<div class="panel cyan">
+  <h3>Bits and qubits</h3>
+  <p class="panel-lead">A qubit is an arrow, not a coin</p>
+  <p>It turns into a 0 or a 1 when you read it, so you run it hundreds of times and read the odds.</p>
+</div>
+<div class="panel" v-click="1">
+  <h3>Grover and Shor</h3>
+  <p class="panel-lead">Wrong answers cancel out</p>
+  <p>Grover only dents AES: use 256-bit keys. Shor breaks RSA and elliptic curves outright.</p>
+</div>
+<div class="panel magenta" v-click="2">
+  <h3>Q-Day</h3>
+  <p class="panel-lead">Nobody knows when</p>
+  <p>The estimates keep falling, and anything recorded today can be read on the day.</p>
+</div>
+<div class="panel amber" v-click="3">
+  <h3>What to do</h3>
+  <p class="panel-lead">The new maths is ready</p>
+  <p>Find your crypto, make the algorithm a setting, and switch on hybrid now.</p>
+</div>
 </div>
 
-<p class="source">A citation line under a claim</p>
+<p class="takeaway" v-click="4"><b>Embrace the uncertainty:</b> in the physics, in the timeline, and in your plan.</p>
 
----
-kicker: Layout · default · code
-motif: none
----
+<style>
+.summary .panel p:not(.panel-lead) { font-size: 0.92em; line-height: 1.45; }
+</style>
 
-# Code and tables
+<!--
+Four things to take back to work.
 
-```python
-def measure(state):
-    """Specimen code block."""
-    return sample(state)
-```
+Bits and qubits. A qubit isn't 0 and 1 at once. It's an arrow that turns into a 0 or a 1 the moment you read it. That's why every demo ran hundreds of shots: one reading tells you almost nothing, and the answer is in the odds.
 
-| Column | Column | Column |
-| --- | --- | --- |
-| Cell | Cell | Cell |
-| Cell | Cell | Cell |
+[click] Grover and Shor. Quantum algorithms work by interference: arranging the maths so wrong answers cancel and right ones add up. Grover does that for any search, but only gives a square-root speedup, so AES survives with 256-bit keys. Shor finds hidden rhythms, and RSA and elliptic curves are built on exactly that kind of rhythm. No key length saves them.
 
----
-layout: entangled
-class: spread
-kicker: Layout · entangled
----
+[click] Q-Day. Nobody knows when a machine big enough will exist. Today's machines are tens of thousands of times too small, but every few years someone cuts the estimate. And harvest now, decrypt later means the clock started for long-lived secrets years ago.
 
-# Two panels, correlated
+[click] What to do. The replacements are already standards, and the key exchange half is already switched on in your browser. Your job is the inventory, making the algorithm a setting rather than a constant, and the 30, 90, 365-day plan.
 
-::left::
+[click] Which brings us back to the title. Embrace the uncertainty, three times over. In the physics: a qubit's answer is genuinely random until you read it. In the timeline: nobody can tell you when Q-Day is, so stop waiting for someone to. And in your plan: plan for the deadline, not the prediction.
 
-### Left panel
-
-- First point
-- Second point
-- Third point
-
-::right::
-
-### Right panel
-
-- First point
-- Second point
-- Third point
-
----
-layout: statement
-kicker: Layout · statement
----
-
-# One line, centred, and nothing else.
-
-A supporting line underneath.
-
----
-layout: quote
-cite: "Attribution, Source, Year"
----
-
-A quoted passage, held between a bra and a ket, set large enough to read from the back of the room.
-
----
-layout: figure
-kicker: Layout · figure
-caption: A caption for the image
----
-
-# Figure slide
+Then over to questions.
+-->
 
 ---
 layout: end

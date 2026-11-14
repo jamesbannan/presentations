@@ -13,9 +13,7 @@ npm run export -- embrace-the-uncertainty
 
 ## Status
 
-The cover, Part one, the demo slides, Part two (Grover and Shor), Part three (Q-Day), Part four (what to do) and the closing slide are written.
-The slides after the demos are layout specimens, one per layout, kept so the theme can be
-built and render-checked until the rest of the talk is written.
+The cover, Part one, the demo slides, Part two (Grover and Shor), Part three (Q-Day), Part four (what to do), the summary and the closing slide are written.
 
 | # | Slide | Notes |
 | --- | --- | --- |
@@ -56,6 +54,8 @@ built and render-checked until the rest of the talk is written.
 | 35 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
 | 36 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
 | 37 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
+| 38 | What to take back to work | Summary: one panel per part, then "embrace the uncertainty" three ways; four clicks |
+| 39 | Thank you | Contact details, questions |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
