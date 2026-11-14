@@ -1316,5 +1316,6 @@ James Bannan
 <div class="contact-list">
   <ContactLink icon="linkedin" text="linkedin.com/in/jamesbannan" />
   <ContactLink icon="mastodon" text="jamesbannan@aus.social" />
-  <ContactLink icon="github" text="github.com/jamesbannan" />
+  <ContactLink icon="github" text="github.com/jamesbannan/presentations" />
+  <ContactLink icon="unimelb" text="unimelb.edu.au/alumni/engage/ask-alumni" />
 </div>

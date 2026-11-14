@@ -58,7 +58,8 @@ the deck works offline.
 | `<Readout>` | `value` (`'0'`\|`'1'`), `label`. A measurement gate and the result it reads |
 
 Also `<Folio>` (slide number as a ket, qubit dots and binary), `<ContactLink>`
-and `<BrandIcon>`.
+and `<BrandIcon>`. `BrandIcon` has `github`, `linkedin` and `mastodon` built in,
+and any SVG in `assets/` is addressable by filename (`unimelb.svg` → `unimelb`).
 
 Every motif is seeded, so the same slide draws the same picture in the dev
 server, the build and the PDF. The only animation is a slow precession on the
