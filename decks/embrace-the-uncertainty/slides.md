@@ -68,6 +68,63 @@ Organiser slide, supplied by DDD Adelaide, with this talk's own feedback code. L
 -->
 
 ---
+kicker: The plan
+---
+
+# Four parts, from qubits to your to-do list
+
+<div class="split toc" style="--split: repeat(4, 1fr); gap: 1.2em; margin-top: 1em; align-items: stretch">
+<div class="panel cyan">
+  <span class="ket toc-ket">1</span>
+  <h3>Part one</h3>
+  <p class="panel-lead">Bits and qubits</p>
+  <p>What a qubit is, why reading one changes it, and what that lets a computer do.</p>
+</div>
+<div class="panel">
+  <span class="ket toc-ket">2</span>
+  <h3>Part two</h3>
+  <p class="panel-lead">Grover and Shor</p>
+  <p>Two famous algorithms. One speeds up search; the other breaks the locks.</p>
+</div>
+<div class="panel magenta">
+  <span class="ket toc-ket">3</span>
+  <h3>Part three</h3>
+  <p class="panel-lead">Q-Day</p>
+  <p>When Shor might run for real, and why today's traffic is already at risk.</p>
+</div>
+<div class="panel amber">
+  <span class="ket toc-ket">4</span>
+  <h3>Part four</h3>
+  <p class="panel-lead">What to do</p>
+  <p>The new standards, what they cost you, and a 30, 90 and 365-day plan.</p>
+</div>
+</div>
+
+<p class="takeaway" style="margin-top: 1.4em">Along the way: demos in Q#, on a simulator and on real quantum hardware.</p>
+
+<style>
+.toc .panel p:not(.panel-lead) { font-size: 0.86em; line-height: 1.45; }
+.toc .toc-ket { display: flex; width: fit-content; font-family: var(--font-display) !important; font-size: 3.4rem; font-weight: 500; color: var(--violet); margin: 0.1em 0 0.3em; }
+.toc .cyan .toc-ket { color: var(--cyan); }
+.toc .magenta .toc-ket { color: var(--magenta); }
+.toc .amber .toc-ket { color: var(--amber); }
+</style>
+
+<!--
+Here's where we're going. Four parts, and each one sets up the next.
+
+Part one: bits and qubits. No maths, no cats. Just an arrow on a globe, and what happens when you read it. A few small demos to show it's real.
+
+Part two: Grover and Shor, the two algorithms everyone in security should be able to name. One gives a modest speed-up to search. The other breaks the public-key crypto the internet runs on.
+
+Part three: Q-Day. When could Shor actually run? Nobody knows, and that's the point. But some of your data is already at risk today.
+
+Part four: what to do about it. The replacements are already standards. The hard part is finding everything that still uses the old maths.
+
+And the demos are real: Q# on a local simulator, and one run on actual quantum hardware.
+-->
+
+---
 layout: section
 numeral: 1
 kicker: Part one
