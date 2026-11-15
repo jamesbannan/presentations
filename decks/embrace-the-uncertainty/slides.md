@@ -658,50 +658,53 @@ Keep both in mind: one is a modest speed-up we can absorb with longer keys, the 
 kicker: Grover's search · what it is
 ---
 
-# Grover's search: boost the right answer
+# Grover's search: boost the right key
 
-Find the one item that passes a check, with no index to help. Classically, you try them **one at a time**.
+The attacker knows one block of a message and its encrypted version. To find the key, try keys **one at a time** until one works. Grover tries them all at once.
 
-<div class="plates patterns-row" style="--plate: 220px; margin-top: 0.6em">
+<div class="plates patterns-row" style="--plate: 180px; margin-top: 0.4em">
   <div class="plate">
     <Patterns mode="grover" :pick="9" :rounds="0" />
-    <p><b>Start</b>Even odds on all 16: a guess.</p>
+    <p><b>Start</b>16 keys, even odds: a guess.</p>
   </div>
   <div class="plate" v-click="1">
     <Patterns mode="grover" :pick="9" :rounds="1" />
-    <p><b>One round</b>Mark the right answer, then boost its odds: 47%.</p>
+    <p><b>One round</b>Flag the key that turns 7 into 3, then boost it: 47%.</p>
   </div>
   <div class="plate" v-click="2">
     <Patterns mode="grover" :pick="9" :rounds="3" />
-    <p><b>Three rounds</b>96%. Now read it.</p>
+    <p><b>Three rounds</b>96%. Read out the key.</p>
   </div>
 </div>
 
-<div class="doubling" v-click="3" style="--steps: 3">
-  <span class="doubling-lead">Worst case to find one item: checking one by one, or Grover rounds</span>
-  <div><b>16 items</b><span>16 checks · 3 rounds</span></div>
-  <div><b>A million</b><span>1,000,000 checks · about 800 rounds</span></div>
-  <div><b>A trillion</b><span>10¹² checks · about 800,000 rounds</span></div>
+<div class="doubling" v-click="3" style="--steps: 4">
+  <span class="doubling-lead">Work to find a key: trying keys (on average), or Grover rounds</span>
+  <div><b>4 bits (demo)</b><span>8.5 tries · 3 rounds</span></div>
+  <div><b>DES, 56 bits</b><span>2⁵⁵ tries · ~2²⁸ rounds</span></div>
+  <div><b>AES-128</b><span>2¹²⁷ tries · ~2⁶⁴ rounds</span></div>
+  <div><b>AES-256</b><span>2²⁵⁵ tries · ~2¹²⁸ rounds</span></div>
 </div>
 
-<p class="takeaway" v-click="4"><b>A square-root speed-up, for almost any search.</b> Not exponential, which is why longer keys keep symmetric encryption like AES safe.</p>
+<p class="takeaway" v-click="4"><b>A square root, and no more.</b> Double the key: AES-256 against Grover is as hard as AES-128 today.</p>
 
 <!--
-Lov Grover, Bell Labs, 1996. Next to Shor's algorithm, which we'll get to, it's the most famous quantum algorithm. If you've never heard of it, here's the problem it solves.
+Lov Grover, Bell Labs, 1996. Next to Shor's algorithm, which we'll get to, it's the most famous quantum algorithm. Here's the problem it solves, as an attack.
 
-You've got a pile of possibilities and a way to check any one of them: "is this the one?" But there's no index, no sorting, no shortcut. Think of a combination lock, a password you can only test by trying it, or a phone book where you have the number and need the name. Classically you have no choice: try them one by one. Sixteen items, up to sixteen checks. A million items, up to a million.
+Alice encrypts a message with a secret key. Eve, the eavesdropper, knows one block of it, say a standard file header, and she's intercepted the encrypted version. That's called a known-plaintext attack. Any key can be tested: encrypt the known block with it and see if you get the intercepted one. But there's no shortcut to the right key. Classically Eve just tries keys, one after another. On average she gets there halfway through.
 
-Start: four qubits, sixteen patterns, all equally likely. Read now and it's a pure guess: one in sixteen. The dashed square is the answer we're after, 1001, but the computer doesn't know that yet.
+Our demo shrinks that to a 4-bit key: sixteen possible keys, the known block is 7, the encrypted block is 3, and the secret key is 9, 1001. The dashed square is the key we're after, but the computer doesn't know that.
 
-[click] One Grover round is two steps. First, flag: a piece of circuit that can check an answer, but not find one, flips the sign of the right answer. That's the Z trick from the gates demo: the sign you can't see. Nothing you could measure has changed yet. Second, boost: flip every pattern's odds around the average. The flagged one was below the average, so it bounces up high; everything else drops a little. After one round the answer is already 47%.
+Start: four qubits, all sixteen keys equally likely. Read now and it's a pure guess: one in sixteen.
 
-[click] Repeat. After three rounds it's 96%. Now read, and you almost certainly get the answer. Three rounds instead of up to sixteen checks.
+[click] One Grover round is two steps. First, flag. The circuit runs the cipher on every key at once, checks whether the output is 3, and flips the sign of any key that matches. Then it un-runs the cipher to tidy up. Note the circuit never knows the key; it only knows how to check one. That's the Z trick from the gates demo: a sign you can't see. Second, boost: flip every key's odds around the average. The flagged one was below the average, so it bounces up high; everything else drops a little. After one round the right key is at 47%.
 
-[click] And that's the scaling. Grover needs about the square root of the number of items. A million items: about 800 rounds instead of a million checks. A trillion: about 800,000 instead of a trillion. (It's π/4 times the square root.) That's a big win, and it works on almost anything you can check: scheduling, puzzles, constraint solving, guessing keys.
+[click] Repeat. After three rounds it's 96%. Read the register and you almost certainly get the key. And if you don't, one ordinary encryption tells you, and you run it again. Three rounds instead of eight and a half tries on average.
 
-[click] Why it matters. One: it's general. Shor only works on problems with a hidden structure; Grover works on any search where you can check an answer. Two: it's the limit. It's been proven that no quantum computer can search an unstructured pile faster than this. So it's not the start of something bigger; this is the ceiling. Three, and this is our story: it's the best a quantum computer can do against symmetric encryption like AES. Guessing a 128-bit key is 2^128 tries classically; Grover brings it to about 2^64 rounds. Double the key to 256 bits and Grover still faces 2^128 rounds: out of reach. Those rounds also have to run one after another on error-corrected hardware, so the real-world gain is even smaller. Longer keys, problem solved. Contrast that with RSA, coming up, where there's no such easy fix.
+[click] Now scale it up. Grover needs about the square root of the number of keys. DES, 56 bits: 2^55 tries classically, about 2^28 Grover rounds. AES-128: 2^127 tries, about 2^64 rounds. AES-256: 2^255 tries, still about 2^128 rounds. For reference, DES fell to classical brute force back in 1998.
 
-One catch, and it's the demo: too many rounds and the answer drains away again. Knowing when to stop is part of the algorithm.
+[click] Why it matters. One: it's the ceiling. It's been proven no quantum computer can search for a key faster than this. Two: doubling the key undoes it. AES-256 against Grover costs the same as AES-128 against today's computers. Three: it's worse than it looks for the attacker. The rounds have to run one after another on error-corrected hardware, and splitting the work over M quantum computers only buys you the square root of M. Jaques and others costed one AES-128 key search, in Q#, at around 2^83 logical gates. Not happening soon. Even so, the NSA's CNSA 2.0 guidance asks for AES-256 for long-term secrets. Longer keys, problem solved. Contrast that with RSA, coming up, where there's no such easy fix.
+
+One catch, and it's the demo: too many rounds and the key drains away again. Knowing when to stop is part of the algorithm.
 -->
 
 ---
@@ -709,42 +712,48 @@ kicker: Demo · Grover's search
 class: demo
 ---
 
-# Demo: Grover's search has to know when to stop
+# Demo: recover the key, and know when to stop
 
-<div class="split" style="--split: 0.94fr 1.06fr">
+<div class="split" style="--split: 1.08fr 0.92fr">
 <div>
 
 ```rust
-ApplyToEach(H, register); // all 16
+ApplyToEach(H, key); // all 16 keys
 for _ in 1..iterations {
-  ReflectAboutMarked(marked, register);
-  ReflectAboutUniform(register);
+  ReflectAboutKey(plaintext, ciphertext, key);
+  ReflectAboutUniform(key);
 }
-return MeasureInteger(register);
+return MeasureInteger(key);
 ```
 
-Three rounds find the answer 96% of the time. Keep going and the odds **fall away again**. Stopping at the right round is part of the algorithm.
+Each round flags the key that turns 7 into 3, then boosts it. Grover finds the key 96% of the time after **3 rounds**. Keep going and it **falls to 2%**, worse than guessing.
 
 <p class="run-cmd">uv run demos/grover.py</p>
 
 </div>
 <div>
-  <GroverCurve :qubits="4" :measured="[0.064, 0.503, 0.889, 0.957, 0.561, 0.108, 0.012, 0.375, 0.834, 0.994]" />
+  <GroverCurve :qubits="4" :measured="[0.043, 0.476, 0.911, 0.964, 0.612, 0.132, 0.021, 0.345, 0.826, 0.987]" />
 </div>
 </div>
 
-<p class="source">A typical run: 16 candidates, looking for 9, 1,000 shots per point on the local QDK simulator</p>
+<p class="source">Known block 7 → encrypted 3, secret key 9 of 16, 1,000 shots per point on the local QDK simulator</p>
 
 <!--
 Demo: quantum-computing repo, demos/grover.py (Q# in demos/src/Grover.qs).
 
-Four qubits, so 16 candidates, and we're looking for number 9. Start with all 16 equally likely. Each round does two things: flag the answer, then boost whatever was flagged. Interference doing the work: wrong answers cancel, the right one builds up.
+The setup from the last slide. A toy cipher with a 4-bit key: two rounds of "mix in the key, then a substitution box", and the substitution box is borrowed from PRESENT, a real lightweight cipher. Eve knows block 7 encrypts to 3. Which of the sixteen keys did Alice use? It's 9, but the circuit doesn't know that.
 
-The script runs it with 0 rounds, 1 round, 2, and so on, a thousand times each. Watch the dots. Three rounds: about 96%. Theory says stop there. Keep going and it falls apart: six rounds, about 1%, worse than guessing. Then it climbs back.
+Start in VS Code with BruteForce: the classical attack, trying keys in order. It finds key 9 on the tenth encryption. On average, trying keys at random, it's eight and a half.
 
-Grover isn't a lookup, it's a rotation. Knowing when to stop is the algorithm. And on 16 items it needs about 3 rounds, versus up to 16 checks classically: a square-root speedup, not magic. That's why it doesn't kill AES.
+Now the quantum version. Put the key register into all sixteen keys at once. Each round: ReflectAboutKey runs the cipher on every key at once, flips the sign wherever the output is 3, and then un-runs the cipher. It checks; it never knows the answer. Then ReflectAboutUniform boosts whatever was flagged. Interference doing the work: wrong keys cancel, the right one builds up.
 
-For the extension: GroverAtOptimum and GroverOverIterated have Run/Histogram CodeLenses in VS Code.
+If there's time, show the circuit on GroverAtOptimum and expand ReflectAboutKey down to ApplyEncrypt and ApplySBox. Fourteen qubits (four for the key, eight to do the encryption, two helpers) and about 2,900 gates, for a 4-bit key. That's why AES-sized Grover is so far off.
+
+The script runs it with 0 rounds, 1 round, 2, and so on, a thousand times each. Watch the dots. Three rounds: about 96%. Theory says stop there. Keep going and it falls apart: six rounds, about 2%, worse than guessing. Then it climbs back. Histogram GroverAtOptimum against GroverOverIterated to show the same thing in two clicks.
+
+Grover isn't a lookup, it's a rotation. Knowing when to stop is the algorithm. And a wrong answer is cheap: one ordinary encryption checks a candidate key, so you just run it again.
+
+Two honest footnotes if asked. Noise: add even a 0.1% error rate to the simulator and the 96% drops to about 10%, barely better than guessing, so this needs error correction. And the known block matters: with block 3, two different keys both give the same output, so real attacks check against two or three known blocks. To show it isn't rigged, try a different secret: --key 6 --plaintext 2.
 -->
 
 ---

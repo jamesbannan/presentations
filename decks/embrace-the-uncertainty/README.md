@@ -38,8 +38,8 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 19 | Demo: the same pair on a real machine | `bell_hardware.py`: local simulator vs a Bell pair run on IonQ Forte-1 hardware via Open Quantum (100 shots, 1 mixed) |
 | 20 | Demo: it adds every pair at once, but shows you one | `adder.py`: a half adder on all four inputs at once |
 | 21 | Part two: Grover and Shor | Section |
-| 22 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
-| 23 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
+| 22 | Grover's search: boost the right key | Grover as a known-plaintext key search: 16-key grids at 0, 1 and 3 rounds (6%, 47%, 96%), tries vs rounds from the 4-bit demo to DES, AES-128 and AES-256, why doubling the key undoes it; four clicks |
+| 23 | Demo: recover the key, and know when to stop | `grover.py`: recovering a 4-bit key from one known block (7 → 3); key-recovery rate by number of rounds, 96% at 3 vs 2% at 6 |
 | 24 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
 | 25 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5 |
 | 26 | Demo: what would RSA-2048 take? | `shor_estimate.py`: `ShorCost`, physical qubits and run time from 32-bit keys to RSA-2048 (36M qubits, 183 days) on the resource estimator; optimised circuits in the notes; one click |
