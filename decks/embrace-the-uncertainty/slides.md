@@ -762,11 +762,11 @@ kicker: Shor's algorithm · what it is
 
 # Shor's algorithm: find the rhythm, break the lock
 
-RSA's lock: multiplying two primes is easy, splitting the result back is **hard**. Shor turns splitting into finding a repeating **rhythm**.
+RSA's lock: multiplying two primes is easy, splitting the result back is **hard**. To split **15**, pick any number, say **7**, and keep multiplying it by itself on a 15-hour clock.
 
 <div class="period-figure" style="max-width: 640px">
   <Period :multiplier="7" :modulus="15" />
-  <p style="margin-top: 0.5em">Powers of 7, keeping the remainder after dividing by 15</p>
+  <p style="margin-top: 0.5em">Where 7, 7×7, 7×7×7… land on the clock. It repeats, and that <b>rhythm</b> gives away the factors.</p>
 </div>
 
 <div class="chain" v-click="1" style="margin-top: 0.9em">
@@ -783,14 +783,16 @@ RSA's lock: multiplying two primes is easy, splitting the result back is **hard*
   <div><b>With Shor</b><span>under a week · ~1 million noisy qubits</span></div>
 </div>
 
-<p class="takeaway" v-click="3" style="margin-top: 1.1em"><b>A massive speed-up, not just a square root.</b> Longer keys won't save RSA or elliptic curves. They have to be replaced with new maths.</p>
+<p class="takeaway" v-click="3" style="margin-top: 1.1em"><b>A massive speed-up, not a square root.</b> Longer keys won't save RSA or elliptic curves: they need new maths.</p>
 
 <!--
 Peter Shor, Bell Labs, 1994. Two years before Grover, and it's the reason governments and banks care about quantum computers at all.
 
 The lock. RSA, the public-key encryption behind a lot of the internet's certificates and signatures, is built on one lopsided fact. Multiplying two big primes together is easy: a laptop does it instantly. Going backwards, taking the product and finding the two primes, is brutally hard. Your public key is the product; the primes are the secret. Nobody has found a fast way to split a big number on a normal computer.
 
-Shor's trick is to swap the hard question for a different one. Pick any number, say 7. Take its powers, 1, 7, 49, 343, and after each one keep only the remainder when you divide by 15, the number we want to split. Look at the row: 1, 7, 4, 13, then 1, 7, 4, 13 again. It repeats. Every number does this, and how often it repeats, the rhythm, secretly carries the factors.
+Shor's trick is to swap the hard question for a different one. Our stand-in for an RSA key is 15; we want to find 3 times 5 without being told.
+
+Pick any number. It really doesn't matter which, as long as it doesn't already share a factor with 15; if it does, you've been lucky and you're done. We'll take 7. Now keep multiplying it by itself: 7, 49, 343, and so on. Those get big fast, so do it on a clock with 15 hours instead: every time you go past 15, wrap round, like 3 p.m. becoming 3 o'clock. That's all "remainder after dividing by 15" means. 49 hours on a 15-hour clock lands on 4. Look at the row: 1, 7, 4, 13, then 1, 7, 4, 13 again. It repeats. Any number you pick does this on any clock, and how often it repeats, the rhythm, secretly carries the factors of the clock size. Some picks give a rhythm that's no use; then you pick another number and go again.
 
 [click] Here's the payoff, and it's school maths. The rhythm is 4. Take 7 to the power of half the rhythm: 7 squared, 49. Look either side of it: 48 and 50. Each of those shares a factor with 15: 48 shares 3, 50 shares 5. Out pop 3 and 5. Only the rhythm needs a quantum computer; everything after it is maths you could do with a pencil, using Euclid's algorithm from 300 BC.
 
