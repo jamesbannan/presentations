@@ -660,7 +660,7 @@ kicker: Grover's search · what it is
 
 # Grover's search: boost the right key
 
-The attacker knows one block of a message and its encrypted version. To find the key, try keys **one at a time** until one works. Grover tries them all at once.
+An attacker knows one block of a message (**7**) and what it encrypts to (**3**). Classically, they try keys **one at a time** until one turns 7 into 3. Grover tries every key at once.
 
 <div class="plates patterns-row" style="--plate: 180px; margin-top: 0.4em">
   <div class="plate">
@@ -669,7 +669,7 @@ The attacker knows one block of a message and its encrypted version. To find the
   </div>
   <div class="plate" v-click="1">
     <Patterns mode="grover" :pick="9" :rounds="1" />
-    <p><b>One round</b>Flag the key that turns 7 into 3, then boost it: 47%.</p>
+    <p><b>One round</b>Mark the key that encrypts 7 as 3, then boost it: 47%.</p>
   </div>
   <div class="plate" v-click="2">
     <Patterns mode="grover" :pick="9" :rounds="3" />
