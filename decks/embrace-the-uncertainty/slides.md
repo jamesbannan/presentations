@@ -85,19 +85,19 @@ clicks: 4
   <span class="ket toc-ket">2</span>
   <h3>Part two</h3>
   <p class="panel-lead">Grover and Shor</p>
-  <p>Two famous algorithms. One speeds up search; the other breaks the locks.</p>
+  <p>Two famous algorithms. One speeds up search; the other breaks today's encryption.</p>
 </div>
 <div class="panel magenta" v-click="3">
   <span class="ket toc-ket">3</span>
   <h3>Part three</h3>
   <p class="panel-lead">Q-Day</p>
-  <p>When Shor might run for real, and why today's traffic is already at risk.</p>
+  <p>When a quantum computer might break that encryption, and why data sent today is already at risk.</p>
 </div>
 <div class="panel amber" v-click="4">
   <span class="ket toc-ket">4</span>
   <h3>Part four</h3>
   <p class="panel-lead">What to do</p>
-  <p>The new standards, what they cost you, and a 30, 90 and 365-day plan.</p>
+  <p>The quantum-safe replacements, what they cost you, and a 30, 90 and 365-day plan.</p>
 </div>
 </div>
 
@@ -133,7 +133,7 @@ kicker: Part one
 
 # Bits and qubits
 
-## Same two answers. Very different rules.
+## Both give you a 0 or a 1. They play by very different rules.
 
 <!--
 Before any algorithms or cryptography: what is a qubit, and how is it different from the bits you already work with every day? One picture carries the whole section: an arrow on a globe.
@@ -145,14 +145,16 @@ kicker: Bits and qubits · classical
 
 # A bit points one of two ways
 
+Picture a bit as an arrow that can only point north (0) or south (1). Nothing in between.
+
 <div class="plates" style="--plate: 230px">
   <div class="plate">
     <Globe bit :theta="0" />
-    <p><b>Zero</b>North. Read it as often as you like.</p>
+    <p><b>Zero</b>Points north. Read it as often as you like: always 0.</p>
   </div>
   <div class="plate">
     <Globe bit :theta="180" />
-    <p><b>One</b>South. It stays where you left it.</p>
+    <p><b>One</b>Points south. Reading it doesn't change it.</p>
   </div>
 </div>
 
@@ -170,9 +172,9 @@ kicker: Bits and qubits · quantum
 <Globe :theta="62" wander />
 <div>
 
-- Same globe, same two poles
-- The arrow can point in **any** direction
-- That direction *is* the qubit
+- Same globe, same two poles: north is 0, south is 1
+- But the arrow can point in **any** direction, not just at a pole
+- Pointing somewhere in between is what **superposition** means
 
 </div>
 </div>
@@ -186,6 +188,8 @@ kicker: Bits and qubits · reading a qubit
 ---
 
 # How far north sets the odds
+
+Reading a qubit always gives a plain 0 or 1. The direction only sets the **odds** of each.
 
 <div class="plates" style="--plate: 200px">
   <div class="plate">
@@ -215,6 +219,8 @@ kicker: Bits and qubits · measurement
 
 # Reading it moves the arrow
 
+Reading a qubit snaps the arrow to the answer you got. You can't peek without changing it.
+
 <div class="plates" style="--plate: 220px">
   <div class="plate">
     <Globe :theta="60" />
@@ -225,7 +231,7 @@ kicker: Bits and qubits · measurement
   </div>
   <div class="plate" v-click>
     <Globe :theta="0" :was="60" />
-    <p><b>After</b>Snapped to 0. Read again: 0, every time.</p>
+    <p><b>After</b>Snapped to north. The old direction is gone: every read now gives 0.</p>
   </div>
 </div>
 
@@ -239,7 +245,7 @@ kicker: Bits and qubits · shots
 
 # So you run it hundreds of times
 
-Set up the same qubit 500 times. Read it each time. Count.
+One read is just a 0 or a 1. So set up the same qubit 500 times, read it each time, and count: the split tells you where the arrow pointed.
 
 <Shots :theta="55" :reads="500" :per-row="50" :seed="18" play />
 
@@ -257,7 +263,7 @@ kicker: Bits and qubits · why
   <ScaleZoom />
 </div>
 
-Real qubits are an electron, a particle of light, a single atom, or a circuit chilled until it acts like one.
+At the scale of atoms, nature keeps odds, not definite values. Real qubits are made from those tiny things: an electron, a particle of light, a single atom, or a circuit chilled until it behaves like one.
 
 <!--
 So why does a qubit behave like this? Because of what it's made of. Zoom in from a one-dollar coin, to a grain of sand, to a cell, to an atom, to an electron. Somewhere around the atom the rules change. Down there, nature doesn't keep a definite value for everything. It keeps odds.
@@ -271,23 +277,23 @@ kicker: Bits and qubits · uncertainty
 
 # Uncertainty is built in
 
-Every direction is a sure answer to one question, and a coin toss for another.
+This is Heisenberg's uncertainty principle: any direction gives a sure answer to one question, and a coin toss for another.
 
 <div class="plates" style="--plate: 180px">
   <div class="plate">
     <Globe :theta="0" />
     <Odds :theta="0" />
-    <p><b>North or south?</b>Sure: north, so 0.</p>
+    <p><b>North or south?</b>Sure: it points north, so 0.</p>
   </div>
   <div class="plate">
     <Globe :theta="0" ask="ew" />
     <Odds :chance="0.5" :labels="['W', 'E']" />
-    <p><b>West or east?</b>Same arrow. Coin toss.</p>
+    <p><b>West or east?</b>Same arrow, but now it's a coin toss.</p>
   </div>
   <div class="plate" v-click>
     <Globe :theta="90" :phi="28.65" />
     <Odds :theta="90" />
-    <p><b>Point it east?</b>North or south: coin toss.</p>
+    <p><b>Point it east instead?</b>Now north or south is the coin toss.</p>
   </div>
 </div>
 
@@ -307,9 +313,9 @@ kicker: Bits and qubits · side by side
 
 | | <div class="mini-globe"><Globe bit :theta="0" /></div> Bit | <div class="mini-globe"><Globe :theta="62" /></div> Qubit |
 | --- | --- | --- |
-| Holds | 0 or 1 | A direction |
-| A read gives you | What's stored | 0 or 1, at the odds |
-| After a read | Unchanged | Snapped to the answer |
+| Holds | 0 or 1 | A direction, which sets the odds |
+| A read gives you | What's stored | 0 or 1, picked at random by the odds |
+| After a read | Unchanged | Snapped to the answer it gave |
 | To learn what it holds | Read it once | Set it up and read it many times |
 
 <!--
@@ -338,15 +344,15 @@ kicker: Bits and qubits · so what?
 <div class="plates patterns-row" style="--plate: 240px">
   <div class="plate">
     <Patterns mode="bits" />
-    <p><b>4 bits</b>One pattern at a time.</p>
+    <p><b>4 bits</b>Hold one of the 16 patterns at a time.</p>
   </div>
   <div class="plate" v-click="1">
     <Patterns mode="odds" />
-    <p><b>4 qubits</b>Odds on all 16. A read shows one.</p>
+    <p><b>4 qubits</b>Hold odds on all 16 at once. A read still shows just one.</p>
   </div>
   <div class="plate" v-click="2">
     <Patterns mode="focus" />
-    <p><b>Then interference</b>Wrong answers cancel out.</p>
+    <p><b>Then interference</b>Gates make wrong answers cancel out, so the right one is likely.</p>
   </div>
 </div>
 
@@ -358,7 +364,7 @@ kicker: Bits and qubits · so what?
   <div><b>300 qubits</b><span>more numbers than atoms in the universe</span></div>
 </div>
 
-<p class="takeaway" v-click="4"><b>Not a faster computer. A different one.</b> It only wins where interference can steer to the answer: simulating molecules, and factoring the numbers behind today's encryption.</p>
+<p class="takeaway" v-click="4"><b>Not a faster computer. A different one.</b> It only wins on problems where wrong answers can be made to cancel: simulating molecules, and factoring the numbers behind today's encryption.</p>
 
 <!--
 So why does an arrow instead of a switch make a radically different computer? Picture every pattern four bits can hold: sixteen of them, 0000 to 1111.
@@ -393,7 +399,7 @@ Classical code runs on logic gates: AND, OR, NOT. Quantum gates **turn the arrow
   </div>
   <div class="plate" v-click="2">
     <div class="gate-move"><Globe :theta="90" :phi="28.65" /><span class="gate gate--z">Z</span><Globe :theta="90" :phi="208.65" /></div>
-    <p><b>Z: half a spin</b>East to west. Same odds, so a read can't tell.</p>
+    <p><b>Z: half a spin</b>East to west. The odds don't change, so a read can't tell.</p>
   </div>
   <div class="plate" v-click="3">
     <div class="gate-pair">
@@ -404,7 +410,7 @@ Classical code runs on logic gates: AND, OR, NOT. Quantum gates **turn the arrow
   </div>
 </div>
 
-<p class="takeaway" v-click="4"><b>A gate never reads the qubit, and every gate can be undone.</b> A program is gates on wires, then one read at the end.</p>
+<p class="takeaway" v-click="4"><b>Gates turn the arrow without reading it, and can always be run backwards.</b> A quantum program is a list of gates, then one read at the end.</p>
 
 <!--
 A classical program, all the way down, is logic gates: AND, OR, NOT, shuffling bits. Quantum programs are built from gates too. The difference: a quantum gate doesn't set a bit, it turns the arrow. Four of them carry the whole talk.
@@ -427,9 +433,11 @@ class: demo
 
 # Demo: the sign you can't see
 
-<div class="plate-groups" style="--plate: 200px">
+East and west both read as 50/50. One more H reveals which is which.
+
+<div class="plate-groups" style="--plate: 190px">
   <div class="plate-group">
-    <p class="plate-group-label">Measure straight away</p>
+    <p class="plate-group-label">Read straight away: they look the same</p>
     <div class="plates">
       <div class="plate">
         <p class="gate-seq"><span class="gate">H</span></p>
@@ -446,7 +454,7 @@ class: demo
     </div>
   </div>
   <div class="plate-group">
-    <p class="plate-group-label">Add one more H first</p>
+    <p class="plate-group-label">Add one more H, then read: they don't</p>
     <div class="plates">
       <div class="plate">
         <p class="gate-seq"><span class="gate">H</span><span class="gate">H</span></p>
@@ -503,12 +511,14 @@ CNOT(a, b);  // b: follows a
 return (MResetZ(a), MResetZ(b));
 ```
 
+Each qubit alone is a coin toss, but together they **always match**: 00 or 11, never 01 or 10.
+
 <p class="run-cmd">uv run demos/bell_pair.py</p>
 
 </div>
 <div class="chart-pair">
-  <Outcomes :stretch="130" title="Entangled" :counts="[487, 0, 0, 513]" />
-  <Outcomes :stretch="130" title="Not entangled" :counts="[248, 280, 246, 226]" />
+  <Outcomes :stretch="130" title="Entangled: always match" :counts="[487, 0, 0, 513]" />
+  <Outcomes :stretch="130" title="Two separate coins" :counts="[248, 280, 246, 226]" />
 </div>
 </div>
 
@@ -538,7 +548,7 @@ class: demo
 
 The same Bell pair, run on **IonQ's Forte-1**, a real quantum computer, and replayed here offline.
 
-Perfect qubits never disagree. These did, **once in 100**. **That gap is noise.**
+Perfect qubits never disagree. These did, **once in 100**. That's **noise**. Long programs need **error correction**: many physical qubits for each reliable one.
 
 <p class="run-cmd">uv run demos/bell_hardware.py</p>
 
@@ -570,7 +580,7 @@ kicker: Demo · half adder
 class: demo
 ---
 
-# Demo: one pass adds every pair, one read shows one
+# Demo: it adds every pair at once, but shows you one
 
 <div class="split" style="--split: 1fr 1fr">
 <div>
@@ -582,6 +592,8 @@ CNOT(a, sum);        // sum = a XOR b
 CNOT(b, sum);
 MResetEachZ([a, b, sum, carry])
 ```
+
+A half adder built from quantum gates. One run works out **all four sums at once**, but each read hands you **one, at random**. Every answer is right; you just can't have them all.
 
 <p class="run-cmd">uv run demos/adder.py</p>
 
@@ -630,7 +642,7 @@ kicker: Part two
 
 # Grover and Shor
 
-## Two famous algorithms. One speeds up search; the other breaks the locks.
+## Two famous algorithms. One speeds up search; the other breaks today's encryption.
 
 <!--
 So far: what a qubit is, how gates steer it, and that real machines are noisy. Now, what is it actually good for? Two algorithms carry most of the headlines, and most of the security worry.
@@ -657,16 +669,16 @@ Find the one item that passes a check, with no index to help. Classically, you t
   </div>
   <div class="plate" v-click="1">
     <Patterns mode="grover" :pick="9" :rounds="1" />
-    <p><b>One round</b>Flag the answer, then boost it: 47%.</p>
+    <p><b>One round</b>Mark the right answer, then boost its odds: 47%.</p>
   </div>
   <div class="plate" v-click="2">
     <Patterns mode="grover" :pick="9" :rounds="3" />
-    <p><b>Three rounds</b>96%. Now read.</p>
+    <p><b>Three rounds</b>96%. Now read it.</p>
   </div>
 </div>
 
 <div class="doubling" v-click="3" style="--steps: 3">
-  <span class="doubling-lead">To find one item in the pile, worst case:</span>
+  <span class="doubling-lead">Worst case to find one item: checking one by one, or Grover rounds</span>
   <div><b>16 items</b><span>16 checks · 3 rounds</span></div>
   <div><b>A million</b><span>1,000,000 checks · about 800 rounds</span></div>
   <div><b>A trillion</b><span>10¹² checks · about 800,000 rounds</span></div>
@@ -711,6 +723,8 @@ for _ in 1..iterations {
 return MeasureInteger(register);
 ```
 
+Three rounds find the answer 96% of the time. Keep going and the odds **fall away again**. Stopping at the right round is part of the algorithm.
+
 <p class="run-cmd">uv run demos/grover.py</p>
 
 </div>
@@ -739,7 +753,7 @@ kicker: Shor's algorithm · what it is
 
 # Shor's algorithm: find the rhythm, break the lock
 
-RSA's lock: multiplying primes is easy, splitting them back out is **hard**. Shor turns the splitting into finding a **rhythm**.
+RSA's lock: multiplying two primes is easy, splitting the result back is **hard**. Shor turns splitting into finding a repeating **rhythm**.
 
 <div class="period-figure" style="max-width: 640px">
   <Period :multiplier="7" :modulus="15" />
@@ -747,20 +761,20 @@ RSA's lock: multiplying primes is easy, splitting them back out is **hard**. Sho
 </div>
 
 <div class="chain" v-click="1" style="margin-top: 0.9em">
-  <span>Rhythm: 4</span>
-  <span>7² = 49</span>
-  <span>48 and 50</span>
+  <span>Repeats every 4</span>
+  <span>Half of 4: 7² = 49</span>
+  <span>Its neighbours: 48, 50</span>
   <span class="chain-end">15 = 3 × 5</span>
 </div>
 
 <div class="doubling" v-click="2" style="--steps: 3; margin-top: 1.3em">
   <span class="doubling-lead">To split a 2,048-bit RSA key:</span>
   <div><b>Classically</b><span>about 2¹¹² steps · out of reach</span></div>
-  <div><b>Today's machines</b><span>~1,000 noisy qubits · Shor has split 21</span></div>
+  <div><b>Today's machines</b><span>~1,000 noisy qubits · largest split so far: 21</span></div>
   <div><b>With Shor</b><span>under a week · ~1 million noisy qubits</span></div>
 </div>
 
-<p class="takeaway" v-click="3" style="margin-top: 1.1em"><b>Exponential, not square-root.</b> Longer keys won't save RSA or elliptic curves; new maths will.</p>
+<p class="takeaway" v-click="3" style="margin-top: 1.1em"><b>A massive speed-up, not just a square root.</b> Longer keys won't save RSA or elliptic curves. They have to be replaced with new maths.</p>
 
 <!--
 Peter Shor, Bell Labs, 1994. Two years before Grover, and it's the reason governments and banks care about quantum computers at all.
@@ -800,7 +814,7 @@ let r = PeriodCandidate(15, y, 9);
 let (p, q) = FactorsFromPeriod(7, 15, r);
 ```
 
-Only **one line** is quantum. Half its readings give **3&nbsp;×&nbsp;5**; the rest are duds, so it runs again.
+Only **one line** is quantum: it finds the rhythm. The rest is ordinary maths. About half the readings lead to **3&nbsp;×&nbsp;5**; the rest are duds, so you check and run again.
 
 <p class="run-cmd">uv run demos/shor.py</p>
 
@@ -856,7 +870,7 @@ Controlled ModularMultiplyByConstant(
 // Shor needs 4,097 of these
 ```
 
-The **resource estimator** counts every gate, then sizes the machine. Error correction turns **6,148** qubits into **36&nbsp;million**.
+Too big to run, but the **resource estimator** counts every gate. Error correction turns **6,148** qubits into **36&nbsp;million** physical ones.
 
 <p class="run-cmd">uv run demos/shor_estimate.py</p>
 
@@ -895,7 +909,7 @@ kicker: Part three
 
 # Q-Day
 
-## The day Shor runs for real. Some call it the Q-Pocalypse.
+## The day a quantum computer can break today's encryption. Some call it the Q-Pocalypse.
 
 <!--
 Q-Day is the name for the day someone switches on a quantum computer big enough, and clean enough, to run Shor's algorithm against a real key. Not 15. A 2048-bit RSA key, or the 256-bit elliptic curve key in your browser, your SSH config or your bitcoin wallet.
@@ -936,7 +950,7 @@ kicker: Q-Day · what breaks
 </div>
 </div>
 
-<p class="takeaway" v-click="2" style="margin-top: 1.3em"><b>Shor breaks the handshake, and the handshake carries the key to everything else.</b> Read the handshake from a recording, and you can read the whole conversation.</p>
+<p class="takeaway" v-click="2" style="margin-top: 1.3em"><b>AES is safe, but its key is sent inside a handshake that Shor breaks.</b> Record a conversation today, break its handshake later, and you can read all of it.</p>
 
 <!--
 Two families of cryptography, two very different stories.
@@ -957,9 +971,11 @@ kicker: Q-Day · how close?
 clicks: 2
 ---
 
-# The bar keeps dropping
+# The machine needed keeps shrinking
 
-<div style="max-width: 860px; margin: 1.4em auto 0">
+How many qubits it would take to break today's keys, versus the biggest machines we have.
+
+<div style="max-width: 820px; margin: 0.6em auto 0">
   <QubitBudget :upto="$clicks + 1" />
 </div>
 
@@ -1032,7 +1048,7 @@ clicks: 2
   <Mosca :exposed="$clicks >= 1" />
 </div>
 
-<p class="takeaway" v-click="2"><b>Time to migrate + time it stays secret &gt; time to Q-Day?</b> Then that data is already exposed. It's being recorded today.</p>
+<p class="takeaway" v-click="2"><b>Years until you've migrated + years it must stay secret &gt; years until Q-Day?</b> Then that data is already exposed: it can be recorded now and read later.</p>
 
 <!--
 Here's the bit that makes Q-Day a today problem. Encrypted traffic is easy to record. Storage is cheap. So a patient adversary can copy encrypted data now, sit on it, and decrypt it when the machine arrives. Harvest now, decrypt later. It's the reason every security agency gives for starting the migration now.
@@ -1105,7 +1121,7 @@ clicks: 1
 <div class="split" style="--split: 0.82fr 1.18fr; margin-top: 0.7em">
 <div>
   <NoisyLattice :solved="$clicks >= 1" />
-  <p class="takeaway" style="margin-top: 0.5em; font-size: 0.75rem">Find the grid point nearest the star. Easy in 2 dimensions. ML-KEM-768 hides it in 768.</p>
+  <p class="takeaway" style="margin-top: 0.5em; font-size: 0.75rem">The secret is the grid point nearest the star. Easy to spot in 2 dimensions; hopeless in 768, even for a quantum computer.</p>
 </div>
 <div class="hype" style="--hype-tag: 6.2em">
   <div><span class="tag cyan">FIPS 203</span><b>ML-KEM: agree a key</b><span>Replaces ECDH and RSA key exchange. Built on lattices. Already in your browser.</span></div>
@@ -1149,7 +1165,7 @@ clicks: 2
   <KeySizes :stage="$clicks" />
 </div>
 
-<p class="takeaway" v-click="2"><b>Your browser's first hello no longer fits in one packet.</b> An ML-DSA-signed JWT is over 4 KB: too big for a cookie.</p>
+<p class="takeaway" v-click="2"><b>The new keys and signatures are 40 to 120 times bigger.</b> A browser's opening TLS message no longer fits in one network packet, and an ML-DSA-signed JWT is too big for a cookie.</p>
 
 <p class="source">FIPS 203, 204 and 205 · bytes one side sends: a public key, or a signature</p>
 
@@ -1185,7 +1201,7 @@ Peer signature type: ecdsa_secp256r1_sha256
 Negotiated TLS1.3 group: X25519MLKEM768
 ```
 
-<p class="takeaway" style="margin-top: 0.6em"><b>This conference's website already agrees its keys quantum-safely.</b> Its certificate is still elliptic-curve: there are no post-quantum certificates on the web yet.</p>
+<p class="takeaway" style="margin-top: 0.6em"><b>This conference's website already uses a hybrid, quantum-safe key exchange.</b> Its certificate is still elliptic-curve: there are no post-quantum certificates on the web yet.</p>
 
 <!--
 ML-KEM is new. X25519 has been battered by attackers for over a decade. So how do you adopt the new thing without betting everything on it? You run both.
@@ -1269,7 +1285,7 @@ class: demo
     <li>Data that must stay secret for years</li>
     <li>Vendors and SaaS you can't see inside</li>
   </ul>
-  <p>Write it down as a CBOM: an SBOM for crypto.</p>
+  <p>Record it in a CBOM: a bill of materials for your cryptography, like an SBOM.</p>
 </div>
 <div>
 
@@ -1327,8 +1343,8 @@ clicks: 3
   <p class="panel-lead">Find it</p>
   <ul>
     <li>Scan code, certificates and config into a CBOM</li>
-    <li>Rank it with Mosca: longest-lived secrets first</li>
-    <li>No new RSA or elliptic-curve designs without an exit</li>
+    <li>Rank it: data that must stay secret longest goes first</li>
+    <li>No new designs on RSA or elliptic curves without a plan to replace them</li>
     <li>AES-256 and SHA-384 for anything new</li>
   </ul>
 </div>
@@ -1336,10 +1352,10 @@ clicks: 3
   <h3>365 days</h3>
   <p class="panel-lead">Start moving</p>
   <ul>
-    <li>Quantum-safe key exchange everywhere you end TLS</li>
+    <li>Hybrid key exchange on every TLS endpoint you run</li>
     <li>Pilot ML-DSA where you own both ends: internal PKI, code signing, service tokens</li>
     <li>Test the bigger sizes: headers, cookies, HSMs</li>
-    <li>PQC clauses in contracts and procurement</li>
+    <li>Require post-quantum support in contracts and purchases</li>
   </ul>
 </div>
 </div>

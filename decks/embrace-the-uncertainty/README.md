@@ -36,7 +36,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 17 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
 | 18 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
 | 19 | Demo: the same pair on a real machine | `bell_hardware.py`: local simulator vs a Bell pair run on IonQ Forte-1 hardware via Open Quantum (100 shots, 1 mixed) |
-| 20 | Demo: one pass adds every pair, one read shows one | `adder.py`: a half adder on all four inputs at once |
+| 20 | Demo: it adds every pair at once, but shows you one | `adder.py`: a half adder on all four inputs at once |
 | 21 | Part two: Grover and Shor | Section |
 | 22 | Grover's search: boost the right answer | What Grover is: 16-pattern grids at 0, 1 and 3 rounds (6%, 47%, 96%), checks vs rounds for 16 to a trillion items, why it matters for AES; four clicks |
 | 23 | Demo: Grover's search has to know when to stop | `grover.py`: success rate by number of rounds |
@@ -45,7 +45,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 26 | Demo: what would RSA-2048 take? | `shor_estimate.py`: `ShorCost`, physical qubits and run time from 32-bit keys to RSA-2048 (36M qubits, 183 days) on the resource estimator; optimised circuits in the notes; one click |
 | 27 | Part three: Q-Day | Section |
 | 28 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
-| 29 | The bar keeps dropping | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
+| 29 | The machine needed keeps shrinking | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
 | 30 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert odds, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
 | 31 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
 | 32 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
