@@ -98,7 +98,7 @@ const model = computed(() => {
 
 <template>
   <svg class="motif qday-timeline" :viewBox="`0 0 ${W} ${model.height}`" role="img"
-    aria-label="A timeline from today: expert odds of a code-breaking quantum computer rising over the next fifteen years, and the deadlines regulators have set to move off RSA and elliptic curves">
+    aria-label="A timeline from today: expert estimates of the probability of a code-breaking quantum computer rising over the next fifteen years, and the deadlines regulators have set to move off RSA and elliptic curves">
     <defs>
       <linearGradient id="qt-band" x1="0" x2="1" y1="0" y2="0">
         <stop offset="0" style="stop-color: var(--magenta); stop-opacity: 0.04" />

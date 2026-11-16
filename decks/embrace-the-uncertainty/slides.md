@@ -187,9 +187,9 @@ A qubit keeps the same two poles, but the arrow is free to point anywhere on the
 kicker: Bits and qubits · reading a qubit
 ---
 
-# How far north sets the odds
+# How far north sets the probabilities
 
-Reading a qubit always gives a plain 0 or 1. The direction only sets the **odds** of each.
+Reading a qubit always gives a plain 0 or 1. The direction only sets the **probabilities** of each.
 
 <div class="plates" style="--plate: 200px">
   <div class="plate">
@@ -210,7 +210,7 @@ Reading a qubit always gives a plain 0 or 1. The direction only sets the **odds*
 </div>
 
 <!--
-Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both". What the direction controls is the odds. The closer to north, the more likely a 0. On the equator it's a coin toss.
+Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both". What the direction controls is the probabilities. The closer to north, the more likely a 0. On the equator it's a coin toss.
 -->
 
 ---
@@ -263,10 +263,10 @@ kicker: Bits and qubits · why
   <ScaleZoom />
 </div>
 
-At the scale of atoms, nature keeps odds, not definite values. Real qubits are made from those tiny things: an electron, a particle of light, a single atom, or a circuit chilled until it behaves like one.
+At the scale of atoms, nature keeps probabilities, not definite values. Real qubits are made from those tiny things: an electron, a particle of light, a single atom, or a circuit chilled until it behaves like one.
 
 <!--
-So why does a qubit behave like this? Because of what it's made of. Zoom in from a one-dollar coin, to a grain of sand, to a cell, to an atom, to an electron. Somewhere around the atom the rules change. Down there, nature doesn't keep a definite value for everything. It keeps odds.
+So why does a qubit behave like this? Because of what it's made of. Zoom in from a one-dollar coin, to a grain of sand, to a cell, to an atom, to an electron. Somewhere around the atom the rules change. Down there, nature doesn't keep a definite value for everything. It keeps probabilities.
 
 A qubit is one of those tiny things that we've learned to control: an electron's spin, a particle of light, a single trapped atom. Or the IBM and Google approach: a superconducting circuit big enough to see under a microscope, cooled colder than outer space until the whole thing behaves like one quantum object. The arrow on our globe is that object's state.
 -->
@@ -313,8 +313,8 @@ kicker: Bits and qubits · side by side
 
 | | <div class="mini-globe"><Globe bit :theta="0" /></div> Bit | <div class="mini-globe"><Globe :theta="62" /></div> Qubit |
 | --- | --- | --- |
-| Holds | 0 or 1 | A direction, which sets the odds |
-| A read gives you | What's stored | 0 or 1, picked at random by the odds |
+| Holds | 0 or 1 | A direction, which sets the probabilities |
+| A read gives you | What's stored | 0 or 1, picked at random by the probabilities |
 | After a read | Unchanged | Snapped to the answer it gave |
 | To learn what it holds | Read it once | Set it up and read it many times |
 
@@ -348,7 +348,7 @@ kicker: Bits and qubits · so what?
   </div>
   <div class="plate" v-click="1">
     <Patterns mode="odds" />
-    <p><b>4 qubits</b>Hold odds on all 16 at once. A read still shows just one.</p>
+    <p><b>4 qubits</b>Hold probabilities for all 16 at once. A read still shows just one.</p>
   </div>
   <div class="plate" v-click="2">
     <Patterns mode="focus" />
@@ -371,9 +371,9 @@ So why does an arrow instead of a switch make a radically different computer? Pi
 
 A classical register holds exactly one of those patterns. Your program works on it, moves to the next, one step at a time. Billions of steps a second, but one pattern per step.
 
-[click] Four qubits don't hold a pattern. They hold odds on every pattern, all sixteen at once, and every gate you apply reshapes all of those odds in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, at those odds. The skill is arranging the gates so the pattern you want is the likely one.
+[click] Four qubits don't hold a pattern. They hold probabilities for every pattern, all sixteen at once, and every gate you apply reshapes all of those probabilities in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, according to those probabilities. The skill is arranging the gates so the pattern you want is the likely one.
 
-[click] So where does the power come from, if a read gives one pattern? Interference. The odds have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of odds. You'll see the hidden sign in the next demo.
+[click] So where does the power come from, if a read gives one pattern? Interference. The probabilities have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of probabilities. You'll see the hidden sign in the next demo.
 
 [click] And here's what scares classical computers. Every qubit you add doubles the patterns. To simulate qubits on a normal computer you have to store a number for every pattern: thirty qubits is sixteen gigabytes, about your laptop. Forty is sixteen terabytes, a cluster. Sixty is sixteen exabytes, more memory than any computer ever built. Three hundred qubits: more numbers than there are atoms in the observable universe. (16 bytes per pattern, one double-precision complex number; binary units.)
 
@@ -399,7 +399,7 @@ Classical code runs on logic gates: AND, OR, NOT. Quantum gates **turn the arrow
   </div>
   <div class="plate" v-click="2">
     <div class="gate-move"><Globe :theta="90" :phi="28.65" /><span class="gate gate--z">Z</span><Globe :theta="90" :phi="208.65" /></div>
-    <p><b>Z: half a spin</b>East to west. The odds don't change, so a read can't tell.</p>
+    <p><b>Z: half a spin</b>East to west. The probabilities don't change, so a read can't tell.</p>
   </div>
   <div class="plate" v-click="3">
     <div class="gate-pair">
@@ -419,11 +419,11 @@ X: flip. North to south, 0 to 1. It's the quantum NOT, and on a plain 0 or 1 it 
 
 [click] H, the Hadamard gate: tip the arrow over. From the north pole down onto the equator, pointing east. A sure 0 becomes a perfect coin toss. Almost every quantum program starts with a row of these.
 
-[click] Z: spin the arrow half a turn around the pole. East becomes west. Here's the catch: north-or-south odds don't change at all, still 50/50, so if you read it now you can't tell Z ever happened. Remember that; it's the next demo.
+[click] Z: spin the arrow half a turn around the pole. East becomes west. Here's the catch: the north-or-south probabilities don't change at all, still 50/50, so if you read it now you can't tell Z ever happened. Remember that; it's the next demo.
 
 [click] CNOT, controlled-NOT: the first two-qubit gate. If the first qubit is 1, flip the second; if it's 0, leave it. On plain 0s and 1s that's ordinary logic, XOR in fact. Feed it a first qubit that's a coin toss and the two qubits come out linked. That's entanglement: the demo after next.
 
-[click] Two rules that make these unlike classical gates. A gate never reads the qubit, so it never collapses anything; only the read at the end does. And every gate can be run backwards. AND can't: if AND gives you 0, you don't know which inputs made it. Gates turn the arrow; they don't throw information away. And remember the last slide: each gate reshapes the odds on every pattern at once. A quantum program is just a sequence of these turns, timed so that interference does the work, then one read.
+[click] Two rules that make these unlike classical gates. A gate never reads the qubit, so it never collapses anything; only the read at the end does. And every gate can be run backwards. AND can't: if AND gives you 0, you don't know which inputs made it. Gates turn the arrow; they don't throw information away. And remember the last slide: each gate reshapes the probabilities of every pattern at once. A quantum program is just a sequence of these turns, timed so that interference does the work, then one read.
 -->
 
 ---
@@ -479,7 +479,7 @@ East and west both read as 50/50. One more H reveals which is which.
 <!--
 Demo: quantum-computing repo, demos/gates.py (Q# in demos/src/Gates.qs). Runs locally, no Azure, no network.
 
-Gates are the moves you make on the arrow. H takes the north arrow and lays it on the equator, pointing east. Measure now: 50/50. Add a Z after the H and the arrow swings round to point west. Same height, so the same odds: still 50/50. Measure those two and you can't tell them apart.
+Gates are the moves you make on the arrow. H takes the north arrow and lays it on the equator, pointing east. Measure now: 50/50. Add a Z after the H and the arrow swings round to point west. Same height, so the same probabilities: still 50/50. Measure those two and you can't tell them apart.
 
 But they are different. Remember the "west or east?" question from earlier? A second H is how you ask it. It turns east into north and west into south. So H H comes back 0 every single time, and H Z H comes back 1 every single time. The difference you couldn't measure decided everything.
 
@@ -606,7 +606,7 @@ An attacker knows one block of a message (**7**) and what it encrypts to (**3**)
 <div class="plates patterns-row" style="--plate: 180px; margin-top: 0.4em">
   <div class="plate">
     <Patterns mode="grover" :pick="9" :rounds="0" />
-    <p><b>Start</b>16 keys, even odds: a guess.</p>
+    <p><b>Start</b>16 keys, equal probabilities: a guess.</p>
   </div>
   <div class="plate" v-click="1">
     <Patterns mode="grover" :pick="9" :rounds="1" />
@@ -637,7 +637,7 @@ Our demo shrinks that to a 4-bit key: sixteen possible keys, the known block is 
 
 Start: four qubits, all sixteen keys equally likely. Read now and it's a pure guess: one in sixteen.
 
-[click] One Grover round is two steps. First, flag. The circuit runs the cipher on every key at once, checks whether the output is 3, and flips the sign of any key that matches. Then it un-runs the cipher to tidy up. Note the circuit never knows the key; it only knows how to check one. That's the Z trick from the gates demo: a sign you can't see. Second, boost: flip every key's odds around the average. The flagged one was below the average, so it bounces up high; everything else drops a little. After one round the right key is at 47%.
+[click] One Grover round is two steps. First, flag. The circuit runs the cipher on every key at once, checks whether the output is 3, and flips the sign of any key that matches. Then it un-runs the cipher to tidy up. Note the circuit never knows the key; it only knows how to check one. That's the Z trick from the gates demo: a sign you can't see. Second, boost: flip every key's probability around the average. The flagged one was below the average, so it bounces up high; everything else drops a little. After one round the right key is at 47%.
 
 [click] Repeat. After three rounds it's 96%. Read the register and you almost certainly get the key. And if you don't, one ordinary encryption tells you, and you run it again. Three rounds instead of eight and a half tries on average.
 
@@ -971,7 +971,7 @@ So when is Q-Day? Here's the honest answer: nobody knows. Here's today, and fift
 
 [click] The US is on a similar clock. NIST's IR 8547, finalised in October 2026: quantum-vulnerable public-key algorithms are deprecated after 2030 and disallowed after 2035. Some US federal systems have even earlier deadlines.
 
-Notice the deadlines sit well before the odds get high. That's deliberate. Migration is slow, years for a big organisation, so the regulators have worked backwards from the risk, not forwards from the prediction. Which is a very "embrace the uncertainty" way to run a project.
+Notice the deadlines sit well before the probabilities get high. That's deliberate. Migration is slow, years for a big organisation, so the regulators have worked backwards from the risk, not forwards from the prediction. Which is a very "embrace the uncertainty" way to run a project.
 -->
 
 ---
@@ -1337,7 +1337,7 @@ clicks: 4
 <div class="panel cyan">
   <h3>Bits and qubits</h3>
   <p class="panel-lead">A qubit is an arrow, not a coin</p>
-  <p>It turns into a 0 or a 1 when you read it, so you run it hundreds of times and read the odds.</p>
+  <p>It turns into a 0 or a 1 when you read it, so you run it hundreds of times and read the probabilities.</p>
 </div>
 <div class="panel" v-click="1">
   <h3>Grover and Shor</h3>
@@ -1365,7 +1365,7 @@ clicks: 4
 <!--
 Four things to take back to work.
 
-Bits and qubits. A qubit isn't 0 and 1 at once. It's an arrow that turns into a 0 or a 1 the moment you read it. That's why every demo ran hundreds of shots: one reading tells you almost nothing, and the answer is in the odds.
+Bits and qubits. A qubit isn't 0 and 1 at once. It's an arrow that turns into a 0 or a 1 the moment you read it. That's why every demo ran hundreds of shots: one reading tells you almost nothing, and the answer is in the probabilities.
 
 [click] Grover and Shor. Quantum algorithms work by interference: arranging the maths so wrong answers cancel and right ones add up. Grover does that for any search, but only gives a square-root speedup, so AES survives with 256-bit keys. Shor finds hidden rhythms, and RSA and elliptic curves are built on exactly that kind of rhythm. No key length saves them.
 

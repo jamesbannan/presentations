@@ -24,14 +24,14 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 5 | Part one: Bits and qubits | Section |
 | 6 | A bit points one of two ways | Arrow on a globe, north or south only |
 | 7 | A qubit can point anywhere | Same globe, any direction |
-| 8 | How far north sets the odds | Three latitudes and their odds |
+| 8 | How far north sets the probabilities | Three latitudes and their probabilities |
 | 9 | Reading it moves the arrow | Two clicks: the read, then the snapped arrow |
 | 10 | So you run it hundreds of times | 500 simulated reads of the cover's arrow, coloured in one at a time as the slide opens |
 | 11 | Why? Qubits are built from tiny things | Zoom from an Australian $1 coin to an electron; where the rules change |
 | 12 | Uncertainty is built in | Heisenberg as two questions on one globe; one click |
 | 13 | Bit vs qubit | Summary table |
 | 14 | The one-liner | Statement |
-| 15 | Why that makes a different kind of computer | 16-pattern grids: 4 bits hold one, 4 qubits spread odds over all, interference focuses them; memory to simulate 30–300 qubits; four clicks |
+| 15 | Why that makes a different kind of computer | 16-pattern grids: 4 bits hold one, 4 qubits spread probabilities over all, interference focuses them; memory to simulate 30–300 qubits; four clicks |
 | 16 | Gates turn the arrow | X, H and Z as before → after turns of the arrow, then CNOT on two qubits; four clicks |
 | 17 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
 | 18 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
@@ -45,7 +45,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 26 | Part three: Q-Day | Section |
 | 27 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
 | 28 | The machine needed keeps shrinking | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
-| 29 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert odds, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
+| 29 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert estimates, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
 | 30 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
 | 31 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
 | 32 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
@@ -62,7 +62,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
 by `NoisyLattice`, `KeySizes` and `HybridKex`, so there are no image files to maintain. The
-odds come from the arrow's angle, so a figure stays correct if you change its
+probabilities come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
 
 The only image files are the organiser's, in `organiser/`. Slide 2 is their

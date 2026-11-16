@@ -229,7 +229,7 @@ const split = computed(() => {
     <rect x="10" y="236" :width="W - 20" height="6" rx="3" :fill="`url(#${ids.band})`" />
     <path :d="`M${split.x} 228 L${split.x} 250`" class="zs-split" />
     <text x="10" y="266" class="zs-band zs-band--classical">Everyday rules · things have a definite value</text>
-    <text :x="W - 10" y="266" text-anchor="end" class="zs-band zs-band--quantum">Quantum rules · things carry odds</text>
+    <text :x="W - 10" y="266" text-anchor="end" class="zs-band zs-band--quantum">Quantum rules · things carry probabilities</text>
   </svg>
 </template>
 
