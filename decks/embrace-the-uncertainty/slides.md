@@ -799,7 +799,78 @@ Flags: --number 21 --a 2 (period 6, more ways to fail), --seed N for a repeatabl
 
 For the extension: Histogram on PeriodFindingSevenModFifteen, Run on FactorFifteen to watch the attempts in the Debug Console.
 
-Next slide: the same Q# pointed at a real key size.
+Next slide: what it would take to point the same Q# at a real key size.
+-->
+
+---
+kicker: Shor's algorithm · resource estimation
+clicks: 2
+---
+
+# Pricing a machine nobody has built yet
+
+Shor can't run on real RSA yet. A **resource estimator** prices it, so we know it's safe today.
+
+<div class="split qec" style="--split: 0.92fr 1.08fr">
+<div>
+  <LogicalQubit />
+</div>
+<dl class="qec-terms">
+  <div><dt>Physical qubit</dt><dd>The real hardware: a trapped atom, or a tiny superconducting loop.</dd></div>
+  <div><dt>Noisy</dt><dd>1 in 100 to 1 in 1,000 steps goes wrong, and the arrow drifts.</dd></div>
+  <div><dt>Logical qubit</dt><dd>Many noisy ones checking each other: errors (<b class="m">●</b>) are caught (<b class="a">◆</b>) and fixed. That's <b>error correction</b>.</dd></div>
+</dl>
+</div>
+
+<div class="chain" v-click="1" style="margin-top: 0.5em">
+  <span>Q# program</span>
+  <span>Count every step</span>
+  <span>Pick the hardware</span>
+  <span>Add error correction</span>
+  <span class="chain-end">Qubits + run time</span>
+</div>
+
+<div class="doubling" v-click="2" style="--steps: 3; margin-top: 0.9em">
+  <span class="doubling-lead">The price of error correction, for RSA-2048</span>
+  <div><b>2,738 noisy qubits</b><span>for every reliable one</span></div>
+  <div><b>~300× slower</b><span>every step waits for rounds of checks</span></div>
+  <div><b>Fewer errors, smaller machine</b><span>error rates matter as much as qubit counts</span></div>
+</div>
+
+<style>
+.qec { align-items: center; margin-top: 0.2em; }
+.qec .motif { max-width: 340px; margin: 0 auto; }
+.qec-terms { margin: 0; display: grid; gap: 0.55em; }
+.qec-terms > div { border-left: 2px solid var(--violet); padding-left: 0.8em; }
+.qec-terms > div:nth-child(2) { border-left-color: var(--magenta); }
+.qec-terms > div:nth-child(3) { border-left-color: var(--cyan); }
+.qec-terms dt { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; color: var(--ink); }
+.qec-terms dd { margin: 0.1em 0 0; font-size: 0.84rem; line-height: 1.4; color: var(--ink-soft); }
+.qec-terms b { color: var(--ink); }
+.qec-terms b.m { color: var(--magenta); }
+.qec-terms b.a { color: var(--amber); }
+</style>
+
+<!--
+We've factored 15. The obvious next question: what about a real RSA key, 2,048 bits? We can't run it, there's no machine big enough, and we can't simulate it either: simulating 2,048 qubits would need more memory than there are atoms in the universe. So we cost it instead. That's resource estimation.
+
+First, three words that get thrown around in every quantum headline.
+
+A physical qubit is one actual thing on the chip. In IonQ's machine, the one that ran our Bell pair, it's a single charged atom held in place by electric fields. In Google's and IBM's, it's a tiny loop of superconducting wire, cooled to colder than deep space. When a company says "our chip has 1,000 qubits", it means physical qubits.
+
+Noisy means they make mistakes. Every gate has a small chance of turning the arrow slightly the wrong way: around 1 in 100 on the machine we used earlier (one mixed result in a hundred shots), around 1 in 1,000 on the best ones today. And left alone, the arrow drifts: heat, stray light, vibrations nudge it. A program like Shor needs billions of steps. At 1 error in 1,000, you'd be wrong long before you got anywhere.
+
+So we make a logical qubit: one reliable qubit made out of many noisy ones. The picture is the most popular scheme, the surface code. The black dots hold the data. The diamonds are check qubits: each one keeps asking its four neighbours "do you still agree with each other?", without reading the answer itself, because reading it would snap it. When a data qubit goes wrong (magenta), the checks either side of it fire (amber), and the pattern of fired checks points at the culprit so it can be fixed. It's like a spreadsheet's row and column totals: one wrong cell shows up in both, so you know where it is.
+
+The patch here is 49 physical qubits for one logical one. Bigger patches catch more errors at once; the size is called the code distance.
+
+[click] How the estimator works. You give it the Q# program, the same Shor code that just factored 15, pointed at 2,048 bits. It counts every logical step without running anything. Then you tell it what hardware to assume: how often gates fail, how fast they are. It works out how big each patch has to be so the whole run is likely to finish without an uncorrected error, and adds the extra machinery Shor needs. Out come two numbers: physical qubits, and run time.
+
+[click] For RSA-2048 on superconducting-style hardware with 1-in-1,000 errors, that's patches with a code distance of 37: 2,738 noisy physical qubits for every reliable logical one. Not 49. And every logical step has to wait for 37 rounds of checks, so it's about 300 times slower than a raw gate. The flip side: error correction only works if the hardware is already good enough. Around 1 in 100 is the break-even point: below it, bigger patches make things better; above it, they make things worse. And every time the error rate improves, the patches shrink. Google showed this for real in late 2024 with its Willow chip: each bigger patch halved the error rate. So when you read a quantum headline, the error rate matters as much as the qubit count.
+
+Why bother with all this? Because this is how anyone can say "RSA is safe today" with a straight face: we know the size of machine it takes, and we know how far today's machines are from it. And it's how we'll see Q-Day coming: every new algorithm and every improvement in error rates moves the estimate, and you can rerun it. Let's run it.
+
+Source: Microsoft Resource Estimator in the QDK, run on demos/src/ShorEstimate.qs with the qubit_gate_ns_e3 model (50 ns gates, 0.1% errors) and the surface code: code distance 37, 2,738 physical per logical qubit, 14.8 µs logical cycle.
 -->
 
 ---
@@ -837,7 +908,7 @@ Too big to run, but the **resource estimator** counts every gate. Error correcti
 <!--
 Demo: quantum-computing repo, demos/shor_estimate.py (Q# in demos/src/ShorEstimate.qs, reusing Shor.qs). The numbers don't change between runs: no randomness, it's counting, not simulating. A few seconds once it's warmed up; the 2048-bit trace needs about 5 GB of RAM (--max-bits 1024 is lighter). The plot is in output/shor_estimate.png.
 
-What it does: we can't simulate 2048 qubits, nobody can, but we don't need to run the circuit to cost it. Microsoft's resource estimator walks through the same Q# that factored 15 on the last slide, counts every gate, then asks: on a given kind of hardware, with a given error rate, how many physical qubits and how long? Shor at n bits is 2n + 1 of these controlled multiplications, all the same size, so the script traces one and multiplies by 4,097.
+What it does: we can't simulate 2048 qubits, nobody can, but we don't need to run the circuit to cost it. Microsoft's resource estimator walks through the same Q# that factored 15 two slides ago, counts every gate, then asks: on a given kind of hardware, with a given error rate, how many physical qubits and how long? Shor at n bits is 2n + 1 of these controlled multiplications, all the same size, so the script traces one and multiplies by 4,097.
 
 Read the chart a row at a time: every time the key doubles, the qubits roughly double and the time goes up about eight or nine times. Click for RSA-2048: about 36 million physical qubits running for about 183 days. 6,148 logical qubits doing the work, and error correction wraps every one of those in thousands of noisy physical ones. That's the 1% error rate from the hardware demo coming back to bite.
 
