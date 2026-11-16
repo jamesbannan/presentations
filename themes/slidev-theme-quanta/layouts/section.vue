@@ -51,7 +51,10 @@ const bits = computed(() => toBinary(props.numeral))
 .section-lattice {
   position: absolute;
   inset: 4% -4% auto -4%;
-  opacity: 0.28;
+  opacity: 0.13;
+  /* Thin the lattice further behind the heading so the text stays legible. */
+  -webkit-mask-image: radial-gradient(ellipse 50% 36% at 60% 50%, rgba(0, 0, 0, 0.06) 55%, #000 100%);
+  mask-image: radial-gradient(ellipse 50% 36% at 60% 50%, rgba(0, 0, 0, 0.06) 55%, #000 100%);
 }
 
 .section-register {
