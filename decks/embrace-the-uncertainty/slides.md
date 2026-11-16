@@ -371,7 +371,7 @@ So why does an arrow instead of a switch make a radically different computer? Pi
 
 A classical register holds exactly one of those patterns. Your program works on it, moves to the next, one step at a time. Billions of steps a second, but one pattern per step.
 
-[click] Four qubits don't hold a pattern. They hold odds on every pattern, all sixteen at once, and every gate you apply reshapes all of those odds in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, at those odds. That's the half adder demo coming up.
+[click] Four qubits don't hold a pattern. They hold odds on every pattern, all sixteen at once, and every gate you apply reshapes all of those odds in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, at those odds. The skill is arranging the gates so the pattern you want is the likely one.
 
 [click] So where does the power come from, if a read gives one pattern? Interference. The odds have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of odds. You'll see the hidden sign in the next demo.
 
@@ -576,65 +576,6 @@ If you want the emulator run on stage instead: uv run demos/bell_hardware.py --r
 -->
 
 ---
-kicker: Demo · half adder
-class: demo
----
-
-# Demo: it adds every pair at once, but shows you one
-
-<div class="split" style="--split: 1fr 1fr">
-<div>
-
-```rust
-H(a); H(b);          // every pair at once
-CCNOT(a, b, carry);  // carry = a AND b
-CNOT(a, sum);        // sum = a XOR b
-CNOT(b, sum);
-MResetEachZ([a, b, sum, carry])
-```
-
-A half adder built from quantum gates. One run works out **all four sums at once**, but each read hands you **one, at random**. Every answer is right; you just can't have them all.
-
-<p class="run-cmd">uv run demos/adder.py</p>
-
-</div>
-<Outcomes
-  class="chart-solo"
-  title="a b sum carry"
-  :counts="[269, 260, 246, 225]"
-  :labels="['0000', '0110', '1010', '1101']"
-  :captions="['0+0=00', '0+1=01', '1+0=01', '1+1=10']"
-  :ceiling="0.4"
-/>
-</div>
-
-<p class="source">A typical run: 1,000 shots on the local QDK simulator. Wrong sums: 0</p>
-
-<!--
-Demo: quantum-computing repo, demos/adder.py (Q# in demos/src/Adder.qs). Runs locally, no Azure, no network.
-
-Classical logic is a special case of a quantum circuit. CNOT is XOR, CCNOT is AND, so a half adder is three gates. Feed it ordinary bits and you get the ordinary truth table; the script prints that first.
-
-Now the twist: H on both inputs first. One pass through the adder and the state holds all four additions at once, each with amplitude 0.5. This is the "quantum computers try every answer in parallel" headline, and it's true as far as it goes.
-
-Then you measure. Four bars, about a quarter each, and never a wrong sum. But each run hands you one row of the truth table, at random. To see all four you'd run it four-plus times, which is no faster than a classical adder. Parallelism on its own isn't a speed-up. You need interference to make the answer you want the likely one, which is exactly what Grover does next.
-
-Why this demo matters: it's the myth-buster. The most common headline about quantum computing is "it tries every answer at once". This demo shows that line is half true, and the missing half is the part that matters. The computer really did work out all four sums in one pass. You just can't have them. Reading is the bottleneck, not computing.
-
-What the results mean:
-
-- Quantum isn't fuzzy. Every shot was a correct sum, and zero were wrong. The randomness is in which answer you get, not whether it's right. (That's on a perfect simulator. Real hardware adds noise, which is the error-correction story.)
-- A quantum computer can run any classical logic. CNOT is XOR and CCNOT is AND, so in principle anything your laptop does can be built from these gates. It wouldn't be faster, though, and it would cost far more. Quantum computers won't replace your laptop; they're a co-processor for a few special problems.
-- Gates can't throw information away, which is why we needed four qubits to add two bits. A classical adder just overwrites. Here the inputs stay on their wires, because every gate must be reversible. That overhead scales up: the arithmetic inside Shor's algorithm needs thousands of these error-corrected qubits, which is why it isn't running yet.
-- The real speed-ups come from asking a question about all the answers together, rather than for every answer. "Which row is the sum of 1 and 1?" gains nothing. "What pattern runs through all of them?" is where interference wins. Shor asks exactly that kind of question about the numbers behind RSA, and that's why public-key encryption is in trouble.
-- That's also why "a quantum computer will try every password, or every AES key, at once" is sci-fi. You'd get one random key back. The best you can do is Grover, the next demo, which only gives a square-root speed-up. That's why doubling key lengths is enough to protect symmetric encryption.
-
-One-liner to land it: "It computes every answer, and then it hands you one at random. The skill is in arranging the gates so that the one you get is the one you want."
-
-In VS Code: Circuit on HalfAdder, Debug on AddEverything stepped to MResetEachZ to show the four basis states, then Histogram on AddEverything.
--->
-
----
 layout: section
 numeral: 2
 kicker: Part two
@@ -798,7 +739,7 @@ Pick any number. It really doesn't matter which, as long as it doesn't already s
 
 So why is the rhythm hard? For 15 the pattern repeats after 4 steps and you can just look. For a 2,048-bit RSA number, the rhythm can be a number with hundreds of digits. You'd be listing remainders until the heat death of the universe.
 
-What does the quantum computer do? The same tools as everything else today. Put the exponent in superposition: all of 0, 1, 2, 3 and on, at once. Compute the remainders for all of them in one pass, like the half adder adding every pair. Reading now would just give one random remainder, useless. Instead, a final step called the quantum Fourier transform makes the paths interfere, like Grover's boost, so that only readings in step with the rhythm survive. A handful of reads, and the rhythm drops out. It's the same idea as tapping along to a song: you don't need to hear every beat to know the tempo.
+What does the quantum computer do? The same tools as everything else today. Put the exponent in superposition: all of 0, 1, 2, 3 and on, at once. Compute the remainders for all of them in one pass. Reading now would just give one random remainder, useless. Instead, a final step called the quantum Fourier transform makes the paths interfere, like Grover's boost, so that only readings in step with the rhythm survive. A handful of reads, and the rhythm drops out. It's the same idea as tapping along to a song: you don't need to hear every beat to know the tempo.
 
 [click] How close is it? Classically, the best known method needs around 2 to the 112 steps for RSA-2048. That's NIST's rating for it, and it's far out of reach. Today's biggest machines have around a thousand noisy physical qubits, give or take, and the biggest numbers Shor has actually been run on are 15 and 21, the same tiny scale as the demo coming up. That's both funny and reassuring. But the estimate keeps falling. In 2019 it was 20 million noisy qubits for eight hours (Gidney and Ekerå). In May 2025, Craig Gidney at Google brought it to under a million noisy qubits, in under a week. That assumes a 0.1% error per gate: ten times better than the 1% we saw on the real machine. Not today, but no longer science fiction.
 
