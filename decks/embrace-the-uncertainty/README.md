@@ -41,7 +41,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 22 | Demo: recover the key, and know when to stop | `grover.py`: recovering a 4-bit key from one known block (7 → 3); key-recovery rate by number of rounds, 96% at 3 vs 2% at 6 |
 | 23 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
 | 24 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5 |
-| 25 | Pricing a machine nobody has built yet | `LogicalQubit`: a 49-qubit surface-code patch acting as one logical qubit; physical, noisy and logical qubits defined; how the resource estimator works; the RSA-2048 price of error correction (code distance 37, 2,738 physical per logical, ~300× slower); two clicks |
+| 25 | Pricing a machine nobody has built yet | `LogicalQubit`: a 49-qubit surface-code patch acting as one logical qubit; physical, noisy and logical qubits defined; how the resource estimator works; how the error rate sets the RSA-2048 price (2,738 physical per logical and 36M in all at 0.1% errors, 722 and 9M at 0.01%); two clicks |
 | 26 | Demo: what would RSA-2048 take? | `shor_estimate.py`: `ShorCost`, physical qubits and run time from 32-bit keys to RSA-2048 (36M qubits, 183 days) on the resource estimator; optimised circuits in the notes; one click |
 | 27 | Part three: Q-Day | Section |
 | 28 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |

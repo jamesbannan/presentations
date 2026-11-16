@@ -816,7 +816,7 @@ Shor can't run on real RSA yet. A **resource estimator** prices it, so we know i
   <LogicalQubit />
 </div>
 <dl class="qec-terms">
-  <div><dt>Physical qubit</dt><dd>The real hardware: a trapped atom, or a tiny superconducting loop.</dd></div>
+  <div><dt>Physical qubit</dt><dd>The real hardware: a trapped atom, or a tiny superconducting loop. A chip's advertised qubit count means these.</dd></div>
   <div><dt>Noisy</dt><dd>1 in 100 to 1 in 1,000 steps goes wrong, and the arrow drifts.</dd></div>
   <div><dt>Logical qubit</dt><dd>Many noisy ones checking each other: errors (<b class="m">●</b>) are caught (<b class="a">◆</b>) and fixed. That's <b>error correction</b>.</dd></div>
 </dl>
@@ -831,10 +831,10 @@ Shor can't run on real RSA yet. A **resource estimator** prices it, so we know i
 </div>
 
 <div class="doubling" v-click="2" style="--steps: 3; margin-top: 0.9em">
-  <span class="doubling-lead">The price of error correction, for RSA-2048</span>
-  <div><b>2,738 noisy qubits</b><span>for every reliable one</span></div>
-  <div><b>~300× slower</b><span>every step waits for rounds of checks</span></div>
-  <div><b>Fewer errors, smaller machine</b><span>error rates matter as much as qubit counts</span></div>
+  <span class="doubling-lead">For RSA-2048, the error rate sets the price</span>
+  <div><b>1 in 1,000 errors</b><span>2,738 noisy qubits per reliable one · 36M in all</span></div>
+  <div><b>1 in 10,000 errors</b><span>722 per reliable one · 9M in all</span></div>
+  <div><b>Better qubits, smaller machine</b><span>watch error rates, not just qubit counts</span></div>
 </div>
 
 <style>
@@ -856,7 +856,7 @@ We've factored 15. The obvious next question: what about a real RSA key, 2,048 b
 
 First, three words that get thrown around in every quantum headline.
 
-A physical qubit is one actual thing on the chip. In IonQ's machine, the one that ran our Bell pair, it's a single charged atom held in place by electric fields. In Google's and IBM's, it's a tiny loop of superconducting wire, cooled to colder than deep space. When a company says "our chip has 1,000 qubits", it means physical qubits.
+A physical qubit is one actual thing on the chip. In IonQ's machine, the one that ran our Bell pair, it's a single charged atom held in place by electric fields. In Google's and IBM's, it's a tiny loop of superconducting wire, cooled to colder than deep space. When a company says "our chip has 1,000 qubits", it means physical qubits: Google's Willow has 105, IBM's Condor 1,121. A few labs now also announce logical qubits, a dozen or two so far; that's the number to watch.
 
 Noisy means they make mistakes. Every gate has a small chance of turning the arrow slightly the wrong way: around 1 in 100 on the machine we used earlier (one mixed result in a hundred shots), around 1 in 1,000 on the best ones today. And left alone, the arrow drifts: heat, stray light, vibrations nudge it. A program like Shor needs billions of steps. At 1 error in 1,000, you'd be wrong long before you got anywhere.
 
@@ -866,11 +866,15 @@ The patch here is 49 physical qubits for one logical one. Bigger patches catch m
 
 [click] How the estimator works. You give it the Q# program, the same Shor code that just factored 15, pointed at 2,048 bits. It counts every logical step without running anything. Then you tell it what hardware to assume: how often gates fail, how fast they are. It works out how big each patch has to be so the whole run is likely to finish without an uncorrected error, and adds the extra machinery Shor needs. Out come two numbers: physical qubits, and run time.
 
-[click] For RSA-2048 on superconducting-style hardware with 1-in-1,000 errors, that's patches with a code distance of 37: 2,738 noisy physical qubits for every reliable logical one. Not 49. And every logical step has to wait for 37 rounds of checks, so it's about 300 times slower than a raw gate. The flip side: error correction only works if the hardware is already good enough. Around 1 in 100 is the break-even point: below it, bigger patches make things better; above it, they make things worse. And every time the error rate improves, the patches shrink. Google showed this for real in late 2024 with its Willow chip: each bigger patch halved the error rate. So when you read a quantum headline, the error rate matters as much as the qubit count.
+[click] So is the overhead hopeless? No: it's a price, and the error rate sets it. For RSA-2048 on superconducting-style hardware with 1-in-1,000 errors, the patches need a code distance of 37: 2,738 noisy physical qubits for every reliable logical one, 36 million in all. Not 49, because Shor runs billions of steps and can't afford a single uncorrected error; a shorter program gets away with smaller patches. Make the qubits ten times better, 1 in 10,000, and the same estimate drops to 722 per logical qubit and about 9 million in all, and the run time halves. Ten times better hardware, four times smaller machine. Newer codes than the surface code (IBM's, for example) cut it roughly another ten times, at the cost of harder wiring.
+
+There's a time cost too: every logical step waits for rounds of checks, so it's hundreds of times slower than a raw gate.
+
+And error correction only works once the hardware is good enough. Around 1 in 100 is the break-even point: below it, bigger patches make things better; above it, they make things worse. Google showed the good side for real in late 2024 with Willow: each bigger patch halved the error rate. So when you read "our chip has N qubits", ask about the error rate. That's what decides how many of those N are worth anything.
 
 Why bother with all this? Because this is how anyone can say "RSA is safe today" with a straight face: we know the size of machine it takes, and we know how far today's machines are from it. And it's how we'll see Q-Day coming: every new algorithm and every improvement in error rates moves the estimate, and you can rerun it. Let's run it.
 
-Source: Microsoft Resource Estimator in the QDK, run on demos/src/ShorEstimate.qs with the qubit_gate_ns_e3 model (50 ns gates, 0.1% errors) and the surface code: code distance 37, 2,738 physical per logical qubit, 14.8 µs logical cycle.
+Source: Microsoft Resource Estimator in the QDK, run on demos/src/ShorEstimate.qs (textbook circuit, 2048 bits) with the surface code. qubit_gate_ns_e3 (0.1% errors): code distance 37, 2,738 physical per logical qubit, 35.7M physical, 183 days. qubit_gate_ns_e4 (0.01% errors): code distance 19, 722 per logical, 9.3M physical, 94 days.
 -->
 
 ---
