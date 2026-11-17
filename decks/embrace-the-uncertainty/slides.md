@@ -166,21 +166,26 @@ Picture a bit as an arrow that can only point at the North Pole or the South Pol
 kicker: Bits and qubits · quantum
 ---
 
+<script setup>
+import { ref } from 'vue'
+const s = ref({ theta: 62, phi: 0 })
+</script>
+
 # A qubit can point anywhere
 
-<div class="split">
-<Globe :theta="62" wander />
-<div>
+Same two poles, but the arrow can point in **any** direction. Pointing between them is **superposition**.
 
-- Same globe, same two poles: north is 0, south is 1
-- But the arrow can point in **any** direction, not just at a pole
-- Pointing somewhere in between is what **superposition** means
-
-</div>
+<div class="split" style="--split: 0.8fr 1.2fr">
+<Globe :theta="62" wander :hop="2400" @move="s = $event" />
+<QubitState v-bind="s" />
 </div>
 
 <!--
-A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. Watch it hop: every one of those directions, and the fading ones it just left, is a valid qubit. The direction the arrow points is the state. That's all "superposition" means here: pointing somewhere other than straight at a pole.
+A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. Watch it glide: the line it traces sits on the surface of the globe, because the arrow's tip never leaves it. When the arrow swings round the back, it goes dashed and faint, like you're seeing it through glass.
+
+The panel on the right is the same arrow, described with numbers. Two angles pin down any direction: the tilt down from north, and the turn round the equator. Its length is always exactly 1, and that's why the tip always sits on the surface. Physicists write the same arrow as a recipe: some amount of 0 plus some amount of 1. Square those two amounts and they always add up to 1. Hold that thought, because on the next slide those squared amounts become the probabilities of reading 0 or 1. The little e-to-the-i bit is the turn; it doesn't change the probabilities, but it matters when qubits interfere.
+
+That's all "superposition" means here: pointing somewhere other than straight at a pole.
 -->
 
 ---

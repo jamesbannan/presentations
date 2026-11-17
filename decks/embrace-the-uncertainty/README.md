@@ -23,7 +23,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 4 | Four parts, from qubits to your to-do list | Contents: one panel per part, with a large ket numeral in that part's colour; four clicks |
 | 5 | Part one: Bits and qubits | Section |
 | 6 | A bit points one of two ways | Arrow on a globe, north or south only |
-| 7 | A qubit can point anywhere | Same globe, any direction |
+| 7 | A qubit can point anywhere | `Globe` glides over the surface (dashed and faint behind it) beside a live `QubitState` readout: tilt θ, turn φ, length 1, and the state as α|0⟩ + β|1⟩ |
 | 8 | How far north sets the probabilities | Three latitudes and their probabilities |
 | 9 | Reading it moves the arrow | Two clicks: the read, then the snapped arrow |
 | 10 | So you run it hundreds of times | 500 simulated reads of the cover's arrow, coloured in one at a time as the slide opens |
@@ -61,7 +61,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 42 | Thank you | Contact details, questions |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
-`Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), the error-correction patch by `LogicalQubit`, Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
+`QubitState`, `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), the error-correction patch by `LogicalQubit`, Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
 by `NoisyLattice`, `KeySizes` and `HybridKex`, so there are no image files to maintain. The
 probabilities come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
