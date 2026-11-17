@@ -166,51 +166,62 @@ Picture a bit as an arrow that can only point at the North Pole or the South Pol
 kicker: Bits and qubits · quantum
 ---
 
+<script setup>
+import { ref } from 'vue'
+const s = ref({ theta: 62, phi: 0 })
+</script>
+
 # A qubit can point anywhere
 
-<div class="split">
-<Globe :theta="62" wander />
-<div>
+Same two poles, but the arrow can point in **any** direction. Pointing between them is **superposition**.
 
-- Same globe, same two poles: north is 0, south is 1
-- But the arrow can point in **any** direction, not just at a pole
-- Pointing somewhere in between is what **superposition** means
-
-</div>
+<div class="split" style="--split: 0.8fr 1.2fr">
+<Globe :theta="62" wander :hop="2400" @move="s = $event" />
+<QubitState v-bind="s" />
 </div>
 
 <!--
-A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. Watch it hop: every one of those directions, and the fading ones it just left, is a valid qubit. The direction the arrow points is the state. That's all "superposition" means here: pointing somewhere other than straight at a pole.
+A qubit keeps the same two poles, but the arrow is free to point anywhere on the globe. Watch it glide: the line it traces sits on the surface of the globe, because the arrow's tip never leaves it. When the arrow swings round the back, it goes dashed and faint, like you're seeing it through glass.
+
+The panel on the right is the same arrow, described with numbers. Two angles pin down any direction: the tilt down from north, and the turn round the equator. Its length is always exactly 1, and that's why the tip always sits on the surface. Physicists write the same arrow as a recipe: some amount of 0 plus some amount of 1. Square those two amounts and they always add up to 1. Hold that thought, because on the next slide those squared amounts become the probabilities of reading 0 or 1. The little e-to-the-i bit is the turn; it doesn't change the probabilities, but it matters when qubits interfere.
+
+That's all "superposition" means here: pointing somewhere other than straight at a pole.
 -->
 
 ---
 kicker: Bits and qubits · reading a qubit
 ---
 
-# How far north sets the probabilities
+# The arrow is a recipe for probabilities
 
-Reading a qubit always gives a plain 0 or 1. The direction only sets the **probabilities** of each.
+The arrow is a **vector** of two amounts. Square each to get the **probability** of reading 0 or 1.
 
-<div class="plates" style="--plate: 200px">
+<div class="plates compact-plates" style="--plate: 190px">
   <div class="plate">
     <Globe :theta="30" latitude />
-    <Odds :theta="30" />
-    <p><b>Mostly 0</b>Near the north pole</p>
+    <Odds :theta="30" amps />
+    <p><b>Mostly 0</b>Near north</p>
   </div>
   <div class="plate">
     <Globe :theta="90" latitude />
-    <Odds :theta="90" />
+    <Odds :theta="90" amps />
     <p><b>Coin toss</b>On the equator</p>
   </div>
   <div class="plate">
     <Globe :theta="150" latitude />
-    <Odds :theta="150" />
-    <p><b>Mostly 1</b>Near the south pole</p>
+    <Odds :theta="150" amps />
+    <p><b>Mostly 1</b>Near south</p>
   </div>
 </div>
 
 <!--
-Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both". What the direction controls is the probabilities. The closer to north, the more likely a 0. On the equator it's a coin toss.
+Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both".
+
+So what is the arrow? It's a mathematical vector, the same one from the panel on the last slide. Physicists write it as an amount of 0 plus an amount of 1. Square each amount and you get the probability of reading that answer. Near the north pole it's 0.97 of 0 and 0.26 of 1: square them and that's 93% and 7%. On the equator both amounts are 0.71, which squares to a half each: a coin toss. And because the arrow's length is always 1, those squares always add up to 100%.
+
+The turn round the equator doesn't change these numbers at all, which is why I've left it out here. It only matters when qubits interfere, which is coming up in Part two.
+
+So the arrow isn't the answer. It's the recipe for the probabilities of each answer.
 -->
 
 ---
@@ -219,24 +230,26 @@ kicker: Bits and qubits · measurement
 
 # Reading it moves the arrow
 
-Reading a qubit snaps the arrow to the answer you got. You can't peek without changing it.
+Reading snaps the vector to the answer you got. You can't peek without changing it.
 
-<div class="plates" style="--plate: 220px">
+<div class="plates compact-plates" style="--plate: 190px">
   <div class="plate">
     <Globe :theta="60" />
-    <p><b>Before</b>Somewhere north of the equator</p>
+    <Odds :theta="60" amps />
+    <p><b>Before</b>75% chance of 0</p>
   </div>
   <div class="plate-step" v-click>
     <Readout value="0" />
   </div>
   <div class="plate" v-click>
     <Globe :theta="0" :was="60" />
-    <p><b>After</b>Snapped to north. The old direction is gone: every read now gives 0.</p>
+    <Odds :theta="0" amps />
+    <p><b>After</b>Every read now gives 0</p>
   </div>
 </div>
 
 <!--
-And reading it isn't free. [click] We read it and get a 0. [click] The arrow is now pointing straight at the North Pole. Wherever it was before is gone. Read it again and you'll get 0 forever. You can't peek without changing it.
+And reading it isn't free. Before the read, the vector is 0.87 of 0 and 0.50 of 1: square them and that's a 75% chance of 0 and 25% of 1. [click] We read it and get a 0. [click] The arrow now points straight at the North Pole: the vector is 1 of 0 and none of 1. Wherever it was before is gone, and the 25% chance of a 1 has vanished with it. Read it again and you'll get 0 forever. You can't peek without changing it.
 -->
 
 ---
@@ -249,8 +262,10 @@ One read is just a 0 or a 1. So set up the same qubit 500 times, read it each ti
 
 <Shots :theta="55" :reads="500" :per-row="50" :seed="18" play />
 
+<p class="takeaway"><b>Why so many?</b> Reading wipes out the vector, so each qubit gives up just one 0 or 1, never the probabilities themselves. You can't see the 79%, only count your way to it, and the more reads you take, the closer the count gets.</p>
+
 <!--
-One read tells you almost nothing. Watch the reads come in one at a time: the first handful could say anything, but the split settles down fast. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
+One read tells you almost nothing, and as we just saw, reading wipes out the vector, so you can't go back and read it again. The probabilities are never shown to you directly. The only way to find them is to set up the same qubit again and again, read each one, and count. Watch the reads come in one at a time: the first handful could say anything, but the split settles down fast. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
 -->
 
 ---
@@ -277,32 +292,53 @@ kicker: Bits and qubits · uncertainty
 
 # Uncertainty is built in
 
-This is Heisenberg's uncertainty principle: any direction gives a sure answer to one question, and a coin toss for another.
+A read always picks between **two opposite points**, and the nearer one is likelier. The poles are one pair; **−** and **+** on the equator are another.
 
-<div class="plates" style="--plate: 180px">
-  <div class="plate">
-    <Globe :theta="0" />
-    <Odds :theta="0" />
-    <p><b>North or south?</b>Sure: it points north, so 0.</p>
+<div class="plate-groups" style="--plate: 170px">
+  <div class="plate-group">
+    <p class="plate-group-label">Arrow on 0</p>
+    <div class="plates">
+      <div class="plate">
+        <Globe :theta="0" />
+        <Odds :theta="0" />
+        <p><b>Ask: 0 or 1?</b>Sure: it's on 0</p>
+      </div>
+      <div class="plate">
+        <Globe :theta="0" ask="pm" />
+        <Odds :chance="0.5" :labels="['−', '+']" />
+        <p><b>Ask: − or +?</b>Coin toss: both equally far</p>
+      </div>
+    </div>
   </div>
-  <div class="plate">
-    <Globe :theta="0" ask="ew" />
-    <Odds :chance="0.5" :labels="['W', 'E']" />
-    <p><b>West or east?</b>Same arrow, but now it's a coin toss.</p>
-  </div>
-  <div class="plate" v-click>
-    <Globe :theta="90" :phi="28.65" />
-    <Odds :theta="90" />
-    <p><b>Point it east instead?</b>Now north or south is the coin toss.</p>
+  <div class="plate-group" v-click>
+    <p class="plate-group-label">Arrow on +</p>
+    <div class="plates">
+      <div class="plate">
+        <Globe :theta="90" :phi="28.65" ask="pm" />
+        <Odds :chance="0" :labels="['−', '+']" />
+        <p><b>Ask: − or +?</b>Sure: it's on +</p>
+      </div>
+      <div class="plate">
+        <Globe :theta="90" :phi="28.65" />
+        <Odds :theta="90" />
+        <p><b>Ask: 0 or 1?</b>Coin toss: both equally far</p>
+      </div>
+    </div>
   </div>
 </div>
 
+<p class="takeaway" v-click><b>No direction is sure for every question.</b> That's Heisenberg's uncertainty principle, in arrow form.</p>
+
 <!--
-This is Heisenberg's uncertainty principle, in arrow form. Point the arrow straight north and "north or south?" has a sure answer: 0. Ask the same arrow "west or east?" and it's a coin toss.
+Up to now every read has asked one question: 0 or 1, north pole or south pole. But that's a choice. A read always picks between two opposite points on the globe, and the arrow snaps to one of them. It's the same rule as before: the nearer point is the likelier answer. The poles are just the pair we usually ask about. Another pair sits on the equator; physicists call them minus and plus.
 
-[click] Fine, point it east instead. Now west-or-east is sure, and north-or-south is the coin toss. No direction makes every question certain.
+Point the arrow at 0. Ask "0 or 1?" and it's sure: 0. Ask "minus or plus?" and it's a coin toss, because the north pole is exactly as far from minus as it is from plus.
 
-And it's not that our instruments are clumsy, or that the answer is hidden somewhere. The experiments behind the 2022 Nobel Prize in Physics showed the answer can't be secretly written down in advance. It's made when you ask. That's the uncertainty in the title. Quantum computers don't fight it. They're built on it.
+[click] Now point the arrow at plus. Ask "minus or plus?" and it's sure. Ask "0 or 1?" and it's the coin toss. Swap the arrow, swap which question is certain.
+
+[click] No direction makes every question certain. That's Heisenberg's uncertainty principle, in arrow form. And it's not that our instruments are clumsy, or that the answer is hidden somewhere. The experiments behind the 2022 Nobel Prize in Physics showed the answer can't be secretly written down in advance. It's made when you ask. That's the uncertainty in the title. Quantum computers don't fight it. They're built on it.
+
+Why "plus" and "minus"? Written as a vector, plus is 0.71 of 0 plus 0.71 of 1, the coin toss from the equator a few slides ago. Minus is 0.71 of 0 minus 0.71 of 1. Same amounts, so the same 50/50 if you ask "0 or 1?". Only the sign differs. Hold onto that: the demo after next is all about that sign. (How do you ask "minus or plus?" on real hardware? You can only ever read 0 or 1, so you turn the arrow first with an H gate, which swaps the poles with plus and minus, then read. We'll see that in the demo.)
 -->
 
 ---
@@ -373,11 +409,52 @@ A classical register holds exactly one of those patterns. Your program works on 
 
 [click] Four qubits don't hold a pattern. They hold probabilities for every pattern, all sixteen at once, and every gate you apply reshapes all of those probabilities in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, according to those probabilities. The skill is arranging the gates so the pattern you want is the likely one.
 
-[click] So where does the power come from, if a read gives one pattern? Interference. The probabilities have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of probabilities. You'll see the hidden sign in the next demo.
+[click] So where does the power come from, if a read gives one pattern? Interference. The probabilities have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of probabilities. The next slide shows how that works.
 
 [click] And here's what scares classical computers. Every qubit you add doubles the patterns. To simulate qubits on a normal computer you have to store a number for every pattern: thirty qubits is sixteen gigabytes, about your laptop. Forty is sixteen terabytes, a cluster. Sixty is sixteen exabytes, more memory than any computer ever built. Three hundred qubits: more numbers than there are atoms in the observable universe. (16 bytes per pattern, one double-precision complex number; binary units.)
 
 [click] Which is why it isn't a faster computer. It's a different one. For most work, spreadsheets, web servers, your laptop wins. But for a few problems with the right structure, simulating molecules and materials, and factoring the big numbers that today's public-key encryption relies on, it's not faster, it's a different league. That second one is why we're here.
+-->
+
+---
+kicker: Bits and qubits · interference
+---
+
+# Interference: how wrong answers cancel
+
+Waves can cancel out. So can a qubit's amounts, because they can be **negative**.
+
+<div class="plates" style="--plate: 285px">
+  <div class="plate">
+    <WaveSum />
+    <p><b>Waves add or cancel</b>In step they grow. Flipped, they vanish.</p>
+  </div>
+  <div class="plate" v-click="1">
+    <Paths mode="coin" />
+    <p><b>Flip a coin twice</b>Probabilities only ever add. Still 50/50.</p>
+  </div>
+  <div class="plate" v-click="2">
+    <Paths mode="qubit" />
+    <p><b>Tip a qubit over twice</b>Each tip alone is a coin toss. Together, the routes to 1 cancel: always 0.</p>
+  </div>
+</div>
+
+<p class="takeaway" v-click="3"><b>This is where the power comes from.</b> Algorithms arrange their gates so wrong answers cancel and the right one adds up. Noise spoils the cancelling, which is why error correction matters.</p>
+
+<!--
+The last slide said gates make wrong answers cancel. That's interference, and it's the single most important idea in this talk, so let's slow down.
+
+Start with something you already know: waves. Drop two stones in a pond. Where a peak meets a peak, you get a bigger wave. Where a peak meets a trough, the water goes flat. Noise-cancelling headphones do exactly this with sound: they play the noise back, flipped, and the two cancel.
+
+[click] Now a coin. Flip it, then flip it again. There are two routes to heads: heads then heads, or tails then heads. Each route is a quarter. Add them: a half. Same for tails. Probabilities are never negative, so adding more routes to an answer can only ever make it more likely. You can't make an outcome disappear by adding ways to reach it.
+
+[click] Now a qubit. Remember the arrow is a vector of two amounts, and amounts carry a sign: plus and minus differed only by a sign. Start on 0 and tip the arrow onto the equator, a perfect coin toss. Then do the same move again. Two routes to each answer, just like the coin. But the qubit adds the amounts of the routes before squaring them. Both routes to 0 are plus a half: add them, one, squared, a hundred percent. One route to 1 is plus a half and the other is minus a half: they cancel to zero. Never 1. Two coin tosses in a row, and the result is certain. No coin can do that.
+
+That tipping move is the H gate on the next slide, and the demo after it shows exactly this: H, then H, always 0.
+
+[click] Why it matters. Four qubits hold probabilities for all sixteen patterns, but a read hands you one at random, so on its own that's useless; it's an expensive random number generator. Interference is what turns it into a computer. Every quantum algorithm is a choreography: arrange the gates so the routes to wrong answers cancel and the routes to the right answer pile up, then read. Grover does it a little at a time, round after round, draining the wrong keys and boosting the right one. Shor does it to find a rhythm: every wrong rhythm cancels, the right one rings out.
+
+And the catch: cancelling needs the amounts to be exactly right. Noise nudges the arrows, so plus a half minus a bit-less-than-a-half doesn't quite cancel, and wrong answers leak back in. That's why error correction matters so much, and why we'll be pricing machines in millions of qubits later on.
 -->
 
 ---
@@ -395,11 +472,11 @@ Classical code runs on logic gates: AND, OR, NOT. Quantum gates **turn the arrow
   </div>
   <div class="plate" v-click="1">
     <div class="gate-move"><Globe :theta="0" /><span class="gate">H</span><Globe :theta="90" :phi="28.65" /></div>
-    <p><b>H: tip over</b>North to the equator. A sure 0 becomes a coin toss.</p>
+    <p><b>H: tip over</b>From 0 down to +. A sure 0 becomes a coin toss.</p>
   </div>
   <div class="plate" v-click="2">
     <div class="gate-move"><Globe :theta="90" :phi="28.65" /><span class="gate gate--z">Z</span><Globe :theta="90" :phi="208.65" /></div>
-    <p><b>Z: half a spin</b>East to west. The probabilities don't change, so a read can't tell.</p>
+    <p><b>Z: half a spin</b>+ round to −. The 0-or-1 probabilities don't change, so a read can't tell.</p>
   </div>
   <div class="plate" v-click="3">
     <div class="gate-pair">
@@ -417,9 +494,9 @@ A classical program, all the way down, is logic gates: AND, OR, NOT, shuffling b
 
 X: flip. North to south, 0 to 1. It's the quantum NOT, and on a plain 0 or 1 it behaves exactly like one.
 
-[click] H, the Hadamard gate: tip the arrow over. From the north pole down onto the equator, pointing east. A sure 0 becomes a perfect coin toss. Almost every quantum program starts with a row of these.
+[click] H, the Hadamard gate: tip the arrow over. From the north pole down onto the equator, pointing at plus. A sure 0 becomes a perfect coin toss. Almost every quantum program starts with a row of these.
 
-[click] Z: spin the arrow half a turn around the pole. East becomes west. Here's the catch: the north-or-south probabilities don't change at all, still 50/50, so if you read it now you can't tell Z ever happened. Remember that; it's the next demo.
+[click] Z: spin the arrow half a turn around the pole. Plus becomes minus. Here's the catch: the north-or-south probabilities don't change at all, still 50/50, so if you read it now you can't tell Z ever happened. Remember that; it's the next demo.
 
 [click] CNOT, controlled-NOT: the first two-qubit gate. If the first qubit is 1, flip the second; if it's 0, leave it. On plain 0s and 1s that's ordinary logic, XOR in fact. Feed it a first qubit that's a coin toss and the two qubits come out linked. That's entanglement: the demo after next.
 
@@ -433,7 +510,7 @@ class: demo
 
 # Demo: the sign you can't see
 
-East and west both read as 50/50. One more H reveals which is which.
+Arrows on **+** and **−** both read as 50/50. One more H reveals which is which.
 
 <div class="plate-groups" style="--plate: 190px">
   <div class="plate-group">
@@ -443,13 +520,13 @@ East and west both read as 50/50. One more H reveals which is which.
         <p class="gate-seq"><span class="gate">H</span></p>
         <Globe :theta="90" :phi="28.65" />
         <Odds :counts="[481, 519]" />
-        <p><b>Points east</b></p>
+        <p><b>Points at +</b></p>
       </div>
       <div class="plate">
         <p class="gate-seq"><span class="gate">H</span><span class="gate gate--z">Z</span></p>
         <Globe :theta="90" :phi="208.65" />
         <Odds :counts="[539, 461]" />
-        <p><b>Points west</b></p>
+        <p><b>Points at −</b></p>
       </div>
     </div>
   </div>
@@ -479,16 +556,16 @@ East and west both read as 50/50. One more H reveals which is which.
 <!--
 Demo: quantum-computing repo, demos/gates.py (Q# in demos/src/Gates.qs). Runs locally, no Azure, no network.
 
-Gates are the moves you make on the arrow. H takes the north arrow and lays it on the equator, pointing east. Measure now: 50/50. Add a Z after the H and the arrow swings round to point west. Same height, so the same probabilities: still 50/50. Measure those two and you can't tell them apart.
+Gates are the moves you make on the arrow. H takes the north arrow and lays it on the equator, pointing at plus. Measure now: 50/50. Add a Z after the H and the arrow swings round to point at minus. Same height, so the same probabilities: still 50/50. Measure those two and you can't tell them apart.
 
-But they are different. Remember the "west or east?" question from earlier? A second H is how you ask it. It turns east into north and west into south. So H H comes back 0 every single time, and H Z H comes back 1 every single time. The difference you couldn't measure decided everything.
+But they are different. Remember the "minus or plus?" question from earlier? A second H is how you ask it. It turns plus into 0 and minus into 1. So H H comes back 0 every single time, and H Z H comes back 1 every single time. The difference you couldn't measure decided everything.
 
 In amplitude terms: H and H Z both have 0.707 on each answer, but H Z's |1> amplitude is negative. Measurement only sees the size, never the sign. The second H makes the two paths interfere: for H H the paths to 1 cancel, for H Z H the paths to 0 cancel. That cancelling is the engine of every quantum algorithm, Grover's included.
 
-If someone asks "how do you know the arrow points west if you never looked?": we know because we did the maths, not because we looked. Looking would destroy it.
-- Think of a recipe. If you follow it exactly, you know what's in the oven without opening the door. Gates are exact recipes: H always tips north to east, and Z always swings east to west. Nothing random happens until the read, so the arrow can be worked out on paper.
+If someone asks "how do you know the arrow points at minus if you never looked?": we know because we did the maths, not because we looked. Looking would destroy it.
+- Think of a recipe. If you follow it exactly, you know what's in the oven without opening the door. Gates are exact recipes: H always tips 0 to plus, and Z always swings plus to minus. Nothing random happens until the read, so the arrow can be worked out on paper.
 - The laptop running this demo is doing that paperwork. A simulator stores every number for every arrow in memory. That's how the Debug view can show the minus sign (or run `uv run demos/gates.py --dump-state` to print the stored numbers for each sequence), and it's why simulating more qubits needs so much memory, as on the earlier slide.
-- On a real quantum computer, nobody gets to peek. To check the arrow, you run the same recipe thousands of times, ask "north or south?" on some runs and "east or west?" on others, and rebuild the arrow from the tallies. It's like working out the shape of an object from its shadows on different walls. This is called state tomography. It's slow, so it's used to test the machine, not to read answers.
+- On a real quantum computer, nobody gets to peek. To check the arrow, you run the same recipe thousands of times, ask "0 or 1?" on some runs and "minus or plus?" on others, and rebuild the arrow from the tallies. It's like working out the shape of an object from its shadows on different walls. This is called state tomography. It's slow, so it's used to test the machine, not to read answers.
 - The bars on this slide are real shot counts, which is why they say 481 and 519 rather than exactly 500. The globes are the calculated arrow.
 
 The script also runs plain X (always 1, the quantum NOT). In VS Code: Histogram on Superposition and PhaseFlip (identical), then Debug to show the minus sign, then Histogram on Interference and PhaseRevealed.

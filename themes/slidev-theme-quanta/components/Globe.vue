@@ -7,8 +7,8 @@
     <Globe :theta="60" />                a qubit, a little north of the equator
     <Globe :theta="60" :ghosts="14" />   …with faint arrows showing it could point anywhere
     <Globe :theta="0" :was="60" />       …after it's read: snapped to 0, old arrow ghosted
-    <Globe :theta="0" ask="ew" />        the same globe asked a different question: west or east?
-    <Globe :theta="60" wander />         the arrow hops between random directions, leaving a fading trail
+    <Globe :theta="0" ask="pm" />        the same globe asked a different question: − or +?
+    <Globe :theta="60" wander />         the arrow glides between random directions, tracing its path on the surface
 
   Props:
     theta    — degrees from the north pole (0 = 0, 180 = 1)
@@ -18,21 +18,26 @@
     latitude — draw the arrow's line of latitude
     was      — a previous theta: ghosts the old arrow and draws the snap
     seed     — for the ghosts
-    wander   — hop the arrow to a new random direction every `hop` ms,
-               leaving the last `trail` positions fading behind it. Starts
-               at theta/phi, is seeded, and holds still under
+    wander   — every `hop` ms, glide the arrow over the surface to a new
+               random direction, tracing its path on the globe and leaving
+               the last `trail` paths fading behind it. Starts at
+               theta/phi, is seeded, and holds still under
                prefers-reduced-motion
-    hop      — milliseconds between hops (default 1200)
-    trail    — how many past positions to keep (default 5)
-    ask      — which question a read asks: 'ns' (north or south, the
-               default) or 'ew' (west or east, an axis drawn across the
-               globe). An arrow points due east at theta 90, phi 28.65
+    hop      — milliseconds between moves (default 1200)
+    trail    — how many past paths to keep (default 5)
+    ask      — which pair of opposite points a read picks between: 'ns'
+               (0 or 1, the poles; the default) or 'pm' (− or +, two
+               points on the equator joined by an axis drawn across the
+               globe). An arrow points at + at theta 90, phi 28.65
+
+  Emits `move` with { theta, phi } whenever the arrow's direction changes
+  (and once on mount), so a readout can follow a wandering arrow.
 
   Scales to the width of its container. Font sizes and opacity live in the
   stylesheet, not in attributes: UnoCSS attributify reads those as utilities.
 -->
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import { project, rng, safeId, sphereCircle } from '../composables/motif'
 
 const props = defineProps({
@@ -48,6 +53,8 @@ const props = defineProps({
   hop: { type: Number, default: 1200 },
   trail: { type: Number, default: 5 },
 })
+
+const emit = defineEmits<{ move: [{ theta: number, phi: number }] }>()
 
 const uid = useId() ?? 'x'
 const ids = {
@@ -81,44 +88,99 @@ const axis = (() => {
   return `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`
 })()
 
-// Wandering: the arrow's live direction, and where it has been.
+// Wandering: the arrow's live direction, and the paths it has traced.
+// Each move glides along the great circle between two directions, so the
+// tip visibly stays on the surface the whole way.
 const live = ref({ theta: props.theta, phi: props.phi })
 const theta = computed(() => (props.wander ? live.value.theta : props.theta))
 const phi = computed(() => (props.wander ? live.value.phi : props.phi))
 const hops = ref(0)
-const trailTips = ref<{ id: number, x: number, y: number, front: boolean }[]>([])
+type Seg = { d: string, front: boolean }
+type Path = { id: number, segs: Seg[], start: { x: number, y: number, front: boolean } }
+const trailPaths = ref<Path[]>([])
+const glidePath = ref<Seg[]>([])
 let timer: ReturnType<typeof setInterval> | undefined
+let frame = 0
+let trailStart = { x: 0, y: 0, front: true }
+
+const deg = (r: number) => (r * 180) / Math.PI
+const slerp = (a: V, b: V, w: number, t: number): V => {
+  if (w < 1e-6) return b
+  const k0 = Math.sin((1 - t) * w) / Math.sin(w)
+  const k1 = Math.sin(t * w) / Math.sin(w)
+  return [k0 * a[0] + k1 * b[0], k0 * a[1] + k1 * b[1], k0 * a[2] + k1 * b[2]]
+}
+// The arc from a towards b, as far as `upto`, split where it crosses
+// behind the globe.
+const arc = (a: V, b: V, w: number, upto: number): Seg[] => {
+  const n = Math.max(2, Math.ceil(48 * upto))
+  const segs: Seg[] = []
+  let cur: Seg | null = null
+  for (let i = 0; i <= n; i++) {
+    const q = P(slerp(a, b, w, (upto * i) / n))
+    const front = q.depth >= 0
+    const pt = `${f(q.x)} ${f(q.y)}`
+    if (!cur || cur.front !== front) {
+      if (cur) cur.d += ` L${pt}`
+      cur = { d: `M${pt}`, front }
+      segs.push(cur)
+    } else cur.d += ` L${pt}`
+  }
+  return segs
+}
 
 onMounted(() => {
   if (!props.wander) return
   if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
   const r = rng(props.seed + 101)
+  const glide = Math.min(1100, props.hop * 0.6)
   timer = setInterval(() => {
-    const q = P(unit(rad(theta.value), rad(phi.value)))
-    trailTips.value = [{ id: hops.value, x: f(q.x), y: f(q.y), front: q.depth >= 0 }, ...trailTips.value]
-      .slice(0, props.trail)
+    cancelAnimationFrame(frame)
+    const a = unit(rad(theta.value), rad(phi.value))
     // Uniform over the sphere, kept just off the poles so no badge lights up.
     const z = (1 - 2 * r()) * 0.96
-    live.value = { theta: (Math.acos(z) * 180) / Math.PI, phi: r() * 360 }
+    const b = unit(Math.acos(z), r() * 2 * Math.PI)
+    const w = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])))
+    const s = P(a)
+    if (glidePath.value.length) {
+      trailPaths.value = [{ id: hops.value, segs: glidePath.value, start: trailStart }, ...trailPaths.value]
+        .slice(0, props.trail)
+    }
+    trailStart = { x: f(s.x), y: f(s.y), front: s.depth >= 0 }
     hops.value++
+    const begin = performance.now()
+    const step = (now: number) => {
+      const t = Math.min(1, (now - begin) / glide)
+      const e = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2
+      const v = slerp(a, b, w, e)
+      live.value = { theta: deg(Math.acos(Math.max(-1, Math.min(1, v[2])))), phi: (deg(Math.atan2(v[1], v[0])) + 360) % 360 }
+      glidePath.value = arc(a, b, w, e)
+      if (t < 1) frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
   }, props.hop)
 })
+onBeforeUnmount(() => {
+  clearInterval(timer)
+  cancelAnimationFrame(frame)
+})
 
-onBeforeUnmount(() => clearInterval(timer))
+watch([theta, phi], ([t, p]) => emit('move', { theta: t, phi: p }), { immediate: true })
 
-// Due east is the azimuth that the projection draws flat across the page.
-const EAST = 0.5
-const ew = (() => {
-  const a = P([-1.12 * Math.cos(EAST), -1.12 * Math.sin(EAST), 0])
-  const b = P([1.12 * Math.cos(EAST), 1.12 * Math.sin(EAST), 0])
-  return { axis: `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`, west: P([-Math.cos(EAST), -Math.sin(EAST), 0]), east: P([Math.cos(EAST), Math.sin(EAST), 0]) }
+// + is the azimuth that the projection draws flat across the page.
+const PLUS = 0.5
+const side = (() => {
+  const a = P([-1.12 * Math.cos(PLUS), -1.12 * Math.sin(PLUS), 0])
+  const b = P([1.12 * Math.cos(PLUS), 1.12 * Math.sin(PLUS), 0])
+  return { axis: `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`, minus: P([-Math.cos(PLUS), -Math.sin(PLUS), 0]), plus: P([Math.cos(PLUS), Math.sin(PLUS), 0]) }
 })()
 const atSide = computed(() => {
-  const d = Math.sin(rad(theta.value)) * Math.cos(rad(phi.value) - EAST)
-  return d >= 0.999 ? 'e' : d <= -0.999 ? 'w' : null
+  const d = Math.sin(rad(theta.value)) * Math.cos(rad(phi.value) - PLUS)
+  return d >= 0.999 ? 'plus' : d <= -0.999 ? 'minus' : null
 })
 
 const tip = computed(() => P(unit(rad(theta.value), rad(phi.value))))
+const behind = computed(() => !props.bit && tip.value.depth < -0.02)
 const atPole = computed(() => (theta.value <= 0.5 ? 0 : theta.value >= 179.5 ? 1 : null))
 
 const ring = computed(() =>
@@ -160,7 +222,7 @@ const snap = computed(() => {
 </script>
 
 <template>
-  <svg class="motif globe" :class="{ 'globe--bit': bit, 'globe--ew': ask === 'ew' }" viewBox="-130 -142 260 284" aria-hidden="true">
+  <svg class="motif globe" :class="{ 'globe--bit': bit, 'globe--ew': ask === 'pm' }" viewBox="-130 -142 260 284" aria-hidden="true">
     <defs>
       <linearGradient :id="ids.vec" gradientUnits="userSpaceOnUse" x1="0" y1="0" :x2="tip.x" :y2="tip.y">
         <stop offset="0" style="stop-color: var(--cyan)" />
@@ -204,7 +266,7 @@ const snap = computed(() => {
     </g>
     <circle :r="R" fill="none" class="globe-rim" />
     <path :d="axis" class="globe-axis" fill="none" />
-    <path v-if="ask === 'ew'" :d="ew.axis" class="globe-axis globe-axis--ew" fill="none" />
+    <path v-if="ask === 'pm'" :d="side.axis" class="globe-axis globe-axis--ew" fill="none" />
 
     <g class="globe-ghosts">
       <template v-for="(g, i) in ghostArrows" :key="`gf${i}`">
@@ -222,28 +284,26 @@ const snap = computed(() => {
       <path :d="snap.arc" class="globe-snap-arc" :marker-end="`url(#${ids.head})`" />
     </g>
 
-    <!-- Where a wandering arrow has been -->
-    <g v-if="wander" class="globe-trail">
-      <g
-        v-for="(t, i) in trailTips"
-        :key="t.id"
-        :class="{ 'globe-trail--back': !t.front }"
-        :style="{ opacity: 1 - (i + 1) / (trail + 1) }"
-      >
-        <path :d="`M0 0 L${t.x} ${t.y}`" />
-        <circle :cx="t.x" :cy="t.y" r="4" />
+    <!-- Where a wandering arrow has been: paths traced on the surface -->
+    <g v-if="wander" class="globe-trail" fill="none">
+      <g v-for="(p, i) in trailPaths" :key="p.id" :style="{ opacity: 1 - (i + 1) / (trail + 1) }">
+        <path v-for="(s, j) in p.segs" :key="j" :d="s.d" :class="{ 'globe-trail--back': !s.front }" />
+        <circle :cx="p.start.x" :cy="p.start.y" r="3.4" :class="{ 'globe-trail--back': !p.start.front }" />
       </g>
+      <path v-for="(s, j) in glidePath" :key="`g${j}`" :d="s.d" class="globe-trail-live" :class="{ 'globe-trail--back': !s.front }" />
     </g>
 
-    <!-- The arrow -->
-    <path
-      :d="`M0 0 L${f(tip.x)} ${f(tip.y)}`"
-      class="globe-arrow"
-      :stroke="bit ? undefined : `url(#${ids.vec})`"
-      fill="none"
-    />
-    <circle :key="`halo${hops}`" :cx="tip.x" :cy="tip.y" r="12" class="globe-tip-halo" :class="{ 'globe-tip-halo--pop': hops > 0 }" />
-    <circle :cx="tip.x" :cy="tip.y" r="5.2" class="globe-tip" />
+    <!-- The arrow: fainter when it points behind the globe -->
+    <g :class="{ 'globe-behind': behind }">
+      <path
+        :d="`M0 0 L${f(tip.x)} ${f(tip.y)}`"
+        class="globe-arrow"
+        :stroke="bit ? undefined : `url(#${ids.vec})`"
+        fill="none"
+      />
+      <circle :cx="tip.x" :cy="tip.y" r="12" class="globe-tip-halo" />
+      <circle :cx="tip.x" :cy="tip.y" r="5.2" class="globe-tip" />
+    </g>
     <circle r="2.6" class="globe-origin" />
 
     <!-- Poles -->
@@ -256,14 +316,14 @@ const snap = computed(() => {
       <text :x="south.x" :y="south.y + 24" text-anchor="middle" dominant-baseline="central">1</text>
     </g>
 
-    <template v-if="ask === 'ew'">
-      <g class="globe-pole globe-pole--zero" :class="{ 'globe-pole--on': atSide === 'w' }">
-        <circle :cx="ew.west.x - 22" :cy="ew.west.y" r="12" />
-        <text :x="ew.west.x - 22" :y="ew.west.y" text-anchor="middle" dominant-baseline="central">W</text>
+    <template v-if="ask === 'pm'">
+      <g class="globe-pole globe-pole--zero" :class="{ 'globe-pole--on': atSide === 'minus' }">
+        <circle :cx="side.minus.x - 22" :cy="side.minus.y" r="12" />
+        <text :x="side.minus.x - 22" :y="side.minus.y" text-anchor="middle" dominant-baseline="central">−</text>
       </g>
-      <g class="globe-pole globe-pole--one" :class="{ 'globe-pole--on': atSide === 'e' }">
-        <circle :cx="ew.east.x + 22" :cy="ew.east.y" r="12" />
-        <text :x="ew.east.x + 22" :y="ew.east.y" text-anchor="middle" dominant-baseline="central">E</text>
+      <g class="globe-pole globe-pole--one" :class="{ 'globe-pole--on': atSide === 'plus' }">
+        <circle :cx="side.plus.x + 22" :cy="side.plus.y" r="12" />
+        <text :x="side.plus.x + 22" :y="side.plus.y" text-anchor="middle" dominant-baseline="central">+</text>
       </g>
     </template>
   </svg>
@@ -385,33 +445,45 @@ const snap = computed(() => {
   stroke: var(--violet);
   stroke-width: 2;
   stroke-linecap: round;
-  stroke-dasharray: 3 3;
+  opacity: 0.8;
+}
+
+.globe-trail path.globe-trail-live {
+  stroke: var(--magenta);
+  stroke-width: 2.4;
+}
+
+.globe-trail path.globe-trail--back {
+  stroke-width: 1.4;
+  stroke-dasharray: 1 3.5;
+  opacity: 0.55;
 }
 
 .globe-trail circle {
-  fill: var(--magenta);
+  fill: var(--violet);
   stroke: #fff;
   stroke-width: 1;
 }
 
-.globe-trail--back path {
-  stroke-dasharray: 1 3;
+.globe-trail circle.globe-trail--back {
+  fill: var(--paper);
+  stroke: var(--violet);
 }
 
-.globe-trail--back circle {
+/* Behind the globe: seen through the glass. */
+.globe-behind .globe-arrow {
+  opacity: 0.45;
+  stroke-dasharray: 5 4;
+}
+
+.globe-behind .globe-tip {
   fill: var(--paper);
   stroke: var(--magenta);
+  stroke-width: 2;
 }
 
-.globe-tip-halo--pop {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: globe-pop 0.5s ease-out;
-}
-
-@keyframes globe-pop {
-  from { transform: scale(2.4); opacity: 0.45; }
-  to { transform: scale(1); }
+.globe-behind .globe-tip-halo {
+  opacity: 0.06;
 }
 
 .globe-origin {
@@ -438,7 +510,7 @@ const snap = computed(() => {
 .globe-pole--on.globe-pole--one circle { fill: var(--magenta); }
 .globe-pole--on text { fill: #fff; }
 
-/* Asked west-or-east: that axis is the one that counts, so north and south
+/* Asked − or +: that axis is the one that counts, so north and south
    step back. */
 .globe-axis--ew {
   stroke: var(--violet);
