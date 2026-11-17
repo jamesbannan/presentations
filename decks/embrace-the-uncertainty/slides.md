@@ -262,8 +262,10 @@ One read is just a 0 or a 1. So set up the same qubit 500 times, read it each ti
 
 <Shots :theta="55" :reads="500" :per-row="50" :seed="18" play />
 
+<p class="takeaway"><b>Why so many?</b> Reading wipes out the vector, so each qubit gives up just one 0 or 1, never the probabilities themselves. You can't see the 79%, only count your way to it, and the more reads you take, the closer the count gets.</p>
+
 <!--
-One read tells you almost nothing. Watch the reads come in one at a time: the first handful could say anything, but the split settles down fast. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
+One read tells you almost nothing, and as we just saw, reading wipes out the vector, so you can't go back and read it again. The probabilities are never shown to you directly. The only way to find them is to set up the same qubit again and again, read each one, and count. Watch the reads come in one at a time: the first handful could say anything, but the split settles down fast. So quantum programs are run hundreds or thousands of times, and the answer is a tally like this one. Cyan is 0, magenta is 1. Roughly four in five came back 0, which tells us the arrow was well north of the equator. It's the same arrow as the one on the title slide. Keep this picture in mind: every demo today ends in a chart like this.
 -->
 
 ---
