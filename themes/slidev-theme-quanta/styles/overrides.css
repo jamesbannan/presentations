@@ -1,0 +1,31 @@
+/* ============================================================
+   OVERRIDES — Slidev built-ins pulled into the theme's palette
+   ============================================================ */
+
+.slidev-layout .slidev-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid var(--grid);
+  border-left: 3px solid var(--violet);
+  border-radius: 4px;
+}
+
+/* `class: demo` on a slide: bigger code, readable from the back of the room.
+   Slidev sizes code blocks through these variables with !important. */
+.slidev-layout.demo {
+  --slidev-code-font-size: 16px;
+  --slidev-code-line-height: 26px;
+  --slidev-code-padding: 14px 18px;
+}
+
+.slidev-layout .slidev-progress {
+  background: var(--superposition) !important;
+  height: 2px !important;
+}
+
+::selection {
+  background: var(--violet);
+  color: var(--paper);
+}

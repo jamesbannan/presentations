@@ -1,0 +1,797 @@
+/* ============================================================
+   COMPONENTS — furniture shared across layouts
+   ============================================================ */
+
+/* ---------- Kicker — the small mono line above a headline ----------
+   Led by a tiny wire with a qubit on it. */
+.slidev-layout .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+.slidev-layout .kicker::before {
+  content: '';
+  width: 2.2em;
+  height: 0.7em;
+  background:
+    radial-gradient(circle, var(--paper) 0 0.17em, currentColor 0.18em 0.28em, transparent 0.29em) 70% 50% / 0.7em 0.7em no-repeat,
+    linear-gradient(currentColor, currentColor) 0 50% / 100% 1px no-repeat;
+}
+
+/* ---------- Ket — |label⟩ without relying on the glyph ----------
+   `<span class="ket">0</span>` or `<Ket>ψ</Ket>`. The bar and the angle
+   are drawn, so they match any font and never fall back. */
+.slidev-layout .ket,
+.slidev-layout .bra {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  /* Plex Mono has no Greek, so |ψ⟩ falls through to Plex Sans. */
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans', monospace;
+  font-size: 0.95em;
+  line-height: 1;
+  vertical-align: -0.08em;
+}
+
+.slidev-layout .ket::before,
+.slidev-layout .bra::after {
+  content: '';
+  width: 0.08em;
+  min-width: 1px;
+  height: 1.15em;
+  background: currentColor;
+  margin: 0 0.14em;
+}
+
+.slidev-layout .ket::after,
+.slidev-layout .bra::before {
+  content: '';
+  width: 0.36em;
+  height: 1.2em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 20' preserveAspectRatio='none'%3E%3Cpath d='M0.6 0.5 L5.4 10 L0.6 19.5' fill='none' stroke='black' stroke-width='1.1'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 20' preserveAspectRatio='none'%3E%3Cpath d='M0.6 0.5 L5.4 10 L0.6 19.5' fill='none' stroke='black' stroke-width='1.1'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  margin-left: 0.06em;
+}
+
+.slidev-layout .bra::before {
+  transform: scaleX(-1);
+  margin: 0 0.06em 0 0;
+}
+
+/* ---------- Qubit list ----------
+   Each bullet is a tiny Bloch circle with its state on the rim. */
+.slidev-layout ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.slidev-layout ul > li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.slidev-layout ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.48em;
+  width: 0.62em;
+  height: 0.62em;
+  border-radius: 50%;
+  border: 1.5px solid var(--violet);
+  background: radial-gradient(circle at 72% 26%, var(--magenta) 0 0.1em, transparent 0.11em);
+  box-sizing: border-box;
+}
+
+.slidev-layout ul ul > li::before {
+  border-color: var(--cyan);
+  background: none;
+  width: 0.5em;
+  height: 0.5em;
+  top: 0.55em;
+}
+
+/* ---------- Numbered list — register indices in mono ---------- */
+.slidev-layout ol:not(.timeline) {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: q;
+}
+
+.slidev-layout ol:not(.timeline) > li {
+  counter-increment: q;
+  position: relative;
+  padding-left: 2.2em;
+  margin-bottom: 0.4em;
+}
+
+.slidev-layout ol:not(.timeline) > li::before {
+  content: counter(q, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 500;
+  color: var(--violet);
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 0 0.3em;
+  line-height: 1.5;
+}
+
+/* ---------- Timeline — a sequence drawn as a circuit ----------
+   `<ol class="timeline">`: each step is a gate on one wire. `<b>` is the
+   step, an optional `<span>` its gloss. */
+.slidev-layout ol.timeline {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 1em 0 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 1.6em;
+  position: relative;
+}
+
+.slidev-layout ol.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.95em;
+  height: 1px;
+  background: var(--superposition);
+}
+
+.slidev-layout ol.timeline > li {
+  counter-increment: step;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.slidev-layout ol.timeline > li::before {
+  content: counter(step);
+  align-self: flex-start;
+  min-width: 1.9em;
+  height: 1.9em;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--violet);
+  background: var(--paper);
+  border: 1.5px solid var(--violet);
+  border-radius: 3px;
+  margin-bottom: 0.5em;
+}
+
+.slidev-layout ol.timeline > li b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.slidev-layout ol.timeline > li span {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Panel — a lab-instrument card ---------- */
+.slidev-layout .panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--grid);
+  border-top: 2px solid var(--violet);
+  border-radius: 4px;
+  padding: 0.9em 1.1em;
+  backdrop-filter: blur(2px);
+}
+
+/* A tone on the top edge and heading: `<div class="panel magenta">`. */
+.slidev-layout .panel.cyan { border-top-color: var(--cyan); }
+.slidev-layout .panel.magenta { border-top-color: var(--magenta); }
+.slidev-layout .panel.amber { border-top-color: var(--amber); }
+.slidev-layout .panel.cyan h3 { color: var(--cyan); }
+.slidev-layout .panel.magenta h3 { color: var(--magenta); }
+.slidev-layout .panel.amber h3 { color: var(--amber); }
+
+.slidev-layout .panel h3 {
+  margin: 0 0 0.4em;
+}
+
+/* The lead line of a panel: the names that matter, in display type. */
+.slidev-layout .panel .panel-lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 0.6em;
+}
+
+/* A plain list in a panel: small dots, no indent. */
+.slidev-layout .panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slidev-layout .panel ul > li {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  padding-left: 1em;
+  position: relative;
+}
+
+.slidev-layout .panel ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.36em;
+  height: 0.36em;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.slidev-layout .panel ul + p {
+  margin: 0.7em 0 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+/* ---------- Hype — claims rated on a hype-o-meter ----------
+   <div class="hype">
+     <div><span class="tag magenta">Real</span><b>The claim</b><span>Why</span></div>
+   </div>
+   The tag sits in its own column so every claim lines up. Set --hype-tag
+   to widen that column for longer tags. */
+.slidev-layout .hype {
+  display: grid;
+  gap: 0.75em;
+  margin-top: 0.4em;
+}
+
+.slidev-layout .hype > div {
+  display: grid;
+  grid-template-columns: var(--hype-tag, 4.8em) 1fr;
+  column-gap: 1em;
+  align-items: baseline;
+}
+
+.slidev-layout .hype .tag {
+  grid-row: span 2;
+  justify-self: start;
+  align-self: center;
+  font-size: 0.66rem;
+  white-space: nowrap;
+}
+
+.slidev-layout .hype b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.slidev-layout .hype > div > span:not(.tag) {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* ---------- Tag — a small status chip ---------- */
+.slidev-layout .tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--violet);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.15em 0.75em;
+  vertical-align: middle;
+}
+
+.slidev-layout .tag.cyan { color: var(--cyan); }
+.slidev-layout .tag.magenta { color: var(--magenta); }
+.slidev-layout .tag.amber { color: var(--amber); }
+
+/* ---------- Placeholder — content still to be written ----------
+   Layouts restyle their paragraphs; a placeholder should look the same
+   wherever it lands, so it wins over them. */
+.slidev-layout .placeholder {
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft) !important;
+  border: 1px dashed var(--grid);
+  background: rgba(233, 237, 247, 0.6);
+  padding: 0.5em 0.8em;
+  display: inline-block;
+}
+
+.slidev-layout .placeholder::before {
+  content: '[ TODO ] ';
+  color: var(--magenta);
+}
+
+/* ---------- Source — a citation line under a claim ----------
+   Small enough not to compete with the slide, there for anyone who wants
+   to check. Wins over layout paragraph styles, like .placeholder. */
+.slidev-layout .source {
+  font-family: var(--font-mono) !important;
+  font-size: 0.62rem !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft) !important;
+  margin-top: 0.9em !important;
+}
+
+.slidev-layout .source::before {
+  content: '↳ ';
+  color: var(--violet);
+}
+
+/* ---------- Plates — a row of figures with captions ----------
+   <div class="plates">
+     <div class="plate"><Globe bit :theta="0" /><p><b>Zero</b> A short line</p></div>
+     <div class="plate">…</div>
+   </div>
+   Plates share the row equally; set --plate on the row to cap their width.
+   A <div class="plate-step"> between two plates holds a connector, like a
+   <Readout>, and takes only the room it needs. */
+.slidev-layout .plates {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.2em;
+  margin-top: 0.6em;
+}
+
+.slidev-layout .plate {
+  flex: 0 1 var(--plate, 210px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.slidev-layout .plate > p {
+  margin: 0.7em 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.slidev-layout .plate > p b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.1em;
+}
+
+.slidev-layout .plate .odds {
+  margin-top: 0.8em;
+}
+
+.slidev-layout .plate-step {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+/* ---------- Mini globe — a small figure inline, e.g. in a table head ---------- */
+.slidev-layout .mini-globe {
+  width: 112px;
+  margin: 0 auto 0.3em;
+}
+
+.slidev-layout th .mini-globe {
+  margin: 0 0 0.3em;
+}
+
+.slidev-layout .zoom-figure {
+  margin: 0.4em 0 1.1em;
+}
+
+/* ---------- Split — a figure beside a few lines of text ---------- */
+.slidev-layout .split {
+  display: grid;
+  grid-template-columns: var(--split, 0.85fr 1.15fr);
+  gap: 2.6em;
+  align-items: center;
+}
+
+.slidev-layout .split > * {
+  min-width: 0;
+}
+
+/* ---------- Demos — a command to run, and charts side by side ---------- */
+.slidev-layout .run-cmd {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+  margin-top: 0.8em;
+}
+
+.slidev-layout .run-cmd::before {
+  content: '$ ';
+  color: var(--violet);
+}
+
+.slidev-layout .chart-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6em;
+}
+
+.slidev-layout .chart-solo {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.slidev-layout .chart-solo--wide {
+  max-width: 420px;
+}
+
+/* ---------- Period figure — a <Period> strip with a caption under it ---------- */
+.slidev-layout .period-figure {
+  max-width: 780px;
+  margin: 0.7em auto 0;
+}
+
+.slidev-layout .period-figure > p {
+  margin: 0.2em 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.slidev-layout .run-cmd--centre {
+  text-align: center;
+}
+
+/* ---------- Gate sequences — gates on a wire, read left to right ---------- */
+.slidev-layout .gate-seq {
+  display: flex;
+  justify-content: center;
+  gap: 0.45em;
+  margin: 0 0 0.3em;
+  padding: 0 0.7em;
+  background: linear-gradient(var(--ink-soft), var(--ink-soft)) center / 100% 1px no-repeat;
+}
+
+.slidev-layout .gate {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75em;
+  height: 1.75em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--violet);
+  background: #fff;
+  border: 1.5px solid var(--violet);
+  border-radius: 4px;
+}
+
+.slidev-layout .gate--z {
+  color: var(--magenta);
+  border-color: var(--magenta);
+}
+
+/* ---------- Gate moves — before, gate, after, on a wire ----------
+   <div class="gate-move"><Globe :theta="0" /><span class="gate">X</span><Globe :theta="180" /></div>
+   Wrap two in .gate-pair, with .gate--ctrl over .gate--target, for a CNOT.
+   .qbit is a plain 0 (or, with qbit--one, 1) where a globe is too much. */
+.slidev-layout .gate-moves {
+  gap: 1.4em;
+  margin-top: 1em;
+}
+
+.slidev-layout .gate-moves .plate > .gate-move,
+.slidev-layout .gate-moves .plate > .gate-pair {
+  height: 112px;
+  width: 100%;
+}
+
+.slidev-layout .gate-move {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  background: linear-gradient(var(--ink-soft), var(--ink-soft)) center / 34% 1px no-repeat;
+}
+
+.slidev-layout .gate-move .globe {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.slidev-layout .gate-move .gate {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.slidev-layout .gate-pair {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.1em;
+}
+
+.slidev-layout .gate-pair .gate-move {
+  gap: 1.6em;
+  background-size: 60% 1px;
+}
+
+.slidev-layout .gate-pair::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  bottom: 30%;
+  width: 1.5px;
+  margin-left: -0.75px;
+  background: var(--violet);
+}
+
+.slidev-layout .gate--ctrl {
+  width: 0.7em;
+  height: 0.7em;
+  margin: 0 0.525em;
+  border: 0;
+  border-radius: 50%;
+  background: var(--violet);
+}
+
+.slidev-layout .gate--target {
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--violet), var(--violet)) center / 1.5px 100% no-repeat,
+    linear-gradient(var(--violet), var(--violet)) center / 100% 1.5px no-repeat,
+    #fff;
+}
+
+.slidev-layout .qbit {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--cyan);
+}
+
+.slidev-layout .qbit--one {
+  background: var(--magenta);
+}
+
+/* ---------- Plate groups — plates under a shared, ruled label ---------- */
+.slidev-layout .plate-groups {
+  display: flex;
+  justify-content: center;
+  gap: 3.4em;
+  margin-top: 0.4em;
+}
+
+.slidev-layout .plate-group .plates {
+  gap: 1.6em;
+  margin-top: 0.7em;
+}
+
+.slidev-layout .plate-group .globe {
+  width: 74%;
+  margin: 0 auto;
+}
+
+.slidev-layout .plate-group .plate > p {
+  margin-top: 0.4em;
+}
+
+.slidev-layout .plate-group-label {
+  margin: 0;
+  padding-bottom: 0.45em;
+  border-bottom: 1px solid var(--grid);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+/* A row of <Patterns> grids: wider gaps so the grids read as separate. */
+.slidev-layout .patterns-row {
+  gap: 2.4em;
+  margin-top: 0.2em;
+}
+
+.slidev-layout .patterns-row .patterns {
+  width: 54%;
+}
+
+.slidev-layout .patterns-row .plate > p {
+  margin-top: 0.4em;
+}
+
+/* ---------- Doubling — a row of steps on a wire, each a size and a gloss ----------
+   <div class="doubling">
+     <span class="doubling-lead">Lead-in line</span>
+     <div><b>30 qubits</b><span>16 GB · a laptop</span></div>
+   </div> */
+.slidev-layout .doubling {
+  display: grid;
+  grid-template-columns: repeat(var(--steps, 4), 1fr);
+  column-gap: 1.4em;
+  margin: 0.8em auto 0;
+  max-width: 860px;
+}
+
+.slidev-layout .doubling-lead {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--violet);
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.slidev-layout .doubling > div {
+  position: relative;
+  padding-top: 0.6em;
+  border-top: 2px solid var(--grid);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.slidev-layout .doubling > div::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--violet);
+}
+
+.slidev-layout .doubling > div:last-child::before {
+  background: var(--magenta);
+  border-color: var(--magenta);
+}
+
+.slidev-layout .doubling b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.slidev-layout .doubling > div span {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Takeaway — a closing line under a figure, lead in bold ---------- */
+.slidev-layout .takeaway {
+  margin: 0.8em auto 0;
+  max-width: 860px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.slidev-layout .takeaway b {
+  color: var(--violet);
+}
+
+/* ---------- Chain — a short worked sum, step by step ----------
+   <div class="chain">
+     <span>First step</span><span>Then this</span><span class="chain-end">Result</span>
+   </div>
+   Steps sit on one row with arrows between; the last can be highlighted. */
+.slidev-layout .chain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4em 0;
+  margin: 0.5em auto 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink);
+}
+
+.slidev-layout .chain > span {
+  padding: 0.3em 0.75em;
+  border: 1.5px solid var(--grid);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.slidev-layout .chain > span + span::before {
+  content: '→';
+  position: relative;
+  margin: 0 0.85em 0 -1.95em;
+  color: var(--violet);
+}
+
+.slidev-layout .chain > span + span {
+  margin-left: 1.9em;
+}
+
+.slidev-layout .chain .chain-end {
+  border-color: var(--magenta);
+  color: var(--magenta);
+  font-weight: 600;
+}
+
+/* ---------- Closing-slide contact links ---------- */
+/* One shared column, as wide as the longest link, so every plate matches. */
+.slidev-layout .contact-list {
+  display: grid;
+  grid-template-columns: max-content;
+  justify-content: center;
+  gap: 0.45em;
+  margin-top: 1.4em;
+}
+
+.slidev-layout .contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--grid);
+  border-radius: 4px;
+  padding: 0.35em 0.9em;
+}
+
+.slidev-layout .contact-link .brand-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+  fill: var(--ink);
+}
+
+.slidev-layout .contact-link .brand-icon-linkedin { fill: #0a66c2; }
+.slidev-layout .contact-link .brand-icon-mastodon { fill: #6364ff; }
+.slidev-layout .contact-link .brand-icon-github { fill: var(--ink); }

@@ -1,0 +1,181 @@
+/* ============================================================
+   BASE — slide surface and typography
+
+   The surface is lab paper: a cool white, a two-weight graph grid, and
+   soft pools of cyan and violet light at opposite corners, as if the
+   slide sat on a bench beside the cryostat. Backgrounds attach to
+   `.slidev-layout` (the root every layout renders, including Slidev's
+   built-ins) so built-in layouts get them too.
+   ============================================================ */
+
+html,
+body,
+#slide-content {
+  background: var(--paper);
+}
+
+.slidev-layout {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Graph paper: fine rules every 14px, a stronger rule every 70px. */
+.slidev-layout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(88, 96, 121, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 96, 121, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(88, 96, 121, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 96, 121, 0.04) 1px, transparent 1px);
+  background-size: 70px 70px, 70px 70px, 14px 14px, 14px 14px;
+  background-position: -1px -1px;
+}
+
+/* Lab light: cyan top-left, violet bottom-right, a breath of magenta. */
+.slidev-layout::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 60% at 0% 0%, var(--glow-cyan), transparent 70%),
+    radial-gradient(ellipse 60% 65% at 100% 100%, var(--glow-violet), transparent 70%),
+    radial-gradient(ellipse 35% 40% at 100% 0%, var(--glow-magenta), transparent 70%);
+}
+
+/* Content above the surface; decorative motifs opt out and keep their own
+   absolute positions. */
+.slidev-layout > *:not(.motif) {
+  position: relative;
+  z-index: 2;
+}
+
+.slidev-layout .motif {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- Typography ---------- */
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  color: var(--ink);
+}
+
+.slidev-layout h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.slidev-layout h2 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.slidev-layout h3 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+.slidev-layout p,
+.slidev-layout li,
+.slidev-layout td,
+.slidev-layout th {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.55;
+}
+
+.slidev-layout a {
+  color: var(--violet);
+  text-decoration: underline;
+  text-decoration-color: rgba(98, 70, 234, 0.35);
+  text-underline-offset: 3px;
+}
+
+.slidev-layout strong {
+  color: var(--violet);
+  font-weight: 600;
+}
+
+.slidev-layout em {
+  font-style: italic;
+}
+
+/* A gradient run of text: `<span class="qgrad">uncertainty</span>`. */
+.slidev-layout .qgrad {
+  background: var(--superposition);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.08em;
+}
+
+.slidev-layout code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(98, 70, 234, 0.08);
+  color: var(--violet);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+.slidev-layout pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.slidev-layout blockquote {
+  border-left: 2px solid var(--violet);
+  padding-left: 1em;
+  color: var(--ink-soft);
+}
+
+.slidev-layout hr {
+  border: 0;
+  border-top: 1px solid var(--grid);
+  margin: 1em 0;
+}
+
+.slidev-layout table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.slidev-layout th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: left;
+  border-bottom: 1px solid var(--ink-soft);
+  padding: 0.4em 0.6em;
+}
+
+.slidev-layout td {
+  font-size: 1rem;
+  border-bottom: 1px solid var(--grid);
+  padding: 0.45em 0.6em;
+}

@@ -1,0 +1,429 @@
+<!--
+  A powers-of-ten zoom: a row of round frames, each one a close-up of a
+  spot in the frame before it, from things you can hold down to a single
+  electron. A band underneath marks where everyday rules give way to
+  quantum ones.
+
+    <ScaleZoom />
+    <ScaleZoom :quantum-from="3" />
+
+  Props:
+    stops        — [{ kind, name, size }]; kind is dollar (an Australian $1) | coin |
+                   grain | cell | atom | electron
+    quantumFrom  — index of the first stop drawn as quantum
+    seed         — for the sand grain and the electron cloud
+-->
+<script setup lang="ts">
+import { computed, useId } from 'vue'
+import { rng, safeId } from '../composables/motif'
+
+type Stop = { kind: string, name: string, size: string }
+
+const props = defineProps({
+  stops: {
+    type: Array as () => Stop[],
+    default: () => [
+      { kind: 'dollar', name: '$1 coin', size: '25 mm' },
+      { kind: 'grain', name: 'Grain of sand', size: 'half a millimetre' },
+      { kind: 'cell', name: 'Cell', size: '1/100 mm' },
+      { kind: 'atom', name: 'Atom', size: '1/10,000,000 mm' },
+      { kind: 'electron', name: 'Electron', size: 'too small to size' },
+    ],
+  },
+  quantumFrom: { type: Number, default: 3 },
+  seed: { type: Number, default: 5 },
+})
+
+const uid = useId() ?? 'x'
+const ids = {
+  vec: safeId('zs-vec', uid),
+  band: safeId('zs-band', uid),
+  gold: safeId('zs-gold', uid),
+  emboss: safeId('zs-emboss', uid),
+}
+
+const W = 1000
+const CY = 100
+const R = 62
+const f = (n: number) => Math.round(n * 100) / 100
+
+// The spot in each glyph that the next frame zooms into.
+const targets: Record<string, [number, number]> = {
+  coin: [20, -16],
+  dollar: [21, -24],
+  grain: [14, 12],
+  cell: [-20, 14],
+  atom: [36.4, -7],
+  electron: [0, 0],
+}
+
+const layout = computed(() => {
+  const n = props.stops.length
+  const gap = W / n
+  return props.stops.map((s, i) => {
+    const cx = gap * (i + 0.5)
+    const [dx, dy] = targets[s.kind] ?? [0, 0]
+    const next = i < n - 1 ? gap * (i + 1.5) : null
+    let funnel = null
+    if (next !== null) {
+      const tx = cx + dx
+      const ty = CY + dy
+      const r = 5
+      funnel = {
+        tx, ty, r,
+        fill: `M${f(tx)} ${f(ty - r)} L${f(next)} ${CY - R} L${f(next)} ${CY + R} L${f(tx)} ${f(ty + r)} Z`,
+        top: `M${f(tx)} ${f(ty - r)} L${f(next)} ${CY - R}`,
+        bottom: `M${f(tx)} ${f(ty + r)} L${f(next)} ${CY + R}`,
+      }
+    }
+    return { ...s, cx, funnel, quantum: i >= props.quantumFrom, last: i === n - 1 }
+  })
+})
+
+const grain = computed(() => {
+  const r = rng(props.seed)
+  const n = 10
+  const pts = Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * Math.PI * 2 + (r() - 0.5) * 0.4
+    const d = 30 + r() * 12
+    return `${f(Math.cos(a) * d)},${f(Math.sin(a) * d * 0.86)}`
+  })
+  const specks = Array.from({ length: 6 }, () => ({ x: f((r() - 0.5) * 40), y: f((r() - 0.5) * 30), s: f(1 + r() * 1.6) }))
+  return { pts: pts.join(' '), specks }
+})
+
+const cloud = computed(() => {
+  const r = rng(props.seed + 7)
+  return Array.from({ length: 90 }, () => {
+    const a = r() * Math.PI * 2
+    const d = Math.sqrt(-2 * Math.log(r() + 1e-6)) * 12
+    return { x: f(Math.cos(a) * d), y: f(Math.sin(a) * d), s: f(0.9 + r() * 1.3) }
+  }).filter(p => Math.hypot(p.x, p.y) < 50)
+})
+
+const ticks = Array.from({ length: 36 }, (_, i) => {
+  const a = (i / 36) * Math.PI * 2
+  return `M${f(Math.cos(a) * 35)} ${f(Math.sin(a) * 35)} L${f(Math.cos(a) * 39)} ${f(Math.sin(a) * 39)}`
+}).join(' ')
+
+// The Australian $1, after Stuart Devlin's 1984 design: a big kangaroo
+// looking back over its shoulder, a mob behind it, and "1 DOLLAR".
+// A bounding kangaroo, facing right, about 36 × 18 at scale 1.
+const ROO = 'M-6 -2.4 C-2 -5.6 4 -6 8 -4.8 L10.4 -6.6 L10.6 -9.6 L12 -7.4 L13 -9.8 L13.6 -7.2 L16.8 -6 L16.4 -5 L12.8 -4.4 L11.2 -2.4 L14.2 -1 L13.6 -0.2 L9.8 -1.2 C8 0.6 5 1.4 2 1.4 C0.6 3.6 -1.6 4.6 -4.2 4.4 L-12.4 7.4 L-12.8 6.4 L-7.4 3.2 C-8.6 2.4 -8.6 1.6 -8.4 1 C-12 2.2 -15.6 3.2 -19.4 3.8 C-15.6 1.4 -11.6 -0.8 -6 -2.4 Z'
+// Standing upright, facing left, feet at the origin, about 24 tall.
+const ROO_UP = 'M-3 -19 L0.4 -21.4 L1 -24.6 L2 -21.6 L3.4 -24 L3.6 -20.6 C5.4 -18 5.8 -14 6.4 -10 C7.4 -6 7.6 -3 6.4 -1 C9 0 12 1.6 14.4 4.4 C11 2.8 8 2 5.6 1.6 L4.8 2.6 L-2.6 3 L-2.8 2 L1.6 1.2 C0.6 -1 0.4 -3 0 -5 C-0.8 -8 -1.6 -11 -1.4 -13 L-4.6 -11 L-4.8 -11.8 L-1.4 -14.6 L-0.6 -17 Z'
+const ROO_BIG = 'M13 -11.2 L15.4 -13.6 C17.2 -15 19.2 -15.8 20.8 -15.6 L21.4 -19.8 L22.6 -15.8 L24.2 -19.4 L24.2 -15 C25.4 -13.6 25.6 -11.2 25 -8.6 C25.8 -3 26.6 2.6 27.2 6.2 L28.6 9.2 L26.8 9.4 L25 6.4 C24 4 23 1.6 22 0 C21.6 3.6 20 7.4 17.4 10 L14.8 14.4 L23.6 17.4 L23.4 18.8 L12.4 17.8 C10.6 17.6 10.4 16 11 14.6 L11.6 12.6 C8 12.4 4.4 11.4 1.6 10.2 C-8 11.2 -20 11.6 -31 10.4 C-22 8.8 -10 6.6 -1.6 4.6 C-1.4 -0.6 2.6 -5.6 8.6 -7.2 C11.4 -8 13.4 -9 15.4 -10.2 Z'
+const mob = [
+  { d: ROO, at: 'translate(2 -24) scale(-0.55 0.55)' },
+  { d: ROO, at: 'translate(-10 -15) scale(-0.55 0.55)' },
+  { d: ROO_UP, at: 'translate(-24 6) scale(0.62)' },
+  { d: ROO_UP, at: 'translate(-12 7) scale(0.7)' },
+  { d: ROO_BIG, at: '' },
+]
+
+const orbits = [0, 60, 120]
+const electrons: [number, number][] = [[36.4, -7], [-24, -26], [-10, 34]]
+
+const split = computed(() => {
+  const n = props.stops.length
+  const at = Math.max(0, Math.min(n, props.quantumFrom)) / n
+  return { a: f(at - 0.07), b: f(at + 0.05), x: f(at * W) }
+})
+</script>
+
+<template>
+  <svg class="motif zs" :viewBox="`0 0 ${W} 272`" aria-hidden="true">
+    <defs>
+      <linearGradient :id="ids.vec" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" style="stop-color: var(--cyan)" />
+        <stop offset="0.55" style="stop-color: var(--violet)" />
+        <stop offset="1" style="stop-color: var(--magenta)" />
+      </linearGradient>
+      <linearGradient :id="ids.band" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" style="stop-color: var(--ink-soft)" stop-opacity="0.35" />
+        <stop :offset="split.a" style="stop-color: var(--ink-soft)" stop-opacity="0.35" />
+        <stop :offset="split.b" style="stop-color: var(--violet)" />
+        <stop offset="1" style="stop-color: var(--magenta)" />
+      </linearGradient>
+      <radialGradient :id="ids.gold" cx="0.38" cy="0.32" r="0.8">
+        <stop offset="0" stop-color="#f7ecc6" />
+        <stop offset="0.6" stop-color="#ddc890" />
+        <stop offset="1" stop-color="#b9a064" />
+      </radialGradient>
+      <filter :id="ids.emboss">
+        <feOffset dx="-0.35" dy="-0.35" in="SourceAlpha" result="hi" />
+        <feFlood flood-color="#fffbe8" />
+        <feComposite in2="hi" operator="in" result="hiC" />
+        <feOffset dx="0.4" dy="0.4" in="SourceAlpha" result="lo" />
+        <feFlood flood-color="#7d6a38" />
+        <feComposite in2="lo" operator="in" result="loC" />
+        <feMerge>
+          <feMergeNode in="loC" />
+          <feMergeNode in="hiC" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <template v-for="(s, i) in layout" :key="i">
+      <g :transform="`translate(${s.cx} ${CY})`" class="zs-stop" :class="{ 'zs-stop--quantum': s.quantum }">
+        <circle :r="R" class="zs-frame" :class="{ 'zs-frame--last': s.last }" :style="s.last ? { stroke: `url(#${ids.vec})` } : undefined" />
+
+        <g v-if="s.kind === 'coin'" class="zs-coin">
+          <circle r="40" />
+          <circle r="31" class="zs-coin-inner" />
+          <path :d="ticks" />
+          <path d="M-9 -12 L0 -18 L0 18 M-9 18 L9 18" class="zs-coin-mark" />
+        </g>
+
+        <g v-else-if="s.kind === 'dollar'" class="zs-dollar">
+          <circle r="40" :fill="`url(#${ids.gold})`" />
+          <circle r="36.6" class="zs-dollar-inner" />
+          <g :filter="`url(#${ids.emboss})`" class="zs-dollar-relief">
+            <path v-for="(m, j) in mob" :key="j" :d="m.d" :transform="m.at || undefined" />
+            <text x="-14" y="28" text-anchor="middle" class="zs-dollar-one">1</text>
+            <text x="10" y="26" text-anchor="middle" class="zs-dollar-word">DOLLAR</text>
+          </g>
+        </g>
+
+        <g v-else-if="s.kind === 'grain'" class="zs-grain">
+          <polygon :points="grain.pts" />
+          <circle v-for="(p, j) in grain.specks" :key="j" :cx="p.x" :cy="p.y" :r="p.s" />
+        </g>
+
+        <g v-else-if="s.kind === 'cell'" class="zs-cell">
+          <ellipse rx="42" ry="30" transform="rotate(-16)" />
+          <circle cx="8" cy="-4" r="11" class="zs-cell-nucleus" />
+          <ellipse cx="-20" cy="10" rx="7" ry="3.5" transform="rotate(20 -20 10)" class="zs-cell-bit" />
+          <ellipse cx="22" cy="14" rx="6" ry="3" transform="rotate(-30 22 14)" class="zs-cell-bit" />
+          <ellipse cx="-12" cy="-16" rx="5" ry="2.6" class="zs-cell-bit" />
+        </g>
+
+        <g v-else-if="s.kind === 'atom'" class="zs-atom">
+          <ellipse v-for="o in orbits" :key="o" rx="40" ry="13" :transform="`rotate(${o})`" />
+          <circle cx="-2.6" cy="-2" r="4.4" class="zs-atom-p" />
+          <circle cx="2.8" cy="-1.4" r="4.4" class="zs-atom-n" />
+          <circle cx="0" cy="3" r="4.4" class="zs-atom-p" />
+          <circle v-for="(e, j) in electrons" :key="j" :cx="e[0]" :cy="e[1]" r="3.4" class="zs-atom-e" />
+        </g>
+
+        <g v-else-if="s.kind === 'electron'" class="zs-electron">
+          <circle v-for="(p, j) in cloud" :key="j" :cx="p.x" :cy="p.y" :r="p.s" class="zs-cloud" />
+          <path d="M0 0 L16 -34" :stroke="`url(#${ids.vec})`" class="zs-spin" />
+          <circle cx="16" cy="-34" r="4" class="zs-spin-tip" />
+          <circle r="5.5" class="zs-electron-core" />
+        </g>
+
+        <text :y="R + 30" text-anchor="middle" class="zs-name">{{ s.name }}</text>
+        <text :y="R + 50" text-anchor="middle" class="zs-size">{{ s.size }}</text>
+      </g>
+
+      <g v-if="s.funnel" class="zs-funnel">
+        <path :d="s.funnel.fill" class="zs-funnel-fill" />
+        <path :d="s.funnel.top" />
+        <path :d="s.funnel.bottom" />
+        <circle :cx="s.funnel.tx" :cy="s.funnel.ty" :r="s.funnel.r" class="zs-target" />
+      </g>
+    </template>
+
+    <rect x="10" y="236" :width="W - 20" height="6" rx="3" :fill="`url(#${ids.band})`" />
+    <path :d="`M${split.x} 228 L${split.x} 250`" class="zs-split" />
+    <text x="10" y="266" class="zs-band zs-band--classical">Everyday rules · things have a definite value</text>
+    <text :x="W - 10" y="266" text-anchor="end" class="zs-band zs-band--quantum">Quantum rules · things carry probabilities</text>
+  </svg>
+</template>
+
+<style scoped>
+.zs {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.zs-frame {
+  fill: var(--paper);
+  stroke: var(--ink-soft);
+  stroke-width: 1.2;
+}
+
+.zs-stop--quantum .zs-frame {
+  stroke: var(--violet);
+  stroke-width: 1.6;
+}
+
+.zs-stop .zs-frame--last {
+  stroke-width: 2.6;
+}
+
+.zs-coin circle {
+  fill: color-mix(in srgb, var(--amber) 22%, var(--paper));
+  stroke: color-mix(in srgb, var(--amber) 70%, var(--ink));
+  stroke-width: 1.4;
+}
+
+.zs-coin .zs-coin-inner {
+  fill: none;
+  stroke-width: 0.9;
+}
+
+.zs-coin path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--amber) 70%, var(--ink));
+  stroke-width: 1;
+}
+
+.zs-coin .zs-coin-mark {
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.zs-dollar circle {
+  stroke: #8f7a44;
+  stroke-width: 1.4;
+}
+
+.zs-dollar .zs-dollar-inner {
+  fill: none;
+  stroke: #a48d52;
+  stroke-width: 0.8;
+}
+
+.zs-dollar-relief {
+  fill: #cdb67a;
+}
+
+.zs-dollar-one,
+.zs-dollar-word {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+}
+
+.zs-dollar-one {
+  font-size: 22px;
+}
+
+.zs-dollar-word {
+  font-size: 6.6px;
+  letter-spacing: 0.3px;
+}
+
+.zs-grain polygon {
+  fill: color-mix(in srgb, var(--amber) 14%, var(--paper-deep));
+  stroke: var(--ink-soft);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.zs-grain circle {
+  fill: var(--ink-soft);
+  opacity: 0.4;
+}
+
+.zs-cell ellipse {
+  fill: color-mix(in srgb, var(--cyan) 10%, var(--paper));
+  stroke: var(--cyan);
+  stroke-width: 1.4;
+}
+
+.zs-cell .zs-cell-nucleus {
+  fill: color-mix(in srgb, var(--violet) 22%, var(--paper));
+  stroke: var(--violet);
+  stroke-width: 1.2;
+}
+
+.zs-cell .zs-cell-bit {
+  fill: color-mix(in srgb, var(--cyan) 25%, var(--paper));
+  stroke-width: 0.8;
+}
+
+.zs-atom ellipse {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1;
+  opacity: 0.7;
+}
+
+.zs-atom-p { fill: var(--magenta); }
+.zs-atom-n { fill: var(--violet); }
+
+.zs-atom-e {
+  fill: var(--cyan);
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.zs-cloud {
+  fill: var(--violet);
+  opacity: 0.32;
+}
+
+.zs-spin {
+  fill: none;
+  stroke-width: 3.4;
+  stroke-linecap: round;
+}
+
+.zs-spin-tip {
+  fill: var(--magenta);
+  stroke: #fff;
+  stroke-width: 1.2;
+}
+
+.zs-electron-core {
+  fill: var(--cyan);
+  stroke: #fff;
+  stroke-width: 1.4;
+}
+
+.zs-funnel path {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 0.9;
+  stroke-dasharray: 3 3;
+  opacity: 0.6;
+}
+
+.zs-funnel .zs-funnel-fill {
+  fill: var(--violet);
+  stroke: none;
+  opacity: 0.06;
+}
+
+.zs-target {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1.4;
+}
+
+.zs-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  fill: var(--ink);
+}
+
+.zs-size {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  fill: var(--ink-soft);
+}
+
+.zs-split {
+  stroke: var(--violet);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 3;
+}
+
+.zs-band {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.zs-band--classical { fill: var(--ink-soft); }
+.zs-band--quantum { fill: var(--violet); }
+</style>

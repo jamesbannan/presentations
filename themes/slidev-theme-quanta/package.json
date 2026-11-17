@@ -1,0 +1,40 @@
+{
+  "name": "slidev-theme-quanta",
+  "version": "1.0.0",
+  "description": "Quanta Slidev theme — light quantum-lab aesthetic: Bloch spheres, quantum circuits, qubit lattices and wave packets on graph paper",
+  "author": "James Bannan",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "quantum",
+    "light"
+  ],
+  "engines": {
+    "slidev": ">=52.0.0"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0"
+  },
+  "slidev": {
+    "defaults": {
+      "colorSchema": "light",
+      "canvasWidth": 980,
+      "highlighter": "shiki",
+      "lineNumbers": false,
+      "transition": "fade",
+      "aspectRatio": "16/9",
+      "fonts": {
+        "provider": "none",
+        "sans": "IBM Plex Sans",
+        "serif": "Space Grotesk",
+        "mono": "IBM Plex Mono"
+      },
+      "drawings": {
+        "persist": false
+      }
+    }
+  }
+}
