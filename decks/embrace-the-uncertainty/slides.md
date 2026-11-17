@@ -214,11 +214,6 @@ The arrow is a **vector** of two amounts. Square each to get the **probability**
   </div>
 </div>
 
-<style>
-.compact-plates .plate > p { margin-top: 0.5em; }
-.compact-plates .plate > p b { display: inline; margin-right: 0.35em; }
-</style>
-
 <!--
 Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both".
 
@@ -235,24 +230,26 @@ kicker: Bits and qubits · measurement
 
 # Reading it moves the arrow
 
-Reading a qubit snaps the arrow to the answer you got. You can't peek without changing it.
+Reading snaps the vector to the answer you got. You can't peek without changing it.
 
-<div class="plates" style="--plate: 220px">
+<div class="plates compact-plates" style="--plate: 190px">
   <div class="plate">
     <Globe :theta="60" />
-    <p><b>Before</b>Somewhere north of the equator</p>
+    <Odds :theta="60" amps />
+    <p><b>Before</b>75% chance of 0</p>
   </div>
   <div class="plate-step" v-click>
     <Readout value="0" />
   </div>
   <div class="plate" v-click>
     <Globe :theta="0" :was="60" />
-    <p><b>After</b>Snapped to north. The old direction is gone: every read now gives 0.</p>
+    <Odds :theta="0" amps />
+    <p><b>After</b>Every read now gives 0</p>
   </div>
 </div>
 
 <!--
-And reading it isn't free. [click] We read it and get a 0. [click] The arrow is now pointing straight at the North Pole. Wherever it was before is gone. Read it again and you'll get 0 forever. You can't peek without changing it.
+And reading it isn't free. Before the read, the vector is 0.87 of 0 and 0.50 of 1: square them and that's a 75% chance of 0 and 25% of 1. [click] We read it and get a 0. [click] The arrow now points straight at the North Pole: the vector is 1 of 0 and none of 1. Wherever it was before is gone, and the 25% chance of a 1 has vanished with it. Read it again and you'll get 0 forever. You can't peek without changing it.
 -->
 
 ---

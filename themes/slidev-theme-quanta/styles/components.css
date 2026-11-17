@@ -400,6 +400,16 @@
   margin-top: 0.8em;
 }
 
+/* Compact plates: the caption's title and line share one line. */
+.slidev-layout .compact-plates .plate > p {
+  margin-top: 0.5em;
+}
+
+.slidev-layout .compact-plates .plate > p b {
+  display: inline;
+  margin-right: 0.35em;
+}
+
 .slidev-layout .plate-step {
   flex: 0 0 auto;
   align-self: center;

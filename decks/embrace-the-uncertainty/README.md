@@ -25,7 +25,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 6 | A bit points one of two ways | Arrow on a globe, north or south only |
 | 7 | A qubit can point anywhere | `Globe` glides over the surface (dashed and faint behind it) beside a live `QubitState` readout: tilt θ, turn φ, length 1, and the state as `α\|0⟩ + β\|1⟩` |
 | 8 | The arrow is a recipe for probabilities | The arrow as a vector of two amounts: three latitudes, each written as `a\|0⟩ + b\|1⟩` with `<Odds amps>` squaring the amounts into probabilities |
-| 9 | Reading it moves the arrow | Two clicks: the read, then the snapped arrow |
+| 9 | Reading it moves the arrow | Two clicks: the read, then the snapped arrow; `<Odds amps>` shows the vector going from `0.87\|0⟩ + 0.50\|1⟩` (75% / 25%) to `1.00\|0⟩ + 0.00\|1⟩` |
 | 10 | So you run it hundreds of times | 500 simulated reads of the cover's arrow, coloured in one at a time as the slide opens |
 | 11 | Why? Qubits are built from tiny things | Zoom from an Australian $1 coin to an electron; where the rules change |
 | 12 | Uncertainty is built in | Heisenberg as two questions on one globe; one click |
