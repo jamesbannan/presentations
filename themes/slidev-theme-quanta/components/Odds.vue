@@ -3,7 +3,7 @@
 
     <Odds :theta="90" />            worked out from the arrow: 50 / 50
     <Odds :counts="[316, 84]" />    or from a tally of actual reads
-    <Odds :chance="0.5" :labels="['W', 'E']" />   or a chance, for another question
+    <Odds :chance="0.5" :labels="['−', '+']" />   or a chance, for another question
     <Odds :counts="[120, 31]" :out-of="500" />    a tally still filling up: the bar
                                                   grows in from both ends
     <Odds :theta="30" amps />       also write the arrow as its two amounts,

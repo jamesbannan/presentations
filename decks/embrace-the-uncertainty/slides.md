@@ -409,11 +409,52 @@ A classical register holds exactly one of those patterns. Your program works on 
 
 [click] Four qubits don't hold a pattern. They hold probabilities for every pattern, all sixteen at once, and every gate you apply reshapes all of those probabilities in one go. Careful, though: this is not "tries every answer in parallel". A read still hands you one pattern, at random, according to those probabilities. The skill is arranging the gates so the pattern you want is the likely one.
 
-[click] So where does the power come from, if a read gives one pattern? Interference. The probabilities have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of probabilities. You'll see the hidden sign in the next demo.
+[click] So where does the power come from, if a read gives one pattern? Interference. The probabilities have a hidden sign, like the arrow's direction. Arrange the gates so the paths to wrong answers cancel and the paths to the right answer reinforce, then read. That's what every quantum algorithm is: choreography of probabilities. The next slide shows how that works.
 
 [click] And here's what scares classical computers. Every qubit you add doubles the patterns. To simulate qubits on a normal computer you have to store a number for every pattern: thirty qubits is sixteen gigabytes, about your laptop. Forty is sixteen terabytes, a cluster. Sixty is sixteen exabytes, more memory than any computer ever built. Three hundred qubits: more numbers than there are atoms in the observable universe. (16 bytes per pattern, one double-precision complex number; binary units.)
 
 [click] Which is why it isn't a faster computer. It's a different one. For most work, spreadsheets, web servers, your laptop wins. But for a few problems with the right structure, simulating molecules and materials, and factoring the big numbers that today's public-key encryption relies on, it's not faster, it's a different league. That second one is why we're here.
+-->
+
+---
+kicker: Bits and qubits · interference
+---
+
+# Interference: how wrong answers cancel
+
+Waves can cancel out. So can a qubit's amounts, because they can be **negative**.
+
+<div class="plates" style="--plate: 285px">
+  <div class="plate">
+    <WaveSum />
+    <p><b>Waves add or cancel</b>In step they grow. Flipped, they vanish.</p>
+  </div>
+  <div class="plate" v-click="1">
+    <Paths mode="coin" />
+    <p><b>Flip a coin twice</b>Probabilities only ever add. Still 50/50.</p>
+  </div>
+  <div class="plate" v-click="2">
+    <Paths mode="qubit" />
+    <p><b>Tip a qubit over twice</b>Each tip alone is a coin toss. Together, the routes to 1 cancel: always 0.</p>
+  </div>
+</div>
+
+<p class="takeaway" v-click="3"><b>This is where the power comes from.</b> Algorithms arrange their gates so wrong answers cancel and the right one adds up. Noise spoils the cancelling, which is why error correction matters.</p>
+
+<!--
+The last slide said gates make wrong answers cancel. That's interference, and it's the single most important idea in this talk, so let's slow down.
+
+Start with something you already know: waves. Drop two stones in a pond. Where a peak meets a peak, you get a bigger wave. Where a peak meets a trough, the water goes flat. Noise-cancelling headphones do exactly this with sound: they play the noise back, flipped, and the two cancel.
+
+[click] Now a coin. Flip it, then flip it again. There are two routes to heads: heads then heads, or tails then heads. Each route is a quarter. Add them: a half. Same for tails. Probabilities are never negative, so adding more routes to an answer can only ever make it more likely. You can't make an outcome disappear by adding ways to reach it.
+
+[click] Now a qubit. Remember the arrow is a vector of two amounts, and amounts carry a sign: plus and minus differed only by a sign. Start on 0 and tip the arrow onto the equator, a perfect coin toss. Then do the same move again. Two routes to each answer, just like the coin. But the qubit adds the amounts of the routes before squaring them. Both routes to 0 are plus a half: add them, one, squared, a hundred percent. One route to 1 is plus a half and the other is minus a half: they cancel to zero. Never 1. Two coin tosses in a row, and the result is certain. No coin can do that.
+
+That tipping move is the H gate on the next slide, and the demo after it shows exactly this: H, then H, always 0.
+
+[click] Why it matters. Four qubits hold probabilities for all sixteen patterns, but a read hands you one at random, so on its own that's useless; it's an expensive random number generator. Interference is what turns it into a computer. Every quantum algorithm is a choreography: arrange the gates so the routes to wrong answers cancel and the routes to the right answer pile up, then read. Grover does it a little at a time, round after round, draining the wrong keys and boosting the right one. Shor does it to find a rhythm: every wrong rhythm cancels, the right one rings out.
+
+And the catch: cancelling needs the amounts to be exactly right. Noise nudges the arrows, so plus a half minus a bit-less-than-a-half doesn't quite cancel, and wrong answers leak back in. That's why error correction matters so much, and why we'll be pricing machines in millions of qubits later on.
 -->
 
 ---

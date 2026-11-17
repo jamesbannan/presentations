@@ -32,36 +32,37 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 13 | Bit vs qubit | Summary table |
 | 14 | The one-liner | Statement |
 | 15 | Why that makes a different kind of computer | 16-pattern grids: 4 bits hold one, 4 qubits spread probabilities over all, interference focuses them; memory to simulate 30–300 qubits; four clicks |
-| 16 | Gates turn the arrow | X, H and Z as before → after turns of the arrow, then CNOT on two qubits; four clicks |
-| 17 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
-| 18 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
-| 19 | Demo: the same pair on a real machine | `bell_hardware.py`: local simulator vs a Bell pair run on IonQ Forte-1 hardware via Open Quantum (100 shots, 1 mixed) |
-| 20 | Part two: Grover and Shor | Section |
-| 21 | Grover's search: boost the right key | Grover as a known-plaintext key search: 16-key grids at 0, 1 and 3 rounds (6%, 47%, 96%), tries vs rounds from the 4-bit demo to DES, AES-128 and AES-256, why doubling the key undoes it; four clicks |
-| 22 | Demo: recover the key, and know when to stop | `grover.py`: recovering a 4-bit key from one known block (7 → 3); key-recovery rate by number of rounds, 96% at 3 vs 2% at 6 |
-| 23 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
-| 24 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5 |
-| 25 | Pricing a machine nobody has built yet | `LogicalQubit`: a 49-qubit surface-code patch acting as one logical qubit; physical, noisy and logical qubits defined; how the resource estimator works; how the error rate sets the RSA-2048 price (2,738 physical per logical and 36M in all at 0.1% errors, 722 and 9M at 0.01%); two clicks |
-| 26 | Demo: what would RSA-2048 take? | `shor_estimate.py`: `ShorCost`, physical qubits and run time from 32-bit keys to RSA-2048 (36M qubits, 183 days) on the resource estimator; optimised circuits in the notes; one click |
-| 27 | Part three: Q-Day | Section |
-| 28 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
-| 29 | The machine needed keeps shrinking | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
-| 30 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert estimates, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
-| 31 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
-| 32 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
-| 33 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
-| 34 | Part four: What to do | Section |
-| 35 | The replacements are already standards | `NoisyLattice`: the lattice problem; ML-KEM, ML-DSA and SLH-DSA (FIPS 203–205); one click |
-| 36 | The catch: everything gets bigger | `KeySizes`: classical vs post-quantum bytes against one network packet; two clicks |
-| 37 | Hybrid: belt and braces, already switched on | `HybridKex` plus a live `openssl s_client` check that this conference's site negotiates `X25519MLKEM768`; one click |
-| 38 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
-| 39 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
-| 40 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
-| 41 | What to take back to work | Summary: one panel per part, then "embrace the uncertainty" three ways; four clicks |
-| 42 | Thank you | Contact details, questions |
+| 16 | Interference: how wrong answers cancel | `WaveSum`: waves in and out of step; `Paths`: a coin flipped twice stays 50/50, a qubit tipped over twice has two routes to 1 (+0.5, −0.5) that cancel, so it always reads 0; why algorithms need it and noise spoils it; three clicks |
+| 17 | Gates turn the arrow | X, H and Z as before → after turns of the arrow, then CNOT on two qubits; four clicks |
+| 18 | Demo: the sign you can't see | `gates.py`: H vs HZ read the same 50/50; one more H tells them apart |
+| 19 | Demo: two qubits that always agree | `bell_pair.py`: entangled vs control histograms |
+| 20 | Demo: the same pair on a real machine | `bell_hardware.py`: local simulator vs a Bell pair run on IonQ Forte-1 hardware via Open Quantum (100 shots, 1 mixed) |
+| 21 | Part two: Grover and Shor | Section |
+| 22 | Grover's search: boost the right key | Grover as a known-plaintext key search: 16-key grids at 0, 1 and 3 rounds (6%, 47%, 96%), tries vs rounds from the 4-bit demo to DES, AES-128 and AES-256, why doubling the key undoes it; four clicks |
+| 23 | Demo: recover the key, and know when to stop | `grover.py`: recovering a 4-bit key from one known block (7 → 3); key-recovery rate by number of rounds, 96% at 3 vs 2% at 6 |
+| 24 | Shor's algorithm: find the rhythm, break the lock | What Shor is: 7ˣ mod 15 repeating every 4, rhythm → 3 × 5, RSA-2048 classically vs today vs with Shor, why longer keys don't help; three clicks |
+| 25 | Demo: factoring 15, the hard way | `shor.py`: four readings out of 512, half give 3 × 5 |
+| 26 | Pricing a machine nobody has built yet | `LogicalQubit`: a 49-qubit surface-code patch acting as one logical qubit; physical, noisy and logical qubits defined; how the resource estimator works; how the error rate sets the RSA-2048 price (2,738 physical per logical and 36M in all at 0.1% errors, 722 and 9M at 0.01%); two clicks |
+| 27 | Demo: what would RSA-2048 take? | `shor_estimate.py`: `ShorCost`, physical qubits and run time from 32-bit keys to RSA-2048 (36M qubits, 183 days) on the resource estimator; optimised circuits in the notes; one click |
+| 28 | Part three: Q-Day | Section |
+| 29 | What Shor breaks, and what Grover only dents | RSA, DH and elliptic curves (and where you meet them) vs AES and SHA; the handshake carries the key; two clicks |
+| 30 | The machine needed keeps shrinking | `QubitBudget`: physical qubits to break RSA-2048 (2019, 2025) and 256-bit ECC (2026) vs today's ~1,000s; two clicks |
+| 31 | Q-Day: nobody knows when. The deadlines are set anyway. | `QdayTimeline`: GRI 2025 expert estimates, ASD (2026/2028/2030) and NIST IR 8547 (2030/2035) deadlines; three clicks |
+| 32 | Probability: unknown. Impact: catastrophic. Timeline: uncertain. | Statement: the risk-register gag |
+| 33 | Harvest now, decrypt later | `Mosca`: migration time plus shelf life against a fuzzy Q-Day; two clicks |
+| 34 | The Q-Pocalypse, rated | Hype-o-meter: three real, two myths, one sci-fi; sets up post-quantum crypto; five clicks |
+| 35 | Part four: What to do | Section |
+| 36 | The replacements are already standards | `NoisyLattice`: the lattice problem; ML-KEM, ML-DSA and SLH-DSA (FIPS 203–205); one click |
+| 37 | The catch: everything gets bigger | `KeySizes`: classical vs post-quantum bytes against one network packet; two clicks |
+| 38 | Hybrid: belt and braces, already switched on | `HybridKex` plus a live `openssl s_client` check that this conference's site negotiates `X25519MLKEM768`; one click |
+| 39 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
+| 40 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
+| 41 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
+| 42 | What to take back to work | Summary: one panel per part, then "embrace the uncertainty" three ways; four clicks |
+| 43 | Thank you | Contact details, questions |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
-`QubitState`, `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`), the error-correction patch by `LogicalQubit`, Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
+`QubitState`, `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`, `WaveSum`, `Paths`), the error-correction patch by `LogicalQubit`, Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
 by `NoisyLattice`, `KeySizes` and `HybridKex`, so there are no image files to maintain. The
 probabilities come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
@@ -88,7 +89,7 @@ Quantum), so it's offline on stage too. The slide shows the IonQ Forte-1 hardwar
 most recent recording, so the plain command replays it. The notes cover the
 `quantinuum.sim.h2-1e` emulator run as a backup.
 
-Slide 37's check isn't in the demos repo: it's a one-line `openssl s_client`
+Slide 38's check isn't in the demos repo: it's a one-line `openssl s_client`
 against `dddadelaide.com`. Use Homebrew's OpenSSL 3.5 or later; macOS's
 `/usr/bin/openssl` is LibreSSL and won't offer the hybrid. The output is on the
 slide as a backup.
