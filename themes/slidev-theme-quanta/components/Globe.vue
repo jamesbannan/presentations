@@ -7,7 +7,7 @@
     <Globe :theta="60" />                a qubit, a little north of the equator
     <Globe :theta="60" :ghosts="14" />   …with faint arrows showing it could point anywhere
     <Globe :theta="0" :was="60" />       …after it's read: snapped to 0, old arrow ghosted
-    <Globe :theta="0" ask="ew" />        the same globe asked a different question: west or east?
+    <Globe :theta="0" ask="pm" />        the same globe asked a different question: − or +?
     <Globe :theta="60" wander />         the arrow glides between random directions, tracing its path on the surface
 
   Props:
@@ -25,12 +25,13 @@
                prefers-reduced-motion
     hop      — milliseconds between moves (default 1200)
     trail    — how many past paths to keep (default 5)
+    ask      — which pair of opposite points a read picks between: 'ns'
+               (0 or 1, the poles; the default) or 'pm' (− or +, two
+               points on the equator joined by an axis drawn across the
+               globe). An arrow points at + at theta 90, phi 28.65
 
   Emits `move` with { theta, phi } whenever the arrow's direction changes
   (and once on mount), so a readout can follow a wandering arrow.
-    ask      — which question a read asks: 'ns' (north or south, the
-               default) or 'ew' (west or east, an axis drawn across the
-               globe). An arrow points due east at theta 90, phi 28.65
 
   Scales to the width of its container. Font sizes and opacity live in the
   stylesheet, not in attributes: UnoCSS attributify reads those as utilities.
@@ -166,16 +167,16 @@ onBeforeUnmount(() => {
 
 watch([theta, phi], ([t, p]) => emit('move', { theta: t, phi: p }), { immediate: true })
 
-// Due east is the azimuth that the projection draws flat across the page.
-const EAST = 0.5
-const ew = (() => {
-  const a = P([-1.12 * Math.cos(EAST), -1.12 * Math.sin(EAST), 0])
-  const b = P([1.12 * Math.cos(EAST), 1.12 * Math.sin(EAST), 0])
-  return { axis: `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`, west: P([-Math.cos(EAST), -Math.sin(EAST), 0]), east: P([Math.cos(EAST), Math.sin(EAST), 0]) }
+// + is the azimuth that the projection draws flat across the page.
+const PLUS = 0.5
+const side = (() => {
+  const a = P([-1.12 * Math.cos(PLUS), -1.12 * Math.sin(PLUS), 0])
+  const b = P([1.12 * Math.cos(PLUS), 1.12 * Math.sin(PLUS), 0])
+  return { axis: `M${f(a.x)} ${f(a.y)} L${f(b.x)} ${f(b.y)}`, minus: P([-Math.cos(PLUS), -Math.sin(PLUS), 0]), plus: P([Math.cos(PLUS), Math.sin(PLUS), 0]) }
 })()
 const atSide = computed(() => {
-  const d = Math.sin(rad(theta.value)) * Math.cos(rad(phi.value) - EAST)
-  return d >= 0.999 ? 'e' : d <= -0.999 ? 'w' : null
+  const d = Math.sin(rad(theta.value)) * Math.cos(rad(phi.value) - PLUS)
+  return d >= 0.999 ? 'plus' : d <= -0.999 ? 'minus' : null
 })
 
 const tip = computed(() => P(unit(rad(theta.value), rad(phi.value))))
@@ -221,7 +222,7 @@ const snap = computed(() => {
 </script>
 
 <template>
-  <svg class="motif globe" :class="{ 'globe--bit': bit, 'globe--ew': ask === 'ew' }" viewBox="-130 -142 260 284" aria-hidden="true">
+  <svg class="motif globe" :class="{ 'globe--bit': bit, 'globe--ew': ask === 'pm' }" viewBox="-130 -142 260 284" aria-hidden="true">
     <defs>
       <linearGradient :id="ids.vec" gradientUnits="userSpaceOnUse" x1="0" y1="0" :x2="tip.x" :y2="tip.y">
         <stop offset="0" style="stop-color: var(--cyan)" />
@@ -265,7 +266,7 @@ const snap = computed(() => {
     </g>
     <circle :r="R" fill="none" class="globe-rim" />
     <path :d="axis" class="globe-axis" fill="none" />
-    <path v-if="ask === 'ew'" :d="ew.axis" class="globe-axis globe-axis--ew" fill="none" />
+    <path v-if="ask === 'pm'" :d="side.axis" class="globe-axis globe-axis--ew" fill="none" />
 
     <g class="globe-ghosts">
       <template v-for="(g, i) in ghostArrows" :key="`gf${i}`">
@@ -315,14 +316,14 @@ const snap = computed(() => {
       <text :x="south.x" :y="south.y + 24" text-anchor="middle" dominant-baseline="central">1</text>
     </g>
 
-    <template v-if="ask === 'ew'">
-      <g class="globe-pole globe-pole--zero" :class="{ 'globe-pole--on': atSide === 'w' }">
-        <circle :cx="ew.west.x - 22" :cy="ew.west.y" r="12" />
-        <text :x="ew.west.x - 22" :y="ew.west.y" text-anchor="middle" dominant-baseline="central">W</text>
+    <template v-if="ask === 'pm'">
+      <g class="globe-pole globe-pole--zero" :class="{ 'globe-pole--on': atSide === 'minus' }">
+        <circle :cx="side.minus.x - 22" :cy="side.minus.y" r="12" />
+        <text :x="side.minus.x - 22" :y="side.minus.y" text-anchor="middle" dominant-baseline="central">−</text>
       </g>
-      <g class="globe-pole globe-pole--one" :class="{ 'globe-pole--on': atSide === 'e' }">
-        <circle :cx="ew.east.x + 22" :cy="ew.east.y" r="12" />
-        <text :x="ew.east.x + 22" :y="ew.east.y" text-anchor="middle" dominant-baseline="central">E</text>
+      <g class="globe-pole globe-pole--one" :class="{ 'globe-pole--on': atSide === 'plus' }">
+        <circle :cx="side.plus.x + 22" :cy="side.plus.y" r="12" />
+        <text :x="side.plus.x + 22" :y="side.plus.y" text-anchor="middle" dominant-baseline="central">+</text>
       </g>
     </template>
   </svg>
@@ -509,7 +510,7 @@ const snap = computed(() => {
 .globe-pole--on.globe-pole--one circle { fill: var(--magenta); }
 .globe-pole--on text { fill: #fff; }
 
-/* Asked west-or-east: that axis is the one that counts, so north and south
+/* Asked − or +: that axis is the one that counts, so north and south
    step back. */
 .globe-axis--ew {
   stroke: var(--violet);
