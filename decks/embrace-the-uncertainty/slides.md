@@ -192,30 +192,41 @@ That's all "superposition" means here: pointing somewhere other than straight at
 kicker: Bits and qubits · reading a qubit
 ---
 
-# How far north sets the probabilities
+# The arrow is a recipe for probabilities
 
-Reading a qubit always gives a plain 0 or 1. The direction only sets the **probabilities** of each.
+The arrow is a **vector** of two amounts. Square each to get the **probability** of reading 0 or 1.
 
-<div class="plates" style="--plate: 200px">
+<div class="plates compact-plates" style="--plate: 190px">
   <div class="plate">
     <Globe :theta="30" latitude />
-    <Odds :theta="30" />
-    <p><b>Mostly 0</b>Near the north pole</p>
+    <Odds :theta="30" amps />
+    <p><b>Mostly 0</b>Near north</p>
   </div>
   <div class="plate">
     <Globe :theta="90" latitude />
-    <Odds :theta="90" />
+    <Odds :theta="90" amps />
     <p><b>Coin toss</b>On the equator</p>
   </div>
   <div class="plate">
     <Globe :theta="150" latitude />
-    <Odds :theta="150" />
-    <p><b>Mostly 1</b>Near the south pole</p>
+    <Odds :theta="150" amps />
+    <p><b>Mostly 1</b>Near south</p>
   </div>
 </div>
 
+<style>
+.compact-plates .plate > p { margin-top: 0.5em; }
+.compact-plates .plate > p b { display: inline; margin-right: 0.35em; }
+</style>
+
 <!--
-Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both". What the direction controls is the probabilities. The closer to north, the more likely a 0. On the equator it's a coin toss.
+Here's the catch: you can't read the direction. When you read a qubit you get a plain 0 or a plain 1, every time. Never "a bit of both".
+
+So what is the arrow? It's a mathematical vector, the same one from the panel on the last slide. Physicists write it as an amount of 0 plus an amount of 1. Square each amount and you get the probability of reading that answer. Near the north pole it's 0.97 of 0 and 0.26 of 1: square them and that's 93% and 7%. On the equator both amounts are 0.71, which squares to a half each: a coin toss. And because the arrow's length is always 1, those squares always add up to 100%.
+
+The turn round the equator doesn't change these numbers at all, which is why I've left it out here. It only matters when qubits interfere, which is coming up in Part two.
+
+So the arrow isn't the answer. It's the recipe for the probabilities of each answer.
 -->
 
 ---
