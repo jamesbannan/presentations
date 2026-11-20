@@ -1603,3 +1603,30 @@ James Bannan
   <ContactLink icon="github" text="github.com/jamesbannan/presentations" />
   <ContactLink icon="unimelb" text="unimelb.edu.au/alumni/engage/ask-alumni" />
 </div>
+
+---
+layout: full
+---
+
+<script setup>
+import arrow from './organiser/feedback-arrow.svg?url'
+import label from './organiser/feedback-label.svg?url'
+import qr from './organiser/feedback-qr.png?url'
+import ddd from './organiser/ddd-adelaide-2026.png?url'
+</script>
+
+<div class="organiser">
+  <img :src="arrow" alt="" style="left: 3.95%; top: 22.89%; width: 9.61%; height: 30.69%">
+  <img :src="label" alt="Feedback form here" style="left: 8.75%; top: 12.66%; width: 39.7%; height: 15.27%">
+  <img :src="qr" alt="Feedback QR code for this talk" style="left: 13.56%; top: 27.93%; width: 30.19%; height: 53.68%">
+  <img :src="ddd" alt="DDD Adelaide 2026" style="left: 50.39%; top: 18.94%; width: 37.65%; height: 66.93%">
+</div>
+
+<style>
+.slidev-layout > .organiser { position: absolute; inset: 0; z-index: 3; background: #f3ebe0; }
+.organiser img { position: absolute; object-fit: contain; }
+</style>
+
+<!--
+Organiser slide, supplied by DDD Adelaide, with this talk's own feedback code. Leave it up for a moment: the organisers use the feedback to pick next year's programme, and I read every comment.
+-->

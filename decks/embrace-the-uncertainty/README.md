@@ -61,6 +61,7 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 42 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
 | 43 | What to take back to work | Summary: one panel per part, then "embrace the uncertainty" three ways; four clicks |
 | 44 | Thank you | Contact details, questions |
+| 45 | Feedback form here | Copy of slide 3, so the feedback QR code stays up during questions |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `QubitState`, `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`, `WaveSum`, `Paths`), the error-correction patch by `LogicalQubit`, Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
