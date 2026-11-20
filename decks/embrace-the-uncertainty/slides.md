@@ -797,7 +797,7 @@ RSA's lock: multiplying two primes is easy, splitting the result back is **hard*
 <div class="doubling" v-click="2" style="--steps: 3; margin-top: 1.3em">
   <span class="doubling-lead">To split a 2,048-bit RSA key:</span>
   <div><b>Classically</b><span>about 2¹¹² steps · out of reach</span></div>
-  <div><b>Today's machines</b><span>~1,000 noisy qubits · largest split so far: 21</span></div>
+  <div><b>Today's machines</b><span>~1,200 noisy qubits · largest split so far: 21</span></div>
   <div><b>With Shor</b><span>under a week · ~1 million noisy qubits</span></div>
 </div>
 
@@ -818,7 +818,7 @@ So why is the rhythm hard? For 15 the pattern repeats after 4 steps and you can 
 
 What does the quantum computer do? The same tools as everything else today. Put the exponent in superposition: all of 0, 1, 2, 3 and on, at once. Compute the remainders for all of them in one pass. Reading now would just give one random remainder, useless. Instead, a final step called the quantum Fourier transform makes the paths interfere, like Grover's boost, so that only readings in step with the rhythm survive. A handful of reads, and the rhythm drops out. It's the same idea as tapping along to a song: you don't need to hear every beat to know the tempo.
 
-[click] How close is it? Classically, the best known method needs around 2 to the 112 steps for RSA-2048. That's NIST's rating for it, and it's far out of reach. Today's biggest machines have around a thousand noisy physical qubits, give or take, and the biggest numbers Shor has actually been run on are 15 and 21, the same tiny scale as the demo coming up. That's both funny and reassuring. But the estimate keeps falling. In 2019 it was 20 million noisy qubits for eight hours (Gidney and Ekerå). In May 2025, Craig Gidney at Google brought it to under a million noisy qubits, in under a week. That assumes a 0.1% error per gate: ten times better than the 1% we saw on the real machine. Not today, but no longer science fiction.
+[click] How close is it? Classically, the best known method needs around 2 to the 112 steps for RSA-2048. That's NIST's rating for it, and it's far out of reach. Today's biggest working machine has about 1,200 noisy physical qubits, and the biggest numbers Shor has actually been run on are 15 and 21, the same tiny scale as the demo coming up. That's both funny and reassuring. But the estimate keeps falling. In 2019 it was 20 million noisy qubits for eight hours (Gidney and Ekerå). In May 2025, Craig Gidney at Google brought it to under a million noisy qubits, in under a week. That assumes a 0.1% error per gate: ten times better than the 1% we saw on the real machine. Not today, but no longer science fiction.
 
 [click] Why this one is different. Grover gave a square-root speed-up, so doubling the key length was enough. Shor's speed-up is exponential: making RSA keys bigger only buys a little time, because the quantum effort grows gently with the key size. The same idea also breaks elliptic-curve cryptography, the ECDH and ECDSA in most TLS handshakes and in Bitcoin, and needs even fewer qubits to do it. So the fix isn't longer keys; it's different maths that has no hidden rhythm to find. That's post-quantum cryptography, and it's where we're going next.
 
@@ -893,9 +893,9 @@ Shor can't run on real RSA yet. A **resource estimator** prices it, so we know i
   <LogicalQubit />
 </div>
 <dl class="qec-terms">
-  <div><dt>Physical qubit</dt><dd>The real hardware: a trapped atom, or a tiny superconducting loop. A chip's advertised qubit count means these.</dd></div>
+  <div><dt>Physical qubit</dt><dd>The real hardware: a trapped atom, or a tiny superconducting loop. The advertised count means these: about 1,200 at most today.</dd></div>
   <div><dt>Noisy</dt><dd>1 in 100 to 1 in 1,000 steps goes wrong, and the arrow drifts.</dd></div>
-  <div><dt>Logical qubit</dt><dd>Many noisy ones checking each other: errors (<b class="m">●</b>) are caught (<b class="a">◆</b>) and fixed. That's <b>error correction</b>.</dd></div>
+  <div><dt>Logical qubit</dt><dd>Many noisy ones checking each other: errors (<b class="m">●</b>) are caught (<b class="a">◆</b>) and fixed. That's <b>error correction</b>. Most built so far: 70.</dd></div>
 </dl>
 </div>
 
@@ -933,7 +933,7 @@ We've factored 15. The obvious next question: what about a real RSA key, 2,048 b
 
 First, three words that get thrown around in every quantum headline.
 
-A physical qubit is one actual thing on the chip. In IonQ's machine, the one that ran our Bell pair, it's a single charged atom held in place by electric fields. In Google's and IBM's, it's a tiny loop of superconducting wire, cooled to colder than deep space. When a company says "our chip has 1,000 qubits", it means physical qubits: Google's Willow has 105, IBM's Condor 1,121. A few labs now also announce logical qubits, a dozen or two so far; that's the number to watch.
+A physical qubit is one actual thing on the chip. In IonQ's machine, the one that ran our Bell pair, it's a single charged atom held in place by electric fields. In Google's and IBM's, it's a tiny loop of superconducting wire, cooled to colder than deep space. When a company says "our chip has 1,000 qubits", it means physical qubits: Google's Willow has 105, IBM's Condor 1,121. The biggest working machine is Atom Computing's, about 1,200 neutral atoms; it's what Microsoft's Magne machine in Copenhagen is being built on. (Caltech has held 6,100 atoms in place, but hasn't run gates on them, so it's not a computer yet.) Labs now also announce logical qubits, and that's the number to watch: Quantinuum got 48 error-corrected qubits out of 98 physical ones on Helios this year, and in July IBM and the University of Chicago ran 70 logical qubits at once. A few dozen reliable qubits, against the thousands Shor needs.
 
 Noisy means they make mistakes. Every gate has a small chance of turning the arrow slightly the wrong way: around 1 in 100 on the machine we used earlier (one mixed result in a hundred shots), around 1 in 1,000 on the best ones today. And left alone, the arrow drifts: heat, stray light, vibrations nudge it. A program like Shor needs billions of steps. At 1 error in 1,000, you'd be wrong long before you got anywhere.
 
@@ -1080,10 +1080,10 @@ clicks: 2
 How many qubits it would take to break today's keys, versus the biggest machines we have.
 
 <div style="max-width: 820px; margin: 0.6em auto 0">
-  <QubitBudget :upto="$clicks + 1" />
+  <QubitBudget :upto="$clicks + 1" :today="{ qubits: 1200, count: '~1,200 · Atom Computing', note: 'noisy, no error correction' }" />
 </div>
 
-<p class="source" style="text-align: center">Gidney &amp; Ekerå (Quantum 5, 433) · Gidney 2025 (arXiv 2505.15917) · Babbush, Zalcman, Gidney et al. 2026 (PRX Quantum 7, 031001) · physical qubits at 0.1% error</p>
+<p class="source" style="text-align: center">Gidney &amp; Ekerå (Quantum 5, 433) · Gidney 2025 (arXiv 2505.15917) · Babbush, Zalcman, Gidney et al. 2026 (PRX Quantum 7, 031001) · physical qubits at 0.1% error · biggest today: Atom Computing, 2023</p>
 
 <!--
 How big does a machine have to be? This is physical qubits, on a log scale: each gridline is ten times the last.
@@ -1094,7 +1094,7 @@ In 2019, Craig Gidney and Martin Ekerå at Google worked out that breaking a 204
 
 [click] And in 2026, a Google team including Gidney looked at the elliptic curve Bitcoin and Ethereum use, 256-bit. Elliptic curve keys are much smaller than RSA keys, so they need fewer qubits: no more than about 1,200 error-corrected qubits, which on today's style of superconducting hardware is under half a million physical ones, running in minutes. Minutes matters: when you spend bitcoin, your public key sits in public for the ten or so minutes before the block is mined. A machine that works in minutes could race you to it.
 
-Down at the bottom, the dashed line: the biggest machines today have around a thousand to a few thousand qubits. IBM's Condor has 1,121; neutral-atom arrays have held a few thousand atoms. And these are the noisy kind, without error correction at scale. All the estimates above assume a 0.1% error rate and full error correction running underneath.
+Down at the bottom, the dashed line: the biggest working quantum computer today. That's Atom Computing's neutral-atom machine, about 1,200 qubits, each a single atom held by a laser. IBM's Condor, 1,121 superconducting qubits, is close behind. Caltech has trapped 6,100 atoms, but hasn't run gates on them yet. And these are the noisy kind: the record for error-corrected logical qubits is a few dozen, 48 on Quantinuum's Helios and 70 from IBM and the University of Chicago, both this year. All the estimates above assume a 0.1% error rate and full error correction running underneath.
 
 So we're a few hundred times short on count, and further than that on quality. That's real comfort. But look at the direction: the estimates fell twenty-fold in six years, mostly from better algorithms, not better hardware. The bar is dropping while the machines are climbing. Nobody knows where they meet.
 
