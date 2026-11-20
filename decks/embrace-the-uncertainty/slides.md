@@ -1212,7 +1212,7 @@ Enough doom. This part is the to-do list.
 
 The good news first: the cryptographers have done their bit. Quantum-safe replacements are standardised, they're in the libraries you already use, and some of your traffic is already using them. The hard part is ours: finding every place the old maths hides, and swapping it out before the deadlines on the timeline slide.
 
-Five things: the new algorithms, the catch, the switch that's already on, how to write code that can change, and how to find what you've got. Then a 30, 90, 365-day plan you can take back to work on Monday.
+Six things: the new algorithms, the catch, the switch that's already on, who fixes what, how to write code that can change, and how to find what you've got. Then a 30, 90, 365-day plan you can take back to work on Monday.
 -->
 
 ---
@@ -1321,6 +1321,64 @@ Here's the proof. This is OpenSSL 3.5 talking to the DDD Adelaide website. Negot
 But look at the line above: the signature on the certificate is still ECDSA, elliptic curve. There are no post-quantum certificates on the public web yet. Chrome's plan is a new, more compact kind of certificate, Merkle Tree Certificates, rather than stuffing ML-DSA into today's certificates, partly because of the size problem we just saw. Cloudflare is aiming to issue them from early 2027. That's fine for now: a forged certificate only matters once Q-Day has arrived, but recorded key exchanges matter today. So the industry fixed key agreement first.
 
 One Australian wrinkle. ASD's ISM says hybrid schemes are "not recommended; however, not prohibited". ASD would rather government systems go straight to ML-KEM-1024 on its own by 2030. For the public internet, hybrid is what everyone ships. Know which rulebook your system answers to.
+-->
+
+---
+kicker: What to do · shared responsibility
+clicks: 4
+---
+
+# Shared responsibility: who fixes what
+
+Your providers have made the trip to **their** door quantum-safe. The rest of the trip is yours.
+
+<div style="max-width: 860px; margin: 0 auto 0.5em">
+  <RequestHops :stage="$clicks" />
+</div>
+
+<div class="split" style="--split: 1fr 1fr 1fr; gap: 1em; align-items: stretch">
+<div class="panel cyan" v-click="1">
+  <h3>Done for you</h3>
+  <ul>
+    <li>Browsers and phones offer hybrid ML-KEM</li>
+    <li>Google, AWS, Cloudflare and Azure edges accept it</li>
+    <li>Cloud KMS offers ML-KEM and ML-DSA keys</li>
+  </ul>
+</div>
+<div class="panel magenta" v-click="2">
+  <h3>Your job</h3>
+  <ul>
+    <li>The hop from their edge to your servers</li>
+    <li>TLS 1.3, then hybrid: off by default on Windows</li>
+    <li>Your keys, certificates, signing, tokens</li>
+  </ul>
+</div>
+<div class="panel amber" v-click="3">
+  <h3>Not a problem</h3>
+  <ul>
+    <li>AES-256 on disks, databases, backups</li>
+    <li>SHA-256 and bigger hashes</li>
+    <li>Unless RSA wraps the data's keys</li>
+  </ul>
+</div>
+</div>
+
+<p class="takeaway" v-click="4"><b>Their deadlines aren't yours.</b> Google and Cloudflare: 2029. Microsoft: 2033. ASD and US government: 2030.</p>
+
+<p class="source">Cloudflare Radar, 2026 · Microsoft, Google, AWS PQC roadmaps · US Executive Order 14412, June 2026</p>
+
+<!--
+The last slide showed the conference website is already doing a quantum-safe handshake. So is that job done? Partly. Follow one request from a browser all the way to where your data lives.
+
+[click] The first hop, browser to your provider's edge, is largely done for you. Every major browser and phone OS offers hybrid ML-KEM. Google's own sites use it, and so do its cloud load balancers, on by default. AWS service endpoints negotiate it with any up-to-date SDK. Cloudflare does it at its edge. Azure Front Door turned it on by default for client connections. Cloudflare says about 70 percent of the human traffic it sees arrives quantum-safe. And the cloud key services, AWS KMS and Google Cloud KMS, now sell ML-KEM and ML-DSA keys, though you have to choose to use them.
+
+[click] The second hop is yours. Your provider terminates TLS at its edge, then opens a separate connection to your origin servers. Azure Front Door, Google's load balancers and Cloudflare all say the same: the quantum-safe part is client to edge. Cloudflare can measure the gap: about 70 percent of browsers arrive quantum-safe, but only about 15 percent of the origin servers behind Cloudflare can do it. That's your servers, your APIs, your service-to-service traffic. Hybrid only works on TLS 1.3, so step one is getting off TLS 1.2. Windows-heavy shops: Windows Server 2025 and Windows 11 got hybrid TLS in the July 2026 update, but the groups ship disabled, so somebody has to turn them on with Group Policy, Intune or PowerShell. And everything signature-shaped is yours too: your internal certificate authority, code signing, the keys that sign your tokens. Vendors did key exchange first; certificates and signatures lag behind everywhere.
+
+[click] And some things aren't a problem. Data at rest under AES-256: disks, databases, backups. Grover only halves the strength, and 128 bits is still plenty. Same for SHA-256 and up. One check: most cloud storage wraps its data keys with another symmetric key, which is fine. If yours wraps them with RSA, that wrapper is the weak point.
+
+[click] And watch whose deadline you're working to. Google and Cloudflare are aiming to be fully quantum-safe by 2029. Microsoft says 2033 for all its products and services, with early adoption by 2029. In June 2026 the US signed Executive Order 14412: federal agencies' most sensitive systems on quantum-safe encryption by the end of 2030, authentication by the end of 2031, and federal contractors by 2030. That's a policy deadline, not a physics one, but it moves vendors. For Australian government work, ASD's date is the end of 2030. Your providers' timelines are about their side of the line, not yours.
+
+Sources: Cloudflare blog on post-quantum visibility, and Cloudflare Radar; Microsoft Quantum Safe Program blog, August 2025, and "New Windows features to secure today's data in a post-quantum world", updated July 14, 2026; Azure Front Door hybrid TLS 1.3 announcement; Google Cloud "PQC in plaintext" roadmap and post-quantum TLS load balancer docs; AWS "Migration to post-quantum cryptography"; US EO 14412.
 -->
 
 ---

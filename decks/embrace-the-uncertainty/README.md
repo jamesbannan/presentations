@@ -55,15 +55,16 @@ The cover, two organiser slides, the contents, Part one, the demo slides, Part t
 | 36 | The replacements are already standards | `NoisyLattice`: the lattice problem; ML-KEM, ML-DSA and SLH-DSA (FIPS 203–205); one click |
 | 37 | The catch: everything gets bigger | `KeySizes`: classical vs post-quantum bytes against one network packet; two clicks |
 | 38 | Hybrid: belt and braces, already switched on | `HybridKex` plus a live `openssl s_client` check that this conference's site negotiates `X25519MLKEM768`; one click |
-| 39 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
-| 40 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
-| 41 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
-| 42 | What to take back to work | Summary: one panel per part, then "embrace the uncertainty" three ways; four clicks |
-| 43 | Thank you | Contact details, questions |
+| 39 | Shared responsibility: who fixes what | `RequestHops`: browser → provider edge → your servers → your data, coloured by who fixes each hop; done for you, your job, not a problem; vendor and government deadlines; four clicks |
+| 40 | Crypto-agility: make the algorithm a setting | Three rules beside brittle vs agile signing code |
+| 41 | Step one: find all your crypto | Where crypto hides, and a CycloneDX 1.6 CBOM entry |
+| 42 | 30 days, 90 days, a year | Roadmap: own it, find it, start moving, against the ASD 2026/2028/2030 dates; three clicks |
+| 43 | What to take back to work | Summary: one panel per part, then "embrace the uncertainty" three ways; four clicks |
+| 44 | Thank you | Contact details, questions |
 
 Every image in Part one is drawn by a seeded theme component (`Globe`,
 `QubitState`, `Odds`, `Shots`, `Readout`, `ScaleZoom`, `Patterns`, `WaveSum`, `Paths`), the error-correction patch by `LogicalQubit`, Part three's charts by `QubitBudget`, `QdayTimeline` and `Mosca`, and Part four's
-by `NoisyLattice`, `KeySizes` and `HybridKex`, so there are no image files to maintain. The
+by `NoisyLattice`, `KeySizes`, `HybridKex` and `RequestHops`, so there are no image files to maintain. The
 probabilities come from the arrow's angle, so a figure stays correct if you change its
 `theta`.
 
